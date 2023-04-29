@@ -123,7 +123,7 @@ TabBarTheme tabBarThemeMethod() {
 
 AppBarTheme appBarThemeMethod(TextTheme textTheme) {
   return AppBarTheme(
-    backgroundColor: Coloors.backgroundLight,
+    backgroundColor: Colors.white,
     titleTextStyle: textTheme.titleMedium,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -132,7 +132,7 @@ AppBarTheme appBarThemeMethod(TextTheme textTheme) {
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
-    elevation: 0.5,
+    elevation: 0.75,
     shadowColor: Colors.black45,
   );
 }
