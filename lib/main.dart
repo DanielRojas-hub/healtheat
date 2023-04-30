@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:healtheat/client/favorites/favorites.dart';
-=======
 import 'package:healtheat/common/themes/light_theme.dart';
->>>>>>> themes
 
 void main() {
   runApp(const MyApp());
