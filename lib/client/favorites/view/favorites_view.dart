@@ -6,8 +6,36 @@ class FavoritesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CardFood(),
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        children: [
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 0.85,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            itemBuilder: (BuildContext context, int index) {
+              return CardFood(
+                url:
+                    'https://9a3dd0f30ec2813b0355-0aefa298f29a1e32e1203150d51d4825.ssl.cf1.rackcdn.com/pix_5_101918_80061_6293d1fea56d1.jpg',
+                title: 'Pizza de cartón',
+                subtitle: 'Gluten Free',
+                price: '\$99,9',
+                isFavorite: true,
+                onTap: () {},
+                onTapFavorite: () {},
+                onTapPrice: () {},
+              );
+            },
+            itemCount: 45,
+          ),
+        ],
+      ),
     );
   }
 }
