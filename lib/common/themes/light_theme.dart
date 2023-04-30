@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:healtheat/common/extension/custom_theme_extension.dart';
+import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/coloors.dart';
-// import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 import 'themes.dart';
 
@@ -26,7 +26,7 @@ ThemeData lightTheme() {
     dialogBackgroundColor: Coloors.backgroundLight,
     indicatorColor: Colors.grey[700],
     disabledColor: Colors.grey[500],
-    // extensions: [CustomThemeExtension.lightMode],
+    extensions: [CustomThemeExtension.lightMode],
     textTheme: textTheme,
     appBarTheme: appBarTheme,
     tabBarTheme: tabBarTheme,
@@ -80,20 +80,20 @@ FloatingActionButtonThemeData floatingActionButtonThemeMethod() {
 
 DialogTheme dialogThemeMethod() {
   return DialogTheme(
-      /* shape: RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(Constants.radiusSmall),
-    ), */
-      );
+    ),
+  );
 }
 
 BottomSheetThemeData bottomSheetThemeMethod() {
   return const BottomSheetThemeData(
     backgroundColor: Coloors.backgroundLight,
     modalBackgroundColor: Coloors.backgroundLight,
-    /* shape: RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
       top: Radius.circular(Constants.radiusLarge),
-    )), */
+    )),
   );
 }
 
@@ -103,9 +103,9 @@ ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
       backgroundColor: Coloors.padsyColor,
       foregroundColor: Coloors.backgroundLight,
       splashFactory: NoSplash.splashFactory,
-      /* shape: RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-      ), */
+      ),
     ),
   );
 }
@@ -124,7 +124,7 @@ TabBarTheme tabBarThemeMethod() {
 AppBarTheme appBarThemeMethod(TextTheme textTheme) {
   return AppBarTheme(
     backgroundColor: Colors.white,
-    titleTextStyle: textTheme.titleLarge,
+    titleTextStyle: textTheme.titleMedium,
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
