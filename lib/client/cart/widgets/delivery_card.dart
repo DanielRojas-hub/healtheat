@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 class DeliveryCard extends StatelessWidget {
   const DeliveryCard({super.key});
@@ -10,14 +10,14 @@ class DeliveryCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       color: Colors.grey[50],
       child: Row(children: [
-        /* Container(
+        Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(Constants.radiusSmall)),
           child: Icon(Icons.delivery_dining,
               size: 20, color: Theme.of(context).colorScheme.onPrimary),
-        ), */
+        ),
         const SizedBox(width: 10),
         Expanded(
           child:

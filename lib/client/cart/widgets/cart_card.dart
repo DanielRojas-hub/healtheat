@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
 
 class CartCard extends StatelessWidget {
@@ -13,13 +13,13 @@ class CartCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
           children: [
-            /* Container(
+            Container(
               width: 55,
               height: 55,
               decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(Constants.radiusSmall)),
-            ), */
+            ),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

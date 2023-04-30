@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 class CounterWidget extends StatelessWidget {
   const CounterWidget(
@@ -14,7 +14,7 @@ class CounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      /* child: Container(
+      child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(Constants.radiusInfinite)),
@@ -55,7 +55,7 @@ class CounterWidget extends StatelessWidget {
             ),
           ],
         ),
-      ), */
+      ),
     );
   }
 }
