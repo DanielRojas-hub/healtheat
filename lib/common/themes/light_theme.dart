@@ -100,6 +100,7 @@ BottomSheetThemeData bottomSheetThemeMethod() {
 ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
+      minimumSize: Size(0, 40),
       backgroundColor: Coloors.padsyColor,
       foregroundColor: Coloors.backgroundLight,
       splashFactory: NoSplash.splashFactory,
