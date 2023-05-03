@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
+import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 class CustomCardRestaurant extends StatelessWidget {
@@ -26,47 +27,51 @@ class CustomCardRestaurant extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
-      child: Ink(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).cardColor),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(20)),
-                        image: DecorationImage(
-                            image: NetworkImage(url), fit: BoxFit.cover))),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  child: Column(
-                    children: [
+    return Material(
+      elevation: 2,
+      color: Theme.of(context).cardColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Constants.radiusMedium)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(Constants.radiusMedium),
+        child: Ink(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Constants.radiusMedium),
+              color: Theme.of(context).cardColor),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(Constants.radiusMedium)),
+                          image: DecorationImage(
+                              image: NetworkImage(url), fit: BoxFit.cover))),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Padding(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  Constants.radiusInfinite),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Padding(
                                     padding: const EdgeInsets.all(5),
                                     child: Icon(
                                         isFavorite
@@ -74,56 +79,60 @@ class CustomCardRestaurant extends StatelessWidget {
                                             : Icons.favorite_outline_outlined,
                                         color: isFavorite
                                             ? context.theme.redColor
-                                            : Theme.of(context).disabledColor)),
+                                            : Theme.of(context).disabledColor),
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
+                            )
+                          ]),
                       const SizedBox(height: 7),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomLabelButtom(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomLabelButtom(
                               title: price,
                               icon: Icons.electric_scooter,
-                              backgroundColor: Colors.grey[300],
-                              color: Colors.black),
-                          CustomLabelButtom(title: time, icon: Icons.schedule)
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: List.generate(
-                        typeFood.length,
-                        (index) => Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: CustomLabelButtom(
-                                  title: typeFood[index],
-                                  backgroundColor: Colors.white,
-                                  color: Colors.black),
-                            )),
-                  ),
-                  CustomLabelButtom(
-                    title: rate,
-                    icon: Icons.star_rate_rounded,
-                    backgroundColor: Colors.white,
-                    color: Colors.black,
-                    iconColor: Colors.amber,
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
+                            ),
+                            CustomLabelButtom(title: time, icon: Icons.schedule)
+                          ]),
+                    ]),
                   )
                 ],
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: List.generate(
+                          typeFood.length,
+                          (index) => Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: CustomLabelButtom(
+                                    title: typeFood[index],
+                                    backgroundColor: context.theme.whiteColor,
+                                    color: context.theme.blackColor),
+                              )),
+                    ),
+                    CustomLabelButtom(
+                      title: rate,
+                      icon: Icons.star_rate_rounded,
+                      backgroundColor: Colors.white,
+                      color: Colors.black,
+                      iconColor: Colors.amber,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

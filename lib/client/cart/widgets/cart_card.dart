@@ -8,7 +8,7 @@ class CartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      color: Colors.grey[50],
+      color: Theme.of(context).cardColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(

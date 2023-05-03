@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 class CustomLabelButtom extends StatelessWidget {
   const CustomLabelButtom(
@@ -22,17 +23,18 @@ class CustomLabelButtom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(100),
+      borderRadius: BorderRadius.circular(Constants.radiusInfinite),
       child: Material(
         color: backgroundColor ?? Theme.of(context).primaryColor,
         child: InkWell(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(Constants.radiusInfinite),
           onTap: onTap,
           child: Ink(
               width: width,
               decoration: BoxDecoration(
                   color: backgroundColor ?? Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(100)),
+                  borderRadius:
+                      BorderRadius.circular(Constants.radiusInfinite)),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 6, horizontal: 12),

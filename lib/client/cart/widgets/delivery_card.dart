@@ -7,8 +7,8 @@ class DeliveryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).cardColor,
       padding: const EdgeInsets.symmetric(vertical: 6.0),
-      color: Colors.grey[50],
       child: Row(children: [
         Container(
           padding: const EdgeInsets.all(8.0),

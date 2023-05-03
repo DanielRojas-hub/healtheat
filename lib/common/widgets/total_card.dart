@@ -8,8 +8,8 @@ class TotalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).cardColor,
       padding: const EdgeInsets.symmetric(vertical: 24.0),
-      color: Colors.grey[50],
       child: Row(
         children: [
           Expanded(

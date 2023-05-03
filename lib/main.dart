@@ -4,7 +4,6 @@ import 'package:healtheat/client/search/search.dart';
 import 'package:healtheat/client/splash_screen/splash_screen.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme(),
-      home: const SplashScreenPage(),
+      home: const SearchPage(),
     );
   }
 }

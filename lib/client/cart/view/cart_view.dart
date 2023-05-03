@@ -11,23 +11,24 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const CartFloatingActionButton(),
       appBar: AppBar(title: const Text('Cart'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Scaffold(
-            body: ListView(
-          children: const [
-            CartList(),
-            DeliveryCard(),
-            CustomDivider(),
-            TotalCard(label: Text('\$36.24')),
-            DottedDivider(),
-            SizedBox(height: 100),
-          ],
-        )),
+        child: Material(
+          color: Colors.grey[300],
+          child: ListView(
+            children: const [
+              CartList(),
+              DeliveryCard(),
+              CustomDivider(),
+              TotalCard(label: Text('\$36.24')),
+              DottedDivider(),
+              SizedBox(height: 100),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -8,7 +7,6 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[100],
         appBar: AppBar(),
         body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -26,12 +24,12 @@ class SearchView extends StatelessWidget {
                     rate: '4.5',
                     typeFood: const ['Sushi', 'European'],
                     onTap: () {},
-                    isFavorite: true,
+                    isFavorite: false,
                   );
                 },
                 itemCount: 10,
                 separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(height: 20);
+                  return const SizedBox(height: 20);
                 },
               )
             ]));

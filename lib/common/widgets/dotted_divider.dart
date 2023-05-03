@@ -8,11 +8,15 @@ class DottedDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DottedLine(
-      dashLength: 10,
-      dashGapLength: 5,
-      lineThickness: 2,
-      dashColor: Colors.grey[400]!,
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 1),
+      color: Theme.of(context).cardColor,
+      child: DottedLine(
+        dashLength: 10,
+        dashGapLength: 5,
+        lineThickness: 2,
+        dashColor: Colors.grey[300]!,
+      ),
     );
   }
 }

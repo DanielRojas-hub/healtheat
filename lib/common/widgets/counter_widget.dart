@@ -14,9 +14,10 @@ class CounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
+      child: Material(
+        elevation: 2,
+        color: Theme.of(context).cardColor,
+        shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Constants.radiusInfinite)),
         child: Row(
           children: [
