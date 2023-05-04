@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,17 @@ class LoginView extends StatelessWidget {
                   ),
             ),
             const SizedBox(
-              height: 70,
+              height: 50,
+            ),
+            const TextField(
+              decoration: InputDecoration(
+                label: Text("First name"),
+              ),
+            ),
+            const TextField(
+              decoration: InputDecoration(
+                label: Text("Last name"),
+              ),
             ),
             const TextField(
               decoration: InputDecoration(
@@ -40,7 +50,7 @@ class LoginView extends StatelessWidget {
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Theme.of(context).primaryColor)),
-                child: const Text("Log in"),
+                child: const Text("Register"),
               ),
             ),
             const SizedBox(height: 10),
@@ -87,7 +97,7 @@ class LoginView extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          'Sign in with Google',
+                          'Register with Google',
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
                                     color: Theme.of(context).disabledColor,
@@ -102,7 +112,7 @@ class LoginView extends StatelessWidget {
             const SizedBox(height: 15),
             RichText(
               text: TextSpan(
-                text: "Don't have an account? ",
+                text: "Already have an account? ",
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: Theme.of(context).disabledColor,
                     ),
