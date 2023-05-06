@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 import 'base_card.dart';
-import 'custom_circular_button.dart';
+import 'custom_icon_button.dart';
+import 'custom_label_buttom.dart';
 import 'image_container.dart';
 
 class CardFood extends StatelessWidget {
@@ -54,10 +55,9 @@ class CardFood extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelMedium),
                     const SizedBox(height: 10),
                     CustomLabelButton(
-                      onTap: onTapPrice,
-                      title: price,
-                      width: MediaQuery.of(context).size.width,
-                    )
+                        onTap: onTapPrice,
+                        title: price,
+                        width: MediaQuery.of(context).size.width)
                   ],
                 ),
               ),
@@ -65,9 +65,13 @@ class CardFood extends StatelessWidget {
         Positioned(
           top: 5,
           right: 5,
-          child: CustomCircularButton(
+          child: CustomIconButton(
               onTap: onTapFavorite,
               iconData: isFavorite ? Icons.favorite : Icons.favorite_border,
+              backgroundColor: context.theme.whiteColor,
+              borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+              iconSize: 16.0,
+              padding: const EdgeInsets.all(6.0),
               color: isFavorite
                   ? context.theme.redColor
                   : Theme.of(context).disabledColor),
