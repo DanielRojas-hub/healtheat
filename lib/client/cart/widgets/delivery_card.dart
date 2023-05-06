@@ -8,9 +8,8 @@ class DeliveryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).cardColor,
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(children: [
-        const CustomIconButton(iconData: Icons.delivery_dining),
+        const CustomIconButton(iconData: Icons.delivery_dining, elevation: 0),
         const SizedBox(width: 10),
         Expanded(
           child:

@@ -17,15 +17,18 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
         titleMedium:
             GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600),
         titleSmall:
-            GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
         bodyLarge: GoogleFonts.poppins(fontSize: 16),
         bodyMedium: GoogleFonts.poppins(fontSize: 15),
         bodySmall: GoogleFonts.poppins(fontSize: 14),
         labelLarge: GoogleFonts.poppins(
-            fontSize: 14, color: Colors.black54, fontWeight: FontWeight.w500),
+            fontSize: 14, color: Colors.black45, fontWeight: FontWeight.w500),
         labelMedium: GoogleFonts.poppins(
-            fontSize: 13, color: Colors.black54, fontWeight: FontWeight.w500),
+            fontSize: 13, color: Colors.black45, fontWeight: FontWeight.w500),
         labelSmall: GoogleFonts.poppins(
-            fontSize: 12, color: Colors.black54, fontWeight: FontWeight.w500),
+            fontSize: 11,
+            color: Colors.black45,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5),
       ),
     );
