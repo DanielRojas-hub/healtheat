@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/register/register.dart';
+import 'package:healtheat/client/cart/cart.dart';
+import 'package:healtheat/client/favorites/favorites.dart';
+import 'package:healtheat/client/search/search.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
 
 void main() {
