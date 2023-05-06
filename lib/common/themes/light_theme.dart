@@ -85,7 +85,7 @@ ListTileThemeData listTileThemeMethod() {
 
 FloatingActionButtonThemeData floatingActionButtonThemeMethod() {
   return const FloatingActionButtonThemeData(
-    backgroundColor: Coloors.padsyColor,
+    backgroundColor: Color(0xFFFF4E0B),
     foregroundColor: Colors.white,
   );
 }
@@ -113,7 +113,7 @@ ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       minimumSize: const Size(0, 40),
-      backgroundColor: Coloors.padsyColor,
+      backgroundColor: const Color(0xFFFF4E0B),
       foregroundColor: Coloors.backgroundLight,
       splashFactory: NoSplash.splashFactory,
       shape: RoundedRectangleBorder(

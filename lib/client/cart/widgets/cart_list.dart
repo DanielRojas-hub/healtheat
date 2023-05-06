@@ -17,7 +17,7 @@ class CartList extends StatelessWidget {
           Slidable(
             key: const ValueKey(0),
             endActionPane: ActionPane(
-              extentRatio: 0.15,
+              extentRatio: 0.3,
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
