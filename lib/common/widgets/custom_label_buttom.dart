@@ -12,7 +12,8 @@ class CustomLabelButton extends StatelessWidget {
       this.color,
       this.onTap,
       this.width,
-      this.iconColor});
+      this.iconColor,
+      this.elevation});
 
   final String title;
   final IconData? icon;
@@ -21,6 +22,7 @@ class CustomLabelButton extends StatelessWidget {
   final double? width;
   final VoidCallback? onTap;
   final Color? iconColor;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomLabelButton extends StatelessWidget {
       backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(Constants.radiusInfinite),
       width: width,
+      elevation: elevation ?? 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
         child: Row(

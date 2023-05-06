@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
-import 'package:healtheat/common/widgets/custom_circular_button.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
-import 'package:healtheat/common/widgets/image_container.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 import 'base_card.dart';
+import 'custom_icon_button.dart';
+import 'custom_label_buttom.dart';
+import 'image_container.dart';
 
 class CustomCardRestaurant extends StatelessWidget {
   const CustomCardRestaurant({
@@ -38,7 +39,8 @@ class CustomCardRestaurant extends StatelessWidget {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ImageContainer(url: url, height: 150),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(
+                top: 5, bottom: 17.5, left: 10, right: 10),
             child: Column(children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
@@ -47,9 +49,12 @@ class CustomCardRestaurant extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                 ),
-                CustomCircularButton(
+                CustomIconButton(
                   onTap: onTapFavorite,
+                  borderRadius: BorderRadius.circular(Constants.radiusInfinite),
                   iconSize: 22.0,
+                  elevation: 0,
+                  backgroundColor: Theme.of(context).cardColor,
                   iconData: isFavorite
                       ? Icons.favorite
                       : Icons.favorite_outline_outlined,
@@ -58,7 +63,7 @@ class CustomCardRestaurant extends StatelessWidget {
                       : Theme.of(context).disabledColor,
                 )
               ]),
-              const SizedBox(height: 7),
+              const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomLabelButton(
                   title: price,
@@ -73,7 +78,7 @@ class CustomCardRestaurant extends StatelessWidget {
           )
         ]),
         Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
