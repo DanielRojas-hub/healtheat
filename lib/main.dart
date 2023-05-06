@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/client/home/home.dart';
 import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/cart/cart.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme(),
-      home: const RegisterPage(),
+      home: const HomePage(),
     );
   }
 }
