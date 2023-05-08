@@ -2,14 +2,14 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
 class DottedDivider extends StatelessWidget {
-  const DottedDivider({
-    super.key,
-  });
+  const DottedDivider({super.key, this.padding});
+
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 1),
+      padding: padding ?? const EdgeInsets.symmetric(vertical: 15),
       color: Theme.of(context).cardColor,
       child: DottedLine(
         dashLength: 10,

@@ -9,7 +9,6 @@ class TotalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).cardColor,
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: Row(
         children: [
           Expanded(
@@ -18,7 +17,6 @@ class TotalCard extends StatelessWidget {
           const SizedBox(width: 10),
           DefaultTextStyle.merge(
               style: Theme.of(context).textTheme.titleMedium, child: label),
-          const SizedBox(width: 10),
         ],
       ),
     );

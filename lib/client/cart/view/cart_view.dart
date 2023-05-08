@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 import 'package:healtheat/common/widgets/dotted_divider.dart';
 import 'package:healtheat/common/widgets/total_card.dart';
@@ -15,17 +16,18 @@ class CartView extends StatelessWidget {
       floatingActionButton: const CartFloatingActionButton(),
       appBar: AppBar(title: const Text('Cart'), centerTitle: true),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
         child: Material(
-          color: Colors.grey[300],
+          color: Colors.grey[50],
           child: ListView(
-            children: const [
-              CartList(),
-              DeliveryCard(),
-              CustomDivider(),
-              TotalCard(label: Text('\$36.24')),
-              DottedDivider(),
-              SizedBox(height: 100),
+            children: [
+              const CartList(),
+              CustomDivider(backgroundColor: Theme.of(context).cardColor),
+              const DeliveryCard(),
+              CustomDivider(backgroundColor: Theme.of(context).cardColor),
+              const TotalCard(label: Text('\$36.24')),
+              const DottedDivider(padding: EdgeInsets.only(top: 15)),
+              const SizedBox(height: 100),
             ],
           ),
         ),

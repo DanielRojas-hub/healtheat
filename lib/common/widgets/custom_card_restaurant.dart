@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+
+import 'base_card.dart';
+import 'custom_icon_button.dart';
+import 'custom_label_buttom.dart';
+import 'image_container.dart';
 
 class CustomCardRestaurant extends StatelessWidget {
   const CustomCardRestaurant({
@@ -12,8 +16,9 @@ class CustomCardRestaurant extends StatelessWidget {
     required this.rate,
     required this.time,
     required this.typeFood,
-    required this.onTap,
+    this.onTap,
     required this.isFavorite,
+    this.onTapFavorite,
   });
 
   final String name;
@@ -22,119 +27,83 @@ class CustomCardRestaurant extends StatelessWidget {
   final String rate;
   final String time;
   final List<String> typeFood;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final VoidCallback? onTapFavorite;
   final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 2,
-      color: Theme.of(context).cardColor,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Constants.radiusMedium)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(Constants.radiusMedium),
-        child: Ink(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Constants.radiusMedium),
-              color: Theme.of(context).cardColor),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(Constants.radiusMedium)),
-                          image: DecorationImage(
-                              image: NetworkImage(url), fit: BoxFit.cover))),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w700),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  Constants.radiusInfinite),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Icon(
-                                        isFavorite
-                                            ? Icons.favorite
-                                            : Icons.favorite_outline_outlined,
-                                        color: isFavorite
-                                            ? context.theme.redColor
-                                            : Theme.of(context).disabledColor),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ]),
-                      const SizedBox(height: 7),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomLabelButtom(
-                              title: price,
-                              icon: Icons.electric_scooter,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer,
-                            ),
-                            CustomLabelButtom(title: time, icon: Icons.schedule)
-                          ]),
-                    ]),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: List.generate(
-                          typeFood.length,
-                          (index) => Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: CustomLabelButtom(
-                                    title: typeFood[index],
-                                    backgroundColor: context.theme.whiteColor,
-                                    color: context.theme.blackColor),
-                              )),
-                    ),
-                    CustomLabelButtom(
-                      title: rate,
-                      icon: Icons.star_rate_rounded,
-                      backgroundColor: Colors.white,
-                      color: Colors.black,
-                      iconColor: Colors.amber,
-                    )
-                  ],
+    return BaseCard(
+      onTap: onTap,
+      child: Stack(children: [
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          ImageContainer(url: url, height: 150),
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 5, bottom: 17.5, left: 10, right: 10),
+            child: Column(children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(
+                  name,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                 ),
+                CustomIconButton(
+                  onTap: onTapFavorite,
+                  borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+                  iconSize: 22.0,
+                  elevation: 0,
+                  backgroundColor: Theme.of(context).cardColor,
+                  iconData: isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_outline_outlined,
+                  color: isFavorite
+                      ? context.theme.redColor
+                      : Theme.of(context).disabledColor,
+                )
+              ]),
+              const SizedBox(height: 5),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                CustomLabelButton(
+                  title: price,
+                  icon: Icons.electric_scooter,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.secondaryContainer,
+                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                ),
+                CustomLabelButton(title: time, icon: Icons.schedule)
+              ]),
+            ]),
+          )
+        ]),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: List.generate(
+                    typeFood.length,
+                    (index) => Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: CustomLabelButton(
+                              title: typeFood[index],
+                              backgroundColor: context.theme.whiteColor,
+                              color: context.theme.blackColor),
+                        )),
+              ),
+              CustomLabelButton(
+                title: rate,
+                icon: Icons.star_rate_rounded,
+                backgroundColor: context.theme.whiteColor,
+                color: context.theme.blackColor,
+                iconColor: Colors.amber,
               )
             ],
           ),
-        ),
-      ),
+        )
+      ]),
     );
   }
 }

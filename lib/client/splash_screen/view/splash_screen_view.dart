@@ -22,7 +22,7 @@ class SplashScreenView extends StatelessWidget {
                     size: 30,
                     color: Theme.of(context).disabledColor,
                   ),
-                  CustomLabelButtom(
+                  CustomLabelButton(
                     title: 'Skip',
                     backgroundColor: Theme.of(context).disabledColor,
                     onTap: () {},
@@ -40,7 +40,7 @@ class SplashScreenView extends StatelessWidget {
                   }),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(splashDataList.length, (index) {
@@ -48,7 +48,7 @@ class SplashScreenView extends StatelessWidget {
                   return Container(
                     width: selected ? 15 : 8,
                     height: 8,
-                    margin: EdgeInsets.only(right: 5),
+                    margin: const EdgeInsets.only(right: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       color: selected
@@ -58,7 +58,7 @@ class SplashScreenView extends StatelessWidget {
                   );
                 }),
               ),
-              SizedBox(height: 75),
+              const SizedBox(height: 75),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
@@ -74,7 +74,7 @@ class SplashScreenView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 75),
+              const SizedBox(height: 75),
             ],
           ),
         ),
