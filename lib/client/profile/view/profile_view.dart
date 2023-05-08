@@ -19,7 +19,8 @@ class ProfileView extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: Constants.margin),
+                padding: const EdgeInsets.only(
+                    right: Constants.margin, top: Constants.margin),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: CustomIconButton(
