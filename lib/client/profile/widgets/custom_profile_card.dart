@@ -17,7 +17,7 @@ class CustomProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseCard(
       elevation: 0,
-      height: 50,
+      height: 60,
       borderRadius: BorderRadius.zero,
       onTap: onTap,
       child: Padding(
