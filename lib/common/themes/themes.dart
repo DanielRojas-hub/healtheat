@@ -13,16 +13,22 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
         headlineSmall:
             GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w500),
         titleLarge:
-            GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w600),
         titleMedium:
-            GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600),
         titleSmall:
-            GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
         bodyLarge: GoogleFonts.poppins(fontSize: 16),
         bodyMedium: GoogleFonts.poppins(fontSize: 15),
         bodySmall: GoogleFonts.poppins(fontSize: 14),
-        labelLarge: GoogleFonts.poppins(fontSize: 14, color: Colors.black45),
-        labelMedium: GoogleFonts.poppins(fontSize: 13, color: Colors.black45),
-        labelSmall: GoogleFonts.poppins(fontSize: 12, color: Colors.black45),
+        labelLarge: GoogleFonts.poppins(
+            fontSize: 14, color: Colors.black45, fontWeight: FontWeight.w500),
+        labelMedium: GoogleFonts.poppins(
+            fontSize: 13, color: Colors.black45, fontWeight: FontWeight.w500),
+        labelSmall: GoogleFonts.poppins(
+            fontSize: 11,
+            color: Colors.black45,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5),
       ),
     );

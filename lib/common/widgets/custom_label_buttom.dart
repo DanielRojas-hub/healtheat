@@ -1,62 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
-class CustomLabelButtom extends StatelessWidget {
-  const CustomLabelButtom(
+import 'base_card.dart';
+
+class CustomLabelButton extends StatelessWidget {
+  const CustomLabelButton(
       {super.key,
       required this.title,
       this.icon,
       this.backgroundColor,
       this.color,
       this.onTap,
-      this.width});
+      this.width,
+      this.iconColor,
+      this.elevation});
 
   final String title;
   final IconData? icon;
   final Color? backgroundColor;
   final Color? color;
   final double? width;
-  final VoidCallback? onTap; /* Las distintas funciones de los botones */
+  final VoidCallback? onTap;
+  final Color? iconColor;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(100),
-      child: Material(
-        color: backgroundColor ?? Theme.of(context).primaryColor,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(100),
-          onTap: onTap,
-          child: Ink(
-              width: width,
-              decoration: BoxDecoration(
-                  color: backgroundColor ?? Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(100)),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (icon != null) ...[
-                      Icon(icon,
-                          size: 16,
-                          color:
-                              color ?? Theme.of(context).colorScheme.onPrimary),
-                      const SizedBox(width: 5)
-                    ],
-                    Text(
-                      title,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: color ??
-                                Theme.of(context).colorScheme.onPrimary,
-                          ),
-                    ),
-                  ],
-                ),
-              )),
+    return BaseCard(
+      onTap: onTap,
+      backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
+      borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+      width: width,
+      elevation: elevation ?? 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              Icon(icon,
+                  size: 16,
+                  color: iconColor ??
+                      color ??
+                      Theme.of(context).colorScheme.onPrimary),
+              const SizedBox(width: 5)
+            ],
+            Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: color ?? Theme.of(context).colorScheme.onPrimary,
+                  ),
+            ),
+          ],
         ),
       ),
     );

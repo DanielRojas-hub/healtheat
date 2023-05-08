@@ -22,28 +22,40 @@ ThemeData lightTheme() {
   final switchTheme = switchThemeMethod();
 
   return base.copyWith(
-    scaffoldBackgroundColor: Coloors.backgroundLight,
-    dialogBackgroundColor: Coloors.backgroundLight,
-    indicatorColor: Colors.grey[700],
-    disabledColor: Colors.grey[500],
-    extensions: [CustomThemeExtension.lightMode],
-    textTheme: textTheme,
-    appBarTheme: appBarTheme,
-    tabBarTheme: tabBarTheme,
-    elevatedButtonTheme: elevatedButtonTheme,
-    inputDecorationTheme: inputDecorationTheme,
-    bottomSheetTheme: bottomSheetTheme,
-    dialogTheme: dialogTheme,
-    floatingActionButtonTheme: floatingActionButtonTheme,
-    listTileTheme: listTileTheme,
-    switchTheme: switchTheme,
-  );
+      scaffoldBackgroundColor: Colors.white,
+      dialogBackgroundColor: Coloors.backgroundLight,
+      primaryColor: const Color(0xFFFF4E0B),
+      extensions: [CustomThemeExtension.lightMode],
+      textTheme: textTheme,
+      appBarTheme: appBarTheme,
+      tabBarTheme: tabBarTheme,
+      elevatedButtonTheme: elevatedButtonTheme,
+      inputDecorationTheme: inputDecorationTheme,
+      bottomSheetTheme: bottomSheetTheme,
+      dialogTheme: dialogTheme,
+      floatingActionButtonTheme: floatingActionButtonTheme,
+      listTileTheme: listTileTheme,
+      switchTheme: switchTheme,
+      colorScheme: ColorScheme.light(
+        primary: Color(0xFFFF4E0B),
+        onPrimary: Colors.white,
+        primaryContainer: Colors.white,
+        onPrimaryContainer: Colors.black87,
+        secondary: Colors.blue,
+        onSecondary: Colors.white,
+        secondaryContainer: Colors.grey.shade300,
+        onSecondaryContainer: Colors.black,
+        error: Color(0xffb00020),
+        onError: Colors.white,
+        background: Colors.white,
+        onBackground: Colors.black,
+        surface: Colors.white,
+        onSurface: Colors.black,
+      ));
 }
 
 InputDecorationTheme inputDecorationThemeMethod(TextTheme textTheme) {
   return InputDecorationTheme(
-    // filled: true,
-    // fillColor: Colors.white,
     isDense: true,
     labelStyle: textTheme.labelLarge,
     errorBorder: const UnderlineInputBorder(
@@ -73,7 +85,7 @@ ListTileThemeData listTileThemeMethod() {
 
 FloatingActionButtonThemeData floatingActionButtonThemeMethod() {
   return const FloatingActionButtonThemeData(
-    backgroundColor: Coloors.padsyColor,
+    backgroundColor: Color(0xFFFF4E0B),
     foregroundColor: Colors.white,
   );
 }
@@ -100,7 +112,8 @@ BottomSheetThemeData bottomSheetThemeMethod() {
 ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Coloors.padsyColor,
+      minimumSize: const Size(0, 40),
+      backgroundColor: const Color(0xFFFF4E0B),
       foregroundColor: Coloors.backgroundLight,
       splashFactory: NoSplash.splashFactory,
       shape: RoundedRectangleBorder(

@@ -5,4 +5,6 @@ class Constants {
   static const double radiusMedium = 12.0;
   static const double radiusLarge = 15.0;
   static const double radiusInfinite = 100.0;
+
+  static const double margin = 20.0;
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/client/profile/widgets/custom_profile_card.dart';
+import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/widgets/custom_divider.dart';
 
 class ProfileView extends StatelessWidget {
   // const ProfileView({Key? key}) : super(key: key);
@@ -13,14 +15,20 @@ class ProfileView extends StatelessWidget {
         body: ListView(
           shrinkWrap: true,
           children: [
-            ListView.builder(
+            ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return CustomProfileCard(
-                    title: "My orders :)", icon: "motorcycle", onTap: () {});
+                    title: "My orders", icon: Icons.motorcycle, onTap: () {});
               },
               itemCount: 4,
+              separatorBuilder: (BuildContext context, int index) {
+                return CustomDivider(
+                  height: 1.5,
+                  margin: EdgeInsets.symmetric(horizontal: Constants.margin),
+                );
+              },
             )
           ],
         ));
