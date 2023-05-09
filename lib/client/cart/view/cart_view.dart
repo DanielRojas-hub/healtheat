@@ -18,17 +18,16 @@ class CartView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
         child: Material(
-          color: Colors.grey[300],
-          child: ListView(
-            children: const [
-              CartList(),
-              DeliveryCard(),
-              CustomDivider(),
-              TotalCard(label: Text('\$36.24')),
-              DottedDivider(),
-              SizedBox(height: 100),
-            ],
-          ),
+          color: Colors.grey[50],
+          child: ListView(children: [
+            const CartList(),
+            CustomDivider(backgroundColor: Theme.of(context).cardColor),
+            const DeliveryCard(),
+            CustomDivider(backgroundColor: Theme.of(context).cardColor),
+            const TotalCard(label: Text('\$36.24')),
+            const DottedDivider(padding: EdgeInsets.only(top: 15)),
+            const SizedBox(height: 100),
+          ]),
         ),
       ),
     );
