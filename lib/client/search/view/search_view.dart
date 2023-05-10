@@ -4,6 +4,7 @@ import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
 import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 import 'package:healtheat/common/widgets/custom_search_bar.dart';
+import 'package:healtheat/common/widgets/search_section.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -39,12 +40,9 @@ class SearchView extends StatelessWidget {
     //         ]));
     return Scaffold(
         appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(children: [
-            Expanded(child: CustomSearchBar()),
-            const CustomIconButton(iconData: Icons.filter_alt),
-          ]),
+        body: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SearchSection(),
         ));
   }
 }
