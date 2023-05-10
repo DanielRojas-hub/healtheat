@@ -9,7 +9,8 @@ class BaseCard extends StatelessWidget {
       this.borderRadius,
       this.elevation,
       this.width,
-      this.backgroundColor})
+      this.backgroundColor,
+      this.height})
       : super(key: key);
 
   final double? elevation;
@@ -18,6 +19,7 @@ class BaseCard extends StatelessWidget {
   final VoidCallback? onTap;
   final double? width;
   final Widget child;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class BaseCard extends StatelessWidget {
         borderRadius: borderRadius ?? originalBorderRadius,
         child: Ink(
           width: width,
+          height: height,
           decoration: BoxDecoration(
               borderRadius: borderRadius ?? originalBorderRadius,
               color: backgroundColor ?? originalColorCard),

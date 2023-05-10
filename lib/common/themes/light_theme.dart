@@ -44,7 +44,7 @@ ThemeData lightTheme() {
         secondary: Colors.blue,
         onSecondary: Colors.white,
         secondaryContainer: Colors.grey.shade300,
-        onSecondaryContainer: Colors.black,
+        onSecondaryContainer: Colors.black45,
         error: Color(0xffb00020),
         onError: Colors.white,
         background: Colors.white,

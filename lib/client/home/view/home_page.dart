@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 
 import '../home.dart';
 
@@ -7,6 +9,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TabCubit>(
+          create: (context) => TabCubit(tabList: homeTabList),
+        ),
+        // BlocProvider(
+        //   create: (context) => SubjectBloc(),
+        // ),
+      ],
+      child: const HomeView(),
+    );
   }
 }
