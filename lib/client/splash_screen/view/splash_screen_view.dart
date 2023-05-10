@@ -23,7 +23,7 @@ class SplashScreenView extends StatelessWidget {
                     color: Theme.of(context).disabledColor,
                   ),
                   CustomLabelButton(
-                    title: 'Skip',
+                    label: 'Skip',
                     backgroundColor: Theme.of(context).disabledColor,
                     onTap: () {},
                   ),

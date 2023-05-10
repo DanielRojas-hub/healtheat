@@ -35,9 +35,14 @@ class CustomCardRestaurant extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseCard(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(Constants.radiusLarge),
       child: Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          ImageContainer(url: url, height: 150),
+          ImageContainer(
+              url: url,
+              height: 150,
+              borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(Constants.radiusLarge))),
           Padding(
             padding: const EdgeInsets.only(
                 top: 5, bottom: 17.5, left: 10, right: 10),
@@ -66,13 +71,13 @@ class CustomCardRestaurant extends StatelessWidget {
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomLabelButton(
-                  title: price,
+                  label: price,
                   icon: Icons.electric_scooter,
                   backgroundColor:
                       Theme.of(context).colorScheme.secondaryContainer,
                   color: Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
-                CustomLabelButton(title: time, icon: Icons.schedule)
+                CustomLabelButton(label: time, icon: Icons.schedule)
               ]),
             ]),
           )
@@ -88,13 +93,13 @@ class CustomCardRestaurant extends StatelessWidget {
                     (index) => Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: CustomLabelButton(
-                              title: typeFood[index],
+                              label: typeFood[index],
                               backgroundColor: context.theme.whiteColor,
                               color: context.theme.blackColor),
                         )),
               ),
               CustomLabelButton(
-                title: rate,
+                label: rate,
                 icon: Icons.star_rate_rounded,
                 backgroundColor: context.theme.whiteColor,
                 color: context.theme.blackColor,
