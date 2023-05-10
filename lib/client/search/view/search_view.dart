@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
+import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 import 'package:healtheat/common/widgets/custom_search_bar.dart';
 
@@ -40,7 +41,10 @@ class SearchView extends StatelessWidget {
         appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(children: []),
+          child: Row(children: [
+            Expanded(child: CustomSearchBar()),
+            const CustomIconButton(iconData: Icons.filter_alt),
+          ]),
         ));
   }
 }
