@@ -38,9 +38,13 @@ class BaseCard extends StatelessWidget {
           width: width,
           height: height,
           decoration: BoxDecoration(
-              borderRadius: borderRadius ?? originalBorderRadius,
-              color: backgroundColor ?? originalColorCard),
-          child: child,
+            borderRadius: borderRadius ?? originalBorderRadius,
+            color: backgroundColor ?? originalColorCard,
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: child,
+          ),
         ),
       ),
     );

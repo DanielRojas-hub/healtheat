@@ -42,13 +42,14 @@ class CustomCardRestaurant extends StatelessWidget {
             padding: const EdgeInsets.only(
                 top: 5, bottom: 17.5, left: 10, right: 10),
             child: Column(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(
+              Row(children: [
+                Expanded(
+                    child: Text(
                   name,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
-                ),
+                )),
                 CustomIconButton(
                   onTap: onTapFavorite,
                   borderRadius: BorderRadius.circular(Constants.radiusInfinite),

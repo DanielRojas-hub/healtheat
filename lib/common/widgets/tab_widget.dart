@@ -4,10 +4,10 @@ import 'package:healtheat/common/extension/custom_theme_extension.dart';
 
 import 'base_card.dart';
 
-class Tab extends Equatable {
+class TabElement extends Equatable {
   final String title;
 
-  const Tab(this.title);
+  const TabElement(this.title);
 
   @override
   List<Object?> get props => [title];
@@ -21,9 +21,9 @@ class TabWidget extends StatelessWidget {
       required this.onTap})
       : super(key: key);
 
-  final List<Tab> tabList;
-  final Tab selectedTab;
-  final void Function(Tab selectedTab) onTap;
+  final List<TabElement> tabList;
+  final TabElement selectedTab;
+  final void Function(TabElement selectedTab) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,9 @@ class SelectionOption extends StatelessWidget {
       required this.onTap})
       : super(key: key);
 
-  final Tab tab;
+  final TabElement tab;
   final bool isSelected;
-  final void Function(Tab selectedTab) onTap;
+  final void Function(TabElement selectedTab) onTap;
 
   @override
   Widget build(BuildContext context) {

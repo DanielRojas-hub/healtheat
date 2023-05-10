@@ -2,17 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/tab_widget.dart' as tab;
+import 'package:healtheat/common/widgets/tab_widget.dart';
 
 part 'tab_state.dart';
 
 class TabCubit extends Cubit<TabState> {
-  TabCubit({required List<tab.Tab> tabList, PageController? controller})
+  TabCubit({required List<TabElement> tabList, PageController? controller})
       : _tabList = tabList,
         controller = controller ?? PageController(initialPage: 0),
         super(TabState(selectedTab: tabList.first));
 
-  final List<tab.Tab> _tabList;
+  final List<TabElement> _tabList;
   final PageController controller;
 
   bool isAvailable = true;
@@ -25,7 +25,7 @@ class TabCubit extends Cubit<TabState> {
     }
   }
 
-  void onTap(tab.Tab selectedTab) {
+  void onTap(TabElement selectedTab) {
     if (isAvailable) {
       int index = 0;
       isAvailable = false;
