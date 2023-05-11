@@ -17,7 +17,8 @@ class CustomSearchBar extends StatelessWidget {
             contentPadding: contentPadding,
             fillColor: Colors.grey[200],
             prefixIcon: const Icon(Icons.search_rounded, size: 20),
-            hintText: "Search...",
+            hintText: "Search",
+            hintStyle: Theme.of(context).textTheme.labelLarge,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Constants.radiusSmall),
                 borderSide: const BorderSide(color: Colors.transparent)),

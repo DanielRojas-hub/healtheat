@@ -5,6 +5,7 @@ import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/category_button.dart';
 import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
+import 'package:healtheat/common/widgets/search_section.dart';
 import 'package:healtheat/common/widgets/tab_widget.dart';
 import 'package:healtheat/common/widgets/view_all_button.dart';
 
@@ -19,6 +20,11 @@ class HomeView extends StatelessWidget {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            const SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: Constants.margin),
+              sliver: SliverToBoxAdapter(child: SearchSection()),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
@@ -39,7 +45,7 @@ class HomeView extends StatelessWidget {
                       final isFirst = index == 0;
                       return Padding(
                         padding: EdgeInsets.only(
-                            left: isFirst ? 15.0 : 0, right: 20.0),
+                            left: isFirst ? Constants.margin : 0, right: 15.0),
                         child: CategoryButton(
                           iconData: Icons.lunch_dining_outlined,
                           label: const Text("Burger"),
@@ -49,7 +55,7 @@ class HomeView extends StatelessWidget {
                     }),
                   )),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 15)),
+            const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(

@@ -32,20 +32,17 @@ class CategoryButton extends StatelessWidget {
       children: [
         CustomIconButton(
           iconData: iconData,
-          backgroundColor: backgroundColor ?? Colors.grey[200],
+          backgroundColor: backgroundColor ?? Colors.grey[100],
           color: color ?? Colors.grey[600],
           iconSize: iconSize ?? 30,
-          padding: const EdgeInsets.all(8.0),
+          padding: padding ?? const EdgeInsets.all(10.0),
           elevation: elevation ?? 0,
           onTap: onTap,
           borderRadius:
               borderRadius ?? BorderRadius.circular(Constants.radiusSmall),
         ),
         DefaultTextStyle.merge(
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSecondaryContainer),
-          child: label,
-        ),
+            style: Theme.of(context).textTheme.labelSmall, child: label),
       ],
     );
   }

@@ -18,14 +18,12 @@ class ViewAllButton extends StatelessWidget {
       child: Row(
         children: [
           DefaultTextStyle.merge(
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSecondaryContainer),
-            child: const Text("View all"),
-          ),
+              style: Theme.of(context).textTheme.labelMedium,
+              child: const Text("View all")),
           Icon(
             iconData,
             size: iconSize,
-            color: Theme.of(context).colorScheme.onSecondaryContainer,
+            color: Theme.of(context).unselectedWidgetColor,
           ),
         ],
       ),

@@ -7,14 +7,17 @@ class SearchSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double size = 37;
+
     return Row(children: const [
       Expanded(
           child: CustomSearchBar(
-        height: 40,
+        height: size,
         contentPadding: EdgeInsets.symmetric(horizontal: 5),
       )),
       SizedBox(width: 10),
-      CustomIconButton(iconData: Icons.filter_alt, height: 40, width: 40),
+      CustomIconButton(
+          iconData: Icons.filter_alt, height: size, width: size, elevation: 0),
     ]);
   }
 }
