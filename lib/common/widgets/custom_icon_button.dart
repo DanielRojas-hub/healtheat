@@ -13,7 +13,9 @@ class CustomIconButton extends StatelessWidget {
       this.backgroundColor,
       this.color,
       this.padding,
-      this.elevation})
+      this.elevation,
+      this.height,
+      this.width})
       : super(key: key);
 
   final VoidCallback? onTap;
@@ -24,10 +26,13 @@ class CustomIconButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? color;
   final double? elevation;
-
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return BaseCard(
+      height: height,
+      width: width,
       backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
       borderRadius:
           borderRadius ?? BorderRadius.circular(Constants.radiusSmall),

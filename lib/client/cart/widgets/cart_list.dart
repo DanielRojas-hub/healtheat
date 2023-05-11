@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:healtheat/common/widgets/cart_card.dart';
-import 'package:healtheat/common/widgets/custom_divider.dart';
 
 class CartList extends StatelessWidget {
   const CartList({super.key});

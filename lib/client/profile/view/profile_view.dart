@@ -66,7 +66,7 @@ class ProfileView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomLabelButton(
-                          title: "284",
+                          label: "284",
                           color: context.theme.blackColor,
                           icon: Icons.motorcycle,
                           iconColor: Theme.of(context).primaryColor,
@@ -74,7 +74,7 @@ class ProfileView extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         CustomLabelButton(
-                          title: "4.5",
+                          label: "4.5",
                           color: context.theme.blackColor,
                           icon: Icons.star,
                           iconColor: Theme.of(context).primaryColor,

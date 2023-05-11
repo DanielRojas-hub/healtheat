@@ -56,7 +56,7 @@ class CardFood extends StatelessWidget {
                     const SizedBox(height: 10),
                     CustomLabelButton(
                         onTap: onTapPrice,
-                        title: price,
+                        label: price,
                         width: MediaQuery.of(context).size.width)
                   ],
                 ),
