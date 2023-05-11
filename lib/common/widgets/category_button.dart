@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/utils/constants.dart';
 import 'custom_icon_button.dart';
 
 class CategoryButton extends StatelessWidget {
@@ -6,9 +7,23 @@ class CategoryButton extends StatelessWidget {
     Key? key,
     required this.iconData,
     required this.label,
+    this.iconSize,
+    this.padding,
+    this.color,
+    this.backgroundColor,
+    this.elevation,
+    required this.onTap,
+    this.borderRadius,
   }) : super(key: key);
 
   final IconData iconData;
+  final double? iconSize;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final Color? backgroundColor;
+  final double? elevation;
+  final BorderRadius? borderRadius;
+  final VoidCallback onTap;
   final Widget label;
 
   @override
@@ -17,15 +32,17 @@ class CategoryButton extends StatelessWidget {
       children: [
         CustomIconButton(
           iconData: iconData,
-          backgroundColor: Colors.grey[200],
-          color: Colors.grey[500],
-          iconSize: 40,
-        ),
-        const SizedBox(
-          height: 5,
+          backgroundColor: backgroundColor ?? Colors.grey[200],
+          color: color ?? Colors.grey[600],
+          iconSize: iconSize ?? 30,
+          padding: const EdgeInsets.all(8.0),
+          elevation: elevation ?? 0,
+          onTap: onTap,
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(Constants.radiusSmall),
         ),
         DefaultTextStyle.merge(
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color: Theme.of(context).colorScheme.onSecondaryContainer),
           child: label,
         ),
