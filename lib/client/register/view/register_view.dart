@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/widgets/custom_expanded_button.dart';
+
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
@@ -43,16 +45,7 @@ class RegisterView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor)),
-                child: const Text("Register"),
-              ),
-            ),
+            const ExpandedButton(label: Text("Register")),
             const SizedBox(height: 10),
             Row(
               children: [

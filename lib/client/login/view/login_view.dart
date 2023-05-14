@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/widgets/custom_expanded_button.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -33,16 +35,7 @@ class LoginView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor)),
-                child: const Text("Log in"),
-              ),
-            ),
+            const ExpandedButton(label: Text("Log in")),
             const SizedBox(height: 10),
             Row(
               children: [
