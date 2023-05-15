@@ -43,7 +43,7 @@ class FilterRestaurantView extends StatelessWidget {
                 10,
                 (index) {
                   return CustomLabelButton(
-                    label: "Burger",
+                    label: const Text("Burger"),
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
@@ -72,7 +72,7 @@ class FilterRestaurantView extends StatelessWidget {
                 8,
                 (index) {
                   return CustomLabelButton(
-                    label: "Burger",
+                    label: const Text("Burger"),
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
@@ -101,7 +101,7 @@ class FilterRestaurantView extends StatelessWidget {
                 7,
                 (index) {
                   return CustomLabelButton(
-                    label: "Burger",
+                    label: const Text("Burger"),
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
@@ -131,7 +131,7 @@ class FilterRestaurantView extends StatelessWidget {
                   return Row(
                     children: [
                       CustomLabelButton(
-                        label: "",
+                        label: const Text("Burger"),
                         backgroundColor:
                             Theme.of(context).colorScheme.secondaryContainer,
                         color:

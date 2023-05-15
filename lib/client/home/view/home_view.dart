@@ -72,6 +72,8 @@ class HomeView extends StatelessWidget {
           ];
         },
         body: PageView(
+            onPageChanged: (index) =>
+                context.read<TabCubit>().onPageChanged(index),
             controller: context.read<TabCubit>().controller,
             children: [
               ListView.separated(
