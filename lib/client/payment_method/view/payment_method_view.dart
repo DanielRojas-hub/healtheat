@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/widgets/bottom_sheet.dart';
 
 import '../payment_method.dart';
 
@@ -19,6 +20,8 @@ class PaymentMethodView extends StatelessWidget {
           child: ListView(children: const [
             SizedBox(height: 20),
             PaymentList(),
+            SizedBox(height: 20),
+            BottomSheetWidget(),
           ]),
         ),
       ),
