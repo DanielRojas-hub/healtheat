@@ -17,6 +17,7 @@ class TotalCard extends StatelessWidget {
           const SizedBox(width: 10),
           DefaultTextStyle.merge(
               style: Theme.of(context).textTheme.titleMedium, child: label),
+          const SizedBox(width: 10),
         ],
       ),
     );

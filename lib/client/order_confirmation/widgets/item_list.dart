@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/widgets/cart_card.dart';
+import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 
 class ItemList extends StatelessWidget {
@@ -16,7 +17,8 @@ class ItemList extends StatelessWidget {
       },
       itemCount: 2,
       separatorBuilder: (BuildContext context, int index) =>
-          CustomDivider(color: Colors.grey[100], height: 1),
+          const CustomBackgroundWidget(
+              child: CustomDivider(margin: EdgeInsets.zero)),
     );
   }
 }

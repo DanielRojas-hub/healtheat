@@ -49,12 +49,8 @@ class CustomCardRestaurant extends StatelessWidget {
             child: Column(children: [
               Row(children: [
                 Expanded(
-                    child: Text(
-                  name,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                )),
+                    child: Text(name,
+                        style: Theme.of(context).textTheme.titleLarge)),
                 CustomIconButton(
                   onTap: onTapFavorite,
                   borderRadius: BorderRadius.circular(Constants.radiusInfinite),
@@ -72,42 +68,43 @@ class CustomCardRestaurant extends StatelessWidget {
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 CustomLabelButton(
-                  label: price,
                   icon: Icons.electric_scooter,
+                  color: Theme.of(context).colorScheme.onTertiaryContainer,
                   backgroundColor:
-                      Theme.of(context).colorScheme.secondaryContainer,
-                  color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      Theme.of(context).colorScheme.tertiaryContainer,
+                  label: Text(price,
+                      style: Theme.of(context).textTheme.labelMedium),
                 ),
-                CustomLabelButton(label: time, icon: Icons.schedule)
+                CustomLabelButton(label: Text(time), icon: Icons.schedule)
               ]),
             ]),
           )
         ]),
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Expanded(
+              child: Row(
                 children: List.generate(
                     typeFood.length,
                     (index) => Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: CustomLabelButton(
-                              label: typeFood[index],
+                              label: Text(typeFood[index]),
                               backgroundColor: context.theme.whiteColor,
                               color: context.theme.blackColor),
                         )),
               ),
-              CustomLabelButton(
-                label: rate,
-                icon: Icons.star_rate_rounded,
-                backgroundColor: context.theme.whiteColor,
-                color: context.theme.blackColor,
-                iconColor: Colors.amber,
-              )
-            ],
-          ),
+            ),
+            CustomLabelButton(
+              label: Text(rate),
+              icon: Icons.star_rate_rounded,
+              backgroundColor: context.theme.whiteColor,
+              color: context.theme.blackColor,
+              iconColor: context.theme.rateColor,
+            )
+          ]),
         )
       ]),
     );

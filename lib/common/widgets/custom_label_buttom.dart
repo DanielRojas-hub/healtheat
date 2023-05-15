@@ -11,7 +11,6 @@ class CustomLabelButton extends StatelessWidget {
       this.backgroundColor,
       this.color,
       this.onTap,
-      this.width,
       this.iconColor,
       this.elevation,
       this.iconSize,
@@ -19,13 +18,13 @@ class CustomLabelButton extends StatelessWidget {
       this.onDeleted,
       this.deleteIconSize,
       this.deleteIconColor,
-      this.padding});
+      this.padding,
+      this.expanded});
 
-  final String label;
+  final Widget label;
   final IconData? icon;
   final Color? backgroundColor;
   final Color? color;
-  final double? width;
   final VoidCallback? onTap;
   final Color? iconColor;
   final double? elevation;
@@ -35,6 +34,7 @@ class CustomLabelButton extends StatelessWidget {
   final double? deleteIconSize;
   final Color? deleteIconColor;
   final EdgeInsetsGeometry? padding;
+  final bool? expanded;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +43,13 @@ class CustomLabelButton extends StatelessWidget {
       backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
       borderRadius:
           borderRadius ?? BorderRadius.circular(Constants.radiusInfinite),
-      width: width,
       elevation: elevation ?? 0,
       child: Padding(
         padding:
-            padding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+            padding ?? const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: expanded ?? false ? MainAxisSize.max : MainAxisSize.min,
           children: [
             if (icon != null) ...[
               Icon(icon,
@@ -60,20 +59,19 @@ class CustomLabelButton extends StatelessWidget {
                       Theme.of(context).colorScheme.onPrimary),
               const SizedBox(width: 5)
             ],
-            Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: color ?? Theme.of(context).colorScheme.onPrimary,
-                  ),
-            ),
+            DefaultTextStyle.merge(
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: color ?? Theme.of(context).colorScheme.onPrimary,
+                    ),
+                child: label),
             if (onDeleted != null) ...[
               const SizedBox(width: 5),
               BaseCard(
-                backgroundColor: Colors.transparent,
                 elevation: 0,
                 onTap: onDeleted,
+                backgroundColor: Colors.transparent,
                 borderRadius: BorderRadius.circular(Constants.radiusInfinite),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),

@@ -12,10 +12,10 @@ class CustomChip extends StatelessWidget {
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: CustomLabelButton(
-        label: label,
+        label: Text(label),
         borderRadius: BorderRadius.circular(Constants.radiusSmall),
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
+        backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+        color: Theme.of(context).colorScheme.onTertiaryContainer,
         deleteIconColor: Theme.of(context).disabledColor,
         onDeleted: () {},
         padding: const EdgeInsets.only(top: 6, bottom: 6, left: 10, right: 6),

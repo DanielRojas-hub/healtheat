@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/client/home/home.dart';
+import 'package:healtheat/client/login/login.dart';
+import 'package:healtheat/client/profile/profile.dart';
+import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/search/search.dart';
+import 'package:healtheat/client/splash_screen/splash_screen.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
 
 void main() {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme(),
-      home: const HomePage(),
+      home: const SplashScreenPage(),
     );
   }
 }

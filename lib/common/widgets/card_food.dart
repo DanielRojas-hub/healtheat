@@ -20,9 +20,9 @@ class CardFood extends StatelessWidget {
       this.onTapPrice});
 
   final String url;
-  final String title;
-  final String subtitle;
-  final String price;
+  final Widget title;
+  final Widget subtitle;
+  final Widget price;
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
@@ -33,48 +33,41 @@ class CardFood extends StatelessWidget {
     return BaseCard(
       onTap: onTap,
       child: Stack(children: [
-        Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: ImageContainer(url: url)),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Expanded(child: ImageContainer(url: url)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              DefaultTextStyle.merge(
+                  style: Theme.of(context).textTheme.titleLarge,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  child: title),
+              DefaultTextStyle.merge(
+                  style: Theme.of(context).textTheme.labelMedium,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  child: subtitle),
               const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.only(
-                    left: 10.0, right: 10.0, bottom: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.titleLarge),
-                    Text(subtitle,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium),
-                    const SizedBox(height: 10),
-                    CustomLabelButton(
-                        onTap: onTapPrice,
-                        label: price,
-                        width: MediaQuery.of(context).size.width)
-                  ],
-                ),
-              ),
+              CustomLabelButton(label: price, onTap: onTapPrice, expanded: true)
             ]),
+          ),
+        ]),
         Positioned(
           top: 5,
           right: 5,
           child: CustomIconButton(
-              onTap: onTapFavorite,
-              iconData: isFavorite ? Icons.favorite : Icons.favorite_border,
-              backgroundColor: context.theme.whiteColor,
-              borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-              iconSize: 16.0,
-              padding: const EdgeInsets.all(6.0),
-              color: isFavorite
-                  ? context.theme.redColor
-                  : Theme.of(context).disabledColor),
+            onTap: onTapFavorite,
+            iconData: isFavorite ? Icons.favorite : Icons.favorite_border,
+            backgroundColor: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+            iconSize: 16.0,
+            padding: const EdgeInsets.all(6.0),
+            color: isFavorite
+                ? context.theme.redColor
+                : Theme.of(context).disabledColor,
+          ),
         ),
       ]),
     );

@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/coloors.dart';
 import 'package:healtheat/common/utils/constants.dart';
-
-import 'themes.dart';
+import 'package:healtheat/common/utils/text_theme.dart';
 
 ThemeData lightTheme() {
   final ThemeData base = ThemeData.light();
@@ -13,7 +12,7 @@ ThemeData lightTheme() {
 
   final appBarTheme = appBarThemeMethod(textTheme);
   var inputDecorationTheme = inputDecorationThemeMethod(textTheme);
-  final tabBarTheme = tabBarThemeMethod();
+  // final tabBarTheme = tabBarThemeMethod();
   final elevatedButtonTheme = elevatedButtonThemeMethod(textTheme);
   final bottomSheetTheme = bottomSheetThemeMethod();
   final dialogTheme = dialogThemeMethod();
@@ -23,12 +22,13 @@ ThemeData lightTheme() {
 
   return base.copyWith(
       scaffoldBackgroundColor: Colors.white,
-      dialogBackgroundColor: Coloors.backgroundLight,
+      dialogBackgroundColor: Colors.white,
       primaryColor: const Color(0xFFFF4E0B),
+      unselectedWidgetColor: Colors.black45,
       extensions: [CustomThemeExtension.lightMode],
       textTheme: textTheme,
       appBarTheme: appBarTheme,
-      tabBarTheme: tabBarTheme,
+      // tabBarTheme: tabBarTheme,
       elevatedButtonTheme: elevatedButtonTheme,
       inputDecorationTheme: inputDecorationTheme,
       bottomSheetTheme: bottomSheetTheme,
@@ -43,8 +43,9 @@ ThemeData lightTheme() {
         onPrimaryContainer: Colors.black87,
         secondary: Colors.blue,
         onSecondary: Colors.white,
-        secondaryContainer: Colors.grey.shade200,
-        onSecondaryContainer: Colors.black87,
+        tertiary: Colors.black45,
+        tertiaryContainer: Colors.grey.shade200,
+        onTertiaryContainer: Colors.black54,
         error: const Color(0xffb00020),
         onError: Colors.white,
         background: Colors.white,
@@ -112,10 +113,11 @@ BottomSheetThemeData bottomSheetThemeMethod() {
 ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      minimumSize: const Size(0, 40),
+      minimumSize: const Size(double.infinity, 40),
       backgroundColor: const Color(0xFFFF4E0B),
       foregroundColor: Coloors.backgroundLight,
       splashFactory: NoSplash.splashFactory,
+      textStyle: textTheme.titleMedium,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Constants.radiusInfinite),
       ),
@@ -123,7 +125,7 @@ ElevatedButtonThemeData elevatedButtonThemeMethod(TextTheme textTheme) {
   );
 }
 
-TabBarTheme tabBarThemeMethod() {
+/* TabBarTheme tabBarThemeMethod() {
   return const TabBarTheme(
     indicator: UnderlineTabIndicator(
       borderSide: BorderSide(
@@ -132,7 +134,7 @@ TabBarTheme tabBarThemeMethod() {
       ),
     ),
   );
-}
+} */
 
 AppBarTheme appBarThemeMethod(TextTheme textTheme) {
   return AppBarTheme(
@@ -142,10 +144,8 @@ AppBarTheme appBarThemeMethod(TextTheme textTheme) {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
-    iconTheme: const IconThemeData(
-      color: Colors.black,
-    ),
-    elevation: 0.75,
+    iconTheme: const IconThemeData(color: Colors.black),
+    elevation: 2,
     shadowColor: Colors.black45,
   );
 }

@@ -16,8 +16,8 @@ class RestaurantAddress extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
                 shape: BoxShape.circle, color: Colors.lightGreenAccent),
-            padding: const EdgeInsets.all(8.0),
-            child: const Icon(Icons.restaurant),
+            padding: const EdgeInsets.all(10.0),
+            child: const Icon(Icons.restaurant, size: 20),
           ),
           const SizedBox(width: 10.0),
           Column(

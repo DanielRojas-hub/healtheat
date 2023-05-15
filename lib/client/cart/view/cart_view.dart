@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 import 'package:healtheat/common/widgets/dotted_divider.dart';
 import 'package:healtheat/common/widgets/total_card.dart';
@@ -20,14 +21,16 @@ class CartView extends StatelessWidget {
         child: Material(
           color: Colors.grey[50],
           child: ListView(
-            children: [
-              const CartList(),
-              CustomDivider(backgroundColor: Theme.of(context).cardColor),
-              const DeliveryCard(),
-              CustomDivider(backgroundColor: Theme.of(context).cardColor),
-              const TotalCard(label: Text('\$36.24')),
-              const DottedDivider(padding: EdgeInsets.only(top: 15)),
-              const SizedBox(height: 100),
+            children: const [
+              CartList(),
+              CustomBackgroundWidget(
+                  child: CustomDivider(margin: EdgeInsets.only(bottom: 15.0))),
+              DeliveryCard(),
+              CustomBackgroundWidget(child: CustomDivider()),
+              TotalCard(label: Text('\$36.24')),
+              CustomBackgroundWidget(
+                  child: DottedDivider(padding: EdgeInsets.only(top: 15))),
+              SizedBox(height: 100),
             ],
           ),
         ),

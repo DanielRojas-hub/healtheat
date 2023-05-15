@@ -22,17 +22,18 @@ class FavoritesView extends StatelessWidget {
                 mainAxisSpacing: 20),
             itemBuilder: (BuildContext context, int index) {
               return CardFood(
-                  url:
-                      'https://9a3dd0f30ec2813b0355-0aefa298f29a1e32e1203150d51d4825.ssl.cf1.rackcdn.com/pix_5_101918_80061_6293d1fea56d1.jpg',
-                  title: 'Pizza de cartón',
-                  subtitle: 'Gluten free',
-                  price: '\$99,9',
-                  isFavorite: false,
-                  onTap: () {},
-                  onTapFavorite: () {},
-                  onTapPrice: () {});
+                url:
+                    'https://9a3dd0f30ec2813b0355-0aefa298f29a1e32e1203150d51d4825.ssl.cf1.rackcdn.com/pix_5_101918_80061_6293d1fea56d1.jpg',
+                title: const Text('Pizza de cartón'),
+                subtitle: const Text('Gluten free'),
+                price: const Text('\$99,9'),
+                isFavorite: false,
+                onTap: () {},
+                onTapFavorite: () {},
+                onTapPrice: () {},
+              );
             },
-            itemCount: 45,
+            itemCount: 5,
           ),
         ],
       ),

@@ -29,7 +29,7 @@ class OrderConfirmationView extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium),
               ),
               const RestaurantAddress(),
-              const CustomDivider(),
+              const CustomBackgroundWidget(child: CustomDivider()),
               CustomBackgroundWidget(
                 child: Text('Delivery To:',
                     style: Theme.of(context).textTheme.titleMedium),
@@ -40,28 +40,31 @@ class OrderConfirmationView extends StatelessWidget {
                     children: [
                       Text('Address',
                           style: Theme.of(context).textTheme.labelSmall),
-                      Text('New address',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: Colors.blue,
-                                    decoration: TextDecoration.underline,
-                                  )),
+                      Text(
+                        'New address',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                                decoration: TextDecoration.underline),
+                      ),
                     ]),
               ),
               const DeliveryToDropdownButton(),
-              const CustomDivider(),
+              const CustomBackgroundWidget(child: CustomDivider()),
               CustomBackgroundWidget(
                 child: Text('Items in Cart',
                     style: Theme.of(context).textTheme.titleMedium),
               ),
-              const CustomBackgroundWidget(child: SizedBox(height: 10)),
               const ItemList(),
-              CustomDivider(color: Colors.grey[100], height: 1),
+              const CustomBackgroundWidget(
+                  child: CustomDivider(margin: EdgeInsets.only(bottom: 15.0))),
               const OrderConfirmationDetails(),
-              const CustomBackgroundWidget(child: SizedBox(height: 10)),
-              const DottedDivider(),
+              const CustomBackgroundWidget(child: DottedDivider()),
               const TotalCard(label: Text('\$28.48')),
-              const DottedDivider(padding: EdgeInsets.only(top: 15)),
+              const CustomBackgroundWidget(
+                  child: DottedDivider(padding: EdgeInsets.only(top: 15))),
               const SizedBox(height: 100),
             ],
           ),

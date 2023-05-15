@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
                       children: [
                     Text("Popular Categories",
                         style: Theme.of(context).textTheme.titleLarge),
-                    const ViewAllButton(iconData: Icons.keyboard_arrow_right),
+                    const ViewAllButton(),
                   ])),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
@@ -48,7 +48,8 @@ class HomeView extends StatelessWidget {
                             left: isFirst ? Constants.margin : 0, right: 15.0),
                         child: CategoryButton(
                           iconData: Icons.lunch_dining_outlined,
-                          label: const Text("Burger"),
+                          label: Text("Burger",
+                              style: Theme.of(context).textTheme.labelSmall),
                           onTap: () {},
                         ),
                       );
@@ -59,54 +60,55 @@ class HomeView extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
-                  child: BlocBuilder<TabCubit, TabState>(
-                      builder: (context, state) => TabWidget(
-                            onTap: (TabElement selectedTab) =>
-                                context.read<TabCubit>().onTap(selectedTab),
-                            selectedTab: state.selectedTab,
-                            tabList: homeTabList,
-                          ))),
+                child: BlocBuilder<TabCubit, TabState>(
+                    builder: (context, state) => TabWidget(
+                        onTap: (TabElement selectedTab) =>
+                            context.read<TabCubit>().onTap(selectedTab),
+                        selectedTab: state.selectedTab,
+                        tabList: homeTabList)),
+              ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 15)),
           ];
         },
         body: PageView(
-          controller: context.read<TabCubit>().controller,
-          children: [
-            ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-              itemBuilder: (BuildContext context, int index) =>
-                  const CustomCardRestaurant(
-                      name: "Vero Vero",
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
-                      price: "\$10 - \$15",
-                      rate: "4,8",
-                      time: "25-35 min",
-                      typeFood: ['Pizza', 'Italian'],
-                      isFavorite: false),
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 15),
-              itemCount: 5,
-            ),
-            ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-              itemBuilder: (BuildContext context, int index) =>
-                  const CustomCardRestaurant(
-                      name: "Vero Vero",
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
-                      price: "\$10 - \$15",
-                      rate: "4,8",
-                      time: "25-35 min",
-                      typeFood: ['Pizza', 'Italian'],
-                      isFavorite: false),
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 15),
-              itemCount: 5,
-            ),
-          ],
-        ),
+            controller: context.read<TabCubit>().controller,
+            children: [
+              ListView.separated(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: Constants.margin),
+                itemBuilder: (BuildContext context, int index) =>
+                    const CustomCardRestaurant(
+                        name: "Vero Vero",
+                        url:
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
+                        price: "\$10 - \$15",
+                        rate: "4,8",
+                        time: "25-35 min",
+                        typeFood: ['Pizza', 'Italian'],
+                        isFavorite: false),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 15),
+                itemCount: 5,
+              ),
+              ListView.separated(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: Constants.margin),
+                itemBuilder: (BuildContext context, int index) =>
+                    const CustomCardRestaurant(
+                        name: "Vero Vero",
+                        url:
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
+                        price: "\$10 - \$15",
+                        rate: "4,8",
+                        time: "25-35 min",
+                        typeFood: ['Pizza', 'Italian'],
+                        isFavorite: false),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 15),
+                itemCount: 5,
+              ),
+            ]),
       ),
     );
   }

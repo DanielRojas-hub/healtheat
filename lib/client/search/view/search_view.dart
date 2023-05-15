@@ -40,17 +40,18 @@ class SearchView extends StatelessWidget {
         body: ListView(
           children: [
             SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(5, (index) {
-                    final isFirst = index == 0;
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(5, (index) {
+                  final isFirst = index == 0;
 
-                    return Padding(
-                      padding: EdgeInsets.only(left: !isFirst ? 8.0 : 10.0),
-                      child: const CustomChip(label: 'Sushi'),
-                    );
-                  }),
-                )),
+                  return Padding(
+                    padding: EdgeInsets.only(left: !isFirst ? 8.0 : 10.0),
+                    child: const CustomChip(label: 'Sushi'),
+                  );
+                }),
+              ),
+            ),
             const SizedBox(height: 20.0),
             ListView.separated(
               shrinkWrap: true,
@@ -70,9 +71,8 @@ class SearchView extends StatelessWidget {
                 );
               },
               itemCount: 10,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(height: 20);
-              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 20),
             )
           ],
         ));

@@ -10,7 +10,8 @@ class BaseCard extends StatelessWidget {
       this.elevation,
       this.width,
       this.backgroundColor,
-      this.height})
+      this.height,
+      this.border})
       : super(key: key);
 
   final double? elevation;
@@ -20,6 +21,7 @@ class BaseCard extends StatelessWidget {
   final double? width;
   final Widget child;
   final double? height;
+  final BoxBorder? border;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,10 @@ class BaseCard extends StatelessWidget {
     return Material(
       elevation: elevation ?? 2,
       color: backgroundColor ?? originalColorCard,
-      shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? originalBorderRadius),
+      shape: border != null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: borderRadius ?? originalBorderRadius),
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius ?? originalBorderRadius,
@@ -38,7 +42,9 @@ class BaseCard extends StatelessWidget {
           width: width,
           height: height,
           decoration: BoxDecoration(
-            borderRadius: borderRadius ?? originalBorderRadius,
+            border: border,
+            borderRadius:
+                border != null ? null : borderRadius ?? originalBorderRadius,
             color: backgroundColor ?? originalColorCard,
           ),
           child: child,

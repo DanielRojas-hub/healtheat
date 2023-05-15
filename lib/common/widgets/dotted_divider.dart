@@ -10,12 +10,11 @@ class DottedDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding ?? const EdgeInsets.symmetric(vertical: 15),
-      color: Theme.of(context).cardColor,
       child: DottedLine(
         dashLength: 10,
         dashGapLength: 5,
         lineThickness: 2,
-        dashColor: Colors.grey[300]!,
+        dashColor: Theme.of(context).colorScheme.secondaryContainer,
       ),
     );
   }

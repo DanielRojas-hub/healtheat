@@ -10,14 +10,10 @@ class SearchSection extends StatelessWidget {
     const double size = 37;
 
     return Row(children: const [
-      Expanded(
-          child: CustomSearchBar(
-        height: size,
-        contentPadding: EdgeInsets.symmetric(horizontal: 5),
-      )),
-      SizedBox(width: 10),
+      Expanded(child: CustomSearchBar(height: size)),
+      SizedBox(width: 15),
       CustomIconButton(
-          iconData: Icons.filter_alt, height: size, width: size, elevation: 0),
+          iconData: Icons.tune, height: size, width: size, elevation: 0),
     ]);
   }
 }

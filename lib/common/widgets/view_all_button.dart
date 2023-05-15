@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'base_card.dart';
 
 class ViewAllButton extends StatelessWidget {
-  const ViewAllButton({
-    Key? key,
-    required this.iconData,
-    this.iconSize,
-  }) : super(key: key);
-
-  final IconData iconData;
-  final double? iconSize;
+  const ViewAllButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +10,9 @@ class ViewAllButton extends StatelessWidget {
       elevation: 0,
       child: Row(
         children: [
-          DefaultTextStyle.merge(
-              style: Theme.of(context).textTheme.labelMedium,
-              child: const Text("View all")),
-          Icon(
-            iconData,
-            size: iconSize,
-            color: Theme.of(context).unselectedWidgetColor,
-          ),
+          Text("View all", style: Theme.of(context).textTheme.labelMedium),
+          Icon(Icons.keyboard_arrow_right,
+              color: Theme.of(context).colorScheme.tertiary),
         ],
       ),
     );

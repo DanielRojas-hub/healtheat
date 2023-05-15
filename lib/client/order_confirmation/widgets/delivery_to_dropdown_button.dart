@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/utils/input_border.dart';
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 
 class DeliveryToDropdownButton extends StatelessWidget {
@@ -8,15 +9,9 @@ class DeliveryToDropdownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBackgroundWidget(
       child: DropdownButtonFormField(
-        decoration: InputDecoration(
+        decoration: inputDecorationBorderMethod(context).copyWith(
           isDense: true,
           contentPadding: const EdgeInsets.all(6.0),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
-          ),
         ),
         value: '6391 Elgin St. Celina, Delaware 10299',
         onChanged: (String? newValue) {},
