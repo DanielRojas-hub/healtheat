@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:healtheat/client/splash_screen/static/splash_data.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 import '../splash_screen.dart';
@@ -58,7 +60,7 @@ class SplashScreenView extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => context.goNamed(RouteName.home),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).primaryColor)),

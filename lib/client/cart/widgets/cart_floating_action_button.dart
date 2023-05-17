@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:healtheat/common/router/routes.dart';
 
 class CartFloatingActionButton extends StatelessWidget {
   const CartFloatingActionButton({super.key});
@@ -9,7 +11,7 @@ class CartFloatingActionButton extends StatelessWidget {
       height: 42.5,
       child: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {},
+        onPressed: () => context.goNamed(RouteName.orderConfirmation),
         label: SizedBox(
           width: 4 * MediaQuery.of(context).size.width / 5,
           child: Row(

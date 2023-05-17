@@ -144,7 +144,7 @@ AppBarTheme appBarThemeMethod(TextTheme textTheme) {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
-    iconTheme: const IconThemeData(color: Colors.black),
+    iconTheme: const IconThemeData(color: Colors.black, size: 20),
     elevation: 2,
     shadowColor: Colors.black45,
   );

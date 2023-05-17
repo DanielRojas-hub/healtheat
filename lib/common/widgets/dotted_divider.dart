@@ -14,7 +14,7 @@ class DottedDivider extends StatelessWidget {
         dashLength: 10,
         dashGapLength: 5,
         lineThickness: 2,
-        dashColor: Theme.of(context).colorScheme.secondaryContainer,
+        dashColor: Theme.of(context).colorScheme.tertiaryContainer,
       ),
     );
   }

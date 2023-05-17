@@ -36,7 +36,7 @@ class CartCard extends StatelessWidget {
             width: 55,
             height: 55,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryContainer,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(Constants.radiusSmall),
             ),
           ),

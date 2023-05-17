@@ -15,7 +15,6 @@ class CartView extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const CartFloatingActionButton(),
-      appBar: AppBar(title: const Text('Cart'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
         child: Material(

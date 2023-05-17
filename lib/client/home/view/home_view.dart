@@ -14,9 +14,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: NestedScrollView(
+    return Material(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
             const SliverToBoxAdapter(child: SizedBox(height: 100)),

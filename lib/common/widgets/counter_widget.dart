@@ -40,7 +40,7 @@ class CounterWidget extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.symmetric(
                   vertical: BorderSide(
-                      color: Theme.of(context).colorScheme.secondaryContainer)),
+                      color: Theme.of(context).colorScheme.tertiaryContainer)),
             ),
             child: Text(label, style: Theme.of(context).textTheme.titleSmall),
           ),
