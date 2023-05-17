@@ -7,4 +7,5 @@ class RouteName {
   static const cart = 'cart';
   static const orderConfirmation = 'order_confirmation';
   static const profile = 'profile';
+  static const search = 'search';
 }
