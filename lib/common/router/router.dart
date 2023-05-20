@@ -8,6 +8,7 @@ import 'package:healtheat/client/order_confirmation/order_confirmation.dart';
 import 'package:healtheat/client/profile/profile.dart';
 import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/splash_screen/splash_screen.dart';
+import 'package:healtheat/client/food_details/food_detail.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -21,7 +22,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/splash_screen',
+    initialLocation: '/food_details',
     routes: [
       GoRoute(
           path: '/splash_screen',
@@ -70,6 +71,10 @@ class AppRouter {
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),
+            GoRoute(
+                path: '/food_details',
+                name: RouteName.foodDetails,
+                builder: (context, state) => const FoodDetailsPage()),
           ]),
     ],
   );
