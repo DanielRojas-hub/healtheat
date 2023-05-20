@@ -8,4 +8,5 @@ class RouteName {
   static const orderConfirmation = 'order_confirmation';
   static const profile = 'profile';
   static const search = 'search';
+  static const restaurantDetails = 'restaurant_details';
 }
