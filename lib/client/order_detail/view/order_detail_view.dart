@@ -55,31 +55,34 @@ class OrderDetailView extends StatelessWidget {
                         child: Column(
                           children: [
                             CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .tertiaryContainer,
-                              child: const Icon(Icons.access_time,
-                                  color: Colors.grey),
-                            ),
+                                radius: 25,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .tertiaryContainer,
+                                child: Icon(
+                                  Icons.access_time,
+                                  color: Theme.of(context).disabledColor,
+                                )),
                             const SizedBox(height: 30),
                             CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .tertiaryContainer,
-                              child: const Icon(Icons.soup_kitchen,
-                                  color: Colors.grey),
-                            ),
+                                radius: 25,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .tertiaryContainer,
+                                child: Icon(
+                                  Icons.soup_kitchen,
+                                  color: Theme.of(context).disabledColor,
+                                )),
                             const SizedBox(height: 30),
                             CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .tertiaryContainer,
-                              child: const Icon(Icons.delivery_dining,
-                                  color: Colors.grey),
-                            ),
+                                radius: 25,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .tertiaryContainer,
+                                child: Icon(
+                                  Icons.delivery_dining,
+                                  color: Theme.of(context).disabledColor,
+                                )),
                           ],
                         ),
                       ),
