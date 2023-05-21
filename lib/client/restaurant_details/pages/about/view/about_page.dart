@@ -6,6 +6,6 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AboutView();
+    return const AboutView();
   }
 }
