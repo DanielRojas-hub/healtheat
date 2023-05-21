@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:healtheat/common/widgets/base_card.dart';
 
 class CustomFooter extends StatelessWidget {
-  const CustomFooter({super.key, required this.price});
+  const CustomFooter(
+      {super.key,
+      required this.price,
+      required this.label,
+      required this.textButton,
+      required this.onPressed});
 
   final Widget price;
+  final Widget label;
+  final Widget textButton;
+  final VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return BaseCard(
@@ -18,17 +27,15 @@ class CustomFooter extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Total price: ',
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
+                DefaultTextStyle.merge(
+                    style: Theme.of(context).textTheme.labelLarge,
+                    child: label),
                 DefaultTextStyle.merge(
                     style: Theme.of(context).textTheme.titleLarge, child: price)
               ]),
           const SizedBox(width: 70),
           Expanded(
-              child: ElevatedButton(
-                  onPressed: () {}, child: const Text('Add to cart')))
+              child: ElevatedButton(onPressed: onPressed, child: textButton))
         ]),
       ),
     );

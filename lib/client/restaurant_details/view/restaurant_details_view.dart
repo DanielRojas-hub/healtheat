@@ -13,7 +13,7 @@ class RestaurantDetailsView extends StatelessWidget {
     return const Scaffold(
         body: CustomScrollView(slivers: [
       CustomAppBar(
-        image:
+        imageUrl:
             'https://hips.hearstapps.com/hmg-prod/images/dsc01939-1638289406.jpg',
         isFavorite: true,
         height: 150,

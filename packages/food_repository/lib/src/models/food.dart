@@ -8,6 +8,7 @@ class Food extends Equatable {
   final String id;
   final String displayName;
   final String description;
+  final String imageUrl;
   final num price;
   final bool isAvailable;
 
@@ -15,6 +16,7 @@ class Food extends Equatable {
     required this.id,
     required this.displayName,
     required this.description,
+    required this.imageUrl,
     required this.price,
     required this.isAvailable,
   });
@@ -23,6 +25,7 @@ class Food extends Equatable {
     String? id,
     String? displayName,
     String? description,
+    String? imageUrl,
     num? price,
     bool? isAvailable,
   }) {
@@ -30,6 +33,7 @@ class Food extends Equatable {
       id: id ?? this.id,
       displayName: displayName ?? this.displayName,
       description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
     );
@@ -40,6 +44,7 @@ class Food extends Equatable {
       'id': id,
       'displayName': displayName,
       'description': description,
+      'imageUrl': imageUrl,
       'price': price,
       'isAvailable': isAvailable,
     };
@@ -50,6 +55,7 @@ class Food extends Equatable {
       id: map['id'] as String,
       displayName: map['displayName'] as String,
       description: map['description'] as String,
+      imageUrl: map['imageUrl'] as String,
       price: map['price'] as num,
       isAvailable: map['isAvailable'] as bool,
     );
@@ -62,6 +68,7 @@ class Food extends Equatable {
       id: snapshot.id,
       displayName: data?['displayName'],
       description: data?['description'],
+      imageUrl: data?['imageUrl'],
       price: data?['price'],
       isAvailable: data?['isAvailable'],
     );
@@ -81,6 +88,7 @@ class Food extends Equatable {
       id,
       displayName,
       description,
+      imageUrl,
       price,
       isAvailable,
     ];
