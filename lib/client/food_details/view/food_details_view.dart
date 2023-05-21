@@ -8,15 +8,21 @@ class FoodDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+        bottomNavigationBar: Text("holis"),
         body: CustomScrollView(
-      slivers: [
-        CustomAppBar(
-            isFavorite: false,
-            image:
-                "https://s1.eestatic.com/2021/05/27/como/584453709_186431572_1706x960.jpg",
-            height: 200),
-        SliverToBoxAdapter(child: FoodInfo()),
-      ],
-    ));
+          slivers: [
+            CustomAppBar(
+                isFavorite: true,
+                image:
+                    "https://s1.eestatic.com/2021/05/27/como/584453709_186431572_1706x960.jpg",
+                height: 275),
+            SliverToBoxAdapter(
+                child: FoodInfo(
+                    title: Text("Sakura Set (1100g)"),
+                    price: Text("\$23.69"),
+                    subtitle: Text(
+                        "El sushi es un plato de la gastronomía japonesa con base de arroz condimentado con vinagre y azúcar"))),
+          ],
+        ));
   }
 }

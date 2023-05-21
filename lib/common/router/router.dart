@@ -71,11 +71,11 @@ class AppRouter {
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),
-            GoRoute(
-                path: '/food_details',
-                name: RouteName.foodDetails,
-                builder: (context, state) => const FoodDetailsPage()),
           ]),
+      GoRoute(
+          path: '/food_details',
+          name: RouteName.foodDetails,
+          builder: (context, state) => const FoodDetailsPage())
     ],
   );
 }
