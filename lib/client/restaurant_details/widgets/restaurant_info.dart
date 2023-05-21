@@ -54,6 +54,8 @@ class RestaurantInfo extends StatelessWidget {
                   context.read<TabCubit>().onTap(selectedTab),
               selectedTab: state.selectedTab,
               tabList: restaurantDetailsTabList)),
+      const SizedBox(height: 30),
+      const MenuView(),
     ]);
   }
 }
