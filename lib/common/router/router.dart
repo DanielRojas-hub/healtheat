@@ -24,7 +24,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/food_details',
+    initialLocation: '/favorites',
     routes: [
       GoRoute(
           path: '/splash_screen',

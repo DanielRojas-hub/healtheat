@@ -32,7 +32,7 @@ class StreamFoods extends FoodEvent {
   final String restaurantId;
   final List<String>? foodIds;
 
-  const StreamFoods(this.restaurantId, this.foodIds);
+  const StreamFoods(this.restaurantId, {this.foodIds});
 
   @override
   List<Object?> get props => [restaurantId, foodIds];
