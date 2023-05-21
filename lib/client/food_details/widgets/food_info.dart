@@ -20,26 +20,33 @@ class FoodInfo extends StatelessWidget {
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             DefaultTextStyle.merge(
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.headlineSmall,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 child: title),
-            const SizedBox(height: 10),
             DefaultTextStyle.merge(
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: Theme.of(context).primaryColor),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 child: price),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             DefaultTextStyle.merge(
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.labelLarge,
                 // overflow: TextOverflow.,
                 // maxLines: 1,
                 child: subtitle),
-            const SizedBox(height: 10),
           ]),
-          const SizedBox(height: 20),
-          const CounterWidget(label: '1')
+          const SizedBox(height: 50),
+          const CounterWidget(
+            label: '1',
+            iconSize: 30,
+            fontSize: 22,
+            labelPadding: EdgeInsets.symmetric(horizontal: 15.0),
+            iconPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+          )
         ],
       ),
     );

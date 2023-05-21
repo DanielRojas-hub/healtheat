@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/client/food_details/widgets/custom_footer.dart';
 import 'package:healtheat/client/food_details/widgets/food_info.dart';
 import 'package:healtheat/common/widgets/custom_appbar.dart';
 
@@ -8,7 +9,9 @@ class FoodDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        bottomNavigationBar: Text("holis"),
+        bottomNavigationBar: CustomFooter(
+          price: Text('\$23.69'),
+        ),
         body: CustomScrollView(
           slivers: [
             CustomAppBar(
