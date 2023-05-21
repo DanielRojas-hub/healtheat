@@ -40,12 +40,8 @@ class FoodFooter extends StatelessWidget {
             textButton: const Text('Add to cart'),
           );
         }
-        if (state is FoodLoading) {
-          return const SliverFillRemaining(
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-        return const SliverToBoxAdapter();
+
+        return const SizedBox();
       },
     );
   }
