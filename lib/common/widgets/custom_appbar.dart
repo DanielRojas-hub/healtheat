@@ -19,6 +19,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      pinned: true,
       expandedHeight: height,
       flexibleSpace: FlexibleSpaceBar(
         background: Image.network(image, fit: BoxFit.cover),

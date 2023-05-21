@@ -7,11 +7,11 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
         // displayMedium: GoogleFonts.poppins(fontSize: 60),
         // displaySmall: GoogleFonts.poppins(fontSize: 40),
         headlineLarge:
-            GoogleFonts.poppins(fontSize: 34, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.w700),
         headlineMedium:
-            GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.w700),
         headlineSmall:
-            GoogleFonts.poppins(fontSize: 25, fontWeight: FontWeight.w500),
+            GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
         titleLarge:
             GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w600),
         titleMedium:

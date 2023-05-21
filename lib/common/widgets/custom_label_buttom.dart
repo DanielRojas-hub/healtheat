@@ -46,7 +46,7 @@ class CustomLabelButton extends StatelessWidget {
       elevation: elevation ?? 0,
       child: Padding(
         padding:
-            padding ?? const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+            padding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: expanded ?? false ? MainAxisSize.max : MainAxisSize.min,

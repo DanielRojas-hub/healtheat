@@ -31,9 +31,16 @@ class TabWidget extends StatelessWidget {
         children: List.generate(tabList.length, (index) {
       final tab = tabList[index];
       final isSelected = selectedTab == tab;
+      final isFirst = index == 0;
+      final isLast = index + 1 == tabList.length;
 
       return Expanded(
-        child: SelectionOption(tab: tab, isSelected: isSelected, onTap: onTap),
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: !isFirst ? 8.0 : 0, right: !isLast ? 8.0 : 0),
+          child:
+              SelectionOption(tab: tab, isSelected: isSelected, onTap: onTap),
+        ),
       );
     }));
   }
@@ -68,6 +75,9 @@ class SelectionOption extends StatelessWidget {
         child: Center(
           child: Text(
             tab.title,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: isSelected
                     ? Theme.of(context).primaryColor
