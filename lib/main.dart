@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healtheat/client/home/home.dart';
 import 'package:healtheat/client/login/login.dart';
@@ -9,7 +10,12 @@ import 'package:healtheat/common/router/router.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
