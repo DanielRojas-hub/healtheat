@@ -35,7 +35,7 @@ class RestaurantDetailsView extends StatelessWidget {
           controller: context.read<TabCubit>().controller,
           onPageChanged: (index) =>
               context.read<TabCubit>().onPageChanged(index),
-          children: const [MenuPage(), MenuPage(), MenuPage()]),
+          children: const [MenuPage(), ReviewPage(), MenuPage()]),
     ));
   }
 }

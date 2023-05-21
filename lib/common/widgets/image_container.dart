@@ -7,11 +7,13 @@ class ImageContainer extends StatelessWidget {
       required this.url,
       this.borderRadius,
       this.height,
-      this.isCircle})
+      this.isCircle,
+      this.width})
       : super(key: key);
 
   final String url;
   final double? height;
+  final double? width;
   final BorderRadius? borderRadius;
   final bool? isCircle;
 
@@ -19,6 +21,7 @@ class ImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
+      width: width,
       decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),

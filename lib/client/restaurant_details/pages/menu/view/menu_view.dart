@@ -73,6 +73,7 @@ class MenuView extends StatelessWidget {
         },
         itemCount: 10,
       ),
+      const SizedBox(height: 20)
     ]);
   }
 }
