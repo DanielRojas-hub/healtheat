@@ -18,7 +18,13 @@ class RestaurantDetailsView extends StatelessWidget {
         isFavorite: true,
         height: 150,
       ),
-      SliverToBoxAdapter(child: RestaurantInfo())
+      SliverToBoxAdapter(
+          child: RestaurantInfo(
+        name: "Vero Vero",
+        price: "\$10 - \$15",
+        rate: "4,8",
+        time: "25-35 min",
+      ))
     ]));
   }
 }
