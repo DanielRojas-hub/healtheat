@@ -5,9 +5,20 @@ import 'base_card.dart';
 
 class CounterWidget extends StatelessWidget {
   const CounterWidget(
-      {super.key, required this.label, this.onIncrease, this.onDecrease});
+      {super.key,
+      required this.label,
+      this.onIncrease,
+      this.onDecrease,
+      this.iconSize,
+      this.fontSize,
+      this.iconPadding,
+      this.labelPadding});
 
   final String label;
+  final double? iconSize;
+  final double? fontSize;
+  final EdgeInsetsGeometry? iconPadding;
+  final EdgeInsetsGeometry? labelPadding;
 
   final VoidCallback? onIncrease;
   final VoidCallback? onDecrease;
@@ -26,23 +37,28 @@ class CounterWidget extends StatelessWidget {
                 left: Radius.circular(Constants.radiusInfinite)),
             elevation: 0,
             child: Padding(
-              padding:
+              padding: iconPadding ??
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
               child: Icon(Icons.remove,
-                  size: 16,
+                  size: iconSize ?? 16,
                   color: onDecrease == null
                       ? Theme.of(context).disabledColor
                       : null),
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding:
+                labelPadding ?? const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
               border: Border.symmetric(
                   vertical: BorderSide(
                       color: Theme.of(context).colorScheme.tertiaryContainer)),
             ),
-            child: Text(label, style: Theme.of(context).textTheme.titleSmall),
+            child: Text(label,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontSize: fontSize)),
           ),
           BaseCard(
             onTap: onIncrease,
@@ -53,7 +69,7 @@ class CounterWidget extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
               child: Icon(Icons.add,
-                  size: 16,
+                  size: iconSize ?? 16,
                   color: onIncrease == null
                       ? Theme.of(context).disabledColor
                       : null),

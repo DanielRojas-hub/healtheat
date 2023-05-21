@@ -30,6 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  food_repository:
+    path: packages/food_repository
+  restaurant_repository:
+    path: packages/restaurant_repository
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,6 +48,7 @@ dependencies:
   go_router: ^7.0.1
   provider: ^6.0.5
   salomon_bottom_bar: ^3.3.2
+  firebase_core: ^2.13.0
 
 dev_dependencies:
   flutter_test:

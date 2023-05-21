@@ -9,4 +9,5 @@ class RouteName {
   static const profile = 'profile';
   static const search = 'search';
   static const restaurantDetails = 'restaurant_details';
+  static const foodDetails = 'food_details';
 }
