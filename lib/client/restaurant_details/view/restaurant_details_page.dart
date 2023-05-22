@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import '../restaurant_details.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
@@ -6,6 +8,10 @@ class RestaurantDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RestaurantDetailsView();
+    return MultiBlocProvider(providers: [
+      BlocProvider<TabCubit>(
+        create: (context) => TabCubit(tabList: restaurantDetailsTabList),
+      ),
+    ], child: const RestaurantDetailsView());
   }
 }

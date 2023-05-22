@@ -43,6 +43,8 @@ ThemeData lightTheme() {
         onPrimaryContainer: Colors.black87,
         secondary: Colors.blue,
         onSecondary: Colors.white,
+        secondaryContainer: Colors.white,
+        onSecondaryContainer: Colors.black,
         tertiary: Colors.black45,
         tertiaryContainer: Colors.grey.shade200,
         onTertiaryContainer: Colors.black54,
