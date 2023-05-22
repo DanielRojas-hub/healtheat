@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
 
 class FoodInfo extends StatelessWidget {

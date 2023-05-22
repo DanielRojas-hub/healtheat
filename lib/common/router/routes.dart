@@ -8,7 +8,22 @@ class RouteName {
   static const orderConfirmation = 'order_confirmation';
   static const profile = 'profile';
   static const search = 'search';
-  static const restaurantDetails = 'restaurant_details';
-  static const foodDetails = 'food_details';
+
+  static const homeRestaurantDetails = 'home_restaurant_details';
+  static const favoriteRestaurantDetails = 'favorite_restaurant_details';
+  static const searchRestaurantDetails = 'search_restaurant_details';
+
+  static const homeRestaurantFoodDetails = 'home_restaurant_food_details';
+  static const favoriteRestaurantFoodDetails =
+      'favorite_restaurant_food_details';
+  static const searchRestaurantFoodDetails = 'search_restaurant_food_details';
+
+  static const cartFoodDetails = 'cart_food_details';
+  static const favoriteFoodDetails = 'favorite_food_details';
+
+  static const homeRestaurantFilter = 'home_restaurant_filter';
+  static const favoriteRestaurantFilter = 'favorite_restaurant_filter';
+  static const searchRestaurantFilter = 'search_restaurant_filter';
+
   static const orderDetail = 'order_detail';
 }

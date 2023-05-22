@@ -34,14 +34,14 @@ class FoodRepository {
         .doc(restaurantId)
         .collection('foods');
 
-    var query;
-    if (foodIds != null && foodIds.isNotEmpty) {
-      print('a');
-      query = reference.where('id', arrayContainsAny: foodIds);
-    } else {
-      print('b');
-      query = reference;
-    }
+    // var query;
+    // if (foodIds != null && foodIds.isNotEmpty) {
+    //   print('a');
+    //   query = reference.where('id', arrayContainsAny: foodIds);
+    // } else {
+    //   print('b');
+    //   query = reference;
+    // }
 
     return reference.snapshots().map(
           (snapshot) =>

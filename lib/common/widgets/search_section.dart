@@ -1,10 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:healtheat/client/filter_restaurant/filter_restaurant.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_search_bar.dart';
 
 class SearchSection extends StatelessWidget {
-  const SearchSection({super.key});
+  const SearchSection({
+    Key? key,
+    required this.goRouteName,
+  }) : super(key: key);
+
+  final String goRouteName;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +25,7 @@ class SearchSection extends StatelessWidget {
         height: size,
         width: size,
         elevation: 0,
-        onTap: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            context: context,
-            builder: (BuildContext context) {
-              return const FilterRestaurantView();
-            },
-          );
-        },
+        onTap: () => context.goNamed(goRouteName),
       ),
     ]);
   }

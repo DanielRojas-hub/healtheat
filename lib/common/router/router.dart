@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healtheat/client/cart/cart.dart';
 import 'package:healtheat/client/favorites/favorites.dart';
+import 'package:healtheat/client/filter_restaurant/filter_restaurant.dart';
 import 'package:healtheat/client/home/home.dart';
-import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/order_confirmation/order_confirmation.dart';
 import 'package:healtheat/client/profile/profile.dart';
-import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/restaurant_details/view/restaurant_details_page.dart';
-import 'package:healtheat/client/search/view/search_page.dart';
-import 'package:healtheat/client/splash_screen/splash_screen.dart';
 import 'package:healtheat/client/food_details/food_detail.dart';
+import 'package:healtheat/client/search/search.dart';
+import 'package:healtheat/common/page_builders/modal_bottom_sheet.dart';
 import 'package:healtheat/common/router/routes.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:healtheat/client/order_detail/order_detail.dart';
+
+import '../../client/order_detail/view/order_detail_page.dart';
+import '../format/home_format.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -25,50 +25,62 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/order_detail',
+    initialLocation: '/splash_screen',
     routes: [
-      GoRoute(
-          path: '/splash_screen',
-          name: RouteName.splashScreen,
-          builder: (context, state) => const SplashScreenPage()),
-      GoRoute(
-          path: '/register',
-          name: RouteName.register,
-          builder: (context, state) => const RegisterPage()),
-      GoRoute(
-          path: '/login',
-          name: RouteName.login,
-          builder: (context, state) => const LoginPage()),
-      GoRoute(
-          path: '/restaurant_details',
-          name: RouteName.restaurantDetails,
-          builder: (context, state) => const RestaurantDetailsPage()),
+      // GoRoute(
+      //     path: '/splash_screen',
+      //     name: RouteName.splashScreen,
+      //     builder: (context, state) => const SplashScreenPage()),
+      // GoRoute(
+      //     path: '/register',
+      //     name: RouteName.register,
+      //     builder: (context, state) => const RegisterPage()),
+      // GoRoute(
+      //     path: '/login',
+      //     name: RouteName.login,
+      //     builder: (context, state) => const LoginPage()),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormat(child: child),
           routes: [
             GoRoute(
-              path: '/home',
-              name: RouteName.home,
-              pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: HomePage()),
-            ),
-            GoRoute(
-              path: '/favorites',
-              name: RouteName.favorites,
-              pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: FavoritesPage()),
-            ),
+                path: '/home',
+                name: RouteName.home,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: HomePage()),
+                routes: [
+                  restaurantGoRoute(RouteName.homeRestaurantDetails,
+                      RouteName.homeRestaurantFoodDetails),
+                  filterRestaurantGoRoute(RouteName.homeRestaurantFilter)
+                ]),
             GoRoute(
                 path: '/search',
                 name: RouteName.search,
-                builder: (context, state) => const SearchPage()),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: SearchPage()),
+                routes: [
+                  restaurantGoRoute(RouteName.searchRestaurantDetails,
+                      RouteName.searchRestaurantFoodDetails),
+                  filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
+                ]),
+            GoRoute(
+                path: '/favorites',
+                name: RouteName.favorites,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: FavoritesPage()),
+                routes: [
+                  filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
+                  foodGoRoute(RouteName.favoriteFoodDetails),
+                  restaurantGoRoute(RouteName.favoriteRestaurantDetails,
+                      RouteName.favoriteRestaurantFoodDetails)
+                ]),
             GoRoute(
                 path: '/cart',
                 name: RouteName.cart,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CartPage()),
                 routes: [
+                  foodGoRoute(RouteName.cartFoodDetails),
                   GoRoute(
                     path: 'order_confirmation',
                     parentNavigatorKey: rootNavigatorKey,
@@ -82,91 +94,47 @@ class AppRouter {
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),
-            //GoRoute for order_detail
-            GoRoute(
-              path: '/order_detail',
-              name: RouteName.orderDetail,
-              pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: OrderDetailPage()),
-            ),
           ]),
       GoRoute(
-          path: '/food_details',
-          name: RouteName.foodDetails,
-          builder: (context, state) => const FoodDetailsPage())
+        path: '/order_detail',
+        name: RouteName.orderDetail,
+        builder: (context, state) => OrderDetailPage(
+          restaurantId: state.pathParameters['restaurantId'].toString(),
+          orderId: state.pathParameters['orderId'].toString(),
+        ),
+      ),
     ],
   );
-}
 
-class HomeFormat extends StatefulWidget {
-  const HomeFormat({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  State<HomeFormat> createState() => _HomeFormatState();
-}
-
-class _HomeFormatState extends State<HomeFormat> {
-  int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: widget.child,
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() => _currentIndex = index);
-          switch (index) {
-            case 0:
-              context.goNamed(RouteName.home);
-              break;
-            case 1:
-              context.goNamed(RouteName.favorites);
-              break;
-            case 2:
-              context.goNamed(RouteName.cart);
-              break;
-            case 3:
-              context.goNamed(RouteName.profile);
-              break;
-          }
-        },
-        items: [
-          /// Home
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home),
-            title: const Text("Home"),
-            selectedColor: Colors.purple,
-          ),
-
-          /// Likes
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.favorite_border),
-            title: const Text("Favorites"),
-            selectedColor: Colors.pink,
-          ),
-
-          /// Search
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.shopping_cart),
-            title: const Text("Cart"),
-            selectedColor: Colors.orange,
-          ),
-
-          /// Profile
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.person),
-            title: const Text("Profile"),
-            selectedColor: Colors.teal,
-          ),
-        ],
-      ),
+  GoRoute filterRestaurantGoRoute(String filterName) {
+    return GoRoute(
+      path: 'filter',
+      name: filterName,
+      pageBuilder: (context, state) =>
+          const ModalBottomSheetPage(child: FilterRestaurantPage()),
     );
+  }
+
+  GoRoute restaurantGoRoute(String restaurantName, String foodName) {
+    return GoRoute(
+        path: 'restaurant/:restaurantId',
+        name: restaurantName,
+        builder: (context, state) => RestaurantDetailsPage(
+              restaurantId: state.pathParameters['restaurantId'].toString(),
+              foodName: foodName,
+            ),
+        routes: [
+          foodGoRoute(foodName),
+        ]);
+  }
+
+  GoRoute foodGoRoute(String foodName) {
+    return GoRoute(
+        path: 'food/:foodId',
+        name: foodName,
+        builder: (context, state) => FoodDetailsPage(
+              restaurantId: state.pathParameters['restaurantId'].toString(),
+              foodId: state.pathParameters['foodId'].toString(),
+            ));
   }
 }

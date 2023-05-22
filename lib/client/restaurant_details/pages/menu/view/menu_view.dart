@@ -1,11 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/card_food.dart';
 import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 class MenuView extends StatelessWidget {
-  const MenuView({super.key});
+  const MenuView({
+    Key? key,
+    required this.foodName,
+  }) : super(key: key);
+
+  final String foodName;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +74,7 @@ class MenuView extends StatelessWidget {
             subtitle: const Text('Gluten free'),
             price: const Text('\$99,9'),
             isFavorite: false,
-            onTap: () {},
+            onTap: () => context.goNamed(foodName),
             onTapFavorite: () {},
             onTapPrice: () {},
           );

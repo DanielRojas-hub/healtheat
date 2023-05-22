@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/client/home/home.dart';
 import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/category_button.dart';
-import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
 import 'package:healtheat/common/widgets/search_section.dart';
 import 'package:healtheat/common/widgets/tab_widget.dart';
 import 'package:healtheat/common/widgets/view_all_button.dart';
@@ -25,7 +25,10 @@ class HomeView extends StatelessWidget {
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
             const SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(child: SearchSection()),
+              sliver: SliverToBoxAdapter(
+                  child: SearchSection(
+                goRouteName: RouteName.homeRestaurantFilter,
+              )),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(

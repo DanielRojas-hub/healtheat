@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/widgets/custom_appbar.dart';
 
@@ -7,8 +9,11 @@ import '../restaurant_details.dart';
 
 class RestaurantDetailsView extends StatelessWidget {
   const RestaurantDetailsView({
-    super.key,
-  });
+    Key? key,
+    required this.foodName,
+  }) : super(key: key);
+
+  final String foodName;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,11 @@ class RestaurantDetailsView extends StatelessWidget {
           controller: context.read<TabCubit>().controller,
           onPageChanged: (index) =>
               context.read<TabCubit>().onPageChanged(index),
-          children: const [MenuPage(), ReviewPage(), AboutPage()]),
+          children: [
+            MenuPage(foodName: foodName),
+            const ReviewPage(),
+            const AboutPage()
+          ]),
     ));
   }
 }

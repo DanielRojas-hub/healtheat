@@ -1,8 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/widgets/custom_expanded_button.dart';
-
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 

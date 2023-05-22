@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/button_stars.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 import 'package:healtheat/common/widgets/tab_widget.dart';
 import '../restaurant_details.dart';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
@@ -21,14 +23,16 @@ class HomeRestaurantsView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final restaurant = restaurants[index];
               return CustomCardRestaurant(
-                  name: restaurant.displayName,
-                  url:
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
-                  price: "\$10 - \$15",
-                  rate: "4,8",
-                  time: "25-35 min",
-                  typeFood: ['Pizza', 'Italian'],
-                  isFavorite: false);
+                name: restaurant.displayName,
+                url: restaurant.imageUrl,
+                price: restaurant.deliveryPriceRange,
+                rate: restaurant.rating.toString(),
+                time: restaurant.deliveryTimeRange,
+                typeFood: const ['Pizza', 'Italian'],
+                isFavorite: false,
+                onTap: () => context.goNamed(RouteName.homeRestaurantDetails,
+                    pathParameters: {'restaurantId': restaurant.id}),
+              );
             },
             itemCount: restaurants.length,
           );

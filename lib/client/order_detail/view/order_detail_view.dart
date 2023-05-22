@@ -3,8 +3,6 @@ import 'package:healtheat/common/utils/constants.dart';
 
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
-import 'package:healtheat/common/widgets/dotted_divider.dart';
-import 'package:healtheat/common/widgets/total_card.dart';
 
 class OrderDetailView extends StatelessWidget {
   const OrderDetailView({Key? key}) : super(key: key);

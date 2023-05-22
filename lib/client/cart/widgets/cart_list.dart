@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/widgets/cart_card.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
@@ -35,7 +37,7 @@ class CartList extends StatelessWidget {
           subtitle: 'x1',
           suffix: '\$23.69',
           isCounter: true,
-          onTap: () {},
+          onTap: () => context.goNamed(RouteName.cartFoodDetails),
           onIncrease: () => context.read<CartBloc>().add(const IncreaseQuantity(
               '28LecpHZyk81KUl6EsND', 'qqewld4omDi4w4qF9hPl')),
           onDecrease: () => context.read<CartBloc>().add(const DecreaseQuantity(

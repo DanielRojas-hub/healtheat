@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/client/favorites/pages/fav_dishes/fav_dishes.dart';
 import 'package:healtheat/client/favorites/pages/fav_restaurants/fav_restaurants.dart';
 import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/card_food.dart';
-import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
 import 'package:healtheat/common/widgets/search_section.dart';
 import 'package:healtheat/common/widgets/tab_widget.dart';
 
@@ -24,7 +23,10 @@ class FavoritesView extends StatelessWidget {
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             const SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(child: SearchSection()),
+              sliver: SliverToBoxAdapter(
+                  child: SearchSection(
+                goRouteName: RouteName.favoriteRestaurantFilter,
+              )),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(

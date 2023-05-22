@@ -3,7 +3,6 @@ import 'package:healtheat/client/profile/widgets/custom_profile_card.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
-import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 import 'package:healtheat/common/widgets/image_container.dart';
 

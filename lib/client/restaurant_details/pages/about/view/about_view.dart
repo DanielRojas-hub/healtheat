@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 class AboutView extends StatelessWidget {
   const AboutView({super.key});
