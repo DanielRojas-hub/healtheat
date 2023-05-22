@@ -4,11 +4,14 @@ import 'package:healtheat/client/cart/cart.dart';
 import 'package:healtheat/client/favorites/favorites.dart';
 import 'package:healtheat/client/filter_restaurant/filter_restaurant.dart';
 import 'package:healtheat/client/home/home.dart';
+import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/order_confirmation/order_confirmation.dart';
 import 'package:healtheat/client/profile/profile.dart';
+import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/restaurant_details/view/restaurant_details_page.dart';
 import 'package:healtheat/client/food_details/food_detail.dart';
 import 'package:healtheat/client/search/search.dart';
+import 'package:healtheat/client/splash_screen/splash_screen.dart';
 import 'package:healtheat/common/page_builders/modal_bottom_sheet.dart';
 import 'package:healtheat/common/router/routes.dart';
 
@@ -25,20 +28,20 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/restaurant_details',
+    initialLocation: '/splash_screen',
     routes: [
-      // GoRoute(
-      //     path: '/splash_screen',
-      //     name: RouteName.splashScreen,
-      //     builder: (context, state) => const SplashScreenPage()),
-      // GoRoute(
-      //     path: '/register',
-      //     name: RouteName.register,
-      //     builder: (context, state) => const RegisterPage()),
-      // GoRoute(
-      //     path: '/login',
-      //     name: RouteName.login,
-      //     builder: (context, state) => const LoginPage()),
+      GoRoute(
+          path: '/splash_screen',
+          name: RouteName.splashScreen,
+          builder: (context, state) => const SplashScreenPage()),
+      GoRoute(
+          path: '/register',
+          name: RouteName.register,
+          builder: (context, state) => const RegisterPage()),
+      GoRoute(
+          path: '/login',
+          name: RouteName.login,
+          builder: (context, state) => const LoginPage()),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormat(child: child),
@@ -109,6 +112,7 @@ class AppRouter {
   GoRoute filterRestaurantGoRoute(String filterName) {
     return GoRoute(
       path: 'filter',
+      parentNavigatorKey: rootNavigatorKey,
       name: filterName,
       pageBuilder: (context, state) =>
           const ModalBottomSheetPage(child: FilterRestaurantPage()),
@@ -118,6 +122,7 @@ class AppRouter {
   GoRoute restaurantGoRoute(String restaurantName, String foodName) {
     return GoRoute(
         path: 'restaurant/:restaurantId',
+        parentNavigatorKey: rootNavigatorKey,
         name: restaurantName,
         builder: (context, state) => RestaurantDetailsPage(
               restaurantId: state.pathParameters['restaurantId'].toString(),

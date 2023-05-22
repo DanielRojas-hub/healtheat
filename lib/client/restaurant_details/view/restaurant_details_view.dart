@@ -54,7 +54,8 @@ class RestaurantAppBar extends StatelessWidget {
         if (state is RestaurantLoaded) {
           final restaurant = state.restaurant;
           return CustomAppBar(
-            imageUrl: restaurant.imageUrl,
+            imageUrl: restaurant.imageUrl ??
+                'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
             isFavorite: true,
             height: 200,
           );

@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/card_food.dart';
@@ -12,8 +13,11 @@ import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 class MenuView extends StatelessWidget {
   const MenuView({
     Key? key,
+    required this.restaurantId,
     required this.foodName,
   }) : super(key: key);
+
+  final String restaurantId;
 
   final String foodName;
 
@@ -59,7 +63,7 @@ class MenuView extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 10.0),
-      const FoodList(),
+      FoodList(restaurantId: restaurantId, foodName: foodName),
       const SizedBox(height: 20)
     ]);
   }
@@ -67,8 +71,14 @@ class MenuView extends StatelessWidget {
 
 class FoodList extends StatelessWidget {
   const FoodList({
-    super.key,
-  });
+    Key? key,
+    required this.restaurantId,
+    required this.foodName,
+  }) : super(key: key);
+
+  final String restaurantId;
+
+  final String foodName;
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +99,16 @@ class FoodList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final food = foods[index];
               return CardFood(
-                url: food.imageUrl,
-                title: Text(food.displayName),
+                url: food.imageUrl ??
+                    'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+                title: Text(food.displayName.toString()),
                 subtitle: const Text('Gluten free'),
                 price: Text(food.price.toString()),
                 isFavorite: false,
-                onTap: () {},
+                onTap: () => context.goNamed(foodName, pathParameters: {
+                  'restaurantId': restaurantId,
+                  'foodId': food.id
+                }),
                 onTapFavorite: () {},
                 onTapPrice: () {},
               );

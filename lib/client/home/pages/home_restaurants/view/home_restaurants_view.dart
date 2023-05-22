@@ -23,11 +23,12 @@ class HomeRestaurantsView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final restaurant = restaurants[index];
               return CustomCardRestaurant(
-                name: restaurant.displayName,
-                url: restaurant.imageUrl,
-                price: restaurant.deliveryPriceRange,
+                name: restaurant.displayName.toString(),
+                url: restaurant.imageUrl ??
+                    'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+                price: restaurant.deliveryPriceRange.toString(),
                 rate: restaurant.rating.toString(),
-                time: restaurant.deliveryTimeRange,
+                time: restaurant.deliveryTimeRange.toString(),
                 typeFood: const ['Pizza', 'Italian'],
                 isFavorite: false,
                 onTap: () => context.goNamed(RouteName.homeRestaurantDetails,

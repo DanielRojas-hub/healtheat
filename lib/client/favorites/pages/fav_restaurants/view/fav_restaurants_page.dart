@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/common/services/food/food_bloc.dart';
+import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 
 import '../fav_restaurants.dart';
 
@@ -10,9 +10,8 @@ class FavRestaurantsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<FoodBloc>(
-        create: (context) =>
-            FoodBloc()..add(const StreamFoods('28LecpHZyk81KUl6EsND')),
+      BlocProvider<RestaurantBloc>(
+        create: (context) => RestaurantBloc()..add(const StreamRestaurants()),
       ),
     ], child: const FavRestaurantsView());
   }

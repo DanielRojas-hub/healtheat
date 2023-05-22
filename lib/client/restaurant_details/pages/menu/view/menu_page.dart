@@ -25,9 +25,7 @@ class MenuPage extends StatelessWidget {
           create: (context) => FoodBloc()..add(StreamFoods(restaurantId)),
         )
       ],
-      child: MenuView(
-        foodName: foodName,
-      ),
+      child: MenuView(restaurantId: restaurantId, foodName: foodName),
     );
   }
 }

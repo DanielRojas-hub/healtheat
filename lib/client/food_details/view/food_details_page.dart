@@ -21,12 +21,11 @@ class FoodDetailsPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FoodBloc>(
-          create: (context) => FoodBloc()
-            ..add(const StreamFood(
-                '28LecpHZyk81KUl6EsND', 'qqewld4omDi4w4qF9hPl')),
+          create: (context) =>
+              FoodBloc()..add(StreamFood(restaurantId, foodId)),
         ),
       ],
-      child: const FoodDetails(),
+      child: FoodDetails(restaurantId: restaurantId, foodId: foodId),
     );
   }
 }

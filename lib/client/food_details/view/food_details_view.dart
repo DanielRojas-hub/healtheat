@@ -1,12 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/common/widgets/custom_footer.dart';
+
 import 'package:healtheat/client/food_details/widgets/food_info.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/widgets/custom_appbar.dart';
+import 'package:healtheat/common/widgets/custom_footer.dart';
 
 class FoodDetails extends StatelessWidget {
-  const FoodDetails({super.key});
+  const FoodDetails({
+    Key? key,
+    required this.restaurantId,
+    required this.foodId,
+  }) : super(key: key);
+
+  final String restaurantId;
+  final String foodId;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +70,9 @@ class FoodInformation extends StatelessWidget {
 
           return SliverToBoxAdapter(
             child: FoodInfo(
-                title: Text(food.displayName),
+                title: Text(food.displayName.toString()),
                 price: Text(food.price.toString()),
-                subtitle: Text(food.description)),
+                subtitle: Text(food.description.toString())),
           );
         }
         if (state is FoodLoading) {
@@ -90,7 +99,10 @@ class FoodAppBar extends StatelessWidget {
           final food = state.food;
 
           return CustomAppBar(
-              isFavorite: true, imageUrl: food.imageUrl, height: 275);
+              isFavorite: true,
+              imageUrl: food.imageUrl ??
+                  'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+              height: 275);
         }
         return const SliverToBoxAdapter();
       },

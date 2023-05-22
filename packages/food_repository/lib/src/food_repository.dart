@@ -36,10 +36,8 @@ class FoodRepository {
 
     // var query;
     // if (foodIds != null && foodIds.isNotEmpty) {
-    //   print('a');
     //   query = reference.where('id', arrayContainsAny: foodIds);
     // } else {
-    //   print('b');
     //   query = reference;
     // }
 

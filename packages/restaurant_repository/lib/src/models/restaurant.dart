@@ -2,20 +2,21 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class Restaurant {
+class Restaurant extends Equatable {
   final String id;
-  final String displayName;
-  final List<String> categoryRestaurantIds;
-  final String address;
-  final String phoneNumber;
-  final num rating;
-  final String openTime;
-  final String closeTime;
-  final String imageUrl;
-  final String deliveryTimeRange;
-  final String deliveryPriceRange;
+  final String? displayName;
+  final List<String>? categoryRestaurantIds;
+  final String? address;
+  final String? phoneNumber;
+  final num? rating;
+  final String? openTime;
+  final String? closeTime;
+  final String? imageUrl;
+  final String? deliveryTimeRange;
+  final String? deliveryPriceRange;
 
   Restaurant({
     required this.id,
@@ -79,16 +80,24 @@ class Restaurant {
   factory Restaurant.fromMap(Map<String, dynamic> map) {
     return Restaurant(
       id: map['id'] as String,
-      displayName: map['displayName'] as String,
-      categoryRestaurantIds: List<String>.from(map['categoryRestaurantIds']),
-      address: map['address'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      rating: map['rating'] as num,
-      openTime: map['openTime'] as String,
-      closeTime: map['closeTime'] as String,
-      imageUrl: map['imageUrl'] as String,
-      deliveryTimeRange: map['deliveryTimeRange'] as String,
-      deliveryPriceRange: map['deliveryPriceRange'] as String,
+      displayName:
+          map['displayName'] != null ? map['displayName'] as String : null,
+      categoryRestaurantIds: map['categoryRestaurantIds'] != null
+          ? List<String>.from(map['categoryRestaurantIds'])
+          : null,
+      address: map['address'] != null ? map['address'] as String : null,
+      phoneNumber:
+          map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
+      rating: map['rating'] != null ? map['rating'] as num : null,
+      openTime: map['openTime'] != null ? map['openTime'] as String : null,
+      closeTime: map['closeTime'] != null ? map['closeTime'] as String : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
+      deliveryTimeRange: map['deliveryTimeRange'] != null
+          ? map['deliveryTimeRange'] as String
+          : null,
+      deliveryPriceRange: map['deliveryPriceRange'] != null
+          ? map['deliveryPriceRange'] as String
+          : null,
     );
   }
 
@@ -98,7 +107,8 @@ class Restaurant {
     return Restaurant(
       id: snapshot.id,
       displayName: data?['displayName'],
-      categoryRestaurantIds: List<String>.from(data?['categoryRestaurantIds']),
+      categoryRestaurantIds:
+          List<String>.from(data?['categoryRestaurantIds'] ?? []),
       address: data?['address'],
       phoneNumber: data?['phoneNumber'],
       rating: data?['rating'],
@@ -150,5 +160,25 @@ class Restaurant {
         imageUrl.hashCode ^
         deliveryTimeRange.hashCode ^
         deliveryPriceRange.hashCode;
+  }
+
+  @override
+  bool get stringify => true;
+
+  @override
+  List<Object?> get props {
+    return [
+      id,
+      displayName,
+      categoryRestaurantIds,
+      address,
+      phoneNumber,
+      rating,
+      openTime,
+      closeTime,
+      imageUrl,
+      deliveryTimeRange,
+      deliveryPriceRange,
+    ];
   }
 }

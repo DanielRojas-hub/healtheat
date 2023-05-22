@@ -25,8 +25,7 @@ class FavoritesView extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
                   child: SearchSection(
-                goRouteName: RouteName.favoriteRestaurantFilter,
-              )),
+                      goRouteName: RouteName.favoriteRestaurantFilter)),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(

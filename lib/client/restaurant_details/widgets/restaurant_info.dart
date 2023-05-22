@@ -23,7 +23,7 @@ class RestaurantInfo extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Column(children: [
               const SizedBox(height: 20),
-              Text(restaurant.displayName,
+              Text(restaurant.displayName.toString(),
                   style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 10),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -40,11 +40,11 @@ class RestaurantInfo extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onTertiaryContainer,
                   backgroundColor:
                       Theme.of(context).colorScheme.tertiaryContainer,
-                  label: Text(restaurant.deliveryPriceRange,
+                  label: Text(restaurant.deliveryPriceRange.toString(),
                       style: Theme.of(context).textTheme.labelMedium),
                 ),
                 CustomLabelButton(
-                    label: Text(restaurant.deliveryTimeRange),
+                    label: Text(restaurant.deliveryTimeRange.toString()),
                     icon: Icons.schedule)
               ]),
               const SizedBox(height: 30),

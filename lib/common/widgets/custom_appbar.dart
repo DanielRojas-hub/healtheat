@@ -36,6 +36,7 @@ class CustomAppBar extends StatelessWidget {
             backgroundColor: Theme.of(context).cardColor,
             iconData: Icons.arrow_back,
             color: Theme.of(context).disabledColor,
+            onTap: () => Navigator.of(context).pop(),
           ),
         ),
       ),
