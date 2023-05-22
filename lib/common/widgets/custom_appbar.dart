@@ -8,20 +8,20 @@ class CustomAppBar extends StatelessWidget {
     super.key,
     this.onTapFavorite,
     required this.isFavorite,
-    required this.image,
+    required this.imageUrl,
     required this.height,
   });
 
   final VoidCallback? onTapFavorite;
   final bool isFavorite;
-  final String image;
+  final String imageUrl;
   final double height;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: height,
       flexibleSpace: FlexibleSpaceBar(
-        background: Image.network(image, fit: BoxFit.cover),
+        background: Image.network(imageUrl, fit: BoxFit.cover),
       ),
       leading: Padding(
         padding: const EdgeInsets.only(left: 16),
