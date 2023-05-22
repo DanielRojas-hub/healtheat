@@ -12,35 +12,23 @@ class RestaurantRepository {
       {List<String>? restaurantIds, List<String>? categoryRestaurantIds}) {
     final CollectionReference<Map<String, dynamic>> ref =
         _firebaseFirestore.collection('restaurants');
-    var query;
+    // var query;
 
-    if (restaurantIds != null && restaurantIds.isNotEmpty) {
-      query = query.where('id', whereIn: restaurantIds);
-    }
-    if (categoryRestaurantIds != null && categoryRestaurantIds.isNotEmpty) {
-      query = query.where('categoryRestaurantIds',
-          arrayContainsAny: categoryRestaurantIds);
-    }
-    if (categoryRestaurantIds == null ||
-        categoryRestaurantIds.isEmpty ||
-        restaurantIds == null ||
-        restaurantIds.isEmpty) {
-      query = ref;
-    }
+    // if (restaurantIds != null && restaurantIds.isNotEmpty) {
+    //   query = query.where('id', whereIn: restaurantIds);
+    // }
+    // if (categoryRestaurantIds != null && categoryRestaurantIds.isNotEmpty) {
+    //   query = query.where('categoryRestaurantIds',
+    //       arrayContainsAny: categoryRestaurantIds);
+    // }
+    // if (categoryRestaurantIds == null ||
+    //     categoryRestaurantIds.isEmpty ||
+    //     restaurantIds == null ||
+    //     restaurantIds.isEmpty) {
+    //   query = ref;
+    // }
 
-    return query.snapshots().map(
-          (snapshot) => snapshot.docs
-              .map((doc) => Restaurant.fromMap(doc.data()))
-              .toList(),
-        );
-  }
-
-  Stream<List<Restaurant>> streamUserRestaurants(List<String>? restaurantIds) {
-    return _firebaseFirestore
-        .collection('restaurants')
-        .where('id', whereIn: restaurantIds)
-        .snapshots()
-        .map(
+    return ref.snapshots().map(
           (snapshot) => snapshot.docs
               .map((doc) => Restaurant.fromMap(doc.data()))
               .toList(),
@@ -49,21 +37,19 @@ class RestaurantRepository {
 
   Stream<Restaurant> streamRestaurant(String restaurantId,
       {List<String>? selectedCategories}) {
-    CollectionReference<Map<String, dynamic>> reference =
-        _firebaseFirestore.collection('restaurants');
+    DocumentReference<Map<String, dynamic>> reference =
+        _firebaseFirestore.collection('restaurants').doc(restaurantId);
 
-    var query;
-    if (selectedCategories != null && selectedCategories.isNotEmpty) {
-      query = reference.where('categoryRestaurantIds',
-          arrayContainsAny: selectedCategories);
-    } else {
-      query = reference;
-    }
+    // var query;
+    // if (selectedCategories != null && selectedCategories.isNotEmpty) {
+    //   query = reference.where('categoryRestaurantIds',
+    //       arrayContainsAny: selectedCategories);
+    // } else {
+    //   query = reference;
+    // }
 
-    return query.snapshots().map(
-          (snapshot) => snapshot.docs
-              .map((doc) => Restaurant.fromMap(doc.data()))
-              .toList(),
+    return reference.snapshots().map(
+          (snapshot) => Restaurant.fromSnapshot(snapshot),
         );
   }
 
