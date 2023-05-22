@@ -10,12 +10,11 @@ class CartRepository {
 
   static const cartCacheKey = '__cart_cache_key__';
 
-  Cart? readCart() {
-    final cartRead = _cache.read<String>(key: cartCacheKey);
-    return cartRead != null ? Cart.fromJson(cartRead) : null;
+  Cart readCart() {
+    return _cache.read<Cart>(key: cartCacheKey) ?? Cart.empty;
   }
 
   void writeCart({required Cart cart}) {
-    _cache.write(key: cartCacheKey, value: cart.toJson());
+    _cache.write(key: cartCacheKey, value: cart);
   }
 }

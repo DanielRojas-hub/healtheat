@@ -4,19 +4,23 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Petition extends Equatable {
+  final String restaurantId;
   final String foodId;
   final int quantity;
 
   const Petition({
+    required this.restaurantId,
     required this.foodId,
     required this.quantity,
   });
 
   Petition copyWith({
+    String? restaurantId,
     String? foodId,
     int? quantity,
   }) {
     return Petition(
+      restaurantId: restaurantId ?? this.restaurantId,
       foodId: foodId ?? this.foodId,
       quantity: quantity ?? this.quantity,
     );
@@ -24,6 +28,7 @@ class Petition extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'restaurantId': restaurantId,
       'foodId': foodId,
       'quantity': quantity,
     };
@@ -31,6 +36,7 @@ class Petition extends Equatable {
 
   factory Petition.fromMap(Map<String, dynamic> map) {
     return Petition(
+      restaurantId: map['restaurantId'] as String,
       foodId: map['foodId'] as String,
       quantity: map['quantity'] as int,
     );
@@ -45,5 +51,5 @@ class Petition extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [foodId, quantity];
+  List<Object> get props => [restaurantId, foodId];
 }

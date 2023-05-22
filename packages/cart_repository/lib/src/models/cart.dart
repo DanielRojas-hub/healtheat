@@ -19,6 +19,12 @@ class Cart extends Equatable {
     required this.petitions,
   });
 
+  static const empty =
+      Cart(petitions: [], delivery: 0, subtotal: 0, discount: 0, total: 0);
+
+  bool get isEmpty => this == Cart.empty;
+  bool get isNotEmpty => !isEmpty;
+
   Cart copyWith({
     num? delivery,
     num? subtotal,
