@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 
 class Food extends Equatable {
   final String id;
-  final String? restaurantId;
+  final String restaurantId;
   final String? displayName;
   final String? description;
   final String? imageUrl;
@@ -58,8 +58,7 @@ class Food extends Equatable {
   factory Food.fromMap(Map<String, dynamic> map) {
     return Food(
       id: map['id'] as String,
-      restaurantId:
-          map['restaurantId'] != null ? map['restaurantId'] as String : null,
+      restaurantId: map['restaurantId'] as String,
       displayName:
           map['displayName'] != null ? map['displayName'] as String : null,
       description:

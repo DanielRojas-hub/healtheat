@@ -52,9 +52,9 @@ class AppRouter {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: HomePage()),
                 routes: [
+                  filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
                       RouteName.homeRestaurantFoodDetails),
-                  filterRestaurantGoRoute(RouteName.homeRestaurantFilter)
                 ]),
             GoRoute(
                 path: '/search',
@@ -73,7 +73,6 @@ class AppRouter {
                     const NoTransitionPage(child: FavoritesPage()),
                 routes: [
                   filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
-                  foodGoRoute(RouteName.favoriteFoodDetails),
                   restaurantGoRoute(RouteName.favoriteRestaurantDetails,
                       RouteName.favoriteRestaurantFoodDetails)
                 ]),
@@ -121,21 +120,23 @@ class AppRouter {
 
   GoRoute restaurantGoRoute(String restaurantName, String foodName) {
     return GoRoute(
-        path: 'restaurant/:restaurantId',
-        parentNavigatorKey: rootNavigatorKey,
-        name: restaurantName,
-        builder: (context, state) => RestaurantDetailsPage(
-              restaurantId: state.pathParameters['restaurantId'].toString(),
-              foodName: foodName,
-            ),
-        routes: [
-          foodGoRoute(foodName),
-        ]);
+      path: 'restaurant/:restaurantId',
+      parentNavigatorKey: rootNavigatorKey,
+      name: restaurantName,
+      builder: (context, state) => RestaurantDetailsPage(
+        restaurantId: state.pathParameters['restaurantId'].toString(),
+        foodName: foodName,
+      ),
+      routes: [
+        foodGoRoute(foodName),
+      ],
+    );
   }
 
-  GoRoute foodGoRoute(String foodName) {
+  GoRoute foodGoRoute(String foodName, {bool? isSingle}) {
     return GoRoute(
         path: 'food/:foodId',
+        parentNavigatorKey: rootNavigatorKey,
         name: foodName,
         builder: (context, state) => FoodDetailsPage(
               restaurantId: state.pathParameters['restaurantId'].toString(),

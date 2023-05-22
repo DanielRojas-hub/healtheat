@@ -32,10 +32,11 @@ class FavDishesView extends StatelessWidget {
                 subtitle: const Text('Gluten free'),
                 price: Text(food.price.toString()),
                 isFavorite: false,
-                onTap: () => context.goNamed(RouteName.favoriteFoodDetails,
+                onTap: () => context.pushNamed(
+                    RouteName.favoriteRestaurantFoodDetails,
                     pathParameters: {
-                      'restaurantId': food.restaurantId.toString(),
-                      'foodId': food.id
+                      'foodId': food.id,
+                      'restaurantId': food.restaurantId
                     }),
                 onTapFavorite: () {},
                 onTapPrice: () {},
