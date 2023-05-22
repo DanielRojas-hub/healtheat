@@ -13,6 +13,7 @@ import 'package:healtheat/client/splash_screen/splash_screen.dart';
 import 'package:healtheat/client/food_details/food_detail.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:healtheat/client/order_detail/order_detail.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -24,7 +25,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/splash_screen',
+    initialLocation: '/order_detail',
     routes: [
       GoRoute(
           path: '/splash_screen',
@@ -80,6 +81,13 @@ class AppRouter {
               name: RouteName.profile,
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
+            ),
+            //GoRoute for order_detail
+            GoRoute(
+              path: '/order_detail',
+              name: RouteName.orderDetail,
+              pageBuilder: (context, state) =>
+                  const NoTransitionPage(child: OrderDetailPage()),
             ),
           ]),
       GoRoute(

@@ -10,4 +10,5 @@ class RouteName {
   static const search = 'search';
   static const restaurantDetails = 'restaurant_details';
   static const foodDetails = 'food_details';
+  static const orderDetail = 'order_detail';
 }
