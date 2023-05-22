@@ -41,7 +41,7 @@ class FoodRepository {
       query = reference;
     }
 
-    return query.snapshots().map(
+    return reference.snapshots().map(
           (snapshot) =>
               snapshot.docs.map((doc) => Food.fromMap(doc.data())).toList(),
         );

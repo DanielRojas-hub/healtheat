@@ -11,8 +11,11 @@ class Restaurant {
   final String address;
   final String phoneNumber;
   final num rating;
-  final DateTime openTime;
-  final DateTime closeTime;
+  final String openTime;
+  final String closeTime;
+  final String imageUrl;
+  final String deliveryPriceRange;
+  final String deliveryTimeRange;
 
   Restaurant({
     required this.id,
@@ -23,6 +26,9 @@ class Restaurant {
     required this.rating,
     required this.openTime,
     required this.closeTime,
+    required this.imageUrl,
+    required this.deliveryPriceRange,
+    required this.deliveryTimeRange,
   });
 
   Restaurant copyWith({
@@ -32,8 +38,11 @@ class Restaurant {
     String? address,
     String? phoneNumber,
     num? rating,
-    DateTime? openTime,
-    DateTime? closeTime,
+    String? openTime,
+    String? closeTime,
+    String? imageUrl,
+    String? deliveryPriceRange,
+    String? deliveryTimeRange,
   }) {
     return Restaurant(
       id: id ?? this.id,
@@ -45,6 +54,9 @@ class Restaurant {
       rating: rating ?? this.rating,
       openTime: openTime ?? this.openTime,
       closeTime: closeTime ?? this.closeTime,
+      imageUrl: imageUrl ?? this.imageUrl,
+      deliveryPriceRange: deliveryPriceRange ?? this.deliveryPriceRange,
+      deliveryTimeRange: deliveryTimeRange ?? this.deliveryTimeRange,
     );
   }
 
@@ -56,8 +68,11 @@ class Restaurant {
       'address': address,
       'phoneNumber': phoneNumber,
       'rating': rating,
-      'openTime': openTime.millisecondsSinceEpoch,
-      'closeTime': closeTime.millisecondsSinceEpoch,
+      'openTime': openTime,
+      'closeTime': closeTime,
+      'imageUrl': imageUrl,
+      'deliveryPriceRange': deliveryPriceRange,
+      'deliveryTimeRange': deliveryTimeRange,
     };
   }
 
@@ -69,8 +84,11 @@ class Restaurant {
       address: map['address'] as String,
       phoneNumber: map['phoneNumber'] as String,
       rating: map['rating'] as num,
-      openTime: DateTime.fromMillisecondsSinceEpoch(map['openTime'] as int),
-      closeTime: DateTime.fromMillisecondsSinceEpoch(map['closeTime'] as int),
+      openTime: map['openTime'] as String,
+      closeTime: map['closeTime'] as String,
+      imageUrl: map['imageUrl'] as String,
+      deliveryPriceRange: map['deliveryPriceRange'] as String,
+      deliveryTimeRange: map['deliveryTimeRange'] as String,
     );
   }
 
@@ -80,12 +98,15 @@ class Restaurant {
     return Restaurant(
       id: snapshot.id,
       displayName: data?['displayName'],
-      categoryRestaurantIds: data?['categoryRestaurantIds'],
+      categoryRestaurantIds: List<String>.from(data?['categoryRestaurantIds']),
       address: data?['address'],
       phoneNumber: data?['phoneNumber'],
       rating: data?['rating'],
       openTime: data?['openTime'],
       closeTime: data?['closeTime'],
+      imageUrl: data?['imageUrl'],
+      deliveryTimeRange: data?['deliveryTimeRange'],
+      deliveryPriceRange: data?['deliveryPriceRange'],
     );
   }
 
@@ -96,7 +117,7 @@ class Restaurant {
 
   @override
   String toString() {
-    return 'Restaurant(id: $id, displayName: $displayName, categoryRestaurantIds: $categoryRestaurantIds, address: $address, phoneNumber: $phoneNumber, rating: $rating, openTime: $openTime, closeTime: $closeTime)';
+    return 'Restaurant(id: $id, displayName: $displayName, categoryRestaurantIds: $categoryRestaurantIds, address: $address, phoneNumber: $phoneNumber, rating: $rating, openTime: $openTime, closeTime: $closeTime, imageUrl: $imageUrl, deliveryPriceRange: $deliveryPriceRange, deliveryTimeRange: $deliveryTimeRange)';
   }
 
   @override
@@ -110,7 +131,10 @@ class Restaurant {
         other.phoneNumber == phoneNumber &&
         other.rating == rating &&
         other.openTime == openTime &&
-        other.closeTime == closeTime;
+        other.closeTime == closeTime &&
+        other.imageUrl == imageUrl &&
+        other.deliveryPriceRange == deliveryPriceRange &&
+        other.deliveryTimeRange == deliveryTimeRange;
   }
 
   @override
@@ -122,6 +146,9 @@ class Restaurant {
         phoneNumber.hashCode ^
         rating.hashCode ^
         openTime.hashCode ^
-        closeTime.hashCode;
+        closeTime.hashCode ^
+        imageUrl.hashCode ^
+        deliveryPriceRange.hashCode ^
+        deliveryTimeRange.hashCode;
   }
 }
