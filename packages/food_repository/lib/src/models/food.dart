@@ -11,7 +11,7 @@ class Food extends Equatable {
   final String imageUrl;
   final num price;
   final bool isAvailable;
-
+  final String imageUrl;
   const Food({
     required this.id,
     required this.displayName,
@@ -19,6 +19,7 @@ class Food extends Equatable {
     required this.imageUrl,
     required this.price,
     required this.isAvailable,
+    required this.imageUrl,
   });
 
   Food copyWith({
@@ -28,6 +29,7 @@ class Food extends Equatable {
     String? imageUrl,
     num? price,
     bool? isAvailable,
+    String? imageUrl,
   }) {
     return Food(
       id: id ?? this.id,
@@ -36,6 +38,7 @@ class Food extends Equatable {
       imageUrl: imageUrl ?? this.imageUrl,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
+      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
 
@@ -47,6 +50,7 @@ class Food extends Equatable {
       'imageUrl': imageUrl,
       'price': price,
       'isAvailable': isAvailable,
+      'imageUrl': imageUrl,
     };
   }
 
@@ -58,6 +62,7 @@ class Food extends Equatable {
       imageUrl: map['imageUrl'] as String,
       price: map['price'] as num,
       isAvailable: map['isAvailable'] as bool,
+      imageUrl: map['imageUrl'] as String,
     );
   }
 
@@ -71,6 +76,7 @@ class Food extends Equatable {
       imageUrl: data?['imageUrl'],
       price: data?['price'],
       isAvailable: data?['isAvailable'],
+      imageUrl: data?['imageUrl'],
     );
   }
 
@@ -91,6 +97,7 @@ class Food extends Equatable {
       imageUrl,
       price,
       isAvailable,
+      imageUrl,
     ];
   }
 }
