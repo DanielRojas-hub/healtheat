@@ -36,6 +36,8 @@ dependencies:
     path: packages/restaurant_repository
   cart_repository:
     path: packages/cart_repository
+  preference_repository:
+    path: packages/preference_repository
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
