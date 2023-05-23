@@ -3,6 +3,7 @@ part of 'cart_bloc.dart';
 enum CartStatus {
   empty,
   notEmpty,
+  loading,
 }
 
 class CartState extends Equatable {
@@ -18,6 +19,8 @@ class CartState extends Equatable {
         );
 
   const CartState.empty() : this._(status: CartStatus.empty);
+
+  const CartState.loading() : this._(status: CartStatus.loading);
 
   @override
   List<Object> get props => [status, cart];

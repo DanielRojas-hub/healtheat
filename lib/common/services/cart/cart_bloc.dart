@@ -9,9 +9,8 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc({required CartRepository cartRepository})
       : _cartRepository = cartRepository,
-        super(cartRepository.readCart().isNotEmpty
-            ? CartState.notEmpty(cartRepository.readCart())
-            : const CartState.empty()) {
+        super(const CartState.loading()) {
+    on<GetCart>(onGetCart);
     on<UpdateCart>(onUpdateCart);
     on<ClearCart>(onClearCart);
     on<AddPetition>(onAddPetition);
@@ -22,8 +21,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   final CartRepository _cartRepository;
 
-  void onUpdateCart(UpdateCart event, Emitter<CartState> emit) {
-    _cartRepository.writeCart(cart: event.cart);
+  Future<void> onGetCart(GetCart event, Emitter<CartState> emit) async {
+    final cart = await _cartRepository.getCart();
+    add(UpdateCart(cart));
+  }
+
+  Future<void> onUpdateCart(UpdateCart event, Emitter<CartState> emit) async {
+    await _cartRepository.setCart(cart: event.cart);
     emit(event.cart.isNotEmpty
         ? CartState.notEmpty(event.cart)
         : const CartState.empty());

@@ -43,6 +43,8 @@ class CartView extends StatelessWidget {
                   ],
                 ),
               );
+            } else if (state.status == CartStatus.notEmpty) {
+              return const Center(child: CircularProgressIndicator());
             } else {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,

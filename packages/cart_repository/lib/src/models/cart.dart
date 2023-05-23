@@ -39,7 +39,7 @@ class Cart extends Equatable {
     return Cart(
       restaurantId: map['restaurantId'] as String,
       petitions: List<Petition>.from(
-        (map['petitions'] as List<int>).map<Petition>(
+        (map['petitions']).map<Petition>(
           (x) => Petition.fromMap(x as Map<String, dynamic>),
         ),
       ),

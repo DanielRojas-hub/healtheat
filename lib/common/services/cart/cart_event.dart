@@ -8,6 +8,8 @@ abstract class CartEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class GetCart extends CartEvent {}
+
 class UpdateCart extends CartEvent {
   final Cart cart;
 

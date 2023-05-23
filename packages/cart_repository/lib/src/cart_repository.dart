@@ -1,20 +1,23 @@
-import 'package:cache/cache.dart';
 import 'package:cart_repository/cart_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartRepository {
   CartRepository({
-    CacheClient? cache,
-  }) : _cache = cache ?? CacheClient();
+    Future<SharedPreferences>? prefs,
+  }) : _prefs = prefs ?? SharedPreferences.getInstance();
 
-  final CacheClient _cache;
+  final Future<SharedPreferences> _prefs;
 
   static const cartCacheKey = '__cart_cache_key__';
 
-  Cart readCart() {
-    return _cache.read<Cart>(key: cartCacheKey) ?? Cart.empty;
+  Future<Cart> getCart() async {
+    final SharedPreferences prefs = await _prefs;
+    final json = prefs.getString(cartCacheKey);
+    return json != null ? Cart.fromJson(json) : Cart.empty;
   }
 
-  void writeCart({required Cart cart}) {
-    _cache.write(key: cartCacheKey, value: cart);
+  Future<void> setCart({required Cart cart}) async {
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setString(cartCacheKey, cart.toJson());
   }
 }
