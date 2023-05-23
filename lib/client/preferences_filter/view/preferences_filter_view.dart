@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
+import 'package:healtheat/common/widgets/base_card.dart';
 import 'package:healtheat/common/widgets/image_container.dart';
 
 class PreferencesFilterView extends StatelessWidget {
@@ -21,8 +22,47 @@ class PreferencesFilterView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     )),
           ),
+          OptionPreference()
         ],
       )),
+    );
+  }
+}
+
+class OptionPreference extends StatelessWidget {
+  const OptionPreference({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseCard(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        child: Row(children: [
+          const ImageContainer(
+              url: 'https://cdn-icons-png.flaticon.com/512/3637/3637808.png',
+              height: 45,
+              width: 45,
+              isCircle: true),
+          const SizedBox(width: 10),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Gluten Free',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                'Comida para personas celiacas',
+                style: Theme.of(context).textTheme.bodySmall,
+              )
+            ],
+          ))
+        ]),
+      ),
     );
   }
 }
