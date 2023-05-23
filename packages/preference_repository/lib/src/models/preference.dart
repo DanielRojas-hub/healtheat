@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:uuid/uuid.dart';
 
 class Preference extends Equatable {
   final String id;

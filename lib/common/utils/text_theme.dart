@@ -18,9 +18,9 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
             GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600),
         titleSmall:
             GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
-        bodyLarge: GoogleFonts.poppins(fontSize: 16),
-        bodyMedium: GoogleFonts.poppins(fontSize: 15),
-        bodySmall: GoogleFonts.poppins(fontSize: 14),
+        bodyLarge: GoogleFonts.poppins(fontSize: 16, color: Colors.black87),
+        bodyMedium: GoogleFonts.poppins(fontSize: 15, color: Colors.black87),
+        bodySmall: GoogleFonts.poppins(fontSize: 14, color: Colors.black87),
         labelLarge: GoogleFonts.poppins(
             fontSize: 14, color: Colors.black45, fontWeight: FontWeight.w500),
         labelMedium: GoogleFonts.poppins(

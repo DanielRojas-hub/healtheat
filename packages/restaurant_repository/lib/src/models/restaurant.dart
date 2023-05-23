@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 class Restaurant extends Equatable {
   final String id;
   final String? displayName;
-  final List<String>? categoryRestaurantIds;
+  final List<String>? preferenceIds;
   final String? address;
   final String? phoneNumber;
   final num? rating;
@@ -21,7 +21,7 @@ class Restaurant extends Equatable {
   Restaurant({
     required this.id,
     required this.displayName,
-    required this.categoryRestaurantIds,
+    this.preferenceIds,
     required this.address,
     required this.phoneNumber,
     required this.rating,
@@ -35,7 +35,7 @@ class Restaurant extends Equatable {
   Restaurant copyWith({
     String? id,
     String? displayName,
-    List<String>? categoryRestaurantIds,
+    List<String>? preferenceIds,
     String? address,
     String? phoneNumber,
     num? rating,
@@ -48,8 +48,7 @@ class Restaurant extends Equatable {
     return Restaurant(
       id: id ?? this.id,
       displayName: displayName ?? this.displayName,
-      categoryRestaurantIds:
-          categoryRestaurantIds ?? this.categoryRestaurantIds,
+      preferenceIds: preferenceIds ?? this.preferenceIds,
       address: address ?? this.address,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       rating: rating ?? this.rating,
@@ -65,7 +64,7 @@ class Restaurant extends Equatable {
     return <String, dynamic>{
       'id': id,
       'displayName': displayName,
-      'categoryRestaurantIds': categoryRestaurantIds,
+      'preferenceIds': preferenceIds,
       'address': address,
       'phoneNumber': phoneNumber,
       'rating': rating,
@@ -82,8 +81,8 @@ class Restaurant extends Equatable {
       id: map['id'] as String,
       displayName:
           map['displayName'] != null ? map['displayName'] as String : null,
-      categoryRestaurantIds: map['categoryRestaurantIds'] != null
-          ? List<String>.from(map['categoryRestaurantIds'])
+      preferenceIds: map['preferenceIds'] != null
+          ? List<String>.from(map['preferenceIds'])
           : null,
       address: map['address'] != null ? map['address'] as String : null,
       phoneNumber:
@@ -107,8 +106,7 @@ class Restaurant extends Equatable {
     return Restaurant(
       id: snapshot.id,
       displayName: data?['displayName'],
-      categoryRestaurantIds:
-          List<String>.from(data?['categoryRestaurantIds'] ?? []),
+      preferenceIds: List<String>.from(data?['preferenceIds'] ?? []),
       address: data?['address'],
       phoneNumber: data?['phoneNumber'],
       rating: data?['rating'],
@@ -127,7 +125,7 @@ class Restaurant extends Equatable {
 
   @override
   String toString() {
-    return 'Restaurant(id: $id, displayName: $displayName, categoryRestaurantIds: $categoryRestaurantIds, address: $address, phoneNumber: $phoneNumber, rating: $rating, openTime: $openTime, closeTime: $closeTime, imageUrl: $imageUrl, deliveryTimeRange: $deliveryTimeRange, deliveryPriceRange: $deliveryPriceRange)';
+    return 'Restaurant(id: $id, displayName: $displayName, preferenceIds: $preferenceIds, address: $address, phoneNumber: $phoneNumber, rating: $rating, openTime: $openTime, closeTime: $closeTime, imageUrl: $imageUrl, deliveryTimeRange: $deliveryTimeRange, deliveryPriceRange: $deliveryPriceRange)';
   }
 
   @override
@@ -136,7 +134,7 @@ class Restaurant extends Equatable {
 
     return other.id == id &&
         other.displayName == displayName &&
-        listEquals(other.categoryRestaurantIds, categoryRestaurantIds) &&
+        listEquals(other.preferenceIds, preferenceIds) &&
         other.address == address &&
         other.phoneNumber == phoneNumber &&
         other.rating == rating &&
@@ -151,7 +149,7 @@ class Restaurant extends Equatable {
   int get hashCode {
     return id.hashCode ^
         displayName.hashCode ^
-        categoryRestaurantIds.hashCode ^
+        preferenceIds.hashCode ^
         address.hashCode ^
         phoneNumber.hashCode ^
         rating.hashCode ^
@@ -170,7 +168,7 @@ class Restaurant extends Equatable {
     return [
       id,
       displayName,
-      categoryRestaurantIds,
+      preferenceIds,
       address,
       phoneNumber,
       rating,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
+import 'package:healtheat/common/services/user_preference/user_preference_bloc.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 
 part 'restaurant_event.dart';
@@ -17,6 +18,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<StreamRestaurants>(_onStreamRestaurants);
     on<GetRestaurants>(_onGetRestaurants);
     on<CartBlocRestaurant>(_onCartBlocRestaurant);
+    on<UserPreferenceBlocRestaurants>(_onUserPreferenceBlocRestaurants);
     on<_RestaurantUpdated>(_onRestaurantUpdated);
     on<_RestaurantsUpdated>(_onRestaurantsUpdated);
   }
@@ -63,7 +65,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       _restaurantSubscription = _restaurantRepository
           .streamRestaurants(
               restaurantIds: event.restaurantIds,
-              categoryRestaurantIds: event.categoryRestaurantIds)
+              preferenceIds: event.preferenceIds)
           .listen((restaurants) => add(_RestaurantsUpdated(restaurants)));
     } catch (_) {
       //TODO: catch
@@ -76,7 +78,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try {
       add(_RestaurantsUpdated(await _restaurantRepository.getRestaurants(
           restaurantIds: event.restaurantIds,
-          categoryRestaurantIds: event.categoryRestaurantIds)));
+          preferenceIds: event.preferenceIds)));
     } catch (_) {
       //TODO: catch
     }
@@ -92,6 +94,29 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
         }
       });
       add(StreamRestaurant(event.cartBloc.state.cart.restaurantId));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onUserPreferenceBlocRestaurants(
+      UserPreferenceBlocRestaurants event, Emitter<RestaurantState> emit) {
+    _blocSubscription?.cancel();
+    try {
+      _blocSubscription = event.userPreferenceBloc.stream.listen((state) {
+        if (state.userPreferences.isNotEmpty) {
+          add(StreamRestaurants(
+              preferenceIds: List.generate(state.userPreferences.length,
+                  (index) => state.userPreferences[index].id)));
+        }
+      });
+      if (event.userPreferenceBloc.state.userPreferences.isNotEmpty) {
+        add(StreamRestaurants(
+            preferenceIds: List.generate(
+                event.userPreferenceBloc.state.userPreferences.length,
+                (index) =>
+                    event.userPreferenceBloc.state.userPreferences[index].id)));
+      }
     } catch (_) {
       //TODO: catch
     }

@@ -9,28 +9,17 @@ class RestaurantRepository {
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   Stream<List<Restaurant>> streamRestaurants(
-      {List<String>? restaurantIds, List<String>? categoryRestaurantIds}) {
-    final CollectionReference<Map<String, dynamic>> ref =
-        _firebaseFirestore.collection('restaurants');
-    // var query;
+      {List<String>? restaurantIds, List<String>? preferenceIds}) {
+    Query query = _firebaseFirestore.collection('restaurants');
 
-    // if (restaurantIds != null && restaurantIds.isNotEmpty) {
-    //   query = query.where('id', whereIn: restaurantIds);
-    // }
-    // if (categoryRestaurantIds != null && categoryRestaurantIds.isNotEmpty) {
-    //   query = query.where('categoryRestaurantIds',
-    //       arrayContainsAny: categoryRestaurantIds);
-    // }
-    // if (categoryRestaurantIds == null ||
-    //     categoryRestaurantIds.isEmpty ||
-    //     restaurantIds == null ||
-    //     restaurantIds.isEmpty) {
-    //   query = ref;
-    // }
+    if (preferenceIds != null && preferenceIds.isNotEmpty) {
+      query = query.where('preferenceIds', arrayContainsAny: preferenceIds);
+    }
 
-    return ref.snapshots().map(
+    return query.snapshots().map(
           (snapshot) => snapshot.docs
-              .map((doc) => Restaurant.fromMap(doc.data()))
+              .map((doc) => Restaurant.fromMap(
+                  (doc as QueryDocumentSnapshot<Map<String, dynamic>>).data()))
               .toList(),
         );
   }
@@ -62,8 +51,7 @@ class RestaurantRepository {
   }
 
   Future<List<Restaurant>> getRestaurants(
-      {List<String>? restaurantIds,
-      List<String>? categoryRestaurantIds}) async {
+      {List<String>? restaurantIds, List<String>? preferenceIds}) async {
     CollectionReference<Map<String, dynamic>> ref =
         _firebaseFirestore.collection('restaurants');
 
@@ -71,12 +59,11 @@ class RestaurantRepository {
     if (restaurantIds != null && restaurantIds.isNotEmpty) {
       query = query.where('id', whereIn: restaurantIds);
     }
-    if (categoryRestaurantIds != null && categoryRestaurantIds.isNotEmpty) {
-      query = query.where('categoryRestaurantIds',
-          arrayContainsAny: categoryRestaurantIds);
+    if (preferenceIds != null && preferenceIds.isNotEmpty) {
+      query = query.where('preferenceIds', arrayContainsAny: preferenceIds);
     }
-    if (categoryRestaurantIds == null ||
-        categoryRestaurantIds.isEmpty ||
+    if (preferenceIds == null ||
+        preferenceIds.isEmpty ||
         restaurantIds == null ||
         restaurantIds.isEmpty) {
       query = ref;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/common/router/router.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
+import 'package:healtheat/common/services/user_preference/user_preference_bloc.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -30,10 +31,14 @@ class MyApp extends StatelessWidget {
 
         return MultiBlocProvider(
           providers: [
+            BlocProvider<UserPreferenceBloc>(
+              create: (context) =>
+                  UserPreferenceBloc()..add(GetUserPreference()),
+            ),
             BlocProvider<CartBloc>(
               create: (context) =>
                   CartBloc(cartRepository: CartRepository())..add(GetCart()),
-            )
+            ),
           ],
           child: MaterialApp.router(
             title: 'Flutter Demo',

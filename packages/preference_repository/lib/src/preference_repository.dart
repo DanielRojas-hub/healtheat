@@ -1,12 +1,35 @@
 import 'package:preference_repository/preference_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceRepository {
   final FirebaseFirestore _firebaseFirestore;
+  final Future<SharedPreferences> _prefs;
 
   PreferenceRepository({
     FirebaseFirestore? firebaseFirestore,
-  }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+    Future<SharedPreferences>? prefs,
+  })  : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
+        _prefs = prefs ?? SharedPreferences.getInstance();
+
+  static const userPreferencesCacheKey = '__user_preferences_cache_key__';
+
+  Future<List<Preference>> getUserPreferences() async {
+    final SharedPreferences prefs = await _prefs;
+    final userPreferenceJsons =
+        prefs.getStringList(userPreferencesCacheKey) ?? [];
+    final userPreferences = List.generate(userPreferenceJsons.length,
+        (index) => Preference.fromJson(userPreferenceJsons[index]));
+    return userPreferences;
+  }
+
+  Future<void> setUserPreferences(
+      {required List<Preference> userPreferences}) async {
+    final SharedPreferences prefs = await _prefs;
+    final List<String> userPreferenceJsons = List.generate(
+        userPreferences.length, (index) => userPreferences[index].toJson());
+    await prefs.setStringList(userPreferencesCacheKey, userPreferenceJsons);
+  }
 
   Stream<List<Preference>> streamPreferences({List<String>? preferenceIds}) {
     final CollectionReference<Map<String, dynamic>> ref =
