@@ -31,10 +31,10 @@ class AppRouter {
     navigatorKey: rootNavigatorKey,
     initialLocation: '/preferences_filter',
     routes: [
-      GoRoute(
-          path: '/splash_screen',
-          name: RouteName.splashScreen,
-          builder: (context, state) => const SplashScreenPage()),
+      // GoRoute(
+      //     path: '/splash_screen',
+      //     name: RouteName.splashScreen,
+      //     builder: (context, state) => const SplashScreenPage()),
       GoRoute(
           path: '/preferences_filter',
           name: RouteName.preferencesFilter,
@@ -53,6 +53,7 @@ class AppRouter {
           routes: [
             GoRoute(
                 path: '/home',
+                parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: HomePage()),
@@ -63,6 +64,7 @@ class AppRouter {
                 ]),
             GoRoute(
                 path: '/search',
+                parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.search,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: SearchPage()),
@@ -71,18 +73,19 @@ class AppRouter {
                       RouteName.searchRestaurantFoodDetails),
                   filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
                 ]),
-            GoRoute(
-                path: '/favorites',
-                name: RouteName.favorites,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: FavoritesPage()),
-                routes: [
-                  filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
-                  restaurantGoRoute(RouteName.favoriteRestaurantDetails,
-                      RouteName.favoriteRestaurantFoodDetails)
-                ]),
+            // GoRoute(
+            //     path: '/favorites',
+            //     name: RouteName.favorites,
+            //     pageBuilder: (context, state) =>
+            //         const NoTransitionPage(child: FavoritesPage()),
+            //     routes: [
+            //       filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
+            //       restaurantGoRoute(RouteName.favoriteRestaurantDetails,
+            //           RouteName.favoriteRestaurantFoodDetails)
+            //     ]),
             GoRoute(
                 path: '/cart',
+                parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.cart,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CartPage()),
@@ -98,6 +101,7 @@ class AppRouter {
                 ]),
             GoRoute(
               path: '/profile',
+              parentNavigatorKey: shellNavigatorKey,
               name: RouteName.profile,
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),

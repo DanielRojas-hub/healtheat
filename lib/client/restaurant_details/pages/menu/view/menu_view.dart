@@ -23,30 +23,30 @@ class MenuView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(padding: const EdgeInsets.only(top: 15.0), children: [
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(50, (index) {
-            final isFirst = index == 0;
-            final isLast = index + 1 == 50;
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      // child: Row(
+      //   children: List.generate(50, (index) {
+      //     final isFirst = index == 0;
+      //     final isLast = index + 1 == 50;
 
-            return Padding(
-              padding: EdgeInsets.only(
-                  left: isFirst ? Constants.margin : 8,
-                  right: isLast ? Constants.margin : 0),
-              child: CustomLabelButton(
-                  label: Text('Sushi',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onTertiaryContainer)),
-                  backgroundColor:
-                      Theme.of(context).colorScheme.tertiaryContainer),
-            );
-          }),
-        ),
-      ),
-      const SizedBox(height: 20.0),
+      //     return Padding(
+      //       padding: EdgeInsets.only(
+      //           left: isFirst ? Constants.margin : 8,
+      //           right: isLast ? Constants.margin : 0),
+      //       child: CustomLabelButton(
+      //           label: Text('Sushi',
+      //               style: Theme.of(context).textTheme.labelMedium?.copyWith(
+      //                   color: Theme.of(context)
+      //                       .colorScheme
+      //                       .onTertiaryContainer)),
+      //           backgroundColor:
+      //               Theme.of(context).colorScheme.tertiaryContainer),
+      //     );
+      //   }),
+      // ),
+      // ),
+      // const SizedBox(height: 20.0),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
         child: Row(
