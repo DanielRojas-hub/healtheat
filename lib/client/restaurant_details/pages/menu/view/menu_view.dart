@@ -97,6 +97,7 @@ class FoodList extends StatelessWidget {
                 mainAxisSpacing: 20),
             itemBuilder: (BuildContext context, int index) {
               final food = foods[index];
+
               return CardFood(
                 url: food.imageUrl ??
                     'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
@@ -109,7 +110,10 @@ class FoodList extends StatelessWidget {
                   'foodId': food.id
                 }),
                 onTapFavorite: () {},
-                onTapPrice: () {},
+                onTapPrice: () => context.goNamed(foodName, pathParameters: {
+                  'restaurantId': restaurantId,
+                  'foodId': food.id
+                }),
               );
             },
             itemCount: foods.length,

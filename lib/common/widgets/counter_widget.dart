@@ -14,7 +14,7 @@ class CounterWidget extends StatelessWidget {
       this.iconPadding,
       this.labelPadding});
 
-  final String label;
+  final Widget label;
   final double? iconSize;
   final double? fontSize;
   final EdgeInsetsGeometry? iconPadding;
@@ -32,7 +32,7 @@ class CounterWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(Constants.radiusInfinite),
         child: Row(children: [
           BaseCard(
-            onTap: onIncrease,
+            onTap: onDecrease,
             borderRadius: const BorderRadius.horizontal(
                 left: Radius.circular(Constants.radiusInfinite)),
             elevation: 0,
@@ -54,11 +54,11 @@ class CounterWidget extends StatelessWidget {
                   vertical: BorderSide(
                       color: Theme.of(context).colorScheme.tertiaryContainer)),
             ),
-            child: Text(label,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(fontSize: fontSize)),
+            child: DefaultTextStyle.merge(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: fontSize,
+                    ),
+                child: label),
           ),
           BaseCard(
             onTap: onIncrease,

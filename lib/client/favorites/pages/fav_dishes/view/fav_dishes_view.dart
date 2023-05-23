@@ -35,11 +35,16 @@ class FavDishesView extends StatelessWidget {
                 onTap: () => context.pushNamed(
                     RouteName.favoriteRestaurantFoodDetails,
                     pathParameters: {
-                      'foodId': food.id,
-                      'restaurantId': food.restaurantId
+                      'restaurantId': food.restaurantId,
+                      'foodId': food.id
                     }),
                 onTapFavorite: () {},
-                onTapPrice: () {},
+                onTapPrice: () => context.pushNamed(
+                    RouteName.favoriteRestaurantFoodDetails,
+                    pathParameters: {
+                      'restaurantId': food.restaurantId,
+                      'foodId': food.id
+                    }),
               );
             },
             itemCount: foods.length,

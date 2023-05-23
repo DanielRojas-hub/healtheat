@@ -5,58 +5,39 @@ import 'package:cart_repository/cart_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class Cart extends Equatable {
-  final num delivery;
-  final num subtotal;
-  final num total;
-  final num discount;
+  final String restaurantId;
   final List<Petition> petitions;
 
   const Cart({
-    required this.delivery,
-    required this.subtotal,
-    required this.total,
-    required this.discount,
+    required this.restaurantId,
     required this.petitions,
   });
 
-  static const empty =
-      Cart(petitions: [], delivery: 0, subtotal: 0, discount: 0, total: 0);
+  static const empty = Cart(restaurantId: '', petitions: []);
 
   bool get isEmpty => this == Cart.empty;
   bool get isNotEmpty => !isEmpty;
 
   Cart copyWith({
-    num? delivery,
-    num? subtotal,
-    num? total,
-    num? discount,
+    String? restaurantId,
     List<Petition>? petitions,
   }) {
     return Cart(
-      delivery: delivery ?? this.delivery,
-      subtotal: subtotal ?? this.subtotal,
-      total: total ?? this.total,
-      discount: discount ?? this.discount,
+      restaurantId: restaurantId ?? this.restaurantId,
       petitions: petitions ?? this.petitions,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'delivery': delivery,
-      'subtotal': subtotal,
-      'total': total,
-      'discount': discount,
+      'restaurantId': restaurantId,
       'petitions': petitions.map((x) => x.toMap()).toList(),
     };
   }
 
   factory Cart.fromMap(Map<String, dynamic> map) {
     return Cart(
-      delivery: map['delivery'] as num,
-      subtotal: map['subtotal'] as num,
-      total: map['total'] as num,
-      discount: map['discount'] as num,
+      restaurantId: map['restaurantId'] as String,
       petitions: List<Petition>.from(
         (map['petitions'] as List<int>).map<Petition>(
           (x) => Petition.fromMap(x as Map<String, dynamic>),
@@ -74,13 +55,5 @@ class Cart extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
-    return [
-      delivery,
-      subtotal,
-      total,
-      discount,
-      petitions,
-    ];
-  }
+  List<Object> get props => [restaurantId, petitions];
 }

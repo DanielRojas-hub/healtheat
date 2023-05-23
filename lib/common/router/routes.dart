@@ -11,15 +11,14 @@ class RouteName {
 
   static const homeRestaurantDetails = 'home_restaurant_details';
   static const favoriteRestaurantDetails = 'favorite_restaurant_details';
+  static const cartRestaurantDetails = 'cart_restaurant_details';
   static const searchRestaurantDetails = 'search_restaurant_details';
 
   static const homeRestaurantFoodDetails = 'home_restaurant_food_details';
   static const favoriteRestaurantFoodDetails =
       'favorite_restaurant_food_details';
+  static const cartRestaurantFoodDetails = 'cart_restaurant_food_details';
   static const searchRestaurantFoodDetails = 'search_restaurant_food_details';
-
-  static const cartFoodDetails = 'cart_food_details';
-  static const favoriteFoodDetails = 'favorite_food_details';
 
   static const homeRestaurantFilter = 'home_restaurant_filter';
   static const favoriteRestaurantFilter = 'favorite_restaurant_filter';

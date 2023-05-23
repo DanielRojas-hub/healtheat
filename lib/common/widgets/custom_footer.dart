@@ -12,7 +12,7 @@ class CustomFooter extends StatelessWidget {
   final Widget price;
   final Widget label;
   final Widget textButton;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {

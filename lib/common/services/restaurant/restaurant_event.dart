@@ -45,6 +45,15 @@ class GetRestaurants extends RestaurantEvent {
   List<Object?> get props => [restaurantIds, categoryRestaurantIds];
 }
 
+class CartBlocRestaurant extends RestaurantEvent {
+  final CartBloc cartBloc;
+
+  const CartBlocRestaurant(this.cartBloc);
+
+  @override
+  List<Object?> get props => [cartBloc];
+}
+
 class _RestaurantUpdated extends RestaurantEvent {
   final Restaurant restaurant;
 

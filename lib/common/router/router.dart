@@ -82,7 +82,8 @@ class AppRouter {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CartPage()),
                 routes: [
-                  foodGoRoute(RouteName.cartFoodDetails),
+                  restaurantGoRoute(RouteName.cartRestaurantDetails,
+                      RouteName.cartRestaurantFoodDetails),
                   GoRoute(
                     path: 'order_confirmation',
                     parentNavigatorKey: rootNavigatorKey,

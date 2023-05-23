@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/services/cart/cart_bloc.dart';
+import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
@@ -62,7 +65,7 @@ class OrderConfirmationView extends StatelessWidget {
                   child: CustomDivider(margin: EdgeInsets.only(bottom: 15.0))),
               const OrderConfirmationDetails(),
               const CustomBackgroundWidget(child: DottedDivider()),
-              const TotalCard(label: Text('\$28.48')),
+              const NewWidget(),
               const CustomBackgroundWidget(
                   child: DottedDivider(padding: EdgeInsets.only(top: 15))),
               const SizedBox(height: 100),
@@ -70,6 +73,41 @@ class OrderConfirmationView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        final petitions = state.cart.petitions;
+
+        return BlocBuilder<FoodBloc, FoodState>(
+          builder: (context, state) {
+            if (state is FoodsLoaded) {
+              final foods = state.foods;
+
+              num sum = 0;
+              for (var food in foods) {
+                for (var petition in petitions) {
+                  if (food.id == petition.foodId) {
+                    sum += (food.price ?? 0) * petition.quantity;
+                  }
+                }
+              }
+
+              return TotalCard(label: Text(sum.toString()));
+            }
+            return const SizedBox();
+          },
+        );
+      },
     );
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/services/counter/counter_cubit.dart';
 
 import 'package:healtheat/common/services/food/food_bloc.dart';
 
@@ -24,6 +25,7 @@ class FoodDetailsPage extends StatelessWidget {
           create: (context) =>
               FoodBloc()..add(StreamFood(restaurantId, foodId)),
         ),
+        BlocProvider<CounterCubit>(create: (context) => CounterCubit())
       ],
       child: FoodDetails(restaurantId: restaurantId, foodId: foodId),
     );

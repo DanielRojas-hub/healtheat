@@ -29,21 +29,20 @@ class FoodRepository {
   }
 
   Stream<List<Food>> streamFoods(String restaurantId, {List<String>? foodIds}) {
-    CollectionReference<Map<String, dynamic>> reference = _firebaseFirestore
+    Query query = _firebaseFirestore
         .collection('restaurants')
         .doc(restaurantId)
         .collection('foods');
 
-    // var query;
-    // if (foodIds != null && foodIds.isNotEmpty) {
-    //   query = reference.where('id', arrayContainsAny: foodIds);
-    // } else {
-    //   query = reference;
-    // }
+    if (foodIds != null && foodIds.isNotEmpty) {
+      query = query.where('id', whereIn: foodIds);
+    }
 
-    return reference.snapshots().map(
-          (snapshot) =>
-              snapshot.docs.map((doc) => Food.fromMap(doc.data())).toList(),
+    return query.snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => Food.fromMap(
+                  (doc as QueryDocumentSnapshot<Map<String, dynamic>>).data()))
+              .toList(),
         );
   }
 

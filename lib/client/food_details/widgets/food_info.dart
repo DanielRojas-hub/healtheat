@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/services/counter/counter_cubit.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
 
 class FoodInfo extends StatelessWidget {
@@ -24,27 +26,32 @@ class FoodInfo extends StatelessWidget {
                 maxLines: 1,
                 child: title),
             DefaultTextStyle.merge(
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: Theme.of(context).primaryColor),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 child: price),
             const SizedBox(height: 15),
             DefaultTextStyle.merge(
-                style: Theme.of(context).textTheme.labelLarge,
-                // overflow: TextOverflow.,
-                // maxLines: 1,
-                child: subtitle),
+                style: Theme.of(context).textTheme.labelLarge, child: subtitle),
           ]),
           const SizedBox(height: 50),
-          const CounterWidget(
-            label: '1',
-            iconSize: 30,
-            fontSize: 22,
-            labelPadding: EdgeInsets.symmetric(horizontal: 15.0),
-            iconPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+          BlocBuilder<CounterCubit, int>(
+            builder: (context, state) {
+              return CounterWidget(
+                label: Text(state.toString()),
+                iconSize: 30,
+                fontSize: 22,
+                onIncrease: () => context.read<CounterCubit>().increment(),
+                onDecrease: state - 1 > 0
+                    ? () => context.read<CounterCubit>().decrement()
+                    : null,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 15.0),
+                iconPadding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+              );
+            },
           )
         ],
       ),

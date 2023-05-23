@@ -38,6 +38,15 @@ class StreamFoods extends FoodEvent {
   List<Object?> get props => [restaurantId, foodIds];
 }
 
+class CartBlocFoods extends FoodEvent {
+  final CartBloc cartBloc;
+
+  const CartBlocFoods(this.cartBloc);
+
+  @override
+  List<Object> get props => [cartBloc];
+}
+
 class GetFoods extends FoodEvent {
   final String restaurantId;
   final List<String>? foodIds;

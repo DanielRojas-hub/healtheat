@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
+import 'package:healtheat/common/widgets/image_container.dart';
 
 import 'base_card.dart';
 
@@ -8,17 +9,19 @@ class CartCard extends StatelessWidget {
   const CartCard(
       {super.key,
       required this.title,
-      required this.subtitle,
+      required this.counter,
       this.isCounter = false,
       required this.suffix,
       this.onIncrease,
       this.onDecrease,
-      this.onTap});
+      this.onTap,
+      required this.imageUrl});
 
-  final String title;
-  final String subtitle;
+  final Widget title;
+  final Widget counter;
   final bool isCounter;
-  final String suffix;
+  final Widget suffix;
+  final String imageUrl;
   final VoidCallback? onIncrease;
   final VoidCallback? onDecrease;
   final VoidCallback? onTap;
@@ -32,37 +35,41 @@ class CartCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(children: [
-          Container(
+          ImageContainer(
+            url: imageUrl,
+            borderRadius: BorderRadius.circular(Constants.radiusSmall),
             width: 55,
             height: 55,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.tertiaryContainer,
-              borderRadius: BorderRadius.circular(Constants.radiusSmall),
-            ),
           ),
           const SizedBox(width: 15),
           Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(title, style: Theme.of(context).textTheme.titleSmall),
+              DefaultTextStyle.merge(
+                  style: Theme.of(context).textTheme.titleSmall,
+                  maxLines: 1,
+                  child: title),
               if (isCounter) ...[
                 const SizedBox(height: 5),
                 CounterWidget(
-                  label: '1',
+                  label: counter,
                   onIncrease: onIncrease,
                   onDecrease: onDecrease,
                 )
               ] else ...[
                 const SizedBox(height: 3),
-                Text(subtitle, style: Theme.of(context).textTheme.labelMedium),
+                DefaultTextStyle.merge(
+                    style: Theme.of(context).textTheme.titleSmall,
+                    child: counter),
               ]
             ]),
           ),
           const SizedBox(width: 10),
-          Text(suffix,
+          DefaultTextStyle.merge(
               style: isCounter
                   ? Theme.of(context).textTheme.labelLarge
-                  : Theme.of(context).textTheme.titleMedium),
+                  : Theme.of(context).textTheme.titleMedium,
+              child: suffix),
           if (isCounter) const SizedBox(width: 10),
         ]),
       ),

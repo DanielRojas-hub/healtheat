@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 
 part 'restaurant_event.dart';
@@ -15,16 +16,19 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     on<GetRestaurant>(_onGetRestaurant);
     on<StreamRestaurants>(_onStreamRestaurants);
     on<GetRestaurants>(_onGetRestaurants);
+    on<CartBlocRestaurant>(_onCartBlocRestaurant);
     on<_RestaurantUpdated>(_onRestaurantUpdated);
     on<_RestaurantsUpdated>(_onRestaurantsUpdated);
   }
 
   final RestaurantRepository _restaurantRepository;
 
+  StreamSubscription? _blocSubscription;
   StreamSubscription? _restaurantSubscription;
 
   @override
   Future<void> close() {
+    _blocSubscription?.cancel();
     _restaurantSubscription?.cancel();
     return super.close();
   }
@@ -73,6 +77,21 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       add(_RestaurantsUpdated(await _restaurantRepository.getRestaurants(
           restaurantIds: event.restaurantIds,
           categoryRestaurantIds: event.categoryRestaurantIds)));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onCartBlocRestaurant(
+      CartBlocRestaurant event, Emitter<RestaurantState> emit) {
+    _blocSubscription?.cancel();
+    try {
+      _blocSubscription = event.cartBloc.stream.listen((state) {
+        if (state.cart.restaurantId.isNotEmpty) {
+          add(StreamRestaurant(state.cart.restaurantId));
+        }
+      });
+      add(StreamRestaurant(event.cartBloc.state.cart.restaurantId));
     } catch (_) {
       //TODO: catch
     }

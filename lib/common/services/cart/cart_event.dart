@@ -5,7 +5,7 @@ abstract class CartEvent extends Equatable {
   const CartEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class UpdateCart extends CartEvent {
@@ -31,31 +31,29 @@ class AddPetition extends CartEvent {
 }
 
 class RemovePetition extends CartEvent {
-  final String restaurantId;
   final String foodId;
 
-  const RemovePetition(this.restaurantId, this.foodId);
+  const RemovePetition(this.foodId);
 
   @override
-  List<Object> get props => [restaurantId, foodId];
+  List<Object> get props => [foodId];
 }
 
 class IncreaseQuantity extends CartEvent {
-  final String restaurantId;
   final String foodId;
+  final int? quantity;
 
-  const IncreaseQuantity(this.restaurantId, this.foodId);
+  const IncreaseQuantity(this.foodId, {this.quantity});
 
   @override
-  List<Object> get props => [restaurantId, foodId];
+  List<Object?> get props => [foodId, quantity];
 }
 
 class DecreaseQuantity extends CartEvent {
-  final String restaurantId;
   final String foodId;
 
-  const DecreaseQuantity(this.restaurantId, this.foodId);
+  const DecreaseQuantity(this.foodId);
 
   @override
-  List<Object> get props => [restaurantId, foodId];
+  List<Object> get props => [foodId];
 }

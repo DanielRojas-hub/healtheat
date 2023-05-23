@@ -1,8 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:healtheat/client/food_details/widgets/food_info.dart';
+import 'package:healtheat/common/router/routes.dart';
+import 'package:healtheat/common/services/cart/cart_bloc.dart';
+import 'package:healtheat/common/services/counter/counter_cubit.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/widgets/custom_appbar.dart';
 import 'package:healtheat/common/widgets/custom_footer.dart';
@@ -45,7 +49,11 @@ class FoodFooter extends StatelessWidget {
           return CustomFooter(
             price: Text(food.price.toString()),
             label: const Text('Total price: '),
-            onPressed: () {},
+            onPressed: () {
+              context.read<CartBloc>().add(AddPetition(food.restaurantId,
+                  food.id, context.read<CounterCubit>().state));
+              context.goNamed(RouteName.cart);
+            },
             textButton: const Text('Add to cart'),
           );
         }
