@@ -14,7 +14,9 @@ class OrderConfirmationFloatingActionButton extends StatelessWidget {
       child: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {
-          context.go(RouteName.cart);
+          Navigator.of(context).pop();
+
+          // context.go(RouteName.cart);
           context.read<CartBloc>().add(ClearCart());
         },
         label: SizedBox(

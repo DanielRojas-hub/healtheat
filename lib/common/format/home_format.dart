@@ -32,15 +32,15 @@ class _HomeFormatState extends State<HomeFormat> {
             case 0:
               context.goNamed(RouteName.home);
               break;
+            // case 1:
+            //   context.goNamed(RouteName.favorites);
+            //   break;
             case 1:
-              context.goNamed(RouteName.favorites);
-              break;
-            case 2:
               context.goNamed(RouteName.cart);
               break;
-            case 3:
-              context.goNamed(RouteName.profile);
-              break;
+            // case 2:
+            //   context.goNamed(RouteName.profile);
+            //   break;
           }
         },
         items: [
@@ -52,11 +52,11 @@ class _HomeFormatState extends State<HomeFormat> {
           ),
 
           /// Likes
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.favorite_border),
-            title: const Text("Favorites"),
-            selectedColor: Colors.pink,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Icons.favorite_border),
+          //   title: const Text("Favorites"),
+          //   selectedColor: Colors.pink,
+          // ),
 
           /// Search
           SalomonBottomBarItem(
@@ -66,11 +66,11 @@ class _HomeFormatState extends State<HomeFormat> {
           ),
 
           /// Profile
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.person),
-            title: const Text("Profile"),
-            selectedColor: Colors.teal,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Icons.person),
+          //   title: const Text("Profile"),
+          //   selectedColor: Colors.teal,
+          // ),
         ],
       ),
     );
