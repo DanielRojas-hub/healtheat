@@ -27,18 +27,20 @@ class RestaurantAddress extends StatelessWidget {
                   child: const Icon(Icons.restaurant, size: 20),
                 ),
                 const SizedBox(width: 10.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      restaurant.displayName.toString(),
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      restaurant.address.toString(),
-                      style: Theme.of(context).textTheme.labelMedium,
-                    )
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        restaurant.displayName.toString(),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        restaurant.address.toString(),
+                        style: Theme.of(context).textTheme.labelMedium,
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

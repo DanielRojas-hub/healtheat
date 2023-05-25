@@ -33,7 +33,7 @@ class OrderConfirmationView extends StatelessWidget {
               ),
               const RestaurantAddress(),
               const CustomBackgroundWidget(child: CustomDivider()),
-              CustomBackgroundWidget(
+              /* CustomBackgroundWidget(
                 child: Text('Delivery To:',
                     style: Theme.of(context).textTheme.titleMedium),
               ),
@@ -55,7 +55,7 @@ class OrderConfirmationView extends StatelessWidget {
                     ]),
               ),
               const DeliveryToDropdownButton(),
-              const CustomBackgroundWidget(child: CustomDivider()),
+              const CustomBackgroundWidget(child: CustomDivider()), */
               CustomBackgroundWidget(
                 child: Text('Items in Cart',
                     style: Theme.of(context).textTheme.titleMedium),
@@ -63,8 +63,8 @@ class OrderConfirmationView extends StatelessWidget {
               const ItemList(),
               const CustomBackgroundWidget(
                   child: CustomDivider(margin: EdgeInsets.only(bottom: 15.0))),
-              const OrderConfirmationDetails(),
-              const CustomBackgroundWidget(child: DottedDivider()),
+              /* const OrderConfirmationDetails(),
+              const CustomBackgroundWidget(child: DottedDivider()), */
               const NewWidget(),
               const CustomBackgroundWidget(
                   child: DottedDivider(padding: EdgeInsets.only(top: 15))),

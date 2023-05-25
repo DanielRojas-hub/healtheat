@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
       ),
-      actions: [
+      /* actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: FittedBox(
@@ -60,7 +60,7 @@ class CustomAppBar extends StatelessWidget {
             ),
           ),
         ),
-      ],
+      ], */
     );
   }
 }

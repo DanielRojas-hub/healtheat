@@ -51,7 +51,7 @@ class CustomCardRestaurant extends StatelessWidget {
                 Expanded(
                     child: Text(name,
                         style: Theme.of(context).textTheme.titleLarge)),
-                CustomIconButton(
+                /* CustomIconButton(
                   onTap: onTapFavorite,
                   borderRadius: BorderRadius.circular(Constants.radiusInfinite),
                   iconSize: 22.0,
@@ -63,7 +63,7 @@ class CustomCardRestaurant extends StatelessWidget {
                   color: isFavorite
                       ? context.theme.redColor
                       : Theme.of(context).disabledColor,
-                )
+                ) */
               ]),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -82,9 +82,11 @@ class CustomCardRestaurant extends StatelessWidget {
         ]),
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Expanded(
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment
+                  .end /* mainAxisAlignment: MainAxisAlignment.spaceBetween */,
+              children: [
+                /* Expanded(
               child: Row(
                 children: List.generate(
                     typeFood.length,
@@ -96,15 +98,15 @@ class CustomCardRestaurant extends StatelessWidget {
                               color: context.theme.blackColor),
                         )),
               ),
-            ),
-            CustomLabelButton(
-              label: Text(rate),
-              icon: Icons.star_rate_rounded,
-              backgroundColor: context.theme.whiteColor,
-              color: context.theme.blackColor,
-              iconColor: context.theme.rateColor,
-            )
-          ]),
+            ), */
+                CustomLabelButton(
+                  label: Text(rate),
+                  icon: Icons.star_rate_rounded,
+                  backgroundColor: context.theme.whiteColor,
+                  color: context.theme.blackColor,
+                  iconColor: context.theme.rateColor,
+                )
+              ]),
         )
       ]),
     );

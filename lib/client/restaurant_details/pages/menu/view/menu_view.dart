@@ -47,7 +47,7 @@ class MenuView extends StatelessWidget {
       // ),
       // ),
       // const SizedBox(height: 20.0),
-      Padding(
+      /* Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +60,7 @@ class MenuView extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSecondaryContainer)
           ],
         ),
-      ),
+      ), */
       const SizedBox(height: 10.0),
       FoodList(restaurantId: restaurantId, foodName: foodName),
       const SizedBox(height: 20)

@@ -54,7 +54,7 @@ class CardFood extends StatelessWidget {
             ]),
           ),
         ]),
-        Positioned(
+        /* Positioned(
           top: 5,
           right: 5,
           child: CustomIconButton(
@@ -68,7 +68,7 @@ class CardFood extends StatelessWidget {
                 ? context.theme.redColor
                 : Theme.of(context).disabledColor,
           ),
-        ),
+        ), */
       ]),
     );
   }

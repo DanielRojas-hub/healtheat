@@ -33,8 +33,8 @@ class CartView extends StatelessWidget {
                     CustomBackgroundWidget(
                         child: CustomDivider(
                             margin: EdgeInsets.only(bottom: 15.0))),
-                    DeliveryCard(),
-                    CustomBackgroundWidget(child: CustomDivider()),
+                    /* DeliveryCard(),
+                    CustomBackgroundWidget(child: CustomDivider()), */
                     NewWidget(),
                     CustomBackgroundWidget(
                         child:

@@ -48,47 +48,48 @@ class PreferenceAppBar extends StatelessWidget {
     return BlocBuilder<SelectPreferencesCubit, List<Preference>>(
       builder: (context, state) {
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BaseCard(
-              onTap: () => context.goNamed(RouteName.home),
-              elevation: 0,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
-                child: Text('Skip',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).disabledColor,
-                        decoration: TextDecoration.underline)),
-              ),
-            ),
-            BaseCard(
-              onTap: state.isNotEmpty
-                  ? () {
-                      context
-                          .read<UserPreferenceBloc>()
-                          .add(UpdateUserPreference(state));
-                      context.goNamed(RouteName.home);
-                    }
-                  : null,
-              backgroundColor: state.isNotEmpty
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.tertiaryContainer,
-              elevation: 0,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
-                child: Text(
-                  'Confirm',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: state.isNotEmpty
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : Theme.of(context).colorScheme.onTertiaryContainer),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BaseCard(
+                onTap: () => context.goNamed(RouteName.home),
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 10.0),
+                  child: Text('Skip',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Theme.of(context).disabledColor,
+                          decoration: TextDecoration.underline)),
                 ),
               ),
-            )
-          ],
-        );
+              BaseCard(
+                onTap: state.isNotEmpty
+                    ? () {
+                        context
+                            .read<UserPreferenceBloc>()
+                            .add(UpdateUserPreference(state));
+                        context.goNamed(RouteName.home);
+                      }
+                    : null,
+                backgroundColor: state.isNotEmpty
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.tertiaryContainer,
+                elevation: 0,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 10.0),
+                  child: Text(
+                    'Confirm',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: state.isNotEmpty
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context)
+                                .colorScheme
+                                .onTertiaryContainer),
+                  ),
+                ),
+              )
+            ]);
       },
     );
   }
@@ -158,12 +159,12 @@ class OptionPreference extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         child: Row(children: [
-          const ImageContainer(
+          /* const ImageContainer(
               url: 'https://cdn-icons-png.flaticon.com/512/3637/3637808.png',
               height: 45,
               width: 45,
               isCircle: true),
-          const SizedBox(width: 10),
+          const SizedBox(width: 10), */
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
