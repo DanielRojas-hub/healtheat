@@ -15,7 +15,6 @@ class HomeRestaurantsView extends StatelessWidget {
       builder: (context, state) {
         if (state is RestaurantsLoaded) {
           final restaurants = state.restaurants;
-
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
             separatorBuilder: (BuildContext context, int index) =>
@@ -24,8 +23,7 @@ class HomeRestaurantsView extends StatelessWidget {
               final restaurant = restaurants[index];
               return CustomCardRestaurant(
                 name: restaurant.displayName.toString(),
-                url: restaurant.imageUrl ??
-                    'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+                imageUrl: restaurant.imageUrl,
                 price: restaurant.deliveryPriceRange.toString(),
                 rate: restaurant.rating.toString(),
                 time: restaurant.deliveryTimeRange.toString(),
@@ -33,6 +31,7 @@ class HomeRestaurantsView extends StatelessWidget {
                 isFavorite: false,
                 onTap: () => context.goNamed(RouteName.homeRestaurantDetails,
                     pathParameters: {'restaurantId': restaurant.id}),
+                onTapFavorite: () {},
               );
             },
             itemCount: restaurants.length,

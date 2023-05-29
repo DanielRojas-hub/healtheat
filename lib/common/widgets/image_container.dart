@@ -4,14 +4,14 @@ import 'package:healtheat/common/utils/constants.dart';
 class ImageContainer extends StatelessWidget {
   const ImageContainer(
       {Key? key,
-      required this.url,
+      required this.imageUrl,
       this.borderRadius,
       this.height,
       this.isCircle,
       this.width})
       : super(key: key);
 
-  final String url;
+  final String? imageUrl;
   final double? height;
   final double? width;
   final BorderRadius? borderRadius;
@@ -23,8 +23,11 @@ class ImageContainer extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
+          color: Theme.of(context).colorScheme.tertiaryContainer,
+          image: imageUrl != null
+              ? DecorationImage(
+                  image: NetworkImage(imageUrl!), fit: BoxFit.cover)
+              : null,
           borderRadius: isCircle ?? false
               ? null
               : borderRadius ??

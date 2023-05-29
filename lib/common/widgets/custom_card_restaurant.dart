@@ -8,21 +8,20 @@ import 'custom_label_buttom.dart';
 import 'image_container.dart';
 
 class CustomCardRestaurant extends StatelessWidget {
-  const CustomCardRestaurant({
-    super.key,
-    required this.name,
-    required this.url,
-    required this.price,
-    required this.rate,
-    required this.time,
-    required this.typeFood,
-    this.onTap,
-    required this.isFavorite,
-    this.onTapFavorite,
-  });
+  const CustomCardRestaurant(
+      {super.key,
+      required this.name,
+      required this.imageUrl,
+      required this.price,
+      required this.rate,
+      required this.time,
+      required this.typeFood,
+      this.onTap,
+      required this.isFavorite,
+      this.onTapFavorite});
 
   final String name;
-  final String url;
+  final String? imageUrl;
   final String price;
   final String rate;
   final String time;
@@ -39,7 +38,7 @@ class CustomCardRestaurant extends StatelessWidget {
       child: Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ImageContainer(
-              url: url,
+              imageUrl: imageUrl,
               height: 150,
               borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(Constants.radiusLarge))),
@@ -51,7 +50,7 @@ class CustomCardRestaurant extends StatelessWidget {
                 Expanded(
                     child: Text(name,
                         style: Theme.of(context).textTheme.titleLarge)),
-                /* CustomIconButton(
+                CustomIconButton(
                   onTap: onTapFavorite,
                   borderRadius: BorderRadius.circular(Constants.radiusInfinite),
                   iconSize: 22.0,
@@ -63,7 +62,7 @@ class CustomCardRestaurant extends StatelessWidget {
                   color: isFavorite
                       ? context.theme.redColor
                       : Theme.of(context).disabledColor,
-                ) */
+                )
               ]),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -82,31 +81,27 @@ class CustomCardRestaurant extends StatelessWidget {
         ]),
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment
-                  .end /* mainAxisAlignment: MainAxisAlignment.spaceBetween */,
-              children: [
-                /* Expanded(
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Expanded(
               child: Row(
-                children: List.generate(
-                    typeFood.length,
-                    (index) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: CustomLabelButton(
-                              label: Text(typeFood[index]),
-                              backgroundColor: context.theme.whiteColor,
-                              color: context.theme.blackColor),
-                        )),
-              ),
-            ), */
-                CustomLabelButton(
-                  label: Text(rate),
-                  icon: Icons.star_rate_rounded,
-                  backgroundColor: context.theme.whiteColor,
-                  color: context.theme.blackColor,
-                  iconColor: context.theme.rateColor,
-                )
-              ]),
+                  children: List.generate(
+                      typeFood.length,
+                      (index) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: CustomLabelButton(
+                                label: Text(typeFood[index]),
+                                backgroundColor: context.theme.whiteColor,
+                                color: context.theme.blackColor),
+                          ))),
+            ),
+            CustomLabelButton(
+                label: Text(rate),
+                icon: Icons.star_rate_rounded,
+                backgroundColor: context.theme.whiteColor,
+                color: context.theme.blackColor,
+                iconColor: context.theme.rateColor)
+          ]),
         )
       ]),
     );

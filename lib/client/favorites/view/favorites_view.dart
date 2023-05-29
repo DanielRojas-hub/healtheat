@@ -36,7 +36,7 @@ class FavoritesView extends StatelessWidget {
                         onTap: (TabElement selectedTab) =>
                             context.read<TabCubit>().onTap(selectedTab),
                         selectedTab: state.selectedTab,
-                        tabList: favoritesTabList)),
+                        tabList: state.tabList)),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 15)),

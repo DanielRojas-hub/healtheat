@@ -2,10 +2,13 @@ import 'package:cart_repository/cart_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healtheat/common/controllers/custom_nav_bar/custom_nav_bar_cubit.dart';
 import 'package:healtheat/common/router/router.dart';
+import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/user_preference/user_preference_bloc.dart';
 import 'package:healtheat/common/themes/light_theme.dart';
+import 'package:healtheat/common/widgets/custom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';

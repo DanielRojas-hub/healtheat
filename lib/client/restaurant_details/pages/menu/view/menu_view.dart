@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/card_food.dart';
-import 'package:healtheat/common/widgets/custom_icon_button.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
 
 class MenuView extends StatelessWidget {
   const MenuView({
@@ -99,8 +97,7 @@ class FoodList extends StatelessWidget {
               final food = foods[index];
 
               return CardFood(
-                url: food.imageUrl ??
-                    'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+                imageUrl: food.imageUrl,
                 title: Text(food.displayName.toString()),
                 subtitle: const Text('Gluten free'),
                 price: Text(food.price.toString()),

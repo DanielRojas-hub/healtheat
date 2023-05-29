@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:healtheat/common/extension/custom_theme_extension.dart';
-import 'package:healtheat/common/utils/constants.dart';
 
 import 'base_card.dart';
-import 'custom_icon_button.dart';
 import 'custom_label_buttom.dart';
 import 'image_container.dart';
 
 class CardFood extends StatelessWidget {
   const CardFood(
       {super.key,
-      required this.url,
+      this.imageUrl,
       required this.title,
       required this.subtitle,
       required this.price,
@@ -19,7 +16,7 @@ class CardFood extends StatelessWidget {
       this.onTapFavorite,
       this.onTapPrice});
 
-  final String url;
+  final String? imageUrl;
   final Widget title;
   final Widget subtitle;
   final Widget price;
@@ -34,7 +31,7 @@ class CardFood extends StatelessWidget {
       onTap: onTap,
       child: Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(child: ImageContainer(url: url)),
+          Expanded(child: ImageContainer(imageUrl: imageUrl)),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child:

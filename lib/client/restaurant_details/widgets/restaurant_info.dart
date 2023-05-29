@@ -56,7 +56,7 @@ class RestaurantInfo extends StatelessWidget {
                         onTap: (TabElement selectedTab) =>
                             context.read<TabCubit>().onTap(selectedTab),
                         selectedTab: state.selectedTab,
-                        tabList: restaurantDetailsTabList)),
+                        tabList: state.tabList)),
               ),
             ]),
           );

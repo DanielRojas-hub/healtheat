@@ -7,7 +7,6 @@ import 'package:healtheat/common/services/preference/preference_bloc.dart';
 import 'package:healtheat/common/services/user_preference/user_preference_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/base_card.dart';
-import 'package:healtheat/common/widgets/image_container.dart';
 import 'package:preference_repository/preference_repository.dart';
 
 class PreferencesFilterView extends StatelessWidget {

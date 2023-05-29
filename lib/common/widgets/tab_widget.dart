@@ -67,11 +67,12 @@ class SelectionOption extends StatelessWidget {
       onTap: () => onTap(tab),
       child: Container(
         decoration: BoxDecoration(
-            border: isSelected
-                ? Border(
-                    bottom: BorderSide(
-                        color: Theme.of(context).primaryColor, width: 2.5))
-                : null),
+            border: Border(
+                bottom: BorderSide(
+                    color: isSelected
+                        ? Theme.of(context).primaryColor
+                        : Colors.transparent,
+                    width: 2.5))),
         child: Center(
           child: Text(
             tab.title,

@@ -6,18 +6,16 @@ import 'package:healtheat/client/filter_restaurant/filter_restaurant.dart';
 import 'package:healtheat/client/home/home.dart';
 import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/order_confirmation/order_confirmation.dart';
+import 'package:healtheat/client/order_detail/order_detail.dart';
 import 'package:healtheat/client/preferences_filter/preferences_filter.dart';
 import 'package:healtheat/client/profile/profile.dart';
 import 'package:healtheat/client/register/register.dart';
 import 'package:healtheat/client/restaurant_details/view/restaurant_details_page.dart';
 import 'package:healtheat/client/food_details/food_detail.dart';
 import 'package:healtheat/client/search/search.dart';
-import 'package:healtheat/client/splash_screen/splash_screen.dart';
+import 'package:healtheat/common/format/home_format/home_format.dart';
 import 'package:healtheat/common/page_builders/modal_bottom_sheet.dart';
 import 'package:healtheat/common/router/routes.dart';
-
-import '../../client/order_detail/view/order_detail_page.dart';
-import '../format/home_format.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -29,7 +27,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/preferences_filter',
+    initialLocation: '/home',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -49,7 +47,7 @@ class AppRouter {
           builder: (context, state) => const LoginPage()),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
-          builder: (context, state, child) => HomeFormat(child: child),
+          builder: (context, state, child) => HomeFormatPage(child: child),
           routes: [
             GoRoute(
                 path: '/home',
@@ -73,16 +71,16 @@ class AppRouter {
                       RouteName.searchRestaurantFoodDetails),
                   filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
                 ]),
-            // GoRoute(
-            //     path: '/favorites',
-            //     name: RouteName.favorites,
-            //     pageBuilder: (context, state) =>
-            //         const NoTransitionPage(child: FavoritesPage()),
-            //     routes: [
-            //       filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
-            //       restaurantGoRoute(RouteName.favoriteRestaurantDetails,
-            //           RouteName.favoriteRestaurantFoodDetails)
-            //     ]),
+            GoRoute(
+                path: '/favorites',
+                name: RouteName.favorites,
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: FavoritesPage()),
+                routes: [
+                  filterRestaurantGoRoute(RouteName.favoriteRestaurantFilter),
+                  restaurantGoRoute(RouteName.favoriteRestaurantDetails,
+                      RouteName.favoriteRestaurantFoodDetails)
+                ]),
             GoRoute(
                 path: '/cart',
                 parentNavigatorKey: shellNavigatorKey,

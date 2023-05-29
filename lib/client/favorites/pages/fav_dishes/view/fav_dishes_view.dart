@@ -26,8 +26,7 @@ class FavDishesView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final food = foods[index];
               return CardFood(
-                url: food.imageUrl ??
-                    'https://as01.epimg.net/meristation/imagenes/2021/04/26/reportajes/1619438192_264857_1619438392_sumario_normal.jpg',
+                imageUrl: food.imageUrl,
                 title: Text(food.displayName.toString()),
                 subtitle: const Text('Gluten free'),
                 price: Text(food.price.toString()),

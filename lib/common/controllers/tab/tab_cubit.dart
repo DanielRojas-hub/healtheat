@@ -10,25 +10,25 @@ class TabCubit extends Cubit<TabState> {
   TabCubit({required List<TabElement> tabList, PageController? controller})
       : _tabList = tabList,
         controller = controller ?? PageController(initialPage: 0),
-        super(TabState(selectedTab: tabList.first));
+        super(TabState(tabList: tabList, selectedTab: tabList.first));
 
   final List<TabElement> _tabList;
   final PageController controller;
 
-  bool isAvailable = true;
+  bool _isAvailable = true;
 
   void onPageChanged(int index) {
-    if (isAvailable) {
+    if (_isAvailable) {
       final selectedTab = _tabList[index];
 
-      return emit(TabState(selectedTab: selectedTab));
+      return emit(TabState(tabList: _tabList, selectedTab: selectedTab));
     }
   }
 
   void onTap(TabElement selectedTab) {
-    if (isAvailable) {
+    if (_isAvailable) {
       int index = 0;
-      isAvailable = false;
+      _isAvailable = false;
 
       _tabList.asMap().forEach((key, value) {
         if (selectedTab == value) {
@@ -38,9 +38,9 @@ class TabCubit extends Cubit<TabState> {
 
       controller.animateToPage(index,
           curve: Constants.curve, duration: Constants.duration);
-      Future.delayed((Constants.duration), () => isAvailable = true);
+      Future.delayed((Constants.duration), () => _isAvailable = true);
 
-      return emit(TabState(selectedTab: selectedTab));
+      return emit(TabState(tabList: _tabList, selectedTab: selectedTab));
     }
   }
 }

@@ -16,7 +16,7 @@ class CustomCardReview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       const ImageContainer(
-          url:
+          imageUrl:
               "https://i.pinimg.com/736x/5c/84/3b/5c843bd1b68bbf8935e6239c301dc342.jpg",
           height: 45,
           width: 45,

@@ -36,7 +36,7 @@ class CartCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(children: [
           ImageContainer(
-            url: imageUrl,
+            imageUrl: imageUrl,
             borderRadius: BorderRadius.circular(Constants.radiusSmall),
             width: 55,
             height: 55,

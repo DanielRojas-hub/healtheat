@@ -35,7 +35,7 @@ class ProfileView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const ImageContainer(
-                  url:
+                  imageUrl:
                       "https://i.pinimg.com/736x/5c/84/3b/5c843bd1b68bbf8935e6239c301dc342.jpg",
                   height: 75,
                   isCircle: true),

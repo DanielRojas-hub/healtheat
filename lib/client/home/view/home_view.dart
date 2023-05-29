@@ -22,48 +22,46 @@ class HomeView extends StatelessWidget {
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            // const SliverToBoxAdapter(child: SizedBox(height: 100)),
-            // const SliverPadding(
-            //   padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-            //   sliver: SliverToBoxAdapter(
-            //       child: SearchSection(
-            //     goRouteName: RouteName.homeRestaurantFilter,
-            //   )),
-            // ),
-            // const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            // SliverPadding(
-            //   padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-            //   sliver: SliverToBoxAdapter(
-            //       child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //         Text("Popular Categories",
-            //             style: Theme.of(context).textTheme.titleLarge),
-            //         const ViewAllButton(),
-            //       ])),
-            // ),
-            // const SliverToBoxAdapter(child: SizedBox(height: 10)),
-            // SliverToBoxAdapter(
-            //   child: SingleChildScrollView(
-            //       scrollDirection: Axis.horizontal,
-            //       child: Row(
-            //         children: List.generate(25, (index) {
-            //           final isFirst = index == 0;
-            //           return Padding(
-            //             padding: EdgeInsets.only(
-            //                 left: isFirst ? Constants.margin : 0, right: 15.0),
-            //             child: CategoryButton(
-            //               iconData: Icons.lunch_dining_outlined,
-            //               label: Text("Burger",
-            //                   style: Theme.of(context).textTheme.labelSmall),
-            //               onTap: () {},
-            //             ),
-            //           );
-            //         }),
-            //       )),
-            // ),
-            // const SliverToBoxAdapter(child: SizedBox(height: 25)),
+            const SliverToBoxAdapter(child: SizedBox(height: 25)),
+            const SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: Constants.margin),
+              sliver: SliverToBoxAdapter(
+                  child: SearchSection(
+                      goRouteName: RouteName.homeRestaurantFilter)),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 25)),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+              sliver: SliverToBoxAdapter(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Popular Categories",
+                          style: Theme.of(context).textTheme.titleLarge),
+                      ViewAllButton(onTap: () {}),
+                    ]),
+              ),
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
+            SliverToBoxAdapter(
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(25, (index) {
+                      final isFirst = index == 0;
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            left: isFirst ? Constants.margin : 0, right: 15.0),
+                        child: CategoryButton(
+                            iconData: Icons.lunch_dining_outlined,
+                            label: Text("Burger",
+                                style: Theme.of(context).textTheme.labelSmall),
+                            onTap: () {}),
+                      );
+                    }),
+                  )),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
@@ -72,7 +70,7 @@ class HomeView extends StatelessWidget {
                         onTap: (TabElement selectedTab) =>
                             context.read<TabCubit>().onTap(selectedTab),
                         selectedTab: state.selectedTab,
-                        tabList: homeTabList)),
+                        tabList: state.tabList)),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 15)),

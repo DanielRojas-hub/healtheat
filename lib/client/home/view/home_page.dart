@@ -14,9 +14,6 @@ class HomePage extends StatelessWidget {
         BlocProvider<TabCubit>(
           create: (context) => TabCubit(tabList: homeTabList),
         ),
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
       ],
       child: const HomeView(),
     );

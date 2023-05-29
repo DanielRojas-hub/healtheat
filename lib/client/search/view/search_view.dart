@@ -44,7 +44,7 @@ class SearchView extends StatelessWidget {
             const restaurantId = '28LecpHZyk81KUl6EsND';
             return CustomCardRestaurant(
               name: "Hoshi-Sushi",
-              url:
+              imageUrl:
                   'https://hips.hearstapps.com/hmg-prod/images/dsc01939-1638289406.jpg',
               price: '\$15 - \$20',
               time: '30-40 min',

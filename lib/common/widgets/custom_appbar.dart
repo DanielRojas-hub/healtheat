@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/custom_icon_button.dart';
 

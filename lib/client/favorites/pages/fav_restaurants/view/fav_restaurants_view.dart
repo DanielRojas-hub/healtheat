@@ -26,7 +26,7 @@ class RestaurantList extends StatelessWidget {
         const restaurantId = '28LecpHZyk81KUl6EsND';
         return CustomCardRestaurant(
           name: "Vero Vero",
-          url:
+          imageUrl:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
           price: "\$10 - \$15",
           rate: "4,8",
