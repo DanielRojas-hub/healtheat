@@ -8,6 +8,7 @@ class Constants {
   static const double radiusLarge = 15.0;
   static const double radiusInfinite = 100.0;
 
+  static const double marginSmall = 12.5;
   static const double margin = 20.0;
 
   static const Duration duration = Duration(milliseconds: 200);

@@ -1,158 +1,102 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+import 'package:healtheat/common/widgets/my_header_delegate.dart';
+import 'package:healtheat/common/widgets/scroll_bar.dart';
+
+import '../filter_restaurant.dart';
 
 class FilterRestaurantView extends StatelessWidget {
   const FilterRestaurantView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Container(
-              width: 75,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: 3,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
-            ),
+    return DraggableScrollableSheet(
+      initialChildSize: 0.75,
+      minChildSize: 0,
+      maxChildSize: 0.75,
+      expand: false,
+      snap: true,
+      builder: (BuildContext context, ScrollController controller) {
+        return CustomScrollView(controller: controller, slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: MyHeaderDelegate(
+                maxHeight: 30,
+                minHeight: 30,
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(Constants.radiusMedium)),
+                backgroundColor:
+                    Theme.of(context).bottomSheetTheme.backgroundColor,
+                child: const ScrollBar()),
           ),
-          const SizedBox(
-            height: 15,
+          SliverPadding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(
+                child: Text("Categories",
+                    style: Theme.of(context).textTheme.titleLarge)),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Categories",
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                children: List.generate(
-                  10,
-                  (index) {
-                    return CustomLabelButton(
-                      label: const Text("Burger"),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    );
-                  },
-                ),
-              ),
-            ],
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterWrap()),
           ),
-          const SizedBox(
-            height: 20,
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverPadding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(
+                child: Text("Cuisine",
+                    style: Theme.of(context).textTheme.titleLarge)),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Cuisine",
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                children: List.generate(
-                  8,
-                  (index) {
-                    return CustomLabelButton(
-                      label: const Text("Burger"),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    );
-                  },
-                ),
-              ),
-            ],
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterWrap()),
           ),
-          const SizedBox(
-            height: 20,
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverPadding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(
+                child: Text("Menu",
+                    style: Theme.of(context).textTheme.titleLarge)),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Menu",
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                children: List.generate(
-                  7,
-                  (index) {
-                    return CustomLabelButton(
-                      label: const Text("Burger"),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    );
-                  },
-                ),
-              ),
-            ],
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterWrap()),
           ),
-          const SizedBox(
-            height: 20,
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverPadding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(
+                child: Text("Show first",
+                    style: Theme.of(context).textTheme.titleLarge)),
           ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       "Show first",
-          //       style: Theme.of(context).textTheme.titleLarge,
-          //     ),
-          //     const SizedBox(
-          //       height: 10,
-          //     ),
-          //     Column(
-          //       children: List.generate(
-          //         4,
-          //         (index) {
-          //           return Row(
-          //             children: [
-          //               CustomLabelButton(
-          //                 label: const Text("Burger"),
-          //                 backgroundColor:
-          //                     Theme.of(context).colorScheme.secondaryContainer,
-          //                 color: Theme.of(context)
-          //                     .colorScheme
-          //                     .onSecondaryContainer,
-          //               ),
-          //               const Text("Next to me"),
-          //             ],
-          //           );
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          const SizedBox(
-            height: 20,
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterRadio()),
           ),
-          // const ExpandedButton(label: Text("Apply Settings")),
-          // const ExpandedButton(label: Text("Clean filter")),
-        ]),
-      ),
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterRadio()),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            sliver: SliverToBoxAdapter(child: FilterRadio()),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+        ]);
+      },
     );
   }
 }
