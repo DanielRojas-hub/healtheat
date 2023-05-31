@@ -6,8 +6,8 @@ import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/cards/restaurant_card.dart';
 
-class AllRestaurantList extends StatelessWidget {
-  const AllRestaurantList({Key? key}) : super(key: key);
+class RestaurantList extends StatelessWidget {
+  const RestaurantList({super.key});
 
   @override
   Widget build(BuildContext context) {

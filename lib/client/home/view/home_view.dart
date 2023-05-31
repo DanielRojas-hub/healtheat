@@ -35,7 +35,6 @@ class HomeView extends StatelessWidget {
             const SliverToBoxAdapter(child: PopularCategoryList()),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             const SliverToBoxAdapter(child: HomeTab()),
-            const SliverToBoxAdapter(child: SizedBox(height: 15)),
           ];
         },
         body: PageView(

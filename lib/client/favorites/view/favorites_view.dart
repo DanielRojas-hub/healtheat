@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/client/favorites/pages/fav_dishes/fav_dishes.dart';
-import 'package:healtheat/client/favorites/pages/fav_restaurants/fav_restaurants.dart';
+import 'package:healtheat/client/favorites/pages/dishes/dishes.dart';
+import 'package:healtheat/client/favorites/pages/restaurants/restaurants.dart';
 import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/search_section.dart';
-import 'package:healtheat/common/widgets/custom_tab.dart';
+
+import '../favorites.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({Key? key}) : super(key: key);
@@ -26,15 +27,7 @@ class FavoritesView extends StatelessWidget {
                       goRouteName: RouteName.favoriteRestaurantFilter)),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            SliverToBoxAdapter(
-              child: BlocBuilder<TabCubit, TabState>(
-                  builder: (context, state) => CustomTabNav(
-                      onTap: (TabElement selectedTab) =>
-                          context.read<TabCubit>().onTap(selectedTab),
-                      tabList: state.tabList,
-                      selectedIndex: state.selectedIndex)),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 15)),
+            const SliverToBoxAdapter(child: FavoritesTab()),
           ];
         },
         body: PageView(
@@ -42,8 +35,8 @@ class FavoritesView extends StatelessWidget {
                 context.read<TabCubit>().onPageChanged(index),
             controller: context.read<TabCubit>().controller,
             children: const [
-              FavRestaurantsPage(),
-              FavDishesPage(),
+              RestaurantsPage(),
+              DishesPage(),
             ]),
       ),
     );

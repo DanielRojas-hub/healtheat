@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:healtheat/common/extension/custom_theme_extension.dart';
+import 'package:healtheat/common/utils/constants.dart';
 
 import '../base_card.dart';
+import '../custom_icon_button.dart';
 import '../custom_label_button.dart';
 import '../image_container.dart';
+import '../skelton.dart';
 
 class FoodCard extends StatelessWidget {
   const FoodCard(
       {super.key,
       this.imageUrl,
       required this.title,
-      required this.subtitle,
+      required this.categories,
       required this.price,
       required this.isFavorite,
       this.onTap,
@@ -18,9 +22,9 @@ class FoodCard extends StatelessWidget {
 
   final String? imageUrl;
   final Widget title;
-  final Widget subtitle;
   final Widget price;
   final bool isFavorite;
+  final List<String> categories;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
   final VoidCallback? onTapPrice;
@@ -41,17 +45,21 @@ class FoodCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   child: title),
-              DefaultTextStyle.merge(
-                  style: Theme.of(context).textTheme.labelMedium,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  child: subtitle),
+              Column(
+                children: List.generate(
+                  categories.length,
+                  (index) => Text('- ${categories[index]}',
+                      style: Theme.of(context).textTheme.labelMedium,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1),
+                ),
+              ),
               const SizedBox(height: 10),
               CustomLabelButton(label: price, onTap: onTapPrice, expanded: true)
             ]),
           ),
         ]),
-        /* Positioned(
+        Positioned(
           top: 5,
           right: 5,
           child: CustomIconButton(
@@ -65,7 +73,29 @@ class FoodCard extends StatelessWidget {
                 ? context.theme.redColor
                 : Theme.of(context).disabledColor,
           ),
-        ), */
+        ),
+      ]),
+    );
+  }
+}
+
+class SkeletonFoodCard extends StatelessWidget {
+  const SkeletonFoodCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseCard(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Expanded(child: ImageContainer()),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const SizedBox(height: 30),
+            Skelton(
+                borderRadius: BorderRadius.circular(Constants.radiusInfinite))
+          ]),
+        ),
       ]),
     );
   }

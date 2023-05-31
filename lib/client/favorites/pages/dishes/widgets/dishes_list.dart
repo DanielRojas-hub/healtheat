@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_repository/food_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/cards/food_card.dart';
 
-class FavDishesView extends StatelessWidget {
-  const FavDishesView({super.key});
+class DishesList extends StatelessWidget {
+  const DishesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class FavDishesView extends StatelessWidget {
       builder: (context, state) {
         if (state is FoodsLoaded) {
           final foods = state.foods;
-
           return GridView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.margin, vertical: Constants.marginSmall),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 childAspectRatio: 0.85,
@@ -28,32 +29,37 @@ class FavDishesView extends StatelessWidget {
               return FoodCard(
                 imageUrl: food.imageUrl,
                 title: Text(food.displayName.toString()),
-                subtitle: const Text('Gluten free'),
-                price: Text(food.price.toString()),
+                categories: const ['Gluten free'],
+                price: Text('\$${food.price?.toDouble()}'),
                 isFavorite: false,
-                onTap: () => context.pushNamed(
-                    RouteName.favoriteRestaurantFoodDetails,
-                    pathParameters: {
-                      'restaurantId': food.restaurantId,
-                      'foodId': food.id
-                    }),
+                onTap: () => onPushFoodDetails(context, food),
                 onTapFavorite: () {},
-                onTapPrice: () => context.pushNamed(
-                    RouteName.favoriteRestaurantFoodDetails,
-                    pathParameters: {
-                      'restaurantId': food.restaurantId,
-                      'foodId': food.id
-                    }),
+                onTapPrice: () => onPushFoodDetails(context, food),
               );
             },
             itemCount: foods.length,
           );
         }
         if (state is FoodLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return GridView.builder(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.margin, vertical: Constants.marginSmall),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 0.85,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            itemBuilder: (BuildContext context, int index) =>
+                const SkeletonFoodCard(),
+            itemCount: 5,
+          );
         }
         return const SizedBox();
       },
     );
   }
+
+  void onPushFoodDetails(BuildContext context, Food food) => context.pushNamed(
+      RouteName.favoriteRestaurantFoodDetails,
+      pathParameters: {'restaurantId': food.restaurantId, 'foodId': food.id});
 }

@@ -16,7 +16,8 @@ class OpenNowList extends StatelessWidget {
         if (state is RestaurantsLoaded) {
           final restaurants = state.restaurants;
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.margin, vertical: Constants.marginSmall),
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: 15),
             itemBuilder: (BuildContext context, int index) {
@@ -39,7 +40,8 @@ class OpenNowList extends StatelessWidget {
         }
         if (state is RestaurantLoading) {
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+            padding: const EdgeInsets.symmetric(
+                horizontal: Constants.margin, vertical: Constants.marginSmall),
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: 15),
             itemBuilder: (BuildContext context, int index) =>

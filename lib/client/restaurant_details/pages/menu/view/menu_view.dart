@@ -98,7 +98,7 @@ class FoodList extends StatelessWidget {
               return FoodCard(
                 imageUrl: food.imageUrl,
                 title: Text(food.displayName.toString()),
-                subtitle: const Text('Gluten free'),
+                categories: const ['Gluten free'],
                 price: Text(food.price.toString()),
                 isFavorite: false,
                 onTap: () => context.goNamed(foodName, pathParameters: {
