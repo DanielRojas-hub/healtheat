@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'base_card.dart';
-import 'custom_label_buttom.dart';
-import 'image_container.dart';
+import '../base_card.dart';
+import '../custom_label_button.dart';
+import '../image_container.dart';
 
-class CardFood extends StatelessWidget {
-  const CardFood(
+class FoodCard extends StatelessWidget {
+  const FoodCard(
       {super.key,
       this.imageUrl,
       required this.title,

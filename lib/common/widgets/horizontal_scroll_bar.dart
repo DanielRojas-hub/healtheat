@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
 
-class ScrollBar extends StatelessWidget {
-  const ScrollBar({super.key});
+class HorizontalScrollBar extends StatelessWidget {
+  const HorizontalScrollBar({super.key});
 
   @override
   Widget build(BuildContext context) {

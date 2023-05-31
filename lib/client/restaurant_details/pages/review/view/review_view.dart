@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_card_review.dart';
+import 'package:healtheat/common/widgets/cards/review_card.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 
 class ReviewView extends StatelessWidget {
@@ -13,7 +13,7 @@ class ReviewView extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return const CustomCardReview(
+        return const ReviewCard(
             name: 'Esther Howard',
             date: '3/02/2022',
             review: 'La comida me parecio rica');

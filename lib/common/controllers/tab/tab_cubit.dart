@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/tab_widget.dart';
+import 'package:healtheat/common/widgets/custom_tab.dart';
 
 part 'tab_state.dart';
 
@@ -10,7 +10,7 @@ class TabCubit extends Cubit<TabState> {
   TabCubit({required List<TabElement> tabList, PageController? controller})
       : _tabList = tabList,
         controller = controller ?? PageController(initialPage: 0),
-        super(TabState(tabList: tabList, selectedTab: tabList.first));
+        super(TabState(tabList: tabList, selectedIndex: 0));
 
   final List<TabElement> _tabList;
   final PageController controller;
@@ -19,28 +19,26 @@ class TabCubit extends Cubit<TabState> {
 
   void onPageChanged(int index) {
     if (_isAvailable) {
-      final selectedTab = _tabList[index];
-
-      return emit(TabState(tabList: _tabList, selectedTab: selectedTab));
+      return emit(TabState(tabList: _tabList, selectedIndex: index));
     }
   }
 
   void onTap(TabElement selectedTab) {
     if (_isAvailable) {
-      int index = 0;
+      int selectedIndex = 0;
       _isAvailable = false;
 
-      _tabList.asMap().forEach((key, value) {
+      _tabList.asMap().forEach((index, value) {
         if (selectedTab == value) {
-          index = key;
+          selectedIndex = index;
         }
       });
 
-      controller.animateToPage(index,
+      controller.animateToPage(selectedIndex,
           curve: Constants.curve, duration: Constants.duration);
       Future.delayed((Constants.duration), () => _isAvailable = true);
 
-      return emit(TabState(tabList: _tabList, selectedTab: selectedTab));
+      return emit(TabState(tabList: _tabList, selectedIndex: selectedIndex));
     }
   }
 }

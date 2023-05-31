@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
+import 'package:healtheat/common/widgets/cards/restaurant_card.dart';
 
-class HomeOpenView extends StatelessWidget {
-  const HomeOpenView({super.key});
+class OpenNowList extends StatelessWidget {
+  const OpenNowList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +21,31 @@ class HomeOpenView extends StatelessWidget {
                 const SizedBox(height: 15),
             itemBuilder: (BuildContext context, int index) {
               final restaurant = restaurants[index];
-              return CustomCardRestaurant(
+              return RestaurantCard(
                 name: restaurant.displayName.toString(),
                 imageUrl: restaurant.imageUrl,
-                price: restaurant.deliveryPriceRange.toString(),
-                rate: restaurant.rating.toString(),
-                time: restaurant.deliveryTimeRange.toString(),
+                deliveryPriceRange: restaurant.deliveryPriceRange.toString(),
+                rating: restaurant.rating ?? 0,
+                deliveryTimeRange: restaurant.deliveryTimeRange.toString(),
                 typeFood: const ['Pizza', 'Italian'],
                 isFavorite: false,
                 onTap: () => context.goNamed(RouteName.homeRestaurantDetails,
                     pathParameters: {'restaurantId': restaurant.id}),
+                onTapFavorite: () {},
               );
             },
             itemCount: restaurants.length,
           );
         }
         if (state is RestaurantLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 15),
+            itemBuilder: (BuildContext context, int index) =>
+                const SkeletonRestaurantCard(),
+            itemCount: 3,
+          );
         }
         return const SizedBox();
       },

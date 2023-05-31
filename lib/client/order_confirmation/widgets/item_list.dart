@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
-import 'package:healtheat/common/widgets/cart_card.dart';
+import 'package:healtheat/common/widgets/cards/cart_card.dart';
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:healtheat/common/widgets/button_stars.dart';
 import 'package:healtheat/common/widgets/image_container.dart';
 
-class CustomCardReview extends StatelessWidget {
-  const CustomCardReview(
+class ReviewCard extends StatelessWidget {
+  const ReviewCard(
       {super.key,
       required this.name,
       required this.date,

@@ -19,7 +19,8 @@ class CustomLabelButton extends StatelessWidget {
       this.deleteIconSize,
       this.deleteIconColor,
       this.padding,
-      this.expanded});
+      this.expanded,
+      this.suffix});
 
   final Widget label;
   final IconData? icon;
@@ -35,6 +36,7 @@ class CustomLabelButton extends StatelessWidget {
   final Color? deleteIconColor;
   final EdgeInsetsGeometry? padding;
   final bool? expanded;
+  final IconData? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +47,10 @@ class CustomLabelButton extends StatelessWidget {
           borderRadius ?? BorderRadius.circular(Constants.radiusInfinite),
       elevation: elevation ?? 0,
       child: Padding(
-        padding:
-            padding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+        padding: suffix == null
+            ? padding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 12)
+            : padding ??
+                const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: expanded ?? false ? MainAxisSize.max : MainAxisSize.min,
@@ -79,6 +83,14 @@ class CustomLabelButton extends StatelessWidget {
                       size: deleteIconSize ?? 15, color: deleteIconColor),
                 ),
               ),
+            ],
+            if (suffix != null) ...[
+              const SizedBox(width: 5),
+              Icon(suffix,
+                  size: iconSize ?? 16,
+                  color: iconColor ??
+                      color ??
+                      Theme.of(context).colorScheme.onPrimary),
             ],
           ],
         ),

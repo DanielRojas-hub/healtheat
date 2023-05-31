@@ -6,30 +6,28 @@ import 'package:healtheat/common/widgets/custom_nav_bar.dart';
 part 'custom_nav_bar_state.dart';
 
 class CustomNavBarCubit extends Cubit<CustomNavBarState> {
-  CustomNavBarCubit({required List<CustomNavBarItem> navList})
+  CustomNavBarCubit({required List<NavBarItem> navList})
       : _navList = navList,
-        super(CustomNavBarState(
-            selectedNav: navList.first, navList: navList, position: 0));
+        super(CustomNavBarState(navList: navList, index: 0));
 
-  final List<CustomNavBarItem> _navList;
+  final List<NavBarItem> _navList;
 
   bool _isAvailable = true;
 
-  void onTap(CustomNavBarItem selectedNav) {
+  void onTap(NavBarItem selectedNav) {
     if (_isAvailable) {
       _isAvailable = false;
-      int position = 0;
+      int index = 0;
 
       Future.delayed((Constants.duration), () => _isAvailable = true);
 
-      _navList.asMap().forEach((key, value) {
+      _navList.asMap().forEach((i, value) {
         if (selectedNav == value) {
-          position = key;
+          index = i;
         }
       });
 
-      return emit(CustomNavBarState(
-          selectedNav: selectedNav, navList: _navList, position: position));
+      return emit(CustomNavBarState(navList: _navList, index: index));
     }
   }
 }

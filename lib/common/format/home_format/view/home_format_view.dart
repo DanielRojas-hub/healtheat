@@ -16,10 +16,9 @@ class HomeFormatView extends StatelessWidget {
       body: child,
       bottomNavigationBar: BlocBuilder<CustomNavBarCubit, CustomNavBarState>(
         builder: (context, state) => CustomNavBar(
-          selectedNav: state.selectedNav,
           navList: state.navList,
-          position: state.position,
-          onTap: (CustomNavBarItem selectedNavBar) {
+          index: state.index,
+          onTap: (NavBarItem selectedNavBar) {
             context.read<CustomNavBarCubit>().onTap(selectedNavBar);
             context.goNamed(selectedNavBar.routeName);
           },

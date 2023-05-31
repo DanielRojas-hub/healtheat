@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
+import 'package:healtheat/common/widgets/cards/restaurant_card.dart';
 import 'package:healtheat/common/widgets/custom_chip.dart';
 import 'package:healtheat/common/widgets/search_section.dart';
 
@@ -17,7 +17,7 @@ class SearchView extends StatelessWidget {
         const Padding(
           padding:
               EdgeInsets.symmetric(horizontal: Constants.margin, vertical: 10),
-          child: SearchSection(
+          child: SearchAndFilterSection(
             goRouteName: RouteName.searchRestaurantFilter,
           ),
         ),
@@ -42,13 +42,13 @@ class SearchView extends StatelessWidget {
           physics: const ScrollPhysics(),
           itemBuilder: (context, index) {
             const restaurantId = '28LecpHZyk81KUl6EsND';
-            return CustomCardRestaurant(
+            return RestaurantCard(
               name: "Hoshi-Sushi",
               imageUrl:
                   'https://hips.hearstapps.com/hmg-prod/images/dsc01939-1638289406.jpg',
-              price: '\$15 - \$20',
-              time: '30-40 min',
-              rate: '4.5',
+              deliveryPriceRange: '\$15 - \$20',
+              deliveryTimeRange: '30-40 min',
+              rating: 4.5,
               typeFood: const ['Sushi', 'European'],
               onTap: () => context.goNamed(RouteName.searchRestaurantDetails,
                   pathParameters: {'restaurantId': restaurantId}),

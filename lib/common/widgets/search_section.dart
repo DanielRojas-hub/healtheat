@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/widgets/custom_icon_button.dart';
 import 'package:healtheat/common/widgets/custom_search_bar.dart';
 
-class SearchSection extends StatelessWidget {
-  const SearchSection({
+class SearchAndFilterSection extends StatelessWidget {
+  const SearchAndFilterSection({
     Key? key,
     required this.goRouteName,
   }) : super(key: key);

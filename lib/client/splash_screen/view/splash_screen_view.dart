@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/client/splash_screen/static/splash_data.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/router/routes.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+import 'package:healtheat/common/widgets/custom_label_button.dart';
 
 import '../splash_screen.dart';
 

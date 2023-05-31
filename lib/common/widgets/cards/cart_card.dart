@@ -3,7 +3,7 @@ import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
 import 'package:healtheat/common/widgets/image_container.dart';
 
-import 'base_card.dart';
+import '../base_card.dart';
 
 class CartCard extends StatelessWidget {
   const CartCard(

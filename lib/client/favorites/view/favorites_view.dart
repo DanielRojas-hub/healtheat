@@ -6,9 +6,7 @@ import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/search_section.dart';
-import 'package:healtheat/common/widgets/tab_widget.dart';
-
-import '../favorites.dart';
+import 'package:healtheat/common/widgets/custom_tab.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({Key? key}) : super(key: key);
@@ -24,20 +22,17 @@ class FavoritesView extends StatelessWidget {
             const SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
-                  child: SearchSection(
+                  child: SearchAndFilterSection(
                       goRouteName: RouteName.favoriteRestaurantFilter)),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(
-                child: BlocBuilder<TabCubit, TabState>(
-                    builder: (context, state) => TabWidget(
-                        onTap: (TabElement selectedTab) =>
-                            context.read<TabCubit>().onTap(selectedTab),
-                        selectedTab: state.selectedTab,
-                        tabList: state.tabList)),
-              ),
+            SliverToBoxAdapter(
+              child: BlocBuilder<TabCubit, TabState>(
+                  builder: (context, state) => CustomTabNav(
+                      onTap: (TabElement selectedTab) =>
+                          context.read<TabCubit>().onTap(selectedTab),
+                      tabList: state.tabList,
+                      selectedIndex: state.selectedIndex)),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 15)),
           ];

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_card_restaurant.dart';
+import 'package:healtheat/common/widgets/cards/restaurant_card.dart';
 
 class FavRestaurantsView extends StatelessWidget {
   const FavRestaurantsView({super.key});
@@ -24,13 +24,13 @@ class RestaurantList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
       itemBuilder: (BuildContext context, int index) {
         const restaurantId = '28LecpHZyk81KUl6EsND';
-        return CustomCardRestaurant(
+        return RestaurantCard(
           name: "Vero Vero",
           imageUrl:
               "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Restaurant_N%C3%A4sinneula.jpg/1200px-Restaurant_N%C3%A4sinneula.jpg",
-          price: "\$10 - \$15",
-          rate: "4,8",
-          time: "25-35 min",
+          deliveryPriceRange: "\$10 - \$15",
+          rating: 4.8,
+          deliveryTimeRange: "25-35 min",
           typeFood: const ['Pizza', 'Italian'],
           isFavorite: false,
           onTap: () => context.goNamed(RouteName.favoriteRestaurantDetails,

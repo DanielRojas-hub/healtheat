@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
-import 'package:healtheat/common/widgets/cart_card.dart';
+import 'package:healtheat/common/widgets/cards/cart_card.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 
 class CartList extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/client/home/pages/home_open/view/home_open_view.dart';
+import 'package:healtheat/client/home/pages/open_now/view/open_now_view.dart';
 import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 import 'package:healtheat/common/services/user_preference/user_preference_bloc.dart';
 
-class HomeOpenPage extends StatelessWidget {
-  const HomeOpenPage({super.key});
+class OpenNowPage extends StatelessWidget {
+  const OpenNowPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeOpenPage extends StatelessWidget {
                 context.read<UserPreferenceBloc>())),
         )
       ],
-      child: const HomeOpenView(),
+      child: const OpenNowView(),
     );
   }
 }

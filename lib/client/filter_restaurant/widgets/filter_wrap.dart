@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+import 'package:healtheat/common/widgets/custom_label_button.dart';
 
 class FilterWrap extends StatelessWidget {
   const FilterWrap({super.key});

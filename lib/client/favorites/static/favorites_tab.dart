@@ -1,4 +1,4 @@
-import 'package:healtheat/common/widgets/tab_widget.dart';
+import 'package:healtheat/common/widgets/custom_tab.dart';
 
 final favoritesTabList = [
   const TabElement('Restaurants'),

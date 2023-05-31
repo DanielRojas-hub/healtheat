@@ -1,2 +1,2 @@
-export 'home_restaurants/home_restaurants.dart';
-export 'home_open/home_open.dart';
+export 'all_restaurants/all_restaurants.dart';
+export 'open_now/open_now.dart';

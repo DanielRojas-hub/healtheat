@@ -2,33 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
 
-import 'base_card.dart';
-import 'custom_icon_button.dart';
-import 'custom_label_buttom.dart';
-import 'image_container.dart';
+import '../base_card.dart';
+import '../custom_icon_button.dart';
+import '../custom_label_button.dart';
+import '../image_container.dart';
+import '../skelton.dart';
 
-class CustomCardRestaurant extends StatelessWidget {
-  const CustomCardRestaurant(
-      {super.key,
-      required this.name,
-      required this.imageUrl,
-      required this.price,
-      required this.rate,
-      required this.time,
-      required this.typeFood,
-      this.onTap,
-      required this.isFavorite,
-      this.onTapFavorite});
+class RestaurantCard extends StatelessWidget {
+  const RestaurantCard({
+    super.key,
+    required this.name,
+    required this.rating,
+    required this.deliveryPriceRange,
+    required this.deliveryTimeRange,
+    required this.isFavorite,
+    required this.typeFood,
+    this.onTap,
+    this.onTapFavorite,
+    this.imageUrl,
+  });
 
   final String name;
-  final String? imageUrl;
-  final String price;
-  final String rate;
-  final String time;
+  final num rating;
+  final String deliveryPriceRange;
+  final String deliveryTimeRange;
+  final bool isFavorite;
   final List<String> typeFood;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
-  final bool isFavorite;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +73,11 @@ class CustomCardRestaurant extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onTertiaryContainer,
                   backgroundColor:
                       Theme.of(context).colorScheme.tertiaryContainer,
-                  label: Text(price,
+                  label: Text(deliveryPriceRange,
                       style: Theme.of(context).textTheme.labelMedium),
                 ),
-                CustomLabelButton(label: Text(time), icon: Icons.schedule)
+                CustomLabelButton(
+                    label: Text(deliveryTimeRange), icon: Icons.schedule)
               ]),
             ]),
           )
@@ -96,13 +99,48 @@ class CustomCardRestaurant extends StatelessWidget {
                           ))),
             ),
             CustomLabelButton(
-                label: Text(rate),
+                label: Text(rating.toString()),
                 icon: Icons.star_rate_rounded,
                 backgroundColor: context.theme.whiteColor,
                 color: context.theme.blackColor,
                 iconColor: context.theme.rateColor)
           ]),
         )
+      ]),
+    );
+  }
+}
+
+class SkeletonRestaurantCard extends StatelessWidget {
+  const SkeletonRestaurantCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseCard(
+      borderRadius: BorderRadius.circular(Constants.radiusLarge),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const ImageContainer(
+            height: 150,
+            borderRadius: BorderRadius.vertical(
+                top: Radius.circular(Constants.radiusLarge))),
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 10, bottom: 17.5, left: 10, right: 10),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Skelton(
+                width: 125,
+                borderRadius: BorderRadius.circular(Constants.radiusInfinite)),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Skelton(
+                  width: 125,
+                  borderRadius:
+                      BorderRadius.circular(Constants.radiusInfinite)),
+            ),
+          ]),
+        ),
       ]),
     );
   }

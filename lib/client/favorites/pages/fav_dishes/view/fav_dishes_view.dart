@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/card_food.dart';
+import 'package:healtheat/common/widgets/cards/food_card.dart';
 
 class FavDishesView extends StatelessWidget {
   const FavDishesView({super.key});
@@ -25,7 +25,7 @@ class FavDishesView extends StatelessWidget {
                 mainAxisSpacing: 20),
             itemBuilder: (BuildContext context, int index) {
               final food = foods[index];
-              return CardFood(
+              return FoodCard(
                 imageUrl: food.imageUrl,
                 title: Text(food.displayName.toString()),
                 subtitle: const Text('Gluten free'),

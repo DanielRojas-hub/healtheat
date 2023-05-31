@@ -2,10 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_icon_button.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
-import 'package:healtheat/common/widgets/my_header_delegate.dart';
-import 'package:healtheat/common/widgets/scroll_bar.dart';
+import 'package:healtheat/common/widgets/header_delegate.dart';
+import 'package:healtheat/common/widgets/horizontal_scroll_bar.dart';
 
 import '../filter_restaurant.dart';
 
@@ -24,14 +22,14 @@ class FilterRestaurantView extends StatelessWidget {
         return CustomScrollView(controller: controller, slivers: [
           SliverPersistentHeader(
             pinned: true,
-            delegate: MyHeaderDelegate(
+            delegate: HeaderDelegate(
                 maxHeight: 30,
                 minHeight: 30,
                 borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(Constants.radiusMedium)),
                 backgroundColor:
                     Theme.of(context).bottomSheetTheme.backgroundColor,
-                child: const ScrollBar()),
+                child: const HorizontalScrollBar()),
           ),
           SliverPadding(
             padding:

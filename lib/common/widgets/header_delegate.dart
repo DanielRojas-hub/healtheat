@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyHeaderDelegate extends SliverPersistentHeaderDelegate {
-  MyHeaderDelegate({
+class HeaderDelegate extends SliverPersistentHeaderDelegate {
+  HeaderDelegate({
     required this.child,
     required this.maxHeight,
     required this.minHeight,

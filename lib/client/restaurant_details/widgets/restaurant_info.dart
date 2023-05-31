@@ -4,9 +4,8 @@ import 'package:healtheat/common/controllers/tab/tab_cubit.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
-import 'package:healtheat/common/widgets/tab_widget.dart';
-import '../restaurant_details.dart';
+import 'package:healtheat/common/widgets/custom_label_button.dart';
+import 'package:healtheat/common/widgets/custom_tab.dart';
 
 class RestaurantInfo extends StatelessWidget {
   const RestaurantInfo({
@@ -48,16 +47,12 @@ class RestaurantInfo extends StatelessWidget {
                     icon: Icons.schedule)
               ]),
               const SizedBox(height: 30),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: Constants.margin),
-                child: BlocBuilder<TabCubit, TabState>(
-                    builder: (context, state) => TabWidget(
-                        onTap: (TabElement selectedTab) =>
-                            context.read<TabCubit>().onTap(selectedTab),
-                        selectedTab: state.selectedTab,
-                        tabList: state.tabList)),
-              ),
+              BlocBuilder<TabCubit, TabState>(
+                  builder: (context, state) => CustomTabNav(
+                      onTap: (TabElement selectedTab) =>
+                          context.read<TabCubit>().onTap(selectedTab),
+                      tabList: state.tabList,
+                      selectedIndex: state.selectedIndex)),
             ]),
           );
         }

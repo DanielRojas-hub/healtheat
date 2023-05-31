@@ -4,27 +4,25 @@ import 'package:healtheat/common/utils/constants.dart';
 
 import 'base_card.dart';
 
-class CustomNavBarItem {
+class NavBarItem {
   final IconData icon;
   final IconData? iconDisable;
   final String routeName;
 
-  CustomNavBarItem(this.icon, this.routeName, {this.iconDisable});
+  NavBarItem(this.icon, this.routeName, {this.iconDisable});
 }
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar(
       {Key? key,
       required this.navList,
-      required this.selectedNav,
       required this.onTap,
-      required this.position})
+      required this.index})
       : super(key: key);
 
-  final List<CustomNavBarItem> navList;
-  final CustomNavBarItem selectedNav;
-  final void Function(CustomNavBarItem selectedNav) onTap;
-  final int position;
+  final List<NavBarItem> navList;
+  final void Function(NavBarItem selectedNav) onTap;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +30,9 @@ class CustomNavBar extends StatelessWidget {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Stack(children: [
           Row(
-              children: List.generate(navList.length, (index) {
-            final nav = navList[index];
-            final isSelected = selectedNav == nav;
+              children: List.generate(navList.length, (i) {
+            final nav = navList[i];
+            final isSelected = navList[index] == nav;
             return CustomNavBarSection(
                 navList: navList,
                 nav: nav,
@@ -43,7 +41,7 @@ class CustomNavBar extends StatelessWidget {
           })),
           AnimatedContainer(
             duration: Constants.duration,
-            alignment: Alignment(-1 + position * (2 / (navList.length - 1)), 0),
+            alignment: Alignment(-1 + index * (2 / (navList.length - 1)), 0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -76,9 +74,9 @@ class CustomNavBarSection extends StatelessWidget {
       required this.navList})
       : super(key: key);
 
-  final List<CustomNavBarItem> navList;
-  final CustomNavBarItem nav;
-  final void Function(CustomNavBarItem selectedNav) onTap;
+  final List<NavBarItem> navList;
+  final NavBarItem nav;
+  final void Function(NavBarItem selectedNav) onTap;
   final bool isSelected;
 
   @override

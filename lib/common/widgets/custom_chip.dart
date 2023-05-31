@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
-import 'package:healtheat/common/widgets/custom_label_buttom.dart';
+import 'package:healtheat/common/widgets/custom_label_button.dart';
 
 class CustomChip extends StatelessWidget {
   const CustomChip({super.key, required this.label});

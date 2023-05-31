@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 class Restaurant extends Equatable {
   final String id;
@@ -19,9 +20,9 @@ class Restaurant extends Equatable {
   final String? deliveryPriceRange;
 
   Restaurant({
-    required this.id,
+    String? id,
     required this.displayName,
-    this.preferenceIds,
+    required this.preferenceIds,
     required this.address,
     required this.phoneNumber,
     required this.rating,
@@ -30,7 +31,7 @@ class Restaurant extends Equatable {
     required this.imageUrl,
     required this.deliveryTimeRange,
     required this.deliveryPriceRange,
-  });
+  }) : id = id ?? Uuid().v4();
 
   Restaurant copyWith({
     String? id,
