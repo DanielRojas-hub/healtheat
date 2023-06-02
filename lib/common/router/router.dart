@@ -53,6 +53,7 @@ class AppRouter {
                 path: '/home',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
+                /* builder: (context, state) => const HomePage(), */
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: HomePage()),
                 routes: [
@@ -64,6 +65,7 @@ class AppRouter {
                 path: '/search',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.search,
+                /* builder: (context, state) => const SearchPage(), */
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: SearchPage()),
                 routes: [
@@ -74,6 +76,7 @@ class AppRouter {
             GoRoute(
                 path: '/favorites',
                 name: RouteName.favorites,
+                /* builder: (context, state) => const FavoritesPage(), */
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: FavoritesPage()),
                 routes: [
@@ -85,6 +88,7 @@ class AppRouter {
                 path: '/cart',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.cart,
+                /* builder: (context, state) => const CartPage(), */
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CartPage()),
                 routes: [
@@ -101,6 +105,7 @@ class AppRouter {
               path: '/profile',
               parentNavigatorKey: shellNavigatorKey,
               name: RouteName.profile,
+              /* builder: (context, state) => const ProfilePage(), */
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),

@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/common/services/counter/counter_cubit.dart';
+import 'package:healtheat/common/services/cart/cart_bloc.dart';
+import 'package:healtheat/common/services/counter/counter_bloc.dart';
 
 import 'package:healtheat/common/services/food/food_bloc.dart';
 
@@ -21,11 +22,15 @@ class FoodDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<CounterBloc>(
+          create: (context) => CounterBloc()
+            ..add(CartBlocCounter(
+                context.read<CartBloc>(), restaurantId, foodId)),
+        ),
         BlocProvider<FoodBloc>(
           create: (context) =>
               FoodBloc()..add(StreamFood(restaurantId, foodId)),
         ),
-        BlocProvider<CounterCubit>(create: (context) => CounterCubit())
       ],
       child: FoodDetails(restaurantId: restaurantId, foodId: foodId),
     );

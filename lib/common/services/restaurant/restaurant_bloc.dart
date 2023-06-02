@@ -88,12 +88,15 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       CartBlocRestaurant event, Emitter<RestaurantState> emit) {
     _blocSubscription?.cancel();
     try {
-      _blocSubscription = event.cartBloc.stream.listen((state) {
-        if (state.cart.restaurantId.isNotEmpty) {
+      final cartBloc = event.cartBloc;
+      _blocSubscription = cartBloc.stream.listen((state) {
+        if (state.cart.isNotEmpty) {
           add(StreamRestaurant(state.cart.restaurantId));
         }
       });
-      add(StreamRestaurant(event.cartBloc.state.cart.restaurantId));
+      if (cartBloc.state.cart.isNotEmpty) {
+        add(StreamRestaurant(cartBloc.state.cart.restaurantId));
+      }
     } catch (_) {
       //TODO: catch
     }

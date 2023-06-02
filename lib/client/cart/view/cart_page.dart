@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
+import 'package:healtheat/common/services/restaurant/restaurant_bloc.dart';
 
 import '../cart.dart';
 
@@ -10,11 +11,18 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider<FoodBloc>(
-        create: (context) =>
-            FoodBloc()..add(CartBlocFoods(context.read<CartBloc>())),
-      )
-    ], child: const CartView());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FoodBloc>(
+          create: (context) =>
+              FoodBloc()..add(CartBlocFoods(context.read<CartBloc>())),
+        ),
+        BlocProvider<RestaurantBloc>(
+          create: (context) => RestaurantBloc()
+            ..add(CartBlocRestaurant(context.read<CartBloc>())),
+        )
+      ],
+      child: const CartView(),
+    );
   }
 }

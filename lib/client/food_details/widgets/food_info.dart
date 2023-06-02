@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healtheat/common/services/counter/counter_cubit.dart';
+import 'package:healtheat/common/services/counter/counter_bloc.dart';
 import 'package:healtheat/common/widgets/counter_widget.dart';
 
 class FoodInfo extends StatelessWidget {
@@ -37,15 +37,16 @@ class FoodInfo extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelLarge, child: subtitle),
           ]),
           const SizedBox(height: 50),
-          BlocBuilder<CounterCubit, int>(
+          BlocBuilder<CounterBloc, int>(
             builder: (context, state) {
               return CounterWidget(
                 label: Text(state.toString()),
                 iconSize: 30,
                 fontSize: 22,
-                onIncrease: () => context.read<CounterCubit>().increment(),
+                onIncrease: () =>
+                    context.read<CounterBloc>()..add(IncrementCounter()),
                 onDecrease: state - 1 > 0
-                    ? () => context.read<CounterCubit>().decrement()
+                    ? () => context.read<CounterBloc>()..add(DecrementCounter())
                     : null,
                 labelPadding: const EdgeInsets.symmetric(horizontal: 15.0),
                 iconPadding:

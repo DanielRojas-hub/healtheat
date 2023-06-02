@@ -43,12 +43,11 @@ class RemovePetition extends CartEvent {
 
 class IncreaseQuantity extends CartEvent {
   final String foodId;
-  final int? quantity;
 
-  const IncreaseQuantity(this.foodId, {this.quantity});
+  const IncreaseQuantity(this.foodId);
 
   @override
-  List<Object?> get props => [foodId, quantity];
+  List<Object?> get props => [foodId];
 }
 
 class DecreaseQuantity extends CartEvent {
@@ -58,4 +57,15 @@ class DecreaseQuantity extends CartEvent {
 
   @override
   List<Object> get props => [foodId];
+}
+
+class SetQuantity extends CartEvent {
+  final String restaurantId;
+  final String foodId;
+  final int quantity;
+
+  const SetQuantity(this.restaurantId, this.foodId, this.quantity);
+
+  @override
+  List<Object> get props => [foodId, quantity];
 }

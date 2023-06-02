@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/client/food_details/widgets/food_info.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
-import 'package:healtheat/common/services/counter/counter_cubit.dart';
+import 'package:healtheat/common/services/counter/counter_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/widgets/custom_appbar.dart';
 import 'package:healtheat/common/widgets/custom_footer.dart';
@@ -35,30 +35,32 @@ class FoodDetails extends StatelessWidget {
 }
 
 class FoodFooter extends StatelessWidget {
-  const FoodFooter({
-    super.key,
-  });
+  const FoodFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FoodBloc, FoodState>(
+    return BlocBuilder<CounterBloc, int>(
       builder: (context, state) {
-        if (state is FoodLoaded) {
-          final food = state.food;
-
-          return CustomFooter(
-            price: Text(food.price.toString()),
-            label: const Text('Total price: '),
-            onPressed: () {
-              context.read<CartBloc>().add(AddPetition(food.restaurantId,
-                  food.id, context.read<CounterCubit>().state));
-              context.goNamed(RouteName.cart);
-            },
-            textButton: const Text('Add to cart'),
-          );
-        }
-
-        return const SizedBox();
+        final quantity = state;
+        return BlocBuilder<FoodBloc, FoodState>(
+          builder: (context, state) {
+            if (state is FoodLoaded) {
+              final food = state.food;
+              final total = (food.price ?? 0) * quantity;
+              return CustomFooter(
+                price: Text('\$$total'),
+                label: const Text('Total price: '),
+                onPressed: () {
+                  context.read<CartBloc>().add(SetQuantity(food.restaurantId,
+                      food.id, context.read<CounterBloc>().state));
+                  context.goNamed(RouteName.cart);
+                },
+                textButton: const Text('Add to cart'),
+              );
+            }
+            return const SizedBox();
+          },
+        );
       },
     );
   }
