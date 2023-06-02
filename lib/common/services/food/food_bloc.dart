@@ -95,10 +95,10 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
   }
 
   void _onFoodUpdated(_FoodUpdated event, Emitter<FoodState> emit) {
-    /* return emit(FoodLoaded(event.food)); */
+    return emit(FoodLoaded(event.food));
   }
 
   void _onFoodsUpdated(_FoodsUpdated event, Emitter<FoodState> emit) {
-    /* return emit(FoodsLoaded(event.foods)); */
+    return emit(FoodsLoaded(event.foods));
   }
 }

@@ -127,11 +127,11 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
   void _onRestaurantUpdated(
       _RestaurantUpdated event, Emitter<RestaurantState> emit) {
-    /* return emit(RestaurantLoaded(event.restaurant)); */
+    return emit(RestaurantLoaded(event.restaurant));
   }
 
   void _onRestaurantsUpdated(
       _RestaurantsUpdated event, Emitter<RestaurantState> emit) {
-    /* return emit(RestaurantsLoaded(event.restaurants)); */
+    return emit(RestaurantsLoaded(event.restaurants));
   }
 }
