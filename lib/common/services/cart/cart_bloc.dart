@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:cart_repository/cart_repository.dart';
-import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
 part 'cart_event.dart';

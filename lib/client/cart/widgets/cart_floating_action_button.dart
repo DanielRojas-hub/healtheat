@@ -17,6 +17,7 @@ class CartFloatingActionButton extends StatelessWidget {
           final status = state.status;
           if (status == CartStatus.notEmpty) {
             return FloatingActionButton.extended(
+              heroTag: 'cart',
               backgroundColor: Theme.of(context).primaryColor,
               onPressed: () => context.goNamed(RouteName.orderConfirmation),
               label: SizedBox(
@@ -53,7 +54,7 @@ class RestaurantDeliveryTime extends StatelessWidget {
     return BlocBuilder<RestaurantBloc, RestaurantState>(
       builder: (context, state) {
         if (state is RestaurantLoaded) {
-          // final restaurant = state.restaurant;
+          final restaurant = state.restaurant;
           return Text(
             '20-25 min',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(

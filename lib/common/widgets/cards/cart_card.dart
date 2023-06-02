@@ -18,10 +18,10 @@ class CartCard extends StatelessWidget {
       this.onTap,
       this.imageUrl});
 
-  final Widget title;
-  final Widget counter;
+  final String title;
+  final String counter;
   final bool isCounter;
-  final Widget suffix;
+  final String suffix;
   final String? imageUrl;
   final VoidCallback? onIncrease;
   final VoidCallback? onDecrease;
@@ -46,32 +46,27 @@ class CartCard extends StatelessWidget {
           Expanded(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              DefaultTextStyle.merge(
-                  style: Theme.of(context).textTheme.titleSmall,
-                  maxLines: 1,
-                  child: title),
+              Text(title,
+                  style: Theme.of(context).textTheme.titleSmall, maxLines: 1),
               if (isCounter) ...[
                 const SizedBox(height: 5),
                 CounterWidget(
-                  label: counter,
+                  label: Text(counter),
                   onIncrease: onIncrease,
                   onDecrease: onDecrease,
                 )
               ] else ...[
                 const SizedBox(height: 3),
-                DefaultTextStyle.merge(
-                    style: Theme.of(context).textTheme.titleSmall,
-                    child: counter),
+                Text(counter, style: Theme.of(context).textTheme.titleSmall),
               ]
             ]),
           ),
           const SizedBox(width: 10),
-          DefaultTextStyle.merge(
+          Text(suffix,
               style: isCounter
                   ? Theme.of(context).textTheme.labelLarge
-                  : Theme.of(context).textTheme.titleMedium,
-              child: suffix),
-          if (isCounter) const SizedBox(width: 10),
+                  : Theme.of(context).textTheme.titleMedium),
+          const SizedBox(width: 10),
         ]),
       ),
     );
@@ -79,9 +74,7 @@ class CartCard extends StatelessWidget {
 }
 
 class SkeletonCartCard extends StatelessWidget {
-  const SkeletonCartCard({Key? key, this.isCounter = false}) : super(key: key);
-
-  final bool isCounter;
+  const SkeletonCartCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +100,7 @@ class SkeletonCartCard extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           const Skelton(width: 75),
-          if (isCounter) const SizedBox(width: 10),
+          const SizedBox(width: 10),
         ]),
       ),
     );

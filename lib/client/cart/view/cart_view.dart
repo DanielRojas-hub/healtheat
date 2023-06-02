@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/images.dart';
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
 import 'package:healtheat/common/widgets/dotted_divider.dart';
@@ -28,8 +29,7 @@ class CartView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                    child: SvgPicture.asset(
-                        'assets/images/undraw_empty_cart_co35.svg',
+                    child: SvgPicture.asset(Images.cartEmpty,
                         height: MediaQuery.of(context).size.height * 0.4),
                   ),
                   const SizedBox(height: 20),
