@@ -7,10 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
+import 'package:healtheat/common/utils/string_fix.dart';
 import 'package:healtheat/common/widgets/cards/cart_card.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
-
-import '../cart.dart';
 
 class CartList extends StatelessWidget {
   const CartList({super.key});
@@ -78,7 +77,7 @@ class FoodCartList extends StatelessWidget {
                   child: CartCard(
                     title: food.displayName.toString(),
                     counter: petition.quantity.toString(),
-                    suffix: '\$$total',
+                    suffix: '\$${stringFix(total)}',
                     onIncrease: () =>
                         context.read<CartBloc>().add(IncreaseQuantity(food.id)),
                     onDecrease: () =>

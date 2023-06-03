@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_repository/food_repository.dart';
 import 'package:healtheat/common/services/cart/cart_bloc.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
+import 'package:healtheat/common/utils/string_fix.dart';
 import 'package:healtheat/common/widgets/total_card.dart';
 
 class CartTotal extends StatelessWidget {
@@ -39,7 +40,7 @@ class FoodCartTotal extends StatelessWidget {
         if (state is FoodsLoaded) {
           final foods = state.foods;
           final total = calculateTotal(foods, petitions);
-          return TotalCard(label: Text('\$$total'));
+          return TotalCard(label: Text('\$${stringFix(total)}'));
         }
         if (state is FoodLoading) {
           return const SkeletonTotalCard();
