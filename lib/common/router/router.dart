@@ -131,26 +131,26 @@ class AppRouter {
     );
   }
 
-  GoRoute restaurantGoRoute(String restaurantName, String foodName) {
+  GoRoute restaurantGoRoute(String restaurantName, String foodRouteName) {
     return GoRoute(
       path: 'restaurant/:restaurantId',
       parentNavigatorKey: rootNavigatorKey,
       name: restaurantName,
       builder: (context, state) => RestaurantDetailsPage(
         restaurantId: state.pathParameters['restaurantId'].toString(),
-        foodName: foodName,
+        foodRouteName: foodRouteName,
       ),
       routes: [
-        foodGoRoute(foodName),
+        foodGoRoute(foodRouteName),
       ],
     );
   }
 
-  GoRoute foodGoRoute(String foodName, {bool? isSingle}) {
+  GoRoute foodGoRoute(String foodRouteName, {bool? isSingle}) {
     return GoRoute(
         path: 'food/:foodId',
         parentNavigatorKey: rootNavigatorKey,
-        name: foodName,
+        name: foodRouteName,
         builder: (context, state) => FoodDetailsPage(
               restaurantId: state.pathParameters['restaurantId'].toString(),
               foodId: state.pathParameters['foodId'].toString(),

@@ -39,8 +39,8 @@ ThemeData lightTheme() {
       colorScheme: ColorScheme.light(
         primary: const Color(0xFFFF4E0B),
         onPrimary: Colors.white,
-        primaryContainer: Colors.white,
-        onPrimaryContainer: Colors.black87,
+        primaryContainer: const Color(0xFFFF4E0B),
+        onPrimaryContainer: Colors.white,
         secondary: Colors.blue,
         onSecondary: Colors.white,
         secondaryContainer: Colors.white,

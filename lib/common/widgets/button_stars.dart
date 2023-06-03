@@ -8,11 +8,16 @@ class ButtonStars extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
         children: List.generate(5, (index) {
-      final bool isActive = index + 1 <= rating;
-      return Icon(isActive ? Icons.star : Icons.star_border_rounded,
-          color: isActive
-              ? context.theme.rateColor
-              : Theme.of(context).disabledColor);
+      final isFirst = index == 0;
+      final isActive = index + 1 <= rating;
+      return Padding(
+        padding: EdgeInsets.only(left: !isFirst ? 4.0 : 0.0),
+        child: Icon(isActive ? Icons.star : Icons.star_border_rounded,
+            size: 18,
+            color: isActive
+                ? context.theme.rateColor
+                : Theme.of(context).disabledColor),
+      );
     }));
   }
 }

@@ -48,7 +48,7 @@ class CustomTabNav extends StatelessWidget {
             alignment:
                 Alignment(-1 + selectedIndex * (2 / (tabList.length - 1)), 1),
             child: Container(
-              height: 3,
+              height: 2,
               width: (MediaQuery.of(context).size.width / tabList.length) -
                   Constants.margin,
               decoration: BoxDecoration(

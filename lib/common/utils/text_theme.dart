@@ -20,13 +20,13 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
             GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600),
         bodyLarge: GoogleFonts.poppins(fontSize: 16, color: Colors.black87),
         bodyMedium: GoogleFonts.poppins(fontSize: 15, color: Colors.black87),
-        bodySmall: GoogleFonts.poppins(fontSize: 14, color: Colors.black87),
+        bodySmall: GoogleFonts.poppins(fontSize: 13, color: Colors.black87),
         labelLarge: GoogleFonts.poppins(
             fontSize: 14, color: Colors.black45, fontWeight: FontWeight.w500),
         labelMedium: GoogleFonts.poppins(
             fontSize: 13, color: Colors.black45, fontWeight: FontWeight.w500),
         labelSmall: GoogleFonts.poppins(
-            fontSize: 11,
+            fontSize: 12,
             color: Colors.black45,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.5),

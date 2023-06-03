@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_repository/food_repository.dart';
 import 'package:go_router/go_router.dart';
-import 'package:healtheat/common/router/routes.dart';
 import 'package:healtheat/common/services/food/food_bloc.dart';
 import 'package:healtheat/common/utils/constants.dart';
 import 'package:healtheat/common/widgets/cards/food_card.dart';
 
-class DishesList extends StatelessWidget {
-  const DishesList({Key? key}) : super(key: key);
+class FoodList extends StatelessWidget {
+  const FoodList(
+      {Key? key, required this.restaurantId, required this.foodRouteName})
+      : super(key: key);
+
+  final String restaurantId;
+  final String foodRouteName;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,16 @@ class DishesList extends StatelessWidget {
                 categories: const ['Gluten free'],
                 price: food.price ?? 0,
                 isFavorite: false,
-                onTap: () => onPushFoodDetails(context, food),
+                onTap: () => context.goNamed(foodRouteName, pathParameters: {
+                  'restaurantId': restaurantId,
+                  'foodId': food.id
+                }),
                 onTapFavorite: () {},
-                onTapPrice: () => onPushFoodDetails(context, food),
+                onTapPrice: () => context.goNamed(foodRouteName,
+                    pathParameters: {
+                      'restaurantId': restaurantId,
+                      'foodId': food.id
+                    }),
               );
             },
             itemCount: foods.length,
@@ -58,8 +68,4 @@ class DishesList extends StatelessWidget {
       },
     );
   }
-
-  void onPushFoodDetails(BuildContext context, Food food) => context.pushNamed(
-      RouteName.favoriteRestaurantFoodDetails,
-      pathParameters: {'restaurantId': food.restaurantId, 'foodId': food.id});
 }

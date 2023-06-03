@@ -7,15 +7,12 @@ import 'package:healtheat/common/services/food/food_bloc.dart';
 import '../menu.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({
-    Key? key,
-    required this.restaurantId,
-    required this.foodName,
-  }) : super(key: key);
+  const MenuPage(
+      {Key? key, required this.restaurantId, required this.foodRouteName})
+      : super(key: key);
 
   final String restaurantId;
-
-  final String foodName;
+  final String foodRouteName;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class MenuPage extends StatelessWidget {
           create: (context) => FoodBloc()..add(StreamFoods(restaurantId)),
         )
       ],
-      child: MenuView(restaurantId: restaurantId, foodName: foodName),
+      child: MenuView(restaurantId: restaurantId, foodRouteName: foodRouteName),
     );
   }
 }

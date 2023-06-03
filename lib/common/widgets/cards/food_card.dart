@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/extension/custom_theme_extension.dart';
 import 'package:healtheat/common/utils/constants.dart';
+import 'package:healtheat/common/utils/string_fix.dart';
 
 import '../base_card.dart';
 import '../custom_icon_button.dart';
@@ -21,8 +22,8 @@ class FoodCard extends StatelessWidget {
       this.onTapPrice});
 
   final String? imageUrl;
-  final Widget title;
-  final Widget price;
+  final String title;
+  final num price;
   final bool isFavorite;
   final List<String> categories;
   final VoidCallback? onTap;
@@ -40,11 +41,10 @@ class FoodCard extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              DefaultTextStyle.merge(
+              Text(title,
                   style: Theme.of(context).textTheme.titleLarge,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  child: title),
+                  maxLines: 1),
               Column(
                 children: List.generate(
                   categories.length,
@@ -55,7 +55,15 @@ class FoodCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              CustomLabelButton(label: price, onTap: onTapPrice, expanded: true)
+              CustomLabelButton(
+                  label: Text(
+                    '\$${stringFix(price)}',
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
+                  ),
+                  onTap: onTapPrice,
+                  expanded: true)
             ]),
           ),
         ]),
