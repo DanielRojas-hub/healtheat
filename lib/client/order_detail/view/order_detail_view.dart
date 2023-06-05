@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healtheat/common/utils/constants.dart';
+import 'package:flutter/services.dart';
 
 import 'package:healtheat/common/widgets/custom_background_widget.dart';
 import 'package:healtheat/common/widgets/custom_divider.dart';
@@ -8,6 +9,7 @@ import 'package:healtheat/common/widgets/total_card.dart';
 
 class OrderDetailView extends StatelessWidget {
   const OrderDetailView({Key? key}) : super(key: key);
+  final bool select = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,12 @@ class OrderDetailView extends StatelessWidget {
                         ],
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () => Clipboard.setData(
+                                  const ClipboardData(text: 'hello'))
+                              //then show a snackbar
+                              .then((_) => ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      content: Text('Copied to Clipboard')))),
                           icon: const Icon(Icons.copy, color: Colors.grey)),
                     ]
                         .map((widget) => Padding(
