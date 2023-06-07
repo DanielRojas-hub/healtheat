@@ -7,6 +7,8 @@ import 'package:healtheat/client/home/home.dart';
 import 'package:healtheat/client/login/login.dart';
 import 'package:healtheat/client/order_confirmation/order_confirmation.dart';
 import 'package:healtheat/client/order_detail/order_detail.dart';
+import 'package:healtheat/client/payment_method/payment_method.dart';
+import 'package:healtheat/client/payment_method/widgets/widgets.dart';
 import 'package:healtheat/client/preferences_filter/preferences_filter.dart';
 import 'package:healtheat/client/profile/profile.dart';
 import 'package:healtheat/client/register/register.dart';
@@ -27,12 +29,16 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: '/payment_method',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
       //     name: RouteName.splashScreen,
       //     builder: (context, state) => const SplashScreenPage()),
+      GoRoute(
+          path: '/payment_method',
+          name: RouteName.paymentMethod,
+          builder: (context, state) => const PaymentMethodPage()),
       GoRoute(
           path: '/preferences_filter',
           name: RouteName.preferencesFilter,

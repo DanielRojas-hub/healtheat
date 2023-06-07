@@ -1,5 +1,6 @@
 class RouteName {
   static const splashScreen = 'splash_screen';
+  static const paymentMethod = 'payment_method';
   static const login = 'login';
   static const register = 'register';
   static const home = 'home';
