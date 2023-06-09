@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/screens/register/pages/category/widgets/schedule_input.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -26,7 +27,6 @@ class CategoryView extends StatelessWidget {
             decoration: InputDecoration(label: Text("Address")),
           ),
           const SizedBox(height: 30),
-          // const Text("Phone number", style: TextStyle(fontSize: 13)),
           Text("Phone number", style: Theme.of(context).textTheme.labelLarge),
           Row(children: [
             Text("+", style: Theme.of(context).textTheme.labelLarge),
@@ -44,79 +44,17 @@ class CategoryView extends StatelessWidget {
               child: TextField(
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
-                // decoration: InputDecoration(label: Text("Phone number")),
               ),
             ),
           ]),
           const SizedBox(height: 30),
           Text("Schedule", style: Theme.of(context).textTheme.labelLarge),
-          // const SizedBox(height: 15),
-          // const TextField(
-          //   textAlign: TextAlign.center,
-          //   keyboardType: TextInputType.number,
-          //   decoration: InputDecoration(label: Text("Opening time")),
-          // ),
-          // const SizedBox(height: 10),
-          // const TextField(
-          //   textAlign: TextAlign.center,
-          //   keyboardType: TextInputType.number,
-          //   decoration: InputDecoration(label: Text("Closing time")),
-          // )
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 15),
-              Text("Opening time",
-                  style: Theme.of(context).textTheme.labelLarge),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      // decoration: InputDecoration(label: Text("Opening time")),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(":", style: Theme.of(context).textTheme.labelLarge),
-                  const SizedBox(width: 10),
-                  const SizedBox(
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      // decoration: InputDecoration(label: Text("Closing time")),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Text("Closing time",
-                  style: Theme.of(context).textTheme.labelLarge),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      // decoration: InputDecoration(label: Text("Opening time")),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(":", style: Theme.of(context).textTheme.labelLarge),
-                  const SizedBox(width: 10),
-                  const SizedBox(
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      // decoration: InputDecoration(label: Text("Closing time")),
-                    ),
-                  ),
-                ],
-              ),
+              ScheduleInput(label: 'Opening Time'),
+              SizedBox(width: 30),
+              ScheduleInput(label: 'Closing Time'),
             ],
           ),
         ],
