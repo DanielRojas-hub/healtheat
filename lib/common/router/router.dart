@@ -17,6 +17,8 @@ import 'package:healtheat/common/format/home_format/home_format.dart';
 import 'package:healtheat/common/page_builders/modal_bottom_sheet.dart';
 import 'package:healtheat/common/router/routes.dart';
 
+import '../../restaurant/add_food/pages/information/information.dart';
+
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> shellNavigatorKey =
@@ -27,7 +29,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: '/add_food',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -45,6 +47,10 @@ class AppRouter {
           path: '/login',
           name: RouteName.login,
           builder: (context, state) => const LoginPage()),
+      GoRoute(
+          path: '/add_food',
+          name: RouteName.addFoodRestaurant,
+          builder: (context, state) => const InformationPage()),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),
