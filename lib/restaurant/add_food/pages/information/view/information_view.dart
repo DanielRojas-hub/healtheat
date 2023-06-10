@@ -1,134 +1,106 @@
-import 'package:flutter/material.dart';
-import 'package:healtheat/common/widgets/custom_category_container.dart';
+import 'dart:io';
 
-class InformationView extends StatelessWidget {
-  const InformationView({super.key});
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class InformationView extends StatefulWidget {
+  const InformationView({Key? key}) : super(key: key);
+
+  @override
+  _InformationViewState createState() => _InformationViewState();
+}
+
+class _InformationViewState extends State<InformationView> {
+  File? _image;
+
+  Future<void> _selectImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          children: [
-            Center(
-              child: Text("New Food",
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: Theme.of(context).primaryColor,
-                      )),
-            ),
-            const SizedBox(height: 30),
-            TextFormField(
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.blue,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                labelText: 'Name',
+    return Container(
+      width: double.infinity,
+      height: 600,
+      child: ListView(
+        children: [
+          Text("New Food",
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                  )),
+          const SizedBox(height: 20),
+          Text(
+            'Name',
+            style: TextStyle(color: Theme.of(context).disabledColor),
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
               ),
             ),
-            const SizedBox(height: 30),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.blue,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                labelText: 'Price',
-                suffixIcon: const Icon(Icons.attach_money),
+          ),
+          const SizedBox(height: 30),
+          Text(
+            'Price',
+            style: TextStyle(color: Theme.of(context).disabledColor),
+          ),
+          TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              prefixIcon: const Icon(Icons.attach_money),
+            ),
+          ),
+          const SizedBox(height: 30),
+          Text(
+            'Description',
+            style: TextStyle(color: Theme.of(context).disabledColor),
+          ),
+          TextFormField(
+            maxLines: 4,
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
-            const SizedBox(height: 30),
-            TextFormField(
-              maxLines: 4,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.blue,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                labelText: 'Description',
+          ),
+          const SizedBox(height: 30),
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  _selectImage();
+                },
+                child: Text('Adjuntar imagen'),
               ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              children: [
-                Text(
-                  'Categories',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: Theme.of(context).primaryColor),
-                ),
-                const SizedBox(width: 30),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      '+ New category',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
+              if (_image != null) ...[
+                const SizedBox(height: 10),
+                Image.file(_image!),
               ],
-            ),
-            const SizedBox(height: 15),
-            CategoryContainer(
-              iconData: Icons.eco,
-              label: Text(
-                'Vegan',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Theme.of(context).hintColor),
-              ),
-            ),
-            const SizedBox(height: 15),
-            CategoryContainer(
-              iconData: Icons.breakfast_dining,
-              label: Text(
-                'Gluten free',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Theme.of(context).hintColor),
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }

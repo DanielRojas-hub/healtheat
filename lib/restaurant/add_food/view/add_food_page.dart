@@ -7,6 +7,6 @@ class AddFoodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AddFoodView();
+    return AddFoodView();
   }
 }

@@ -16,8 +16,7 @@ import 'package:healtheat/client/search/search.dart';
 import 'package:healtheat/common/format/home_format/home_format.dart';
 import 'package:healtheat/common/page_builders/modal_bottom_sheet.dart';
 import 'package:healtheat/common/router/routes.dart';
-
-import '../../restaurant/add_food/pages/information/information.dart';
+import 'package:healtheat/restaurant/add_food/add_food.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -50,7 +49,7 @@ class AppRouter {
       GoRoute(
           path: '/add_food',
           name: RouteName.addFoodRestaurant,
-          builder: (context, state) => const InformationPage()),
+          builder: (context, state) => const AddFoodPage()),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),

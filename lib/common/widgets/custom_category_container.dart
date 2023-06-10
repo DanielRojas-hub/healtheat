@@ -15,7 +15,7 @@ class CategoryContainer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Theme.of(context).hoverColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
