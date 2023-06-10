@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/screens/register/pages/category/view/view.dart';
+
+import '../category.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});

@@ -9,16 +9,19 @@ class CustomTextField extends StatelessWidget {
       this.onTap,
       this.readOnly,
       this.prefixText,
-      this.textInputType});
+      this.textInputType,
+      this.maxLines});
   final Icon? icon;
   final VoidCallback? onTap;
   final bool? readOnly;
   final String? prefixText;
   final TextInputType? textInputType;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines ?? 1,
       onTap: onTap,
       readOnly: readOnly ?? false,
       keyboardType: textInputType ?? TextInputType.text,

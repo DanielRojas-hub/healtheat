@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:restaurant/screens/add_food/view/add_food_page.dart';
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
 import 'package:restaurant/screens/register/view/register_page.dart';
 
@@ -33,6 +34,10 @@ class AppRouter {
               },
             )
           ]),
+      GoRoute(
+          path: '/add_food',
+          name: RouteName.addFoodRestaurant,
+          builder: (context, state) => const AddFoodPage())
     ],
   );
 }
