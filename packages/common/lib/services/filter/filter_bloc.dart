@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:preference_repository/preference_repository.dart';
-
 part 'filter_event.dart';
 part 'filter_state.dart';
 
