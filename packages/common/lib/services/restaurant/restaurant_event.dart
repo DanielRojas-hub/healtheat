@@ -28,21 +28,54 @@ class GetRestaurant extends RestaurantEvent {
 class StreamRestaurants extends RestaurantEvent {
   final List<String>? restaurantIds;
   final List<String>? preferenceIds;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
+  final int? sortType;
 
-  const StreamRestaurants({this.restaurantIds, this.preferenceIds});
+  const StreamRestaurants(
+      {this.restaurantIds,
+      this.preferenceIds,
+      this.categoryIds,
+      this.cuisineIds,
+      this.menuIds,
+      this.sortType});
 
   @override
-  List<Object?> get props => [restaurantIds, preferenceIds];
+  List<Object?> get props => [
+        restaurantIds,
+        preferenceIds,
+        categoryIds,
+        cuisineIds,
+        menuIds,
+        sortType
+      ];
 }
 
 class GetRestaurants extends RestaurantEvent {
   final List<String>? restaurantIds;
   final List<String>? preferenceIds;
-
-  const GetRestaurants({this.restaurantIds, this.preferenceIds});
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
+  final int? sortType;
+  const GetRestaurants(
+      {this.restaurantIds,
+      this.preferenceIds,
+      this.categoryIds,
+      this.cuisineIds,
+      this.menuIds,
+      this.sortType});
 
   @override
-  List<Object?> get props => [restaurantIds, preferenceIds];
+  List<Object?> get props => [
+        restaurantIds,
+        preferenceIds,
+        categoryIds,
+        cuisineIds,
+        menuIds,
+        sortType
+      ];
 }
 
 class CartBlocRestaurant extends RestaurantEvent {

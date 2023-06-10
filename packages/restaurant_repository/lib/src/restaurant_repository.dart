@@ -9,11 +9,33 @@ class RestaurantRepository {
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   Stream<List<Restaurant>> streamRestaurants(
-      {List<String>? restaurantIds, List<String>? preferenceIds}) {
+      {List<String>? restaurantIds,
+      List<String>? preferenceIds,
+      List<String>? categoryIds,
+      List<String>? cuisineIds,
+      List<String>? menuIds,
+      int? sortType}) {
     Query query = _firebaseFirestore.collection('restaurants');
 
     if (preferenceIds != null && preferenceIds.isNotEmpty) {
       query = query.where('preferenceIds', arrayContainsAny: preferenceIds);
+    }
+    if (categoryIds != null && categoryIds.isNotEmpty) {
+      query = query.where('categoryIds', arrayContainsAny: categoryIds);
+    }
+    if (cuisineIds != null && cuisineIds.isNotEmpty) {
+      query = query.where('cuisineIds', arrayContainsAny: cuisineIds);
+    }
+    if (menuIds != null && menuIds.isNotEmpty) {
+      query = query.where('menuIds', arrayContainsAny: menuIds);
+    }
+
+    if (sortType == 0) {
+      query = query.orderBy('rating');
+    } else if (sortType == 1) {
+      query = query.orderBy('free');
+    } else {
+      query = query.orderBy('working');
     }
 
     return query.snapshots().map(
@@ -51,25 +73,39 @@ class RestaurantRepository {
   }
 
   Future<List<Restaurant>> getRestaurants(
-      {List<String>? restaurantIds, List<String>? preferenceIds}) async {
-    CollectionReference<Map<String, dynamic>> ref =
-        _firebaseFirestore.collection('restaurants');
+      {List<String>? restaurantIds,
+      List<String>? preferenceIds,
+      List<String>? categoryIds,
+      List<String>? cuisineIds,
+      List<String>? menuIds,
+      int? sortType}) async {
+    Query query = _firebaseFirestore.collection('restaurants');
 
-    var query;
-    if (restaurantIds != null && restaurantIds.isNotEmpty) {
-      query = query.where('id', whereIn: restaurantIds);
-    }
     if (preferenceIds != null && preferenceIds.isNotEmpty) {
       query = query.where('preferenceIds', arrayContainsAny: preferenceIds);
     }
-    if (preferenceIds == null ||
-        preferenceIds.isEmpty ||
-        restaurantIds == null ||
-        restaurantIds.isEmpty) {
-      query = ref;
+    if (categoryIds != null && categoryIds.isNotEmpty) {
+      query = query.where('categoryIds', arrayContainsAny: categoryIds);
+    }
+    if (cuisineIds != null && cuisineIds.isNotEmpty) {
+      query = query.where('cuisineIds', arrayContainsAny: cuisineIds);
+    }
+    if (menuIds != null && menuIds.isNotEmpty) {
+      query = query.where('menuIds', arrayContainsAny: menuIds);
     }
 
-    return query.get().docs.map((doc) => Restaurant.fromSnapshot(doc)).toList();
+    if (sortType == 0) {
+      query = query.orderBy('rating');
+    } else if (sortType == 1) {
+      query = query.orderBy('free');
+    } else {
+      query = query.orderBy('working');
+    }
+
+    return (await query.get())
+        .docs
+        .map((doc) => Restaurant.fromSnapshot(doc))
+        .toList();
   }
 
   Future<void> createRestaurant(Restaurant restaurant) async {

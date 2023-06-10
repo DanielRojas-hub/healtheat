@@ -65,7 +65,11 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       _restaurantSubscription = _restaurantRepository
           .streamRestaurants(
               restaurantIds: event.restaurantIds,
-              preferenceIds: event.preferenceIds)
+              preferenceIds: event.preferenceIds,
+              categoryIds: event.categoryIds,
+              cuisineIds: event.cuisineIds,
+              menuIds: event.menuIds,
+              sortType: event.sortType)
           .listen((restaurants) => add(_RestaurantsUpdated(restaurants)));
     } catch (_) {
       //TODO: catch
@@ -78,7 +82,11 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try {
       add(_RestaurantsUpdated(await _restaurantRepository.getRestaurants(
           restaurantIds: event.restaurantIds,
-          preferenceIds: event.preferenceIds)));
+          preferenceIds: event.preferenceIds,
+          categoryIds: event.categoryIds,
+          cuisineIds: event.cuisineIds,
+          menuIds: event.menuIds,
+          sortType: event.sortType)));
     } catch (_) {
       //TODO: catch
     }
