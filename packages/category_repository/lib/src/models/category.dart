@@ -1,24 +1,23 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:uuid/uuid.dart';
 
-class Categories extends Equatable {
+class Category extends Equatable {
   final String id;
   final String? displayName;
-  Categories({
+  Category({
     String? id,
     this.displayName,
   }) : id = id ?? Uuid().v4();
 
-  Categories copyWith({
+  Category copyWith({
     String? id,
     String? displayName,
   }) {
-    return Categories(
+    return Category(
       id: id ?? this.id,
       displayName: displayName ?? this.displayName,
     );
@@ -31,18 +30,18 @@ class Categories extends Equatable {
     };
   }
 
-  factory Categories.fromMap(Map<String, dynamic> map) {
-    return Categories(
+  factory Category.fromMap(Map<String, dynamic> map) {
+    return Category(
       id: map['id'] as String,
       displayName:
           map['displayName'] != null ? map['displayName'] as String : null,
     );
   }
 
-  factory Categories.fromSnapshot(DocumentSnapshot snapshot) {
+  factory Category.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>?;
 
-    return Categories(
+    return Category(
       id: snapshot.id,
       displayName: data?['displayName'],
     );
@@ -50,8 +49,8 @@ class Categories extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory Categories.fromJson(String source) =>
-      Categories.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Category.fromJson(String source) =>
+      Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;
