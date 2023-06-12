@@ -9,7 +9,7 @@ class MenuRepository {
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   Stream<List<Menu>> streamMenus() {
-    Query query = _firebaseFirestore.collection('menu');
+    Query query = _firebaseFirestore.collection('menus');
 
     return query.snapshots().map(
           (snapshot) => snapshot.docs
@@ -21,7 +21,7 @@ class MenuRepository {
 
   Stream<Menu> streamMenu(String menuId) {
     DocumentReference<Map<String, dynamic>> reference =
-        _firebaseFirestore.collection('menu').doc(menuId);
+        _firebaseFirestore.collection('menus').doc(menuId);
 
     return reference.snapshots().map(
           (snapshot) => Menu.fromSnapshot(snapshot),
@@ -30,12 +30,12 @@ class MenuRepository {
 
   Future<Menu> getMenu(String menuId) async {
     final docSnap =
-        await _firebaseFirestore.collection('menu').doc(menuId).get();
+        await _firebaseFirestore.collection('menus').doc(menuId).get();
     return Menu.fromSnapshot(docSnap);
   }
 
   Future<List<Menu>> getMenus() async {
-    Query query = _firebaseFirestore.collection('menu');
+    Query query = _firebaseFirestore.collection('menus');
 
     return (await query.get())
         .docs

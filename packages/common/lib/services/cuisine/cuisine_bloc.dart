@@ -32,7 +32,6 @@ class CuisineBloc extends Bloc<CuisineEvent, CuisineState> {
   void _onStreamCuisine(StreamCuisine event, Emitter<CuisineState> emit) {
     _cuisineSubscription?.cancel();
     try {
-      // if (event.categoryId.isEmpty) return;
       _cuisineSubscription = _cuisineRepository
           .streamCuisine(event.cuisineId)
           .listen((cuisine) => add(_CuisineUpdated(cuisine)));

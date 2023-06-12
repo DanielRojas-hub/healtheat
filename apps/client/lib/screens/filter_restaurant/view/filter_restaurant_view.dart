@@ -38,7 +38,7 @@ class FilterRestaurantView extends StatelessWidget {
           const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
           const SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterWrap()),
+            sliver: SliverToBoxAdapter(child: CategoryWrap()),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverPadding(
@@ -51,7 +51,7 @@ class FilterRestaurantView extends StatelessWidget {
           const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
           const SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterWrap()),
+            sliver: SliverToBoxAdapter(child: CuisineWrap()),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverPadding(
@@ -64,7 +64,7 @@ class FilterRestaurantView extends StatelessWidget {
           const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
           const SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterWrap()),
+            sliver: SliverToBoxAdapter(child: MenuWrap()),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverPadding(

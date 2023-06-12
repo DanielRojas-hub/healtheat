@@ -18,6 +18,7 @@ class FilterRestaurantPage extends StatelessWidget {
       BlocProvider<MenuBloc>(
         create: (context) => MenuBloc()..add(const StreamMenus()),
       ),
+      BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
     ], child: const FilterRestaurantView());
   }
 }

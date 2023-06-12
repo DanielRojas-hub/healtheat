@@ -9,7 +9,7 @@ class CuisineRepository {
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   Stream<List<Cuisine>> streamCuisines() {
-    Query query = _firebaseFirestore.collection('cuisine');
+    Query query = _firebaseFirestore.collection('cuisines');
 
     return query.snapshots().map(
           (snapshot) => snapshot.docs
@@ -21,7 +21,7 @@ class CuisineRepository {
 
   Stream<Cuisine> streamCuisine(String cuisineId) {
     DocumentReference<Map<String, dynamic>> reference =
-        _firebaseFirestore.collection('cuisine').doc(cuisineId);
+        _firebaseFirestore.collection('cuisines').doc(cuisineId);
 
     return reference.snapshots().map(
           (snapshot) => Cuisine.fromSnapshot(snapshot),
@@ -30,12 +30,12 @@ class CuisineRepository {
 
   Future<Cuisine> getCuisine(String cuisineId) async {
     final docSnap =
-        await _firebaseFirestore.collection('cuisine').doc(cuisineId).get();
+        await _firebaseFirestore.collection('cuisines').doc(cuisineId).get();
     return Cuisine.fromSnapshot(docSnap);
   }
 
   Future<List<Cuisine>> getCuisines() async {
-    Query query = _firebaseFirestore.collection('cuisine');
+    Query query = _firebaseFirestore.collection('cuisines');
 
     return (await query.get())
         .docs
