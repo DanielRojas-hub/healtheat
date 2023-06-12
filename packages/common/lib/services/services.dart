@@ -5,3 +5,6 @@ export './preference/preference_bloc.dart';
 export './restaurant/restaurant_bloc.dart';
 export './user_preference/user_preference_bloc.dart';
 export './filter/filter_bloc.dart';
+export './category/category_bloc.dart';
+export './cuisine/cuisine_bloc.dart';
+export './menu/menu_bloc.dart';
