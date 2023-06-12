@@ -22,3 +22,4 @@ export './skelton.dart';
 export './total_card.dart';
 export './cards/cards.dart';
 export './custom_text_field.dart';
+export './custom_preference.dart';
