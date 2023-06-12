@@ -3,7 +3,6 @@ import 'package:common/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '';
 import '../preview.dart';
 
 class PreviewView extends StatelessWidget {
@@ -18,7 +17,7 @@ class PreviewView extends StatelessWidget {
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
-          // const RestaurantAppBar(),
+          const RestaurantAppBar(),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
           const SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),

@@ -10,24 +10,31 @@ class CustomTextField extends StatelessWidget {
       this.readOnly,
       this.prefixText,
       this.textInputType,
-      this.maxLines});
+      this.maxLines,
+      this.onChanged,
+      this.errorText});
+
   final Icon? icon;
   final VoidCallback? onTap;
   final bool? readOnly;
   final String? prefixText;
   final TextInputType? textInputType;
   final int? maxLines;
+  final ValueChanged<String>? onChanged;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLines ?? 1,
       onTap: onTap,
+      onChanged: onChanged,
       readOnly: readOnly ?? false,
       keyboardType: textInputType ?? TextInputType.text,
       decoration: inputDecorationBorderMethod(context).copyWith(
         filled: true,
         fillColor: Theme.of(context).cardColor,
+        errorText: errorText,
         prefixIcon: prefixText != null
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),

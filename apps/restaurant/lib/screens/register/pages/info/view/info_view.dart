@@ -1,11 +1,12 @@
-import 'package:common/utils/constants.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:restaurant/screens/register/cubit/register_cubit.dart';
 
 class InfoView extends StatefulWidget {
   const InfoView({super.key});
@@ -39,9 +40,10 @@ class _InfoViewState extends State<InfoView> {
           const SizedBox(height: 15),
           Text("Name", style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 5),
-          const CustomTextField(
-            icon: Icon(Icons.storefront, size: 20),
-          ),
+          _NameInput(),
+          // const CustomTextField(
+          //   icon: Icon(Icons.storefront, size: 20),
+          // ),
           const SizedBox(height: 20),
           Text("Address", style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 5),
@@ -105,6 +107,23 @@ class _InfoViewState extends State<InfoView> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _NameInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RegisterCubit, RegisterState>(
+      buildWhen: (previous, current) => previous.name != current.name,
+      builder: (context, state) {
+        return CustomTextField(
+          // key: const Key('registerForm_nameInput_textField'),
+          icon: const Icon(Icons.storefront, size: 20),
+          onChanged: (name) => context.read<RegisterCubit>().nameChanged(name),
+          errorText: state.name.displayError != null ? 'invalid name' : null,
+        );
+      },
     );
   }
 }
