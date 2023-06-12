@@ -11,13 +11,13 @@ TextTheme textThemeMethod(ThemeData base) => base.textTheme.merge(
         headlineMedium:
             GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.w700),
         headlineSmall:
-            GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
+            GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w500),
         titleLarge:
             GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w600),
         titleMedium:
             GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w600),
         titleSmall:
-            GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600),
+            GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400),
         bodyLarge: GoogleFonts.poppins(fontSize: 16, color: Colors.black87),
         bodyMedium: GoogleFonts.poppins(fontSize: 15, color: Colors.black87),
         bodySmall: GoogleFonts.poppins(fontSize: 13, color: Colors.black87),

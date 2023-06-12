@@ -28,20 +28,15 @@ class _InfoViewState extends State<InfoView> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        // padding: const EdgeInsets.symmetric(horizontal: 30),
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
-          Center(
-            child: Text("HealthEat",
-                style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    )),
-          ),
-          const SizedBox(height: 50),
+          Text("Basic Information",
+              style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 15),
           Text("Name", style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 5),
           const CustomTextField(
@@ -88,7 +83,7 @@ class _InfoViewState extends State<InfoView> {
           CustomTextField(
             readOnly: true,
             prefixText: 'Closing time',
-            icon: const Icon(Icons.schedule, size: 20),
+            // icon: const Icon(Icons.schedule, size: 20),
             onTap: () => context.goNamed(RouteName.timePicker,
                 queryParameters: {'type': 'close'}),
           ),
@@ -96,20 +91,12 @@ class _InfoViewState extends State<InfoView> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              CustomIconButton(
-                onTap: () {
+              ElevatedButton(
+                onPressed: () {
                   _selectImage();
                 },
-                iconData: Icons.add_a_photo,
-                borderRadius: BorderRadius.circular(100),
-                padding: const EdgeInsets.all(15),
+                child: const Text('Add image'),
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     _selectImage();
-              //   },
-              //   child: const Text('Add image'),
-              // ),
               if (_image != null) ...[
                 const SizedBox(height: 10),
                 Image.file(_image!),

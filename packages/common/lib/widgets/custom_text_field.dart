@@ -26,10 +26,25 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly ?? false,
       keyboardType: textInputType ?? TextInputType.text,
       decoration: inputDecorationBorderMethod(context).copyWith(
-        prefixText: prefixText,
         filled: true,
         fillColor: Theme.of(context).cardColor,
-        prefixIcon: icon,
+        prefixIcon: prefixText != null
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(prefixText!,
+                        style: Theme.of(context).textTheme.labelLarge),
+                  ],
+                ),
+              )
+            : icon != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: icon,
+                  )
+                : null,
       ),
     );
   }
