@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:restaurant/screens/add_food/widgets/widgets.dart';
 
 class InformationView extends StatefulWidget {
   const InformationView({Key? key}) : super(key: key);
@@ -39,52 +39,19 @@ class _InformationViewState extends State<InformationView> {
             'Name',
             style: TextStyle(color: Theme.of(context).disabledColor),
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40),
-              ),
-            ),
-          ),
+          const DisplayNameInput(),
           const SizedBox(height: 30),
           Text(
             'Price',
             style: TextStyle(color: Theme.of(context).disabledColor),
           ),
-          TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              prefixIcon: const Icon(Icons.attach_money),
-            ),
-          ),
+          const PriceInput(),
           const SizedBox(height: 30),
           Text(
             'Description',
             style: TextStyle(color: Theme.of(context).disabledColor),
           ),
-          TextFormField(
-            maxLines: 4,
-            decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
+          const DescriptionInput(),
           const SizedBox(height: 30),
           Column(
             children: [
@@ -92,7 +59,7 @@ class _InformationViewState extends State<InformationView> {
                 onPressed: () {
                   _selectImage();
                 },
-                child: Text('Adjuntar imagen'),
+                child: const Text('Adjuntar imagen'),
               ),
               if (_image != null) ...[
                 const SizedBox(height: 10),

@@ -11,46 +11,71 @@ class AddFoodView extends StatefulWidget {
 }
 
 class _AddFoodViewState extends State<AddFoodView> {
-  final List<Step> _steps = const [
-    Step(
-      title: Text('Paso 1'),
-      content: InformationPage(),
-    ),
-    Step(
-      title: Text('Paso 2'),
-      content: CategoryPage(),
-    ),
-    Step(
-      title: Text('Paso 3'),
-      content: PrevisualizationPage(),
-    ),
-  ];
-
   int _currentStep = 0;
+
+  List<Step> getSteps() => [
+        Step(
+            title: const Text(
+              'Information',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.blueGrey,
+              ),
+            ),
+            content: const InformationPage(),
+            isActive: _currentStep >= 0),
+        Step(
+            title: const Text(
+              'Categories',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.blueGrey,
+              ),
+            ),
+            content: const CategoryPage(),
+            isActive: _currentStep >= 1),
+        Step(
+            title: const Text(
+              'Previsualization',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.blueGrey,
+              ),
+            ),
+            content: const PrevisualizationPage(),
+            isActive: _currentStep >= 2),
+      ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 249, 249, 249),
+        backgroundColor: const Color.fromARGB(255, 249, 249, 249),
         body: Stepper(
           currentStep: _currentStep,
-          steps: _steps,
+          steps: getSteps(),
           type: StepperType.horizontal,
           onStepContinue: () {
-            if (_currentStep < _steps.length - 1) {
+            if (_currentStep < getSteps().length - 1) {
               setState(() {
                 _currentStep++;
               });
             }
           },
-          onStepCancel: () {
-            if (_currentStep > 0) {
-              setState(() {
-                _currentStep--;
-              });
-            }
-          },
+          onStepCancel: _currentStep == 0
+              ? null
+              : () {
+                  if (_currentStep > 0) {
+                    setState(() {
+                      _currentStep--;
+                    });
+                  }
+                },
+          onStepTapped: (value) => setState(
+            () {
+              _currentStep = value;
+            },
+          ),
         ),
       ),
     );
