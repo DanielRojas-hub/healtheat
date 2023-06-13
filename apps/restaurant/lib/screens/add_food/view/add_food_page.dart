@@ -9,7 +9,7 @@ class AddFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AddFoodCubit(),
+      create: (context) => AddFoodCubit(),
       child: const AddFoodView(),
     );
   }

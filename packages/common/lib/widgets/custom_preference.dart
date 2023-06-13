@@ -26,7 +26,7 @@ class OptionPreference extends StatelessWidget {
           ? Border.all(color: Theme.of(context).primaryColor, width: 2)
           : null,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
         child: Column(children: [
           const ImageContainer(
               imageUrl:
@@ -36,7 +36,7 @@ class OptionPreference extends StatelessWidget {
               height: 45,
               width: 45,
               isCircle: true),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

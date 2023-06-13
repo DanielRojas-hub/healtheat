@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:food_repository/food_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -9,8 +11,13 @@ part 'add_food_state.dart';
 
 class AddFoodCubit extends Cubit<AddFoodState> {
   AddFoodCubit() : super(const AddFoodState());
-
   // final FoodRepository foodRepository;
+  void clearCubit() {
+    emit(const AddFoodState(isRestarting: true));
+    Future.delayed(const Duration(seconds: 3), () {
+      emit(const AddFoodState(isRestarting: false));
+    });
+  }
 
   void nameChanged(String value) {
     final displayName = NotEmptyString.dirty(value);
@@ -51,6 +58,12 @@ class AddFoodCubit extends Cubit<AddFoodState> {
           state.displayName,
         ]),
       ),
+    );
+  }
+
+  void imageChanged(File? image) {
+    emit(
+      state.copyWith(image: image),
     );
   }
 }
