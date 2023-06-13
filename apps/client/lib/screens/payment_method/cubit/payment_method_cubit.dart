@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paypal/flutter_paypal.dart';
+//import 'package:flutter_paypal/flutter_paypal.dart';
 
 enum PaymentMethod { applePay, paypal, creditCard }
 
@@ -16,7 +16,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
         print('Apple Pay');
         break;
       case PaymentMethod.paypal:
-        Navigator.of(context).push(
+        /*Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) => UsePaypal(
                 sandboxMode: true,
@@ -62,7 +62,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
                                 "postal_code": "73301",
                                 "phone": "+00000000",
                                 "state": "Texas"
-                              },*/
+                              },
                     }
                   }
                 ],
@@ -75,9 +75,9 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
                 },
                 onCancel: (params) {
                   print('cancelled: $params');
-                }),
+                }),*/
           ),
-        );
+        );*/
         break;
       case PaymentMethod.creditCard:
         print('Credit Card');
