@@ -1,11 +1,19 @@
 part of 'filter_bloc.dart';
 
 class FilterState extends Equatable {
-  const FilterState(
-      {this.cuisineList = const [],
-      this.menuList = const [],
-      this.sortTypeList = const [],
-      this.categoryList = const []});
+  FilterState(
+      // {required this.cuisineList,
+      // required this.menuList,
+      // required this.sortTypeList,
+      // required this.categoryList});
+      {List<String>? cuisineList,
+      List<String>? menuList,
+      List<int>? sortTypeList,
+      List<String>? categoryList})
+      : categoryList = categoryList ?? List.empty(),
+        menuList = menuList ?? List.empty(),
+        cuisineList = cuisineList ?? List.empty(),
+        sortTypeList = sortTypeList ?? List.empty();
 
   final List<String> categoryList;
   final List<String> cuisineList;
@@ -26,5 +34,6 @@ class FilterState extends Equatable {
   }
 
   @override
-  List<Object> get props => [categoryList, cuisineList, menuList, sortTypeList];
+  List<Object?> get props =>
+      [categoryList, cuisineList, menuList, sortTypeList];
 }

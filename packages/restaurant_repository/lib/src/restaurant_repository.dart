@@ -30,13 +30,13 @@ class RestaurantRepository {
       query = query.where('menuIds', arrayContainsAny: menuIds);
     }
 
-    if (sortType == 0) {
-      query = query.orderBy('rating');
-    } else if (sortType == 1) {
-      query = query.orderBy('free');
-    } else {
-      query = query.orderBy('working');
-    }
+    // if (sortType == 0) {
+    //   query = query.orderBy('rating');
+    // } else if (sortType == 1) {
+    //   query = query.orderBy('free');
+    // } else {
+    //   query = query.orderBy('working');
+    // }
 
     return query.snapshots().map(
           (snapshot) => snapshot.docs
@@ -72,35 +72,36 @@ class RestaurantRepository {
     return Restaurant.fromSnapshot(docSnap);
   }
 
-  Future<List<Restaurant>> getRestaurants(
-      {List<String>? restaurantIds,
-      List<String>? preferenceIds,
-      List<String>? categoryIds,
-      List<String>? cuisineIds,
-      List<String>? menuIds,
-      int? sortType}) async {
+  Future<List<Restaurant>> getRestaurants({
+    List<String>? restaurantIds,
+    List<String>? preferenceIds,
+    // List<String>? categoryIds,
+    // List<String>? cuisineIds,
+    // List<String>? menuIds,
+    // int? sortType
+  }) async {
     Query query = _firebaseFirestore.collection('restaurants');
 
     if (preferenceIds != null && preferenceIds.isNotEmpty) {
       query = query.where('preferenceIds', arrayContainsAny: preferenceIds);
     }
-    if (categoryIds != null && categoryIds.isNotEmpty) {
-      query = query.where('categoryIds', arrayContainsAny: categoryIds);
-    }
-    if (cuisineIds != null && cuisineIds.isNotEmpty) {
-      query = query.where('cuisineIds', arrayContainsAny: cuisineIds);
-    }
-    if (menuIds != null && menuIds.isNotEmpty) {
-      query = query.where('menuIds', arrayContainsAny: menuIds);
-    }
+    // if (categoryIds != null && categoryIds.isNotEmpty) {
+    //   query = query.where('categoryIds', arrayContainsAny: categoryIds);
+    // }
+    // if (cuisineIds != null && cuisineIds.isNotEmpty) {
+    //   query = query.where('cuisineIds', arrayContainsAny: cuisineIds);
+    // }
+    // if (menuIds != null && menuIds.isNotEmpty) {
+    //   query = query.where('menuIds', arrayContainsAny: menuIds);
+    // }
 
-    if (sortType == 0) {
-      query = query.orderBy('rating');
-    } else if (sortType == 1) {
-      query = query.orderBy('free');
-    } else {
-      query = query.orderBy('working');
-    }
+    // if (sortType == 0) {
+    //   query = query.orderBy('rating');
+    // } else if (sortType == 1) {
+    //   query = query.orderBy('free');
+    // } else {
+    //   query = query.orderBy('working');
+    // }
 
     return (await query.get())
         .docs

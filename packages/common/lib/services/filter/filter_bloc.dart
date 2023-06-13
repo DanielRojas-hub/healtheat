@@ -5,7 +5,14 @@ part 'filter_event.dart';
 part 'filter_state.dart';
 
 class FilterBloc extends Bloc<FilterEvent, FilterState> {
-  FilterBloc() : super(const FilterState()) {
+  FilterBloc(
+      {List<String>? categoryIds,
+      List<String>? cuisineIds,
+      List<String>? menuIds})
+      : super(FilterState(
+            categoryList: categoryIds,
+            cuisineList: cuisineIds,
+            menuList: menuIds)) {
     on<AddCategory>(onAddCategory);
     on<RemoveCategory>(onRemoveCategory);
     on<AddCuisine>(onAddCuisine);
@@ -19,6 +26,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   // final PreferenceRepository _preferenceRepository;
 
   void onAddCategory(AddCategory event, Emitter<FilterState> emit) async {
+    if (state.categoryList.isEmpty) {
+      return emit(state.copyWith(categoryList: [event.categoryId]));
+    }
+
     final copyList = List<String>.from(state.categoryList);
     copyList.add(event.categoryId);
     emit(state.copyWith(categoryList: copyList));
@@ -31,6 +42,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   }
 
   void onAddCuisine(AddCuisine event, Emitter<FilterState> emit) async {
+    if (state.cuisineList.isEmpty) {
+      return emit(state.copyWith(cuisineList: [event.cuisineId]));
+    }
     final copyList = List<String>.from(state.cuisineList);
     copyList.add(event.cuisineId);
     emit(state.copyWith(cuisineList: copyList));
@@ -43,6 +57,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   }
 
   void onAddMenu(AddMenu event, Emitter<FilterState> emit) async {
+    if (state.menuList.isEmpty) {
+      return emit(state.copyWith(menuList: [event.menuId]));
+    }
+
     final copyList = List<String>.from(state.menuList);
     copyList.add(event.menuId);
     emit(state.copyWith(menuList: copyList));
@@ -55,6 +73,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   }
 
   void onAddSortType(AddSortType event, Emitter<FilterState> emit) async {
+    if (state.sortTypeList.isEmpty) {
+      return emit(state.copyWith(sortTypeList: [event.sortTypeId]));
+    }
     final copyList = List<int>.from(state.sortTypeList);
     copyList.add(event.sortTypeId);
     emit(state.copyWith(sortTypeList: copyList));

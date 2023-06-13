@@ -11,7 +11,7 @@ class UserPreferenceBloc
       : /* _preferenceRepository = preferenceRepository ?? PreferenceRepository(), */
         super(const UserPreferenceState.loading()) {
     on<GetUserPreference>(onGetUserPreference);
-    on<UpdateUserPreference>(onUpdateCart);
+    on<UpdateUserPreference>(onUpdateUserPreference);
     /* on<ClearUserPreference>(onClearCart);
     on<AddPetition>(onAddPetition);
     on<RemovePetition>(onRemovePetition); */
@@ -33,7 +33,7 @@ class UserPreferenceBloc
     add(UpdateUserPreference(userPreferences));
   }
 
-  Future<void> onUpdateCart(
+  Future<void> onUpdateUserPreference(
       UpdateUserPreference event, Emitter<UserPreferenceState> emit) async {
     // await _preferenceRepository.setUserPreferences(
     //     userPreferences: event.userPreferences);

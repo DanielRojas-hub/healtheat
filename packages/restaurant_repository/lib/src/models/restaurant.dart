@@ -10,6 +10,10 @@ class Restaurant extends Equatable {
   final String id;
   final String? displayName;
   final List<String>? preferenceIds;
+  final List<String>? menuIds;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+
   final String? address;
   final String? phoneNumber;
   final num? rating;
@@ -23,6 +27,9 @@ class Restaurant extends Equatable {
     String? id,
     required this.displayName,
     required this.preferenceIds,
+    required this.menuIds,
+    required this.categoryIds,
+    required this.cuisineIds,
     required this.address,
     required this.phoneNumber,
     required this.rating,
@@ -37,6 +44,9 @@ class Restaurant extends Equatable {
     String? id,
     String? displayName,
     List<String>? preferenceIds,
+    List<String>? menuIds,
+    List<String>? categoryIds,
+    List<String>? cuisineIds,
     String? address,
     String? phoneNumber,
     num? rating,
@@ -50,6 +60,9 @@ class Restaurant extends Equatable {
       id: id ?? this.id,
       displayName: displayName ?? this.displayName,
       preferenceIds: preferenceIds ?? this.preferenceIds,
+      menuIds: menuIds ?? this.menuIds,
+      categoryIds: categoryIds ?? this.categoryIds,
+      cuisineIds: cuisineIds ?? this.cuisineIds,
       address: address ?? this.address,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       rating: rating ?? this.rating,
@@ -66,6 +79,9 @@ class Restaurant extends Equatable {
       'id': id,
       'displayName': displayName,
       'preferenceIds': preferenceIds,
+      'menuIds': menuIds,
+      'categoryIds': categoryIds,
+      'cuisineIds': cuisineIds,
       'address': address,
       'phoneNumber': phoneNumber,
       'rating': rating,
@@ -82,9 +98,13 @@ class Restaurant extends Equatable {
       id: map['id'] as String,
       displayName:
           map['displayName'] != null ? map['displayName'] as String : null,
-      preferenceIds: map['preferenceIds'] != null
-          ? List<String>.from(map['preferenceIds'])
-          : null,
+      preferenceIds:
+          map['preferenceIds'] != null ? List.from(map['preferenceIds']) : null,
+      menuIds: map['menuIds'] != null ? List.from(map['menuIds']) : null,
+      categoryIds:
+          map['categoryIds'] != null ? List.from(map['categoryIds']) : null,
+      cuisineIds:
+          map['cuisineIds'] != null ? List.from(map['cuisineIds']) : null,
       address: map['address'] != null ? map['address'] as String : null,
       phoneNumber:
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
@@ -116,6 +136,9 @@ class Restaurant extends Equatable {
       imageUrl: data?['imageUrl'],
       deliveryTimeRange: data?['deliveryTimeRange'],
       deliveryPriceRange: data?['deliveryPriceRange'],
+      categoryIds: List<String>.from(data?['categoryIds'] ?? []),
+      menuIds: List<String>.from(data?['menuIds'] ?? []),
+      cuisineIds: List<String>.from(data?['cuisineIds'] ?? []),
     );
   }
 
@@ -170,6 +193,9 @@ class Restaurant extends Equatable {
       id,
       displayName,
       preferenceIds,
+      menuIds,
+      categoryIds,
+      cuisineIds,
       address,
       phoneNumber,
       rating,
