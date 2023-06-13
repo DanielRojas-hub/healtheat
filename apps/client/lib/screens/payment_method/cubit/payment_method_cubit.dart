@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cart_repository/cart_repository.dart';
+import 'package:common/services/cart/cart_bloc.dart';
 import 'package:common/services/food/food_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:food_repository/food_repository.dart';
 
@@ -35,7 +37,6 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
   void select(PaymentMethod paymentMethod) => emit(paymentMethod);
 
   Future<void> submit(context, Cart cart) async {
-    //final num total = calculateTotal(cart, cart.petitions);
     final foodRepository = FoodRepository();
     final foods = await foodRepository.getFoods(cart.restaurantId);
     final num total = calculateTotal(foods, cart.petitions);
@@ -97,6 +98,8 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
                 note: "Contact us for any questions on your order.",
                 onSuccess: (Map params) async {
                   print("onSuccess: $params");
+                  Navigator.of(context).pop();
+                  context.read<CartBloc>().add(ClearCart());
                 },
                 onError: (error) {
                   print("onError: $error");

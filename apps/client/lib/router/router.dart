@@ -29,7 +29,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/payment_method',
+    initialLocation: '/home',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
