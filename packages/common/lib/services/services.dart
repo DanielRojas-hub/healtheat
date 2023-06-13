@@ -4,3 +4,4 @@ export './food/food_bloc.dart';
 export './preference/preference_bloc.dart';
 export './restaurant/restaurant_bloc.dart';
 export './user_preference/user_preference_bloc.dart';
+export './authentication/authentication_bloc.dart';

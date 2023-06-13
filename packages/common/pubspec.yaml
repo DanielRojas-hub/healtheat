@@ -20,6 +20,10 @@ dependencies:
     path: ../cart_repository
   preference_repository:
     path: ../preference_repository
+  authentication_repository:
+    path: ../authentication_repository
+  user_repository:
+    path: ../user_repository
   collection: ^1.17.1
   google_fonts: ^5.0.0
   dotted_line: ^3.1.0
