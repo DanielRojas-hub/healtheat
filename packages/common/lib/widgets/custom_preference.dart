@@ -41,9 +41,10 @@ class OptionPreference extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DefaultTextStyle.merge(
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          isSelected ? Theme.of(context).primaryColor : null),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color:
+                            isSelected ? Theme.of(context).primaryColor : null,
+                      ),
                   child: title),
               // DefaultTextStyle.merge(
               //     style: Theme.of(context).textTheme.labelMedium,
