@@ -54,8 +54,20 @@ class AppRouter {
                 path: '/home',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: HomePage()),
+                pageBuilder: (context, state) {
+                  final categories =
+                      state.queryParameters['categories']?.split(',');
+                  final cuisines =
+                      state.queryParameters['cuisines']?.split(',');
+                  final menus = state.queryParameters['menus']?.split(',');
+
+                  return NoTransitionPage(
+                    child: HomePage(
+                        categories: categories,
+                        cuisines: cuisines,
+                        menus: menus),
+                  );
+                },
                 routes: [
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
@@ -124,8 +136,15 @@ class AppRouter {
       path: 'filter',
       parentNavigatorKey: rootNavigatorKey,
       name: filterName,
-      pageBuilder: (context, state) =>
-          const ModalBottomSheetPage(child: FilterRestaurantPage()),
+      pageBuilder: (context, state) {
+        final categories = state.queryParameters['categories']?.split(',');
+        final cuisines = state.queryParameters['cuisines']?.split(',');
+        final menus = state.queryParameters['menus']?.split(',');
+
+        return ModalBottomSheetPage(
+            child: FilterRestaurantPage(
+                categories: categories, cuisines: cuisines, menus: menus));
+      },
     );
   }
 
