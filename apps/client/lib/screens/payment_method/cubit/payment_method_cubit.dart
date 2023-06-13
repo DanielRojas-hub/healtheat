@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cart_repository/cart_repository.dart';
 import 'package:common/services/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
       : _foodRepository = foodRepository ?? FoodRepository(),
         super(PaymentMethod.applePay);
   final FoodRepository _foodRepository;
+  num total = 0;
 
   num calculateTotal(List<Food> foods, List<Petition> petitions) {
     num sum = 0;
@@ -24,6 +27,7 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
         }
       }
     }
+    print('sum: $sum');
     return sum;
   }
 
@@ -34,7 +38,19 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
         cart.petitions.length, (index) => cart.petitions[index].foodId);
     final foods =
         await _foodRepository.getFoods(cart.restaurantId, foodIds: foodIds);
-    final num total = calculateTotal(foods, cart.petitions);
+    List<dynamic> foodsList = [];
+    for (var i in foods) {
+      foodsList.add({
+        "name": i.displayName,
+        "quantity": cart.petitions
+            .firstWhere((element) => element.foodId == i.id)
+            .quantity,
+        "price": i.price.toString(),
+        "currency": "USD"
+      });
+    }
+    total = calculateTotal(foods, cart.petitions);
+    print(cart.petitions);
     switch (state) {
       case PaymentMethod.applePay:
         print('Apple Pay');
@@ -55,26 +71,19 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
                     "amount": {
                       "total": total.toString(),
                       "currency": "USD",
-                      /*"details": {
-                        "subtotal": '10.12',
+                      "details": {
+                        "subtotal": total.toString(),
                         "shipping": '0',
                         "shipping_discount": 0
-                      }*/
+                      }
                     },
-                    "description": "The payment transaction description.",
+                    "description": "Compra HealthEat",
                     // "payment_options": {
                     //   "allowed_payment_method":
                     //       "INSTANT_FUNDING_SOURCE"
                     // },
-                    "item_list": const {
-                      "items": [
-                        {
-                          "name": "A demo product",
-                          "quantity": 1,
-                          "price": '10.12',
-                          "currency": "USD"
-                        }
-                      ],
+                    "item_list": {
+                      "items": foodsList,
 
                       // shipping address is not required though
                       /*"shipping_address": {
