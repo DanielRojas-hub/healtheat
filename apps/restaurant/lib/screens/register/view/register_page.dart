@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/screens/register/cubit/cuisine/cuisine_controller_cubit.dart';
-import 'package:restaurant/screens/register/cubit/register/register_cubit.dart';
 import 'package:restaurant/screens/register/register.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -12,9 +10,6 @@ class RegisterPage extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider<RegisterCubit>(
         create: (context) => RegisterCubit(),
-      ),
-      BlocProvider<CuisineControllerCubit>(
-        create: (context) => CuisineControllerCubit(),
       ),
     ], child: const RegisterView());
   }

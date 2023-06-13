@@ -8,20 +8,20 @@ class OptionPreference extends StatelessWidget {
     required this.title,
     this.subtitle,
     required this.isSelected,
+    this.onTap,
   });
 
   final Widget title;
   final Widget? subtitle;
   final bool isSelected;
+  final VoidCallback? onTap;
   // final Preference preference;
 
   @override
   Widget build(BuildContext context) {
     return BaseCard(
       width: 70,
-      // onTap: () => isSelected
-      //     ? context.read<SelectPreferencesCubit>().removePreference(preference)
-      //     : context.read<SelectPreferencesCubit>().insertPreference(preference),
+      onTap: onTap,
       border: isSelected
           ? Border.all(color: Theme.of(context).primaryColor, width: 2)
           : null,

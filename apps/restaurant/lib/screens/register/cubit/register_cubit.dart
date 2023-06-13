@@ -106,4 +106,16 @@ class RegisterCubit extends Cubit<RegisterState> {
       ]),
     ));
   }
+
+  void addCuisine(String cuisineId) {
+    final List<String> cuisineIds = List.from(state.cuisineIds);
+    cuisineIds.add(cuisineId);
+    emit(state.copyWith(cuisineIds: cuisineIds));
+  }
+
+  void removeCuisine(String cuisineId) {
+    final List<String> cuisineIds = List.from(state.cuisineIds);
+    cuisineIds.remove(cuisineId);
+    emit(state.copyWith(cuisineIds: cuisineIds));
+  }
 }

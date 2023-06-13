@@ -1,7 +1,8 @@
+import 'package:common/services/services.dart';
 import 'package:common/widgets/custom_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/screens/register/cubit/cuisine/cuisine_controller_cubit.dart';
+import 'package:restaurant/screens/register/register.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -41,7 +42,7 @@ class AllCuisines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CuisineControllerCubit, CuisineControllerState>(
+    return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final selectedCuisineIds = state.cuisineIds;
         return GridView.count(
@@ -70,22 +71,39 @@ class RecommendedCuisines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CuisineControllerCubit, CuisineControllerState>(
+    return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final selectedCuisineIds = state.cuisineIds;
-        return GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 3,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 25,
-          children: List.generate(
-            3,
-            (index) => const OptionPreference(
-              isSelected: false,
-              title: Text("Pizza"),
-            ),
-          ),
+        return BlocBuilder<CuisineBloc, CuisineState>(
+          builder: (context, state) {
+            if (state is CuisinesLoaded) {
+              final cuisines = state.cuisines;
+              return GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 3,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 25,
+                children: List.generate(cuisines.length, (index) {
+                  final cuisine = cuisines[index];
+                  final isSelected = selectedCuisineIds.contains(cuisine.id);
+                  return OptionPreference(
+                    isSelected: isSelected,
+                    title: Text(cuisine.displayName.toString()),
+                    onTap: () => isSelected
+                        ? context
+                            .read<RegisterCubit>()
+                            .removeCuisine(cuisine.id)
+                        : context.read<RegisterCubit>().addCuisine(cuisine.id),
+                  );
+                }),
+              );
+            }
+            if (state is CuisineLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return const SizedBox();
+          },
         );
       },
     );

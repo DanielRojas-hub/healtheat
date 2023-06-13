@@ -11,7 +11,8 @@ final class RegisterState extends Equatable {
     this.phone = const IsNumeric.pure(),
     this.openingTime = const NotEmptyString.pure(),
     this.closingTime = const NotEmptyString.pure(),
-  });
+    List<String>? cuisineIds,
+  }) : cuisineIds = cuisineIds ?? const [];
   final String? errorMessage;
   final FormzSubmissionStatus status;
   final bool isValid;
@@ -21,6 +22,7 @@ final class RegisterState extends Equatable {
   final IsNumeric phone;
   final NotEmptyString openingTime;
   final NotEmptyString closingTime;
+  final List<String> cuisineIds;
 
   @override
   List<Object?> get props => [
@@ -30,6 +32,7 @@ final class RegisterState extends Equatable {
         phone,
         openingTime,
         closingTime,
+        cuisineIds,
         errorMessage,
         status,
         isValid
@@ -45,6 +48,7 @@ final class RegisterState extends Equatable {
     FormzSubmissionStatus? status,
     String? errorMessage,
     bool? isValid,
+    List<String>? cuisineIds,
   }) {
     return RegisterState(
       name: name ?? this.name,
@@ -56,6 +60,7 @@ final class RegisterState extends Equatable {
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       isValid: isValid ?? this.isValid,
+      cuisineIds: cuisineIds ?? this.cuisineIds,
     );
   }
 }

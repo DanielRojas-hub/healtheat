@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
-import 'package:restaurant/screens/register/cubit/register/register_cubit.dart';
+import 'package:restaurant/screens/register/cubit/register_cubit.dart';
 
 class OpeningTimeInput extends StatelessWidget {
   const OpeningTimeInput({super.key});

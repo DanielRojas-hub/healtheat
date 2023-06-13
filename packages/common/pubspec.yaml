@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -20,6 +20,13 @@ dependencies:
     path: ../cart_repository
   preference_repository:
     path: ../preference_repository
+  menu_repository:
+    path: ../menu_repository
+  cuisine_repository:
+    path: ../cuisine_repository
+  category_repository:
+    path: ../category_repository
+
   collection: ^1.17.1
   google_fonts: ^5.0.0
   dotted_line: ^3.1.0
