@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
-import 'package:restaurant/screens/register/pages/preview/view/preview_page.dart';
 import 'package:restaurant/screens/register/register.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 

@@ -28,4 +28,5 @@ class RouteName {
   static const orderDetail = 'order_detail';
 
   static const addFoodRestaurant = 'add_food';
+  static const paymentMethod = 'payment_method';
 }

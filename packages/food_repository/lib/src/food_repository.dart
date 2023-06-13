@@ -48,22 +48,18 @@ class FoodRepository {
 
   Future<List<Food>> getFoods(String restaurantId,
       {List<String>? foodIds}) async {
-    CollectionReference<Map<String, dynamic>> reference = _firebaseFirestore
+    Query query = _firebaseFirestore
         .collection('restaurants')
         .doc(restaurantId)
         .collection('foods');
 
-    var query;
     if (foodIds != null && foodIds.isNotEmpty) {
-      query = reference.where('id', arrayContainsAny: foodIds);
-    } else {
-      query = reference;
+      query = query.where('id', whereIn: foodIds);
     }
 
-    return await query
-        .get()
+    return (await query.get())
         .docs
-        .map((doc) => Food.fromMap(doc.data()))
+        .map((doc) => Food.fromMap(doc.data() as Map<String, dynamic>))
         .toList();
   }
 
