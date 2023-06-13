@@ -26,11 +26,15 @@ class AppRouter {
               path: 'time_picker',
               name: RouteName.timePicker,
               pageBuilder: (context, state) {
+                final initTime = state.queryParameters['initTime'];
                 final timePickerType = state.queryParameters['type'] == 'open'
                     ? TimePickerType.open
                     : TimePickerType.close;
                 return DialogPage(
-                    child: TimePickerPage(timePickerType: timePickerType));
+                    child: TimePickerPage(
+                  timePickerType: timePickerType,
+                  initTime: initTime,
+                ));
               },
             )
           ]),

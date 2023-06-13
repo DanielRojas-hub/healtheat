@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/screens/register/pages/category/view/view.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -7,5 +8,9 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CategoryView();
+
+    // MultiBlocProvider(
+    //     providers: [BlocProvider<CuisineBloc>(create: create)],
+    //     child: const CategoryView());
   }
 }

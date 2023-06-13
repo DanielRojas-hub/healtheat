@@ -11,20 +11,22 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  final List<Step> _steps = const [
-    Step(
-      title: Text('Info'),
-      content: InfoPage(),
-    ),
-    Step(
-      title: Text('Category'),
-      content: CategoryPage(),
-    ),
-    Step(
-      title: Text('Preview'),
-      content: PreviewPage(),
-    ),
-  ];
+  List<Step> getSteps() => [
+        Step(
+            title: const Text('Info'),
+            content: const InfoPage(),
+            isActive: _currentStep >= 0),
+        Step(
+          title: const Text('Category'),
+          content: const CategoryPage(),
+          isActive: _currentStep >= 1,
+        ),
+        Step(
+          title: const Text('Preview'),
+          content: const PreviewPage(),
+          isActive: _currentStep >= 2,
+        ),
+      ];
 
   int _currentStep = 0;
 
@@ -32,13 +34,13 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 249, 249, 249),
+        backgroundColor: const Color.fromARGB(255, 249, 249, 249),
         body: Stepper(
           currentStep: _currentStep,
-          steps: _steps,
+          steps: getSteps(),
           type: StepperType.horizontal,
           onStepContinue: () {
-            if (_currentStep < _steps.length - 1) {
+            if (_currentStep < getSteps().length - 1) {
               setState(() {
                 _currentStep++;
               });
@@ -51,6 +53,9 @@ class _RegisterViewState extends State<RegisterView> {
               });
             }
           },
+          onStepTapped: (value) => setState(() {
+            _currentStep = value;
+          }),
         ),
       ),
     );

@@ -36,6 +36,8 @@ dependencies:
   formz: ^0.6.0
   form_inputs:
     path: ../../packages/form_inputs
+  cuisine_repository:
+    path: ../../packages/cuisine_repository
 
 dev_dependencies:
   flutter_test:

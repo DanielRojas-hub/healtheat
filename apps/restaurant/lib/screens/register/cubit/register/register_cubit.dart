@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:form_inputs/form_inputs.dart';
 
@@ -7,6 +8,9 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(const RegisterState());
+  final TextEditingController codeController = TextEditingController();
+  final TextEditingController openingTimeController = TextEditingController();
+  final TextEditingController closingTimeController = TextEditingController();
 
   void nameChanged(String value) {
     final name = NotEmptyString.dirty(value);
@@ -40,6 +44,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void codeChanged(String value) {
     final code = NotEmptyString.dirty(value);
+    codeController.text = value;
     emit(state.copyWith(
       code: code,
       isValid: Formz.validate([
@@ -68,8 +73,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     ));
   }
 
-  void openingTimeChanged(DateTime value) {
+  void openingTimeChanged(DateTime? value) {
+    if (value == null) return;
     final openingTime = NotEmptyString.dirty(value.toString());
+    openingTimeController.text = value.toString();
     emit(state.copyWith(
       openingTime: openingTime,
       isValid: Formz.validate([
@@ -83,8 +90,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     ));
   }
 
-  void closingTimeChanged(DateTime value) {
+  void closingTimeChanged(DateTime? value) {
+    if (value == null) return;
     final closingTime = NotEmptyString.dirty(value.toString());
+    closingTimeController.text = value.toString();
     emit(state.copyWith(
       closingTime: closingTime,
       isValid: Formz.validate([

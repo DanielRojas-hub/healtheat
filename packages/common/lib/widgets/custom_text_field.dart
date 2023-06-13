@@ -12,7 +12,9 @@ class CustomTextField extends StatelessWidget {
       this.textInputType,
       this.maxLines,
       this.onChanged,
-      this.errorText});
+      this.errorText,
+      this.initialValue,
+      this.controller});
 
   final Icon? icon;
   final VoidCallback? onTap;
@@ -22,13 +24,17 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final ValueChanged<String>? onChanged;
   final String? errorText;
+  final String? initialValue;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLines ?? 1,
+      controller: controller,
       onTap: onTap,
       onChanged: onChanged,
+      initialValue: initialValue,
       readOnly: readOnly ?? false,
       keyboardType: textInputType ?? TextInputType.text,
       decoration: inputDecorationBorderMethod(context).copyWith(
