@@ -1,8 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:cart_repository/cart_repository.dart';
 import 'package:common/services/cart/cart_bloc.dart';
-import 'package:common/services/food/food_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
@@ -10,15 +7,11 @@ import 'package:food_repository/food_repository.dart';
 
 enum PaymentMethod { applePay, paypal, creditCard }
 
-class PaymentBloc extends Bloc<FoodEvent, FoodState> {
-  PaymentBloc({FoodRepository? foodRepository})
-      : foodRepository = foodRepository ?? FoodRepository(),
-        super(FoodLoading());
-  final FoodRepository foodRepository;
-}
-
 class PaymentMethodCubit extends Cubit<PaymentMethod> {
-  PaymentMethodCubit() : super(PaymentMethod.applePay);
+  PaymentMethodCubit({FoodRepository? foodRepository})
+      : _foodRepository = foodRepository ?? FoodRepository(),
+        super(PaymentMethod.applePay);
+  final FoodRepository _foodRepository;
 
   num calculateTotal(List<Food> foods, List<Petition> petitions) {
     num sum = 0;
@@ -37,8 +30,10 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
   void select(PaymentMethod paymentMethod) => emit(paymentMethod);
 
   Future<void> submit(context, Cart cart) async {
-    final foodRepository = FoodRepository();
-    final foods = await foodRepository.getFoods(cart.restaurantId);
+    final foodIds = List.generate(
+        cart.petitions.length, (index) => cart.petitions[index].foodId);
+    final foods =
+        await _foodRepository.getFoods(cart.restaurantId, foodIds: foodIds);
     final num total = calculateTotal(foods, cart.petitions);
     switch (state) {
       case PaymentMethod.applePay:

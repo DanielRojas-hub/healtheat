@@ -12,7 +12,7 @@ class PaymentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return /*ListView.separated(
+    return /* ListView.separated(
       shrinkWrap: true,
       physics: const ScrollPhysics(),
       itemBuilder: (context, index) {
@@ -23,7 +23,7 @@ class PaymentList extends StatelessWidget {
         margin: EdgeInsets.zero,
         color: Colors.grey[100],
       ),
-    );*/
+    ); */
         BlocBuilder<PaymentMethodCubit, PaymentMethod>(
       builder: (context, state) {
         return ListView(
