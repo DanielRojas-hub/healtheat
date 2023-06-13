@@ -1,0 +1,85 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "healtheat",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "healtheat (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "healtheat (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "cart_repository",
+            "cwd": "packages\\cart_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "cart_repository (profile mode)",
+            "cwd": "packages\\cart_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "cart_repository (release mode)",
+            "cwd": "packages\\cart_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "food_repository",
+            "cwd": "packages\\food_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "food_repository (profile mode)",
+            "cwd": "packages\\food_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "food_repository (release mode)",
+            "cwd": "packages\\food_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "restaurant_repository",
+            "cwd": "packages\\restaurant_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "restaurant_repository (profile mode)",
+            "cwd": "packages\\restaurant_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "restaurant_repository (release mode)",
+            "cwd": "packages\\restaurant_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
