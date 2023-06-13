@@ -26,4 +26,5 @@ class RouteName {
   static const searchRestaurantFilter = 'search_restaurant_filter';
 
   static const orderDetail = 'order_detail';
+  static const paymentMethod = 'payment_method';
 }
