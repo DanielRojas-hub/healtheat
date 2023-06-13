@@ -1,5 +1,5 @@
-import 'package:common/extension/custom_theme_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:common/extension/custom_theme_extension.dart';
 
 class PaymentMethodFloatingActionButton extends StatelessWidget {
   const PaymentMethodFloatingActionButton({super.key});
