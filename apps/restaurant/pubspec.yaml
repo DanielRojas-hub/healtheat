@@ -38,6 +38,7 @@ dependencies:
     path: ../../packages/form_inputs
   cuisine_repository:
     path: ../../packages/cuisine_repository
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

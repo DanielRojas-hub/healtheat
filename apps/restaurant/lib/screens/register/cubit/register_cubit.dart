@@ -128,7 +128,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   void removeMenu(String menuId) {
     final List<String> menuIds = List.from(state.menuIds);
     menuIds.remove(menuId);
-    emit(state.copyWith(cuisineIds: menuIds));
+    emit(state.copyWith(menuIds: menuIds));
   }
 
   void addCategory(String categoryId) {
