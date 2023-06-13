@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
+<<<<<<< HEAD
             "name": "healtheat",
             "request": "launch",
             "type": "dart"
@@ -22,6 +23,8 @@
             "flutterMode": "release"
         },
         {
+=======
+>>>>>>> c80298fc72b801e636505273f57b5c0f4cde072b
             "name": "client",
             "cwd": "apps\\client",
             "request": "launch",

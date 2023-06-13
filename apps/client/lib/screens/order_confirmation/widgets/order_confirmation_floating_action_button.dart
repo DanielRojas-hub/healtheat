@@ -1,6 +1,8 @@
+import 'package:client/router/route_name.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class OrderConfirmationFloatingActionButton extends StatelessWidget {
   const OrderConfirmationFloatingActionButton({super.key});
@@ -18,7 +20,7 @@ class OrderConfirmationFloatingActionButton extends StatelessWidget {
               backgroundColor: Theme.of(context).primaryColor,
               onPressed: () {
                 Navigator.of(context).pop();
-                context.read<CartBloc>().add(ClearCart());
+                context.goNamed(RouteName.paymentMethod);
               },
               label: SizedBox(
                 width: 4 * MediaQuery.of(context).size.width / 5,
