@@ -1,5 +1,5 @@
 class RouteName {
   static const registerRestaurant = 'register_restaurant';
   static const timePicker = 'time_picker';
-  static var addFoodRestaurant = 'add_food';
+  static const addFood = 'add_food';
 }

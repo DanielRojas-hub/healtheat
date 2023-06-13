@@ -39,6 +39,7 @@ dependencies:
   cuisine_repository:
     path: ../../packages/cuisine_repository
   fluttertoast: ^8.2.2
+  firebase_storage: ^11.2.2
 
 dev_dependencies:
   flutter_test:

@@ -28,7 +28,7 @@ dependencies:
     path: ../category_repository
 
   collection: ^1.17.1
-  google_fonts: ^5.0.0
+  google_fonts: any
   dotted_line: ^3.1.0
 
 dev_dependencies:

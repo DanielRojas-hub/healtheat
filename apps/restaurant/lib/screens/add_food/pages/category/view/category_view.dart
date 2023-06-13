@@ -1,4 +1,4 @@
-import 'package:common/widgets/custom_category_container.dart';
+import 'package:common/widgets/custom_preference.dart';
 import 'package:flutter/material.dart';
 
 class CategoryView extends StatelessWidget {
@@ -6,68 +6,52 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 500,
-      child: ListView(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                'Categories',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Theme.of(context).primaryColor),
+          Text("Category", style: Theme.of(context).textTheme.headlineSmall),
+          // const SizedBox(height: 5),
+          Text("Select your categories...",
+              style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 30),
+          Text("Recommended for you!",
+              style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: 10),
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 3,
+            crossAxisSpacing: 15,
+            mainAxisSpacing: 25,
+            children: List.generate(
+              3,
+              (index) => const OptionPreference(
+                isSelected: false,
+                title: Text("Pizza"),
               ),
-              const SizedBox(width: 30),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    '+ New category',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+            ),
+          ),
+          const SizedBox(height: 30),
+          Text("All the categories",
+              style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: 10),
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 3,
+            crossAxisSpacing: 15,
+            mainAxisSpacing: 25,
+            children: List.generate(
+              9,
+              (index) => const OptionPreference(
+                isSelected: false,
+                title: Text("Pizza"),
               ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          CategoryContainer(
-            iconData: Icons.eco,
-            label: Text(
-              'Vegan',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Theme.of(context).hintColor),
             ),
           ),
           const SizedBox(height: 15),
-          CategoryContainer(
-            iconData: Icons.breakfast_dining,
-            label: Text(
-              'Gluten free',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Theme.of(context).hintColor),
-            ),
-          ),
-          const SizedBox(height: 15),
-          CategoryContainer(
-            iconData: Icons.breakfast_dining,
-            label: Text(
-              'Gluten free',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Theme.of(context).hintColor),
-            ),
-          ),
         ],
       ),
     );
