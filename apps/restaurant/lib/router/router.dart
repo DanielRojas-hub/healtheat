@@ -41,7 +41,7 @@ class AppRouter {
       GoRoute(
           path: '/add_food',
           name: RouteName.addFood,
-          builder: (context, state) => const AddFoodPage()),
+          builder: (context, state) => const AddFoodPage(restaurantId: ,)),
     ],
   );
 }

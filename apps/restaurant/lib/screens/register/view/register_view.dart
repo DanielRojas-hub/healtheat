@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/register.dart';
@@ -41,7 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   int _currentStep = 0;
 
-  final RestaurantRepository _restaurantRepository = RestaurantRepository();
+  final RestaurantRepository restaurantRepository = RestaurantRepository();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
@@ -53,12 +54,16 @@ class _RegisterViewState extends State<RegisterView> {
               currentStep: _currentStep,
               steps: getSteps(),
               type: StepperType.horizontal,
-              onStepContinue: () {
+              onStepContinue: () async {
                 if (_currentStep < getSteps().length - 1) {
                   setState(() {
                     _currentStep++;
                   });
                 } else {
+                  await restaurantRepository.uploadRestaurantImage(
+                      filePath: state.image.toString(), fileName: 'id1');
+                  String imageUrl =
+                      await restaurantRepository.downloadURL('id1');
                   final Restaurant restaurant = Restaurant(
                     displayName: state.name.value,
                     address: state.address.value,
@@ -67,16 +72,15 @@ class _RegisterViewState extends State<RegisterView> {
                     cuisineIds: state.cuisineIds,
                     deliveryPriceRange: '',
                     deliveryTimeRange: '',
-                    imageUrl:
-                        'https://media-cdn.tripadvisor.com/media/photo-s/02/ff/82/8d/patio-view.jpg',
+                    imageUrl: imageUrl,
                     menuIds: state.menuIds,
                     openTime: state.openingTime.value,
                     phoneNumber: '',
                     preferenceIds: state.preferenceIds,
                     rating: null,
                   );
-                  _restaurantRepository.createRestaurant(restaurant);
-                  // showColoredToast();
+                  restaurantRepository.createRestaurant(restaurant);
+                  GoRouter.of(context).go('/add_food');
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(SnackBar(
