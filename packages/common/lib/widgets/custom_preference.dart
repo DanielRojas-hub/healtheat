@@ -8,20 +8,20 @@ class OptionPreference extends StatelessWidget {
     required this.title,
     this.subtitle,
     required this.isSelected,
+    this.onTap,
   });
 
   final Widget title;
   final Widget? subtitle;
   final bool isSelected;
+  final VoidCallback? onTap;
   // final Preference preference;
 
   @override
   Widget build(BuildContext context) {
     return BaseCard(
       width: 70,
-      // onTap: () => isSelected
-      //     ? context.read<SelectPreferencesCubit>().removePreference(preference)
-      //     : context.read<SelectPreferencesCubit>().insertPreference(preference),
+      onTap: onTap,
       border: isSelected
           ? Border.all(color: Theme.of(context).primaryColor, width: 2)
           : null,
@@ -41,9 +41,10 @@ class OptionPreference extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DefaultTextStyle.merge(
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          isSelected ? Theme.of(context).primaryColor : null),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color:
+                            isSelected ? Theme.of(context).primaryColor : null,
+                      ),
                   child: title),
               // DefaultTextStyle.merge(
               //     style: Theme.of(context).textTheme.labelMedium,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/pages/preview/view/preview_page.dart';
+import 'package:restaurant/screens/register/register.dart';
+import 'package:restaurant_repository/restaurant_repository.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -11,48 +14,76 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  final List<Step> _steps = const [
-    Step(
-      title: Text('Info'),
-      content: InfoPage(),
-    ),
-    Step(
-      title: Text('Category'),
-      content: CategoryPage(),
-    ),
-    Step(
-      title: Text('Preview'),
-      content: PreviewPage(),
-    ),
-  ];
+  List<Step> getSteps() => [
+        Step(
+            title: const Text('Info'),
+            content: const InfoPage(),
+            isActive: _currentStep >= 0),
+        Step(
+          title: const Text('Personalization'),
+          content: const CategoryPage(),
+          isActive: _currentStep >= 1,
+        ),
+        // Step(
+        //   title: const Text('Preview'),
+        //   content: const PreviewPage(),
+        //   isActive: _currentStep >= 2,
+        // ),
+      ];
 
   int _currentStep = 0;
 
+  final RestaurantRepository _restaurantRepository = RestaurantRepository();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 249, 249, 249),
-        body: Stepper(
-          currentStep: _currentStep,
-          steps: _steps,
-          type: StepperType.horizontal,
-          onStepContinue: () {
-            if (_currentStep < _steps.length - 1) {
-              setState(() {
-                _currentStep++;
-              });
-            }
-          },
-          onStepCancel: () {
-            if (_currentStep > 0) {
-              setState(() {
-                _currentStep--;
-              });
-            }
-          },
-        ),
-      ),
+    return BlocBuilder<RegisterCubit, RegisterState>(
+      builder: (context, state) {
+        return SafeArea(
+          child: Scaffold(
+            backgroundColor: const Color.fromARGB(255, 249, 249, 249),
+            body: Stepper(
+              currentStep: _currentStep,
+              steps: getSteps(),
+              type: StepperType.horizontal,
+              onStepContinue: () {
+                if (_currentStep < getSteps().length - 1) {
+                  setState(() {
+                    _currentStep++;
+                  });
+                } else {
+                  final Restaurant restaurant = Restaurant(
+                    displayName: state.name.value,
+                    address: state.address.value,
+                    categoryIds: state.categoryIds,
+                    closeTime: state.closingTime.value,
+                    cuisineIds: state.cuisineIds,
+                    deliveryPriceRange: '',
+                    deliveryTimeRange: '',
+                    imageUrl:
+                        'https://media-cdn.tripadvisor.com/media/photo-s/02/ff/82/8d/patio-view.jpg',
+                    menuIds: state.menuIds,
+                    openTime: state.openingTime.value,
+                    phoneNumber: '',
+                    preferenceIds: [],
+                    rating: null,
+                  );
+                  _restaurantRepository.createRestaurant(restaurant);
+                }
+              },
+              onStepCancel: () {
+                if (_currentStep > 0) {
+                  setState(() {
+                    _currentStep--;
+                  });
+                }
+              },
+              onStepTapped: (value) => setState(() {
+                _currentStep = value;
+              }),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,12 +1,7 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:restaurant/router/route_name.dart';
-import 'package:common/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:restaurant/screens/register/cubit/register_cubit.dart';
+import '../widgets/widgets.dart';
 
 class InfoView extends StatefulWidget {
   const InfoView({super.key});
@@ -31,99 +26,54 @@ class _InfoViewState extends State<InfoView> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Basic Information",
-              style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 15),
-          Text("Name", style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: 5),
-          _NameInput(),
-          // const CustomTextField(
-          //   icon: Icon(Icons.storefront, size: 20),
-          // ),
-          const SizedBox(height: 20),
-          Text("Address", style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: 5),
-          const CustomTextField(
-            icon: Icon(Icons.location_on, size: 20),
-          ),
-          const SizedBox(height: 20),
-          Text("Phone Number", style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              SizedBox(
-                  width: (MediaQuery.of(context).size.width) / 4,
-                  child: CustomTextField(
-                      prefixText: "+",
-                      readOnly: true,
-                      onTap: () => showCountryPicker(
-                            context: context,
-                            onSelect: (value) {},
-                          ))),
-              const SizedBox(width: 10),
-              const Expanded(
-                  child: CustomTextField(
-                textInputType: TextInputType.number,
-              )),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Basic Information",
+            style: Theme.of(context).textTheme.headlineSmall),
+        const SizedBox(height: 15),
+        Text("Name", style: Theme.of(context).textTheme.labelLarge),
+        const SizedBox(height: 5),
+        const NameInput(),
+        const SizedBox(height: 20),
+        Text("Address", style: Theme.of(context).textTheme.labelLarge),
+        const SizedBox(height: 5),
+        const AddressInput(),
+        const SizedBox(height: 20),
+        Text("Phone Number", style: Theme.of(context).textTheme.labelLarge),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            SizedBox(
+                width: (MediaQuery.of(context).size.width) / 4,
+                child: const CodeInput()),
+            const SizedBox(width: 10),
+            const Expanded(child: PhoneInput()),
+          ],
+        ),
+        const SizedBox(height: 20),
+        Text("Schedule", style: Theme.of(context).textTheme.labelLarge),
+        const SizedBox(height: 5),
+        const OpeningTimeInput(),
+        const SizedBox(height: 15),
+        const ClosingTimeInput(),
+        const SizedBox(height: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                _selectImage();
+              },
+              child: const Text('Add image'),
+            ),
+            if (_image != null) ...[
+              const SizedBox(height: 10),
+              Image.file(_image!),
             ],
-          ),
-          const SizedBox(height: 20),
-          Text("Schedule", style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: 5),
-          CustomTextField(
-            readOnly: true,
-            prefixText: 'Opening time',
-            icon: const Icon(Icons.schedule, size: 20),
-            onTap: () => context.goNamed(RouteName.timePicker,
-                queryParameters: {'type': 'open'}),
-          ),
-          const SizedBox(height: 15),
-          CustomTextField(
-            readOnly: true,
-            prefixText: 'Closing time',
-            // icon: const Icon(Icons.schedule, size: 20),
-            onTap: () => context.goNamed(RouteName.timePicker,
-                queryParameters: {'type': 'close'}),
-          ),
-          const SizedBox(height: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  _selectImage();
-                },
-                child: const Text('Add image'),
-              ),
-              if (_image != null) ...[
-                const SizedBox(height: 10),
-                Image.file(_image!),
-              ],
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _NameInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
-      buildWhen: (previous, current) => previous.name != current.name,
-      builder: (context, state) {
-        return CustomTextField(
-          // key: const Key('registerForm_nameInput_textField'),
-          icon: const Icon(Icons.storefront, size: 20),
-          onChanged: (name) => context.read<RegisterCubit>().nameChanged(name),
-          errorText: state.name.displayError != null ? 'invalid name' : null,
-        );
-      },
+          ],
+        ),
+      ],
     );
   }
 }

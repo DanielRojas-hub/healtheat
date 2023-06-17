@@ -1,5 +1,5 @@
-import 'package:common/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:common/utils/constants.dart';
 
 import '../payment_method.dart';
 

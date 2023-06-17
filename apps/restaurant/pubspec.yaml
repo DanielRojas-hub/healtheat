@@ -37,6 +37,8 @@ dependencies:
   form_inputs:
     path: ../../packages/form_inputs
   firebase_storage: ^11.2.2
+  cuisine_repository:
+    path: ../../packages/cuisine_repository
 
 dev_dependencies:
   flutter_test:

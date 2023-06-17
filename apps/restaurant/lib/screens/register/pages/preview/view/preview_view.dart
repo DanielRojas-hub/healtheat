@@ -13,8 +13,9 @@ class PreviewView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: NestedScrollView(
+    return const Text('holis');
+
+    NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return [
           const RestaurantAppBar(),
@@ -44,6 +45,6 @@ class PreviewView extends StatelessWidget {
             Text('ReviewPage'),
             Text('AboutPage'),
           ]),
-    ));
+    );
   }
 }

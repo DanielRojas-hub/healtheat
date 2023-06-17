@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:common/services/cart/cart_bloc.dart';
@@ -64,9 +65,13 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     try {
       _restaurantSubscription = _restaurantRepository
           .streamRestaurants(
-              restaurantIds: event.restaurantIds,
-              preferenceIds: event.preferenceIds)
-          .listen((restaurants) => add(_RestaurantsUpdated(restaurants)));
+            restaurantIds: event.restaurantIds,
+            preferenceIds: event.preferenceIds,
+          )
+          .listen((restaurants) => add(_RestaurantsUpdated(restaurants,
+              categoryIds: event.categoryIds,
+              cuisineIds: event.cuisineIds,
+              menuIds: event.menuIds)));
     } catch (_) {
       //TODO: catch
     }
@@ -77,8 +82,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     _restaurantSubscription?.cancel();
     try {
       add(_RestaurantsUpdated(await _restaurantRepository.getRestaurants(
-          restaurantIds: event.restaurantIds,
-          preferenceIds: event.preferenceIds)));
+        restaurantIds: event.restaurantIds,
+        preferenceIds: event.preferenceIds,
+      )));
     } catch (_) {
       //TODO: catch
     }
@@ -107,19 +113,22 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     _blocSubscription?.cancel();
     try {
       _blocSubscription = event.userPreferenceBloc.stream.listen((state) {
-        if (state.userPreferences.isNotEmpty) {
-          add(StreamRestaurants(
-              preferenceIds: List.generate(state.userPreferences.length,
-                  (index) => state.userPreferences[index].id)));
-        }
-      });
-      if (event.userPreferenceBloc.state.userPreferences.isNotEmpty) {
         add(StreamRestaurants(
-            preferenceIds: List.generate(
-                event.userPreferenceBloc.state.userPreferences.length,
-                (index) =>
-                    event.userPreferenceBloc.state.userPreferences[index].id)));
-      }
+            preferenceIds: List.generate(state.userPreferences.length,
+                (index) => state.userPreferences[index].id),
+            categoryIds: event.categories,
+            cuisineIds: event.cuisines,
+            menuIds: event.menus));
+      });
+      add(StreamRestaurants(
+          preferenceIds: List.generate(
+              event.userPreferenceBloc.state.userPreferences.length,
+              (index) =>
+                  event.userPreferenceBloc.state.userPreferences[index].id),
+          categoryIds: event.categories,
+          cuisineIds: event.cuisines,
+          menuIds: event.menus));
+      // }
     } catch (_) {
       //TODO: catch
     }
@@ -132,6 +141,27 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
   void _onRestaurantsUpdated(
       _RestaurantsUpdated event, Emitter<RestaurantState> emit) {
-    return emit(RestaurantsLoaded(event.restaurants));
+    final restaurants = event.restaurants.where((restaurant) {
+      bool validation = true;
+
+      if (event.categoryIds != null && event.categoryIds!.isNotEmpty) {
+        validation = validation &&
+            restaurant.categoryIds!
+                .any((categoryId) => event.categoryIds!.contains(categoryId));
+      }
+      if (event.cuisineIds != null && event.cuisineIds!.isNotEmpty) {
+        validation = validation &&
+            restaurant.cuisineIds!
+                .any((cuisineId) => event.cuisineIds!.contains(cuisineId));
+      }
+      if (event.menuIds != null && event.menuIds!.isNotEmpty) {
+        validation = validation &&
+            restaurant.menuIds!
+                .any((menuId) => event.menuIds!.contains(menuId));
+      }
+
+      return validation;
+    }).toList();
+    return emit(RestaurantsLoaded(restaurants));
   }
 }
