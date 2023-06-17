@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:restaurant_repository/restaurant_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class RestaurantRepository {
   final FirebaseFirestore _firebaseFirestore;
+  final FirebaseStorage _firebaseStorage;
 
   RestaurantRepository({
     FirebaseFirestore? firebaseFirestore,
-  }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+    FirebaseStorage? firebaseStorage,
+  })  : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
+        _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance;
 
   Stream<List<Restaurant>> streamRestaurants(
       {List<String>? restaurantIds,
@@ -123,5 +130,14 @@ class RestaurantRepository {
         .collection('restaurants')
         .doc(restaurantId)
         .update(data);
+  }
+
+  Future uploadRestaurantImage(File file) async {
+    final ref = _firebaseStorage.ref().child('restaurant_image');
+    final fileName = basename(file.path);
+    final uploadTask = ref.child(fileName).putFile(file);
+    final snapshot = await uploadTask;
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
   }
 }

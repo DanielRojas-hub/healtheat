@@ -67,21 +67,21 @@ class FoodCard extends StatelessWidget {
             ]),
           ),
         ]),
-        Positioned(
-          top: 5,
-          right: 5,
-          child: CustomIconButton(
-            onTap: onTapFavorite,
-            iconData: isFavorite ? Icons.favorite : Icons.favorite_border,
-            backgroundColor: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-            iconSize: 16.0,
-            padding: const EdgeInsets.all(6.0),
-            color: isFavorite
-                ? context.theme.redColor
-                : Theme.of(context).disabledColor,
-          ),
-        ),
+        // Positioned(
+        //   top: 5,
+        //   right: 5,
+        //   child: CustomIconButton(
+        //     onTap: onTapFavorite,
+        //     iconData: isFavorite ? Icons.favorite : Icons.favorite_border,
+        //     backgroundColor: Theme.of(context).cardColor,
+        //     borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+        //     iconSize: 16.0,
+        //     padding: const EdgeInsets.all(6.0),
+        //     color: isFavorite
+        //         ? context.theme.redColor
+        //         : Theme.of(context).disabledColor,
+        //   ),
+        // ),
       ]),
     );
   }
