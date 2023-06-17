@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:common/page_builders/page_builders.dart';
 import 'package:common/services/services.dart';
 import 'package:common/services/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:restaurant/screens/add_food/add_food.dart';
+import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
+import 'package:restaurant/screens/register/view/register_page.dart';
 
 import 'route_name.dart';
 
@@ -21,10 +25,31 @@ class AppRouter {
       initialLocation: '/',
       routes: [
         GoRoute(
-            path: '/',
-            name: RouteName.splashScreen,
-            builder: (context, state) => const Scaffold(
-                  body: Text('Funciona'),
+            path: '/register',
+            name: RouteName.registerRestaurant,
+            builder: (context, state) => const RegisterPage(),
+            routes: [
+              GoRoute(
+                path: 'time_picker',
+                name: RouteName.timePicker,
+                pageBuilder: (context, state) {
+                  final initTime = state.queryParameters['initTime'];
+                  final timePickerType = state.queryParameters['type'] == 'open'
+                      ? TimePickerType.open
+                      : TimePickerType.close;
+                  return DialogPage(
+                      child: TimePickerPage(
+                    timePickerType: timePickerType,
+                    initTime: initTime,
+                  ));
+                },
+              )
+            ]),
+        GoRoute(
+            path: '/:restaurantId/add_food',
+            name: RouteName.addFood,
+            builder: (context, state) => AddFoodPage(
+                  restaurantId: state.pathParameters['restaurantId'],
                 )),
       ],
       redirect: (context, state) {

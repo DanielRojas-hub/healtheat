@@ -1,10 +1,10 @@
 name: restaurant
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   bloc: ^8.1.2
@@ -34,6 +34,16 @@ dependencies:
   go_router: ^7.1.1
   ionicons: ^0.2.2
   provider: ^6.0.5
+  country_picker: ^2.0.20
+  flutter_time_picker_spinner: ^2.0.0
+  image_picker: ^0.8.4+4
+  formz: ^0.6.0
+  form_inputs:
+    path: ../../packages/form_inputs
+  cuisine_repository:
+    path: ../../packages/cuisine_repository
+  fluttertoast: ^8.2.2
+  firebase_storage: ^11.2.2
 
 dev_dependencies:
   flutter_test:

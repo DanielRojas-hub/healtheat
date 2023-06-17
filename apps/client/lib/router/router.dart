@@ -16,6 +16,7 @@ import 'package:common/page_builders/page_builders.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../screens/payment_method/payment_method.dart';
 import 'route_name.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -34,6 +35,10 @@ class AppRouter {
       //     path: '/splash_screen',
       //     name: RouteName.splashScreen,
       //     builder: (context, state) => const SplashScreenPage()),
+      GoRoute(
+          path: '/payment_method',
+          name: RouteName.paymentMethod,
+          builder: (context, state) => const PaymentMethodPage()),
       GoRoute(
           path: '/preferences_filter',
           name: RouteName.preferencesFilter,
@@ -54,8 +59,20 @@ class AppRouter {
                 path: '/home',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: HomePage()),
+                pageBuilder: (context, state) {
+                  final categories =
+                      state.queryParameters['categories']?.split(',');
+                  final cuisines =
+                      state.queryParameters['cuisines']?.split(',');
+                  final menus = state.queryParameters['menus']?.split(',');
+
+                  return NoTransitionPage(
+                    child: HomePage(
+                        categories: categories,
+                        cuisines: cuisines,
+                        menus: menus),
+                  );
+                },
                 routes: [
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
@@ -124,8 +141,15 @@ class AppRouter {
       path: 'filter',
       parentNavigatorKey: rootNavigatorKey,
       name: filterName,
-      pageBuilder: (context, state) =>
-          const ModalBottomSheetPage(child: FilterRestaurantPage()),
+      pageBuilder: (context, state) {
+        final categories = state.queryParameters['categories']?.split(',');
+        final cuisines = state.queryParameters['cuisines']?.split(',');
+        final menus = state.queryParameters['menus']?.split(',');
+
+        return ModalBottomSheetPage(
+            child: FilterRestaurantPage(
+                categories: categories, cuisines: cuisines, menus: menus));
+      },
     );
   }
 

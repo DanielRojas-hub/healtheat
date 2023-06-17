@@ -1,5 +1,6 @@
 import 'package:client/router/route_name.dart';
 import 'package:common/controllers/controllers.dart';
+import 'package:common/services/services.dart';
 import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,12 @@ import '../pages/open_now/open_now.dart';
 import '../pages/all_restaurants/all_restaurants.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key, this.categories, this.cuisines, this.menus})
+      : super(key: key);
 
+  final List<String>? categories;
+  final List<String>? cuisines;
+  final List<String>? menus;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -23,19 +28,48 @@ class HomeView extends StatelessWidget {
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(
-                  child: SearchAndFilterSection(
-                onTap: () => context.goNamed(RouteName.homeRestaurantFilter),
+              sliver: SliverToBoxAdapter(child: SearchAndFilterSection(
+                onTap: () async {
+                  Map<String, String>? queryParameters = {};
+
+                  if ((categories ?? []).isNotEmpty) {
+                    queryParameters['categories'] = categories!.join(',');
+                  }
+                  if ((cuisines ?? []).isNotEmpty) {
+                    queryParameters['cuisines'] = cuisines!.join(',');
+                  }
+                  if ((menus ?? []).isNotEmpty) {
+                    queryParameters['menus'] = menus!.join(',');
+                  }
+
+                  Map<String, String?>? returnedQueryParameters =
+                      await context.pushNamed(RouteName.homeRestaurantFilter,
+                          queryParameters: queryParameters);
+                  if (returnedQueryParameters != null) {
+                    context.read<RestaurantBloc>().add(
+                          UserPreferenceBlocRestaurants(
+                              context.read<UserPreferenceBloc>(),
+                              categories: returnedQueryParameters['categories']
+                                  ?.split(','),
+                              cuisines: returnedQueryParameters['cuisines']
+                                  ?.split(','),
+                              menus:
+                                  returnedQueryParameters['menus']?.split(',')),
+                        );
+                    context.goNamed(RouteName.home,
+                        queryParameters: returnedQueryParameters);
+                  }
+                },
               )),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(child: PopularCategoriesTitle()),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-            const SliverToBoxAdapter(child: PopularCategoryList()),
-            const SliverToBoxAdapter(child: SizedBox(height: 25)),
+            // const SliverPadding(
+            //   padding: EdgeInsets.symmetric(horizontal: Constants.margin),
+            //   sliver: SliverToBoxAdapter(child: PopularCategoriesTitle()),
+            // ),
+            // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+            // const SliverToBoxAdapter(child: PopularCategoryList()),
+            // const SliverToBoxAdapter(child: SizedBox(height: 25)),
             const SliverToBoxAdapter(child: HomeTab()),
           ];
         },
@@ -43,9 +77,10 @@ class HomeView extends StatelessWidget {
             onPageChanged: (index) =>
                 context.read<TabCubit>().onPageChanged(index),
             controller: context.read<TabCubit>().controller,
-            children: const [
-              AllRestaurantsPage(),
-              OpenNowPage(),
+            children: [
+              AllRestaurantsPage(
+                  categories: categories, cuisines: cuisines, menus: menus),
+              const OpenNowPage(),
             ]),
       ),
     );
