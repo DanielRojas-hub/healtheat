@@ -69,11 +69,11 @@ class _InfoViewState extends State<InfoView> {
                 // await restaurantRepository.uploadRestaurantImage(
                 //     filePath: _image.toString(), fileName: 'id1');
               },
-              child: const Text('Add image'),
+              child: const Text('Upload image'),
             ),
             if (_image != null) ...[
               const SizedBox(height: 10),
-              Image.file(_image!),
+              RestaurantImage(image: _image),
             ],
           ],
         ),

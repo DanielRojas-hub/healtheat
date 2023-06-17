@@ -61,11 +61,11 @@ class _RegisterViewState extends State<RegisterView> {
                     _currentStep++;
                   });
                 } else {
-                  await restaurantRepository.uploadRestaurantImage(
-                      filePath: state.image.toString(), fileName: 'id1');
-                  String imageUrl =
-                      await restaurantRepository.downloadURL('id1');
-                  final Restaurant restaurant = Restaurant(
+                  // await restaurantRepository.uploadRestaurantImage(
+                  //     filePath: state.image.toString(), fileName: 'id1');
+                  // String imageUrl =
+                  //     await restaurantRepository.downloadURL('id1');
+                  Restaurant restaurant = Restaurant(
                     displayName: state.name.value,
                     address: state.address.value,
                     categoryIds: state.categoryIds,
@@ -73,13 +73,20 @@ class _RegisterViewState extends State<RegisterView> {
                     cuisineIds: state.cuisineIds,
                     deliveryPriceRange: '',
                     deliveryTimeRange: '',
-                    imageUrl: imageUrl,
+                    imageUrl: '',
                     menuIds: state.menuIds,
                     openTime: state.openingTime.value,
                     phoneNumber: '',
                     preferenceIds: state.preferenceIds,
                     rating: null,
                   );
+                  try {
+                    String imageUrl = await restaurantRepository
+                        .uploadRestaurantImage(state.image!);
+                    restaurant = restaurant.copyWith(imageUrl: imageUrl);
+                  } catch (e) {
+                    print(e);
+                  }
                   restaurantRepository.createRestaurant(restaurant);
                   GoRouter.of(context).go('/add_food');
                   ScaffoldMessenger.of(context)

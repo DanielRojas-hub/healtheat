@@ -78,10 +78,13 @@ class _AddFoodViewState extends State<AddFoodView> {
                           imageUrl: '',
                           price: num.parse(state.price.value),
                           isAvailable: true);
-                      await foodRepository.uploadFoodImage(
-                          filePath: state.image.toString(), fileName: food.id);
-                      String imageUrl =
-                          await foodRepository.downloadURL(food.id);
+                      try {
+                        String imageUrl =
+                            await foodRepository.uploadFoodImage(state.image!);
+                        food = food.copyWith(imageUrl: imageUrl);
+                      } catch (e) {
+                        print(e);
+                      }
                       foodRepository.createFood(
                           widget.restaurantId ?? '28LecpHZyk81KUl6EsND', food);
                       _currentStep = 0;

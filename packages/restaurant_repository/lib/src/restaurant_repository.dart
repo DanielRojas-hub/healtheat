@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:restaurant_repository/restaurant_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class RestaurantRepository {
   final FirebaseFirestore _firebaseFirestore;
@@ -131,22 +132,12 @@ class RestaurantRepository {
         .update(data);
   }
 
-  Future<void> uploadRestaurantImage(
-      {String? filePath, String? fileName}) async {
-    File file = File(filePath!);
-
-    try {
-      await _firebaseStorage.ref('restaurant_image/$fileName').putFile(file);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<String> downloadURL(String fileName) async {
-    String downloadURL = await _firebaseStorage
-        .ref('restaurant_image/$fileName')
-        .getDownloadURL();
-    print(downloadURL);
-    return downloadURL;
+  Future uploadRestaurantImage(File file) async {
+    final ref = _firebaseStorage.ref().child('restaurant_image');
+    final fileName = basename(file.path);
+    final uploadTask = ref.child(fileName).putFile(file);
+    final snapshot = await uploadTask;
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
   }
 }

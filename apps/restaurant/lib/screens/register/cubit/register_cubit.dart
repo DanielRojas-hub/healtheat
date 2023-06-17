@@ -156,4 +156,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     preferenceIds.remove(preferenceId);
     emit(state.copyWith(preferenceIds: preferenceIds));
   }
+
+  void imageChanged(File? image) {
+    emit(
+      state.copyWith(image: image),
+    );
+  }
 }
