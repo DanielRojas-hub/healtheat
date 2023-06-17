@@ -15,7 +15,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/add_food',
+    initialLocation: '/register',
     routes: [
       GoRoute(
           path: '/register',
@@ -39,9 +39,11 @@ class AppRouter {
             )
           ]),
       GoRoute(
-          path: '/add_food',
+          path: '/:restaurantId/add_food',
           name: RouteName.addFood,
-          builder: (context, state) => const AddFoodPage(restaurantId: ,)),
+          builder: (context, state) => AddFoodPage(
+                restaurantId: state.pathParameters['restaurantId'],
+              )),
     ],
   );
 }

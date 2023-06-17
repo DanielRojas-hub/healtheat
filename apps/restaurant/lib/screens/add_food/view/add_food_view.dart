@@ -7,8 +7,9 @@ import 'package:restaurant/screens/add_food/pages/information/information.dart';
 import 'package:restaurant/screens/add_food/pages/previsualization/previsualization.dart';
 
 class AddFoodView extends StatefulWidget {
-  const AddFoodView({super.key, required this.restaurantId});
-  final String restaurantId;
+  const AddFoodView({super.key, this.restaurantId});
+
+  final String? restaurantId;
 
   @override
   State<AddFoodView> createState() => _AddFoodViewState();
@@ -70,7 +71,8 @@ class _AddFoodViewState extends State<AddFoodView> {
                       });
                     } else if (_currentStep == getSteps().length - 1) {
                       Food food = Food(
-                          restaurantId: '28LecpHZyk81KUl6EsND',
+                          restaurantId:
+                              widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                           displayName: state.displayName.value,
                           description: state.description.value,
                           imageUrl: '',
@@ -80,8 +82,8 @@ class _AddFoodViewState extends State<AddFoodView> {
                           filePath: state.image.toString(), fileName: food.id);
                       String imageUrl =
                           await foodRepository.downloadURL(food.id);
-                      food = food.copyWith(imageUrl: imageUrl);
-                      foodRepository.createFood('28LecpHZyk81KUl6EsND', food);
+                      foodRepository.createFood(
+                          widget.restaurantId ?? '28LecpHZyk81KUl6EsND', food);
                       _currentStep = 0;
                     }
                   },
