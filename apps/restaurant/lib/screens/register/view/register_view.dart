@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:restaurant/router/route_name.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/register.dart';
@@ -92,6 +94,9 @@ class _RegisterViewState extends State<RegisterView> {
                         ],
                       ),
                     ));
+
+                  context.goNamed(RouteName.addFood,
+                      pathParameters: {'restaurantId': restaurant.id});
 
                   // Navigator.of(context).push(MaterialPageRoute(
                   //   builder: (context) => ToastContext(),

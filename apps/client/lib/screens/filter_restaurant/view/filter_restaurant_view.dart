@@ -91,29 +91,29 @@ class FilterRestaurantView extends StatelessWidget {
             sliver: SliverToBoxAdapter(child: MenuWrap()),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
-          SliverPadding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(
-                child: Text("Show first",
-                    style: Theme.of(context).textTheme.titleLarge)),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 40)),
+          // SliverPadding(
+          //   padding:
+          //       const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(
+          //       child: Text("Show first",
+          //           style: Theme.of(context).textTheme.titleLarge)),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 40)),
           SliverPadding(
               padding:
                   const EdgeInsets.symmetric(horizontal: Constants.marginSmall),

@@ -63,13 +63,13 @@ class HomeView extends StatelessWidget {
               )),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(child: PopularCategoriesTitle()),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-            const SliverToBoxAdapter(child: PopularCategoryList()),
-            const SliverToBoxAdapter(child: SizedBox(height: 25)),
+            // const SliverPadding(
+            //   padding: EdgeInsets.symmetric(horizontal: Constants.margin),
+            //   sliver: SliverToBoxAdapter(child: PopularCategoriesTitle()),
+            // ),
+            // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+            // const SliverToBoxAdapter(child: PopularCategoryList()),
+            // const SliverToBoxAdapter(child: SizedBox(height: 25)),
             const SliverToBoxAdapter(child: HomeTab()),
           ];
         },

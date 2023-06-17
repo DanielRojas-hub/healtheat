@@ -7,7 +7,9 @@ import 'package:restaurant/screens/add_food/pages/information/information.dart';
 import 'package:restaurant/screens/add_food/pages/previsualization/previsualization.dart';
 
 class AddFoodView extends StatefulWidget {
-  const AddFoodView({super.key});
+  const AddFoodView({super.key, this.restaurantId});
+
+  final String? restaurantId;
 
   @override
   State<AddFoodView> createState() => _AddFoodViewState();
@@ -72,13 +74,15 @@ class _AddFoodViewState extends State<AddFoodView> {
                           filePath: state.image.toString(), fileName: 'id1');
                       String imageUrl = await foodRepository.downloadURL('id1');
                       Food food = Food(
-                          restaurantId: '28LecpHZyk81KUl6EsND',
+                          restaurantId:
+                              widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                           displayName: state.displayName.value,
                           description: state.description.value,
                           imageUrl: imageUrl,
                           price: num.parse(state.price.value),
                           isAvailable: true);
-                      foodRepository.createFood('28LecpHZyk81KUl6EsND', food);
+                      foodRepository.createFood(
+                          widget.restaurantId ?? '28LecpHZyk81KUl6EsND', food);
                       _currentStep = 0;
                     }
                   },
