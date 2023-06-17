@@ -4,6 +4,7 @@ import 'package:restaurant/screens/register/pages/category/view/category_page.da
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/register.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -13,6 +14,14 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  void showColoredToast() {
+    Fluttertoast.showToast(
+        msg: "This is Colored Toast with android duration of 5 Sec",
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
+
   List<Step> getSteps() => [
         Step(
             title: const Text('Info'),
@@ -63,10 +72,30 @@ class _RegisterViewState extends State<RegisterView> {
                     menuIds: state.menuIds,
                     openTime: state.openingTime.value,
                     phoneNumber: '',
-                    preferenceIds: [],
+                    preferenceIds: state.preferenceIds,
                     rating: null,
                   );
                   _restaurantRepository.createRestaurant(restaurant);
+                  // showColoredToast();
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(SnackBar(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(state.errorMessage ?? 'Restaurant creation'),
+                          Icon(
+                            Icons.done,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ],
+                      ),
+                    ));
+
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => ToastContext(),
+                  // ));
                 }
               },
               onStepCancel: () {
