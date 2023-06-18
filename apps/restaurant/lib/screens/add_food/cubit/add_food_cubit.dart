@@ -66,4 +66,40 @@ class AddFoodCubit extends Cubit<AddFoodState> {
       state.copyWith(image: image),
     );
   }
+
+  void addMenu(String menuId) {
+    final List<String> menuIds = List.from(state.menuIds);
+    menuIds.add(menuId);
+    emit(state.copyWith(menuIds: menuIds));
+  }
+
+  void removeMenu(String menuId) {
+    final List<String> menuIds = List.from(state.menuIds);
+    menuIds.remove(menuId);
+    emit(state.copyWith(menuIds: menuIds));
+  }
+
+  void addCategory(String categoryId) {
+    final List<String> categoryIds = List.from(state.categoryIds);
+    categoryIds.add(categoryId);
+    emit(state.copyWith(categoryIds: categoryIds));
+  }
+
+  void removeCategory(String categoryId) {
+    final List<String> categoryIds = List.from(state.categoryIds);
+    categoryIds.remove(categoryId);
+    emit(state.copyWith(categoryIds: categoryIds));
+  }
+
+  void addPreference(String preferenceId) {
+    final List<String> preferenceIds = List.from(state.preferenceIds);
+    preferenceIds.add(preferenceId);
+    emit(state.copyWith(preferenceIds: preferenceIds));
+  }
+
+  void removePreference(String preferenceId) {
+    final List<String> preferenceIds = List.from(state.preferenceIds);
+    preferenceIds.remove(preferenceId);
+    emit(state.copyWith(preferenceIds: preferenceIds));
+  }
 }

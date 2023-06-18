@@ -1,49 +1,59 @@
 part of 'add_food_cubit.dart';
 
-class AddFoodState extends Equatable {
-  final NotEmptyString displayName;
-  final IsNumeric price;
-  final NotEmptyString description;
-  final File? image;
-  final List<String> categoryIds;
-  final FormzSubmissionStatus status;
-  final bool isValid;
-  final String? errorMessage;
-  final bool isRestarting;
-
+final class AddFoodState extends Equatable {
   const AddFoodState({
     this.displayName = const NotEmptyString.pure(),
     this.price = const IsNumeric.pure(),
     this.description = const NotEmptyString.pure(),
     this.image,
-    this.categoryIds = const [],
     this.status = FormzSubmissionStatus.initial,
     this.isValid = false,
     this.errorMessage,
     this.isRestarting = false,
-  });
+    List<String>? categoryIds,
+    List<String>? menuIds,
+    List<String>? preferenceIds,
+  })  : categoryIds = categoryIds ?? const [],
+        preferenceIds = preferenceIds ?? const [],
+        menuIds = menuIds ?? const [];
+
+  final NotEmptyString displayName;
+  final IsNumeric price;
+  final NotEmptyString description;
+  final File? image;
+  final FormzSubmissionStatus status;
+  final bool isValid;
+  final String? errorMessage;
+  final bool isRestarting;
+  final List<String> categoryIds;
+  final List<String> menuIds;
+  final List<String> preferenceIds;
 
   AddFoodState copyWith({
     NotEmptyString? displayName,
     IsNumeric? price,
     NotEmptyString? description,
     File? image,
-    List<String>? categoryIds,
     FormzSubmissionStatus? status,
     bool? isValid,
     String? errorMessage,
     bool? isRestarting,
+    List<String>? categoryIds,
+    List<String>? menuIds,
+    List<String>? preferenceIds,
   }) {
     return AddFoodState(
       displayName: displayName ?? this.displayName,
       price: price ?? this.price,
       description: description ?? this.description,
       image: image ?? this.image,
-      categoryIds: categoryIds ?? this.categoryIds,
       status: status ?? this.status,
       isValid: isValid ?? this.isValid,
       errorMessage: errorMessage ?? this.errorMessage,
       isRestarting: isRestarting ?? this.isRestarting,
+      categoryIds: categoryIds ?? this.categoryIds,
+      menuIds: menuIds ?? this.menuIds,
+      preferenceIds: preferenceIds ?? this.preferenceIds,
     );
   }
 
@@ -59,6 +69,9 @@ class AddFoodState extends Equatable {
       isValid,
       errorMessage,
       isRestarting,
+      categoryIds,
+      preferenceIds,
+      menuIds,
     ];
   }
 }

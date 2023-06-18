@@ -13,6 +13,9 @@ class Food extends Equatable {
   final String? imageUrl;
   final num? price;
   final bool? isAvailable;
+  final List<String>? preferenceIds;
+  final List<String>? menuIds;
+  final List<String>? categoryIds;
 
   Food({
     String? id,
@@ -22,6 +25,9 @@ class Food extends Equatable {
     required this.imageUrl,
     required this.price,
     required this.isAvailable,
+    required this.preferenceIds,
+    required this.menuIds,
+    required this.categoryIds,
   }) : id = id ?? Uuid().v4();
 
   Food copyWith({
@@ -32,6 +38,9 @@ class Food extends Equatable {
     String? imageUrl,
     num? price,
     bool? isAvailable,
+    List<String>? preferenceIds,
+    List<String>? menuIds,
+    List<String>? categoryIds,
   }) {
     return Food(
       id: id ?? this.id,
@@ -41,6 +50,9 @@ class Food extends Equatable {
       imageUrl: imageUrl ?? this.imageUrl,
       price: price ?? this.price,
       isAvailable: isAvailable ?? this.isAvailable,
+      preferenceIds: preferenceIds ?? this.preferenceIds,
+      menuIds: menuIds ?? this.menuIds,
+      categoryIds: categoryIds ?? this.categoryIds,
     );
   }
 
@@ -53,6 +65,9 @@ class Food extends Equatable {
       'imageUrl': imageUrl,
       'price': price,
       'isAvailable': isAvailable,
+      'preferenceIds': preferenceIds,
+      'menuIds': menuIds,
+      'categoryIds': categoryIds,
     };
   }
 
@@ -68,6 +83,11 @@ class Food extends Equatable {
       price: map['price'] != null ? map['price'] as num : null,
       isAvailable:
           map['isAvailable'] != null ? map['isAvailable'] as bool : null,
+      preferenceIds:
+          map['preferenceIds'] != null ? List.from(map['preferenceIds']) : null,
+      menuIds: map['menuIds'] != null ? List.from(map['menuIds']) : null,
+      categoryIds:
+          map['categoryIds'] != null ? List.from(map['categoryIds']) : null,
     );
   }
 
@@ -82,6 +102,9 @@ class Food extends Equatable {
       imageUrl: data?['imageUrl'],
       price: data?['price'],
       isAvailable: data?['isAvailable'],
+      preferenceIds: List<String>.from(data?['preferenceIds'] ?? []),
+      categoryIds: List<String>.from(data?['categoryIds'] ?? []),
+      menuIds: List<String>.from(data?['menuIds'] ?? []),
     );
   }
 
@@ -103,6 +126,9 @@ class Food extends Equatable {
       imageUrl,
       price,
       isAvailable,
+      preferenceIds,
+      menuIds,
+      categoryIds,
     ];
   }
 }

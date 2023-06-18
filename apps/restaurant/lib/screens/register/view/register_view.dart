@@ -55,64 +55,68 @@ class _RegisterViewState extends State<RegisterView> {
               currentStep: _currentStep,
               steps: getSteps(),
               type: StepperType.horizontal,
-              onStepContinue: () async {
-                if (_currentStep < getSteps().length - 1) {
-                  setState(() {
-                    _currentStep++;
-                  });
-                } else {
-                  // await restaurantRepository.uploadRestaurantImage(
-                  //     filePath: state.image.toString(), fileName: 'id1');
-                  // String imageUrl =
-                  //     await restaurantRepository.downloadURL('id1');
-                  Restaurant restaurant = Restaurant(
-                    displayName: state.name.value,
-                    address: state.address.value,
-                    categoryIds: state.categoryIds,
-                    closeTime: state.closingTime.value,
-                    cuisineIds: state.cuisineIds,
-                    deliveryPriceRange: '',
-                    deliveryTimeRange: '',
-                    imageUrl: '',
-                    menuIds: state.menuIds,
-                    openTime: state.openingTime.value,
-                    phoneNumber: '',
-                    preferenceIds: state.preferenceIds,
-                    rating: null,
-                  );
-                  try {
-                    String imageUrl = await restaurantRepository
-                        .uploadRestaurantImage(state.image!);
-                    restaurant = restaurant.copyWith(imageUrl: imageUrl);
-                  } catch (e) {
-                    print(e);
-                  }
-                  restaurantRepository.createRestaurant(restaurant);
-                  GoRouter.of(context).go('/add_food');
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(SnackBar(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(state.errorMessage ?? 'Restaurant creation'),
-                          Icon(
-                            Icons.done,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ],
-                      ),
-                    ));
+              onStepContinue: !state.isValid && _currentStep == 1
+                  ? null
+                  : () async {
+                      if (_currentStep < getSteps().length - 1) {
+                        setState(() {
+                          _currentStep++;
+                        });
+                      } else {
+                        // await restaurantRepository.uploadRestaurantImage(
+                        //     filePath: state.image.toString(), fileName: 'id1');
+                        // String imageUrl =
+                        //     await restaurantRepository.downloadURL('id1');
+                        Restaurant restaurant = Restaurant(
+                          displayName: state.name.value,
+                          address: state.address.value,
+                          categoryIds: state.categoryIds,
+                          closeTime: state.closingTime.value,
+                          cuisineIds: state.cuisineIds,
+                          deliveryPriceRange: '',
+                          deliveryTimeRange: '',
+                          imageUrl: '',
+                          menuIds: state.menuIds,
+                          openTime: state.openingTime.value,
+                          phoneNumber: '',
+                          preferenceIds: state.preferenceIds,
+                          rating: null,
+                        );
+                        try {
+                          String imageUrl = await restaurantRepository
+                              .uploadRestaurantImage(state.image!);
+                          restaurant = restaurant.copyWith(imageUrl: imageUrl);
+                        } catch (e) {
+                          print(e);
+                        }
+                        restaurantRepository.createRestaurant(restaurant);
+                        GoRouter.of(context).go('/add_food');
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(state.errorMessage ??
+                                    'Restaurant creation'),
+                                Icon(
+                                  Icons.done,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ],
+                            ),
+                          ));
 
-                  context.goNamed(RouteName.addFood,
-                      pathParameters: {'restaurantId': restaurant.id});
+                        context.goNamed(RouteName.addFood,
+                            pathParameters: {'restaurantId': restaurant.id});
 
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => ToastContext(),
-                  // ));
-                }
-              },
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (context) => ToastContext(),
+                        // ));
+                      }
+                    },
               onStepCancel: () {
                 if (_currentStep > 0) {
                   setState(() {

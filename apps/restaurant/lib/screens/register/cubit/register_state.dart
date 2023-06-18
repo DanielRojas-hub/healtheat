@@ -87,5 +87,3 @@ final class RegisterState extends Equatable {
     );
   }
 }
-
-// class RegisterInitial extends RegisterState {}
