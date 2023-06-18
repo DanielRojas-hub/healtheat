@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_repository/food_repository.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
-import 'package:restaurant/screens/add_food/pages/category/category.dart';
 import 'package:restaurant/screens/add_food/pages/information/information.dart';
 import 'package:restaurant/screens/add_food/pages/previsualization/previsualization.dart';
 

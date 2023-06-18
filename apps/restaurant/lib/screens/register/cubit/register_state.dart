@@ -8,7 +8,7 @@ final class RegisterState extends Equatable {
     this.name = const NotEmptyString.pure(),
     this.address = const NotEmptyString.pure(),
     this.code = const NotEmptyString.pure(),
-    this.phone = const IsNumeric.pure(),
+    this.phone = const Phone.pure(),
     this.openingTime = const NotEmptyString.pure(),
     this.closingTime = const NotEmptyString.pure(),
     this.image,
@@ -26,7 +26,7 @@ final class RegisterState extends Equatable {
   final NotEmptyString name;
   final NotEmptyString address;
   final NotEmptyString code;
-  final IsNumeric phone;
+  final Phone phone;
   final NotEmptyString openingTime;
   final NotEmptyString closingTime;
   final File? image;
@@ -57,7 +57,7 @@ final class RegisterState extends Equatable {
     NotEmptyString? name,
     NotEmptyString? address,
     NotEmptyString? code,
-    IsNumeric? phone,
+    Phone? phone,
     NotEmptyString? openingTime,
     NotEmptyString? closingTime,
     FormzSubmissionStatus? status,

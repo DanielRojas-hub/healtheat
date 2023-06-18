@@ -59,24 +59,7 @@ class _InfoViewState extends State<InfoView> {
         const OpeningTimeInput(),
         const SizedBox(height: 15),
         const ClosingTimeInput(),
-        const SizedBox(height: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                _selectImage();
-                // await restaurantRepository.uploadRestaurantImage(
-                //     filePath: _image.toString(), fileName: 'id1');
-              },
-              child: const Text('Upload image'),
-            ),
-            if (_image != null) ...[
-              const SizedBox(height: 10),
-              RestaurantImage(image: _image),
-            ],
-          ],
-        ),
+        const SizedBox(height: 5),
       ],
     );
   }

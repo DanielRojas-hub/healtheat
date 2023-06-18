@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:form_inputs/form_inputs.dart';
+import 'package:intl/intl.dart';
 
 part 'register_state.dart';
 
@@ -61,7 +62,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void phoneChanged(String value) {
-    final phone = IsNumeric.dirty(value);
+    final phone = Phone.dirty(value);
     emit(state.copyWith(
       phone: phone,
       isValid: Formz.validate([
@@ -78,7 +79,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   void openingTimeChanged(DateTime? value) {
     if (value == null) return;
     final openingTime = NotEmptyString.dirty(value.toString());
-    openingTimeController.text = value.toString();
+    openingTimeController.text = DateFormat('HH:mm').format(value);
     emit(state.copyWith(
       openingTime: openingTime,
       isValid: Formz.validate([
@@ -95,7 +96,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   void closingTimeChanged(DateTime? value) {
     if (value == null) return;
     final closingTime = NotEmptyString.dirty(value.toString());
-    closingTimeController.text = value.toString();
+    closingTimeController.text = DateFormat('HH:mm').format(value);
     emit(state.copyWith(
       closingTime: closingTime,
       isValid: Formz.validate([

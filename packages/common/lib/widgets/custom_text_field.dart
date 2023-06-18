@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../utils/utils.dart';
 
@@ -14,7 +15,8 @@ class CustomTextField extends StatelessWidget {
       this.onChanged,
       this.errorText,
       this.initialValue,
-      this.controller});
+      this.controller,
+      this.inputFormatters});
 
   final Icon? icon;
   final VoidCallback? onTap;
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
   final String? errorText;
   final String? initialValue;
   final TextEditingController? controller;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class CustomTextField extends StatelessWidget {
       onTap: onTap,
       onChanged: onChanged,
       initialValue: initialValue,
+      inputFormatters: inputFormatters,
       readOnly: readOnly ?? false,
       keyboardType: textInputType ?? TextInputType.text,
       decoration: inputDecorationBorderMethod(context).copyWith(

@@ -6,7 +6,7 @@ import 'package:restaurant/screens/register/pages/info/pages/time_picker/cubit/t
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
 
 class TimePickerView extends StatelessWidget {
-  TimePickerView({super.key, required this.timePickerType});
+  const TimePickerView({super.key, required this.timePickerType});
   final TimePickerType timePickerType;
 
   @override
