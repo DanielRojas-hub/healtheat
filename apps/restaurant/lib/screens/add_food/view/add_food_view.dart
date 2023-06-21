@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_repository/food_repository.dart';
+import 'package:go_router/go_router.dart';
+import 'package:restaurant/router/route_name.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
 import 'package:restaurant/screens/add_food/pages/category/category.dart';
 import 'package:restaurant/screens/add_food/pages/information/information.dart';
@@ -93,7 +95,8 @@ class _AddFoodViewState extends State<AddFoodView> {
                             foodRepository.createFood(
                                 widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                                 food);
-                            _currentStep = 0;
+                            GoRouter.of(context).go('/home');
+                            context.goNamed(RouteName.home);
                           }
                         },
                   onStepCancel: _currentStep == 0
