@@ -52,19 +52,19 @@ class RestaurantCard extends StatelessWidget {
                 Expanded(
                     child: Text(name,
                         style: Theme.of(context).textTheme.titleLarge)),
-                CustomIconButton(
-                  onTap: onTapFavorite,
-                  borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-                  iconSize: 22.0,
-                  elevation: 0,
-                  backgroundColor: Theme.of(context).cardColor,
-                  iconData: isFavorite
-                      ? Icons.favorite
-                      : Icons.favorite_outline_outlined,
-                  color: isFavorite
-                      ? context.theme.redColor
-                      : Theme.of(context).disabledColor,
-                )
+                // CustomIconButton(
+                //   onTap: onTapFavorite,
+                //   borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+                //   iconSize: 22.0,
+                //   elevation: 0,
+                //   backgroundColor: Theme.of(context).cardColor,
+                //   iconData: isFavorite
+                //       ? Icons.favorite
+                //       : Icons.favorite_outline_outlined,
+                //   color: isFavorite
+                //       ? context.theme.redColor
+                //       : Theme.of(context).disabledColor,
+                // )
               ]),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

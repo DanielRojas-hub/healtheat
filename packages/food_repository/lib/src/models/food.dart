@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 class Food extends Equatable {
   final String id;
@@ -13,15 +14,15 @@ class Food extends Equatable {
   final num? price;
   final bool? isAvailable;
 
-  const Food({
-    required this.id,
+  Food({
+    String? id,
     required this.restaurantId,
     required this.displayName,
     required this.description,
     required this.imageUrl,
     required this.price,
     required this.isAvailable,
-  });
+  }) : id = id ?? Uuid().v4();
 
   Food copyWith({
     String? id,
