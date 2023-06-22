@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../login.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -19,19 +21,10 @@ class LoginView extends StatelessWidget {
                         )),
               ),
               const SizedBox(height: 40),
-              const TextField(
-                decoration: InputDecoration(
-                    label: Text("Email"), suffixIcon: Icon(Icons.email)),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                    label: Text("Password"), suffixIcon: Icon(Icons.password)),
-              ),
+              const EmailInput(),
+              const PasswordInput(),
               const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("LOG IN"),
-              ),
+              const LoginButton(),
               const SizedBox(height: 10),
               Row(children: [
                 Expanded(
@@ -51,20 +44,7 @@ class LoginView extends StatelessWidget {
                 ),
               ]),
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).cardColor)),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.asset('./assets/icons/google_logo.png',
-                      width: 20, height: 20),
-                  const SizedBox(width: 10),
-                  Text('Sign in with Google',
-                      style: Theme.of(context).textTheme.labelLarge),
-                ]),
-              ),
+              const GoogleButton(),
               const SizedBox(height: 20),
               RichText(
                 textAlign: TextAlign.center,

@@ -29,16 +29,13 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: '/register',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
       //     name: RouteName.splashScreen,
       //     builder: (context, state) => const SplashScreenPage()),
-      GoRoute(
-          path: '/payment_method',
-          name: RouteName.paymentMethod,
-          builder: (context, state) => const PaymentMethodPage()),
+
       GoRoute(
           path: '/preferences_filter',
           name: RouteName.preferencesFilter,
@@ -110,11 +107,19 @@ class AppRouter {
                   restaurantGoRoute(RouteName.cartRestaurantDetails,
                       RouteName.cartRestaurantFoodDetails),
                   GoRoute(
-                    path: 'order_confirmation',
-                    parentNavigatorKey: rootNavigatorKey,
-                    name: RouteName.orderConfirmation,
-                    builder: (context, state) => const OrderConfirmationPage(),
-                  )
+                      path: 'order_confirmation',
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: RouteName.orderConfirmation,
+                      builder: (context, state) =>
+                          const OrderConfirmationPage(),
+                      routes: [
+                        GoRoute(
+                            path: 'payment_method',
+                            parentNavigatorKey: rootNavigatorKey,
+                            name: RouteName.paymentMethod,
+                            builder: (context, state) =>
+                                const PaymentMethodPage()),
+                      ])
                 ]),
             GoRoute(
               path: '/profile',
