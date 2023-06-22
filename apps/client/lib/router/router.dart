@@ -80,10 +80,21 @@ class AppRouter {
                 ]),
             GoRoute(
                 path: '/search',
-                parentNavigatorKey: shellNavigatorKey,
+                parentNavigatorKey: rootNavigatorKey,
                 name: RouteName.search,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: SearchPage()),
+                pageBuilder: (context, state) {
+                  final categories =
+                      state.queryParameters['categories']?.split(',');
+                  final cuisines =
+                      state.queryParameters['cuisines']?.split(',');
+                  final menus = state.queryParameters['menus']?.split(',');
+
+                  return NoTransitionPage(
+                      child: SearchPage(
+                          categories: categories,
+                          cuisines: cuisines,
+                          menus: menus));
+                },
                 routes: [
                   restaurantGoRoute(RouteName.searchRestaurantDetails,
                       RouteName.searchRestaurantFoodDetails),

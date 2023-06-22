@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:common/utils/input_border.dart';
+// import 'package:client/router/route_name.dart';
+// import 'package:go_router/go_router.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key, this.height});
@@ -11,6 +13,8 @@ class CustomSearchBar extends StatelessWidget {
     return SizedBox(
       height: height,
       child: TextField(
+        // onTap: context.goNamed(RouteName.serch);
+        // onChanged:(value) => ,
         decoration: inputDecorationBorderMethod(context).copyWith(
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 5),

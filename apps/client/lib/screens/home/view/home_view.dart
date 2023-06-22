@@ -28,39 +28,42 @@ class HomeView extends StatelessWidget {
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-              sliver: SliverToBoxAdapter(child: SearchAndFilterSection(
-                onTap: () async {
-                  Map<String, String>? queryParameters = {};
+              sliver: SliverToBoxAdapter(
+                child: SearchAndFilterSection(
+                  onTap: () async {
+                    Map<String, String>? queryParameters = {};
 
-                  if ((categories ?? []).isNotEmpty) {
-                    queryParameters['categories'] = categories!.join(',');
-                  }
-                  if ((cuisines ?? []).isNotEmpty) {
-                    queryParameters['cuisines'] = cuisines!.join(',');
-                  }
-                  if ((menus ?? []).isNotEmpty) {
-                    queryParameters['menus'] = menus!.join(',');
-                  }
+                    if ((categories ?? []).isNotEmpty) {
+                      queryParameters['categories'] = categories!.join(',');
+                    }
+                    if ((cuisines ?? []).isNotEmpty) {
+                      queryParameters['cuisines'] = cuisines!.join(',');
+                    }
+                    if ((menus ?? []).isNotEmpty) {
+                      queryParameters['menus'] = menus!.join(',');
+                    }
 
-                  Map<String, String?>? returnedQueryParameters =
-                      await context.pushNamed(RouteName.homeRestaurantFilter,
-                          queryParameters: queryParameters);
-                  if (returnedQueryParameters != null) {
-                    context.read<RestaurantBloc>().add(
-                          UserPreferenceBlocRestaurants(
-                              context.read<UserPreferenceBloc>(),
-                              categories: returnedQueryParameters['categories']
-                                  ?.split(','),
-                              cuisines: returnedQueryParameters['cuisines']
-                                  ?.split(','),
-                              menus:
-                                  returnedQueryParameters['menus']?.split(',')),
-                        );
-                    context.goNamed(RouteName.home,
-                        queryParameters: returnedQueryParameters);
-                  }
-                },
-              )),
+                    Map<String, String?>? returnedQueryParameters =
+                        await context.pushNamed(RouteName.homeRestaurantFilter,
+                            queryParameters: queryParameters);
+                    if (returnedQueryParameters != null) {
+                      context.read<RestaurantBloc>().add(
+                            UserPreferenceBlocRestaurants(
+                                context.read<UserPreferenceBloc>(),
+                                categories:
+                                    returnedQueryParameters['categories']
+                                        ?.split(','),
+                                cuisines: returnedQueryParameters['cuisines']
+                                    ?.split(','),
+                                menus: returnedQueryParameters['menus']
+                                    ?.split(',')),
+                          );
+                      context.goNamed(RouteName.home,
+                          queryParameters: returnedQueryParameters);
+                    }
+                  },
+                ),
+              ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 25)),
             const SliverPadding(

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:menu_repository/menu_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'search_event.dart';
