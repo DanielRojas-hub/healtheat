@@ -41,8 +41,10 @@ class HomeView extends StatelessWidget {
                   context.read<TabCubit>().onPageChanged(index),
               children: [
                 MenuPage(restaurantId: restaurantId),
-                const ReviewPage(),
-                const AboutPage()
+                // const ReviewPage(),
+                AboutPage(
+                  restaurantId: restaurantId,
+                )
               ]),
         ));
     ;

@@ -3,6 +3,7 @@ import 'package:common/services/services.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class RestaurantSpecifications extends StatelessWidget {
   const RestaurantSpecifications({Key? key}) : super(key: key);
@@ -19,19 +20,19 @@ class RestaurantSpecifications extends StatelessWidget {
               runAlignment: WrapAlignment.center,
               runSpacing: 10.0,
               children: [
+                // CustomLabelButton(
+                //     label: Text(restaurant.rating.toString()),
+                //     icon: Icons.star_rate_rounded,
+                //     color: Theme.of(context).colorScheme.onTertiaryContainer,
+                //     backgroundColor:
+                //         Theme.of(context).colorScheme.tertiaryContainer,
+                //     iconColor: context.theme.rateColor),
                 CustomLabelButton(
-                    label: Text(restaurant.rating.toString()),
-                    icon: Icons.star_rate_rounded,
+                    icon: Icons.schedule,
                     color: Theme.of(context).colorScheme.onTertiaryContainer,
                     backgroundColor:
                         Theme.of(context).colorScheme.tertiaryContainer,
-                    iconColor: context.theme.rateColor),
-                CustomLabelButton(
-                    icon: Icons.electric_scooter,
-                    color: Theme.of(context).colorScheme.onTertiaryContainer,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.tertiaryContainer,
-                    label: Text(restaurant.deliveryPriceRange.toString(),
+                    label: Text(restaurant.openTime!,
                         style: Theme.of(context).textTheme.labelMedium)),
                 CustomLabelButton(
                     label: Text(restaurant.deliveryTimeRange.toString()),

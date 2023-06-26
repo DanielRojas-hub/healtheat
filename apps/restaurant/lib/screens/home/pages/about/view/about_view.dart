@@ -1,18 +1,37 @@
+import 'package:common/services/restaurant/restaurant_bloc.dart';
 import 'package:common/utils/utils.dart';
+import 'package:common/widgets/skelton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AboutView extends StatelessWidget {
-  const AboutView({super.key});
+  const AboutView({super.key, required this.restaurantId});
+
+  final String restaurantId;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(Constants.margin),
-      children: const [
-        InfoAbout(label: Text('0423123123123'), iconData: Icons.phone),
-        SizedBox(height: 20),
-        InfoAbout(label: Text('0423123123123'), iconData: Icons.phone)
-      ],
+    return BlocBuilder<RestaurantBloc, RestaurantState>(
+      builder: (context, state) {
+        if (state is RestaurantLoaded) {
+          final restaurant = state.restaurant;
+          return ListView(
+            padding: const EdgeInsets.all(Constants.margin),
+            children: [
+              InfoAbout(
+                  label: Text(restaurant.phoneNumber!), iconData: Icons.phone),
+              const SizedBox(height: 20),
+              InfoAbout(
+                  label: Text(restaurant.address!),
+                  iconData: Icons.location_on),
+            ],
+          );
+        }
+        if (state is RestaurantLoading) {
+          return const Skelton(width: 150);
+        }
+        return const SizedBox();
+      },
     );
   }
 }

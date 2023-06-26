@@ -20,7 +20,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/home/28LecpHZyk81KUl6EsND',
+      initialLocation: '/home/ff99b4b4-80bf-4ec6-bb2b-b87986a1f3e1',
       routes: [
         GoRoute(
             path: '/register',
