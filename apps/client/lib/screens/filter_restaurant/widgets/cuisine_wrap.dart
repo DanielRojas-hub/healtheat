@@ -9,7 +9,7 @@ class CuisineWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FilterBloc, FilterState>(builder: ((context, state) {
-      final selectedCuisines = state.cuisineList;
+      final selectedCuisines = state.cuisineIds;
 
       return BlocBuilder<CuisineBloc, CuisineState>(builder: (context, state) {
         if (state is CuisinesLoaded) {

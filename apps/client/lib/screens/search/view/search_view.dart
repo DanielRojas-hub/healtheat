@@ -9,11 +9,12 @@ import 'package:go_router/go_router.dart';
 import '../search.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({super.key, this.categories, this.cuisines, this.menus});
+  const SearchView(
+      {super.key, this.categoryIds, this.cuisineIds, this.menuIds});
 
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +29,18 @@ class SearchView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: Constants.margin, vertical: 10),
                   child: SearchAndFilterSection(
-                    onTap: () async {
+                    onTapSearch: () {},
+                    onTapFilter: () async {
                       Map<String, String>? queryParameters = {};
 
-                      if ((categories ?? []).isNotEmpty) {
-                        queryParameters['categories'] = categories!.join(',');
+                      if ((categoryIds ?? []).isNotEmpty) {
+                        queryParameters['categoryIds'] = categoryIds!.join(',');
                       }
-                      if ((cuisines ?? []).isNotEmpty) {
-                        queryParameters['cuisines'] = cuisines!.join(',');
+                      if ((cuisineIds ?? []).isNotEmpty) {
+                        queryParameters['cuisineIds'] = cuisineIds!.join(',');
                       }
-                      if ((menus ?? []).isNotEmpty) {
-                        queryParameters['menus'] = menus!.join(',');
+                      if ((menuIds ?? []).isNotEmpty) {
+                        queryParameters['menuIds'] = menuIds!.join(',');
                       }
 
                       Map<String, String?>? returnedQueryParameters =
@@ -49,12 +51,13 @@ class SearchView extends StatelessWidget {
                         context.read<RestaurantBloc>().add(
                               UserPreferenceBlocRestaurants(
                                   context.read<UserPreferenceBloc>(),
-                                  categories:
-                                      returnedQueryParameters['categories']
+                                  categoryIds:
+                                      returnedQueryParameters['categoryIds']
                                           ?.split(','),
-                                  cuisines: returnedQueryParameters['cuisines']
-                                      ?.split(','),
-                                  menus: returnedQueryParameters['menus']
+                                  cuisineIds:
+                                      returnedQueryParameters['cuisineIds']
+                                          ?.split(','),
+                                  menuIds: returnedQueryParameters['menuIds']
                                       ?.split(',')),
                             );
                         context.goNamed(RouteName.search,
@@ -96,7 +99,7 @@ class SearchView extends StatelessWidget {
                       isFavorite: true,
                     );
                   },
-                  itemCount: 10,
+                  itemCount: restaurants.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 20),
                 )

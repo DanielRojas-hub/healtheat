@@ -9,7 +9,7 @@ class MenuElements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FilterBloc, FilterState>(builder: ((context, state) {
-      final selectedMenus = state.menuList;
+      final selectedMenus = state.menuIds;
 
       return BlocBuilder<MenuBloc, MenuState>(builder: (context, state) {
         if (state is MenusLoaded) {

@@ -5,12 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../search.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key, this.categories, this.cuisines, this.menus})
+  const SearchPage(
+      {Key? key,
+      this.categoryIds,
+      this.cuisineIds,
+      this.menuIds,
+      this.searchInput})
       : super(key: key);
 
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
+  final String? searchInput;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +26,9 @@ class SearchPage extends StatelessWidget {
           create: (context) => RestaurantBloc()
             ..add(UserPreferenceBlocRestaurants(
                 context.read<UserPreferenceBloc>(),
-                categories: categories,
-                cuisines: cuisines,
-                menus: menus)),
+                categoryIds: categoryIds,
+                cuisineIds: cuisineIds,
+                menuIds: menuIds)),
         ),
         BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc()..add(const StreamCategories()),
@@ -35,10 +41,12 @@ class SearchPage extends StatelessWidget {
         ),
         BlocProvider<FilterBloc>(
             create: (context) => FilterBloc(
-                categoryIds: categories, cuisineIds: cuisines, menuIds: menus)),
+                categoryIds: categoryIds,
+                cuisineIds: cuisineIds,
+                menuIds: menuIds)),
       ],
-      child:
-          SearchView(categories: categories, cuisines: cuisines, menus: menus),
+      child: SearchView(
+          categoryIds: categoryIds, cuisineIds: cuisineIds, menuIds: menuIds),
     );
   }
 }

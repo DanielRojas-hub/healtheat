@@ -10,9 +10,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
       List<String>? cuisineIds,
       List<String>? menuIds})
       : super(FilterState(
-            categoryList: categoryIds,
-            cuisineList: cuisineIds,
-            menuList: menuIds)) {
+            categoryIds: categoryIds,
+            cuisineIds: cuisineIds,
+            menuIds: menuIds)) {
     on<AddCategory>(onAddCategory);
     on<RemoveCategory>(onRemoveCategory);
     on<AddCuisine>(onAddCuisine);
@@ -26,50 +26,50 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   // final PreferenceRepository _preferenceRepository;
 
   void onAddCategory(AddCategory event, Emitter<FilterState> emit) async {
-    if (state.categoryList.isEmpty) {
-      return emit(state.copyWith(categoryList: [event.categoryId]));
+    if (state.categoryIds.isEmpty) {
+      return emit(state.copyWith(categoryIds: [event.categoryId]));
     }
 
-    final copyList = List<String>.from(state.categoryList);
+    final copyList = List<String>.from(state.categoryIds);
     copyList.add(event.categoryId);
-    emit(state.copyWith(categoryList: copyList));
+    emit(state.copyWith(categoryIds: copyList));
   }
 
   void onRemoveCategory(RemoveCategory event, Emitter<FilterState> emit) async {
-    final copyList = List<String>.from(state.categoryList);
+    final copyList = List<String>.from(state.categoryIds);
     copyList.remove(event.categoryId);
-    emit(state.copyWith(categoryList: copyList));
+    emit(state.copyWith(categoryIds: copyList));
   }
 
   void onAddCuisine(AddCuisine event, Emitter<FilterState> emit) async {
-    if (state.cuisineList.isEmpty) {
-      return emit(state.copyWith(cuisineList: [event.cuisineId]));
+    if (state.cuisineIds.isEmpty) {
+      return emit(state.copyWith(cuisineIds: [event.cuisineId]));
     }
-    final copyList = List<String>.from(state.cuisineList);
+    final copyList = List<String>.from(state.cuisineIds);
     copyList.add(event.cuisineId);
-    emit(state.copyWith(cuisineList: copyList));
+    emit(state.copyWith(cuisineIds: copyList));
   }
 
   void onRemoveCuisine(RemoveCuisine event, Emitter<FilterState> emit) async {
-    final copyList = List<String>.from(state.cuisineList);
+    final copyList = List<String>.from(state.cuisineIds);
     copyList.remove(event.cuisineId);
-    emit(state.copyWith(cuisineList: copyList));
+    emit(state.copyWith(cuisineIds: copyList));
   }
 
   void onAddMenu(AddMenu event, Emitter<FilterState> emit) async {
-    if (state.menuList.isEmpty) {
-      return emit(state.copyWith(menuList: [event.menuId]));
+    if (state.menuIds.isEmpty) {
+      return emit(state.copyWith(menuIds: [event.menuId]));
     }
 
-    final copyList = List<String>.from(state.menuList);
+    final copyList = List<String>.from(state.menuIds);
     copyList.add(event.menuId);
-    emit(state.copyWith(menuList: copyList));
+    emit(state.copyWith(menuIds: copyList));
   }
 
   void onRemoveMenu(RemoveMenu event, Emitter<FilterState> emit) async {
-    final copyList = List<String>.from(state.menuList);
+    final copyList = List<String>.from(state.menuIds);
     copyList.remove(event.menuId);
-    emit(state.copyWith(menuList: copyList));
+    emit(state.copyWith(menuIds: copyList));
   }
 
   void onAddSortType(AddSortType event, Emitter<FilterState> emit) async {

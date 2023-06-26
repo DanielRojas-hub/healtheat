@@ -37,20 +37,47 @@ class AppRouter {
       //     builder: (context, state) => const SplashScreenPage()),
       GoRoute(
           path: '/payment_method',
+          parentNavigatorKey: rootNavigatorKey,
           name: RouteName.paymentMethod,
           builder: (context, state) => const PaymentMethodPage()),
       GoRoute(
           path: '/preferences_filter',
+          parentNavigatorKey: rootNavigatorKey,
           name: RouteName.preferencesFilter,
           builder: (context, state) => const PreferencesFilterPage()),
       GoRoute(
           path: '/register',
+          parentNavigatorKey: rootNavigatorKey,
           name: RouteName.register,
           builder: (context, state) => const RegisterPage()),
       GoRoute(
           path: '/login',
+          parentNavigatorKey: rootNavigatorKey,
           name: RouteName.login,
           builder: (context, state) => const LoginPage()),
+      GoRoute(
+          path: '/search',
+          parentNavigatorKey: rootNavigatorKey,
+          name: RouteName.search,
+          pageBuilder: (context, state) {
+            final categoryIds =
+                state.queryParameters['categoryIds']?.split(',');
+            final cuisineIds = state.queryParameters['cuisineIds']?.split(',');
+            final menuIds = state.queryParameters['menuIds']?.split(',');
+            final searchInput = state.queryParameters['searchInput'];
+
+            return NoTransitionPage(
+                child: SearchPage(
+                    categoryIds: categoryIds,
+                    cuisineIds: cuisineIds,
+                    menuIds: menuIds,
+                    searchInput: searchInput));
+          },
+          routes: [
+            restaurantGoRoute(RouteName.searchRestaurantDetails,
+                RouteName.searchRestaurantFoodDetails),
+            filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
+          ]),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),
@@ -60,45 +87,23 @@ class AppRouter {
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
                 pageBuilder: (context, state) {
-                  final categories =
-                      state.queryParameters['categories']?.split(',');
-                  final cuisines =
-                      state.queryParameters['cuisines']?.split(',');
-                  final menus = state.queryParameters['menus']?.split(',');
+                  final categoryIds =
+                      state.queryParameters['categoryIds']?.split(',');
+                  final cuisineIds =
+                      state.queryParameters['cuisineIds']?.split(',');
+                  final menuIds = state.queryParameters['menuIds']?.split(',');
 
                   return NoTransitionPage(
                     child: HomePage(
-                        categories: categories,
-                        cuisines: cuisines,
-                        menus: menus),
+                        categoryIds: categoryIds,
+                        cuisineIds: cuisineIds,
+                        menuIds: menuIds),
                   );
                 },
                 routes: [
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
                       RouteName.homeRestaurantFoodDetails),
-                ]),
-            GoRoute(
-                path: '/search',
-                parentNavigatorKey: rootNavigatorKey,
-                name: RouteName.search,
-                pageBuilder: (context, state) {
-                  final categories =
-                      state.queryParameters['categories']?.split(',');
-                  final cuisines =
-                      state.queryParameters['cuisines']?.split(',');
-                  final menus = state.queryParameters['menus']?.split(',');
-
-                  return NoTransitionPage(
-                      child: SearchPage(
-                          categories: categories,
-                          cuisines: cuisines,
-                          menus: menus));
-                },
-                routes: [
-                  restaurantGoRoute(RouteName.searchRestaurantDetails,
-                      RouteName.searchRestaurantFoodDetails),
-                  filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
                 ]),
             GoRoute(
                 path: '/favorites',
@@ -153,13 +158,15 @@ class AppRouter {
       parentNavigatorKey: rootNavigatorKey,
       name: filterName,
       pageBuilder: (context, state) {
-        final categories = state.queryParameters['categories']?.split(',');
-        final cuisines = state.queryParameters['cuisines']?.split(',');
-        final menus = state.queryParameters['menus']?.split(',');
+        final categoryIds = state.queryParameters['categoryIds']?.split(',');
+        final cuisineIds = state.queryParameters['cuisineIds']?.split(',');
+        final menuIds = state.queryParameters['menuIds']?.split(',');
 
         return ModalBottomSheetPage(
             child: FilterRestaurantPage(
-                categories: categories, cuisines: cuisines, menus: menus));
+                categoryIds: categoryIds,
+                cuisineIds: cuisineIds,
+                menuIds: menuIds));
       },
     );
   }

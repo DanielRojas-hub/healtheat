@@ -9,7 +9,7 @@ class CategoryWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FilterBloc, FilterState>(builder: ((context, state) {
-      final selectedCategories = state.categoryList;
+      final selectedCategories = state.categoryIds;
 
       return BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, state) {

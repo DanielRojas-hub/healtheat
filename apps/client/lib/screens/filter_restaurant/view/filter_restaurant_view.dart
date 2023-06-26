@@ -124,16 +124,16 @@ class FilterRestaurantView extends StatelessWidget {
 
                     Map<String, String>? queryParameters = {};
 
-                    if (filterState.categoryList.isNotEmpty) {
+                    if (filterState.categoryIds.isNotEmpty) {
                       queryParameters['categories'] =
-                          filterState.categoryList.join(',');
+                          filterState.categoryIds.join(',');
                     }
-                    if (filterState.cuisineList.isNotEmpty) {
+                    if (filterState.cuisineIds.isNotEmpty) {
                       queryParameters['cuisines'] =
-                          filterState.cuisineList.join(',');
+                          filterState.cuisineIds.join(',');
                     }
-                    if (filterState.menuList.isNotEmpty) {
-                      queryParameters['menus'] = filterState.menuList.join(',');
+                    if (filterState.menuIds.isNotEmpty) {
+                      queryParameters['menus'] = filterState.menuIds.join(',');
                     }
 
                     context.pop(queryParameters);

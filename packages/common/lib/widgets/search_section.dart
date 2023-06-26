@@ -6,24 +6,30 @@ import 'package:common/widgets/custom_search_bar.dart';
 class SearchAndFilterSection extends StatelessWidget {
   const SearchAndFilterSection({
     Key? key,
-    required this.onTap,
+    required this.onTapFilter,
+    this.onTapSearch,
   }) : super(key: key);
 
-  final VoidCallback onTap;
+  final VoidCallback onTapFilter;
+  final VoidCallback? onTapSearch;
 
   @override
   Widget build(BuildContext context) {
     const double size = 37;
 
     return Row(children: [
-      const Expanded(child: CustomSearchBar(height: size)),
+      Expanded(
+          child: CustomSearchBar(
+        height: size,
+        onTap: onTapSearch,
+      )),
       const SizedBox(width: 15),
       CustomIconButton(
           iconData: Icons.tune,
           height: size,
           width: size,
           elevation: 0,
-          onTap: onTap),
+          onTap: onTapFilter),
     ]);
   }
 }

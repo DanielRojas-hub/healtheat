@@ -6,11 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../home.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key, this.categories, this.cuisines, this.menus})
+  const HomePage({Key? key, this.categoryIds, this.cuisineIds, this.menuIds})
       : super(key: key);
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,13 @@ class HomePage extends StatelessWidget {
           create: (context) => RestaurantBloc()
             ..add(UserPreferenceBlocRestaurants(
                 context.read<UserPreferenceBloc>(),
-                categories: categories,
-                cuisines: cuisines,
-                menus: menus)),
+                categoryIds: categoryIds,
+                cuisineIds: cuisineIds,
+                menuIds: menuIds)),
         )
       ],
-      child: HomeView(categories: categories, cuisines: cuisines, menus: menus),
+      child: HomeView(
+          categoryIds: categoryIds, cuisineIds: cuisineIds, menuIds: menuIds),
     );
   }
 }

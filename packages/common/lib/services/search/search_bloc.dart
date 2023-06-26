@@ -7,11 +7,11 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchBloc() : super(const SearchState(input: '')) {
+  SearchBloc() : super(const SearchState(searchInput: '')) {
     on<TextChange>(_onTextChange);
   }
 
   void _onTextChange(TextChange event, Emitter<SearchState> emit) async {
-    emit(SearchState(input: event.input));
+    emit(SearchState(searchInput: event.searchInput));
   }
 }

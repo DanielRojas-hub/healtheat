@@ -89,15 +89,16 @@ class CartBlocRestaurant extends RestaurantEvent {
 
 class UserPreferenceBlocRestaurants extends RestaurantEvent {
   final UserPreferenceBloc userPreferenceBloc;
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
 
   const UserPreferenceBlocRestaurants(this.userPreferenceBloc,
-      {this.categories, this.cuisines, this.menus});
+      {this.categoryIds, this.cuisineIds, this.menuIds});
 
   @override
-  List<Object?> get props => [userPreferenceBloc, categories, menus, cuisines];
+  List<Object?> get props =>
+      [userPreferenceBloc, categoryIds, menuIds, cuisineIds];
 }
 
 class _RestaurantUpdated extends RestaurantEvent {

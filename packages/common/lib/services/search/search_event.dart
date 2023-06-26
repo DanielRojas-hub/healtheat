@@ -8,10 +8,10 @@ abstract class SearchEvent extends Equatable {
 }
 
 class TextChange extends SearchEvent {
-  final String input;
+  final String searchInput;
 
-  const TextChange(this.input);
+  const TextChange(this.searchInput);
 
   @override
-  List<Object> get props => [input];
+  List<Object> get props => [searchInput];
 }

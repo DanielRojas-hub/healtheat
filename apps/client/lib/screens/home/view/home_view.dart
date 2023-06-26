@@ -12,12 +12,13 @@ import '../pages/open_now/open_now.dart';
 import '../pages/all_restaurants/all_restaurants.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key, this.categories, this.cuisines, this.menus})
+  const HomeView({Key? key, this.categoryIds, this.cuisineIds, this.menuIds})
       : super(key: key);
 
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -30,17 +31,18 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
                 child: SearchAndFilterSection(
-                  onTap: () async {
+                  onTapSearch: () => context.goNamed(RouteName.search),
+                  onTapFilter: () async {
                     Map<String, String>? queryParameters = {};
 
-                    if ((categories ?? []).isNotEmpty) {
-                      queryParameters['categories'] = categories!.join(',');
+                    if ((categoryIds ?? []).isNotEmpty) {
+                      queryParameters['categoryIds'] = categoryIds!.join(',');
                     }
-                    if ((cuisines ?? []).isNotEmpty) {
-                      queryParameters['cuisines'] = cuisines!.join(',');
+                    if ((cuisineIds ?? []).isNotEmpty) {
+                      queryParameters['cuisineIds'] = cuisineIds!.join(',');
                     }
-                    if ((menus ?? []).isNotEmpty) {
-                      queryParameters['menus'] = menus!.join(',');
+                    if ((menuIds ?? []).isNotEmpty) {
+                      queryParameters['menuIds'] = menuIds!.join(',');
                     }
 
                     Map<String, String?>? returnedQueryParameters =
@@ -50,12 +52,13 @@ class HomeView extends StatelessWidget {
                       context.read<RestaurantBloc>().add(
                             UserPreferenceBlocRestaurants(
                                 context.read<UserPreferenceBloc>(),
-                                categories:
-                                    returnedQueryParameters['categories']
+                                categoryIds:
+                                    returnedQueryParameters['categoryIds']
                                         ?.split(','),
-                                cuisines: returnedQueryParameters['cuisines']
-                                    ?.split(','),
-                                menus: returnedQueryParameters['menus']
+                                cuisineIds:
+                                    returnedQueryParameters['cuisineIds']
+                                        ?.split(','),
+                                menuIds: returnedQueryParameters['menuIds']
                                     ?.split(',')),
                           );
                       context.goNamed(RouteName.home,
@@ -80,10 +83,9 @@ class HomeView extends StatelessWidget {
             onPageChanged: (index) =>
                 context.read<TabCubit>().onPageChanged(index),
             controller: context.read<TabCubit>().controller,
-            children: [
-              AllRestaurantsPage(
-                  categories: categories, cuisines: cuisines, menus: menus),
-              const OpenNowPage(),
+            children: const [
+              AllRestaurantsPage(),
+              OpenNowPage(),
             ]),
       ),
     );

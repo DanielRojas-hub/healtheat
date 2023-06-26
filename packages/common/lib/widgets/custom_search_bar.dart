@@ -4,16 +4,18 @@ import 'package:common/utils/input_border.dart';
 // import 'package:go_router/go_router.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key, this.height});
-
+  const CustomSearchBar({super.key, this.height, this.readOnly, this.onTap});
+  final bool? readOnly;
   final double? height;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       child: TextField(
-        // onTap: context.goNamed(RouteName.serch);
+        readOnly: readOnly ?? false,
+        onTap: onTap,
         // onChanged:(value) => ,
         decoration: inputDecorationBorderMethod(context).copyWith(
           isDense: true,
