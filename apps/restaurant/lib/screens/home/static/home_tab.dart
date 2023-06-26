@@ -1,6 +1,7 @@
 import 'package:common/widgets/widgets.dart';
 
-final homeTabList = [
-  const TabElement('All Restaurants'),
-  const TabElement('Open Now'),
+final restaurantDetailsTabList = [
+  const TabElement('Menu'),
+  const TabElement('Review'),
+  const TabElement('About'),
 ];

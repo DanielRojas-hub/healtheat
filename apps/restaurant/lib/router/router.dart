@@ -20,7 +20,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/register',
+      initialLocation: '/home/28LecpHZyk81KUl6EsND',
       routes: [
         GoRoute(
             path: '/register',
@@ -54,23 +54,56 @@ class AppRouter {
             builder: (context, state, child) => HomeFormatPage(child: child),
             routes: [
               GoRoute(
-                  path: '/home',
+                  path: '/home/:restaurantId',
                   parentNavigatorKey: shellNavigatorKey,
                   name: RouteName.home,
                   pageBuilder: (context, state) {
                     return NoTransitionPage(
-                      child: HomePage(),
+                      child: HomePage(
+                          restaurantId:
+                              state.pathParameters['restaurantId'].toString()),
                     );
                   },
-                  routes: []),
-              GoRoute(
-                  path: '/:restaurantId/menu',
-                  name: RouteName.menu,
-                  builder: (context, state) => MenuPage(
-                        restaurantId:
-                            state.pathParameters['restaurantId'].toString(),
-                        foodRouteName: state.pathParameters[''].toString(),
-                      )),
+                  routes: [
+                    // GoRoute(
+                    //     path: 'add_food',
+                    //     name: RouteName.addFood,
+                    //     builder: (context, state) => AddFoodPage(
+                    //           restaurantId:
+                    //               state.pathParameters['restaurantId'],
+                    //         )),
+                    GoRoute(
+                        path: 'food/:foodId',
+                        name: RouteName.food,
+                        builder: (context, state) => AddFoodPage(
+                              restaurantId:
+                                  state.pathParameters['restaurantId'],
+                            ),
+                        routes: [
+                          GoRoute(
+                              path: 'edit',
+                              name: RouteName.editFood,
+                              builder: (context, state) => AddFoodPage(
+                                    restaurantId:
+                                        state.pathParameters['restaurantId'],
+                                  )),
+                        ]),
+                    GoRoute(
+                        path: 'edit',
+                        name: RouteName.editRestaurant,
+                        builder: (context, state) => AddFoodPage(
+                              restaurantId:
+                                  state.pathParameters['restaurantId'],
+                            )),
+                  ]),
+              // GoRoute(
+              //     path: '/:restaurantId/menu',
+              //     name: RouteName.menu,
+              //     builder: (context, state) => MenuPage(
+              //           restaurantId:
+              //               state.pathParameters['restaurantId'].toString(),
+              //           foodRouteName: state.pathParameters[''].toString(),
+              //         )),
             ])
       ]);
 

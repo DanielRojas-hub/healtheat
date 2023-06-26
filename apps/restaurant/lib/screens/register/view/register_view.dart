@@ -75,7 +75,7 @@ class _RegisterViewState extends State<RegisterView> {
               currentStep: _currentStep,
               steps: getSteps(),
               type: StepperType.horizontal,
-              onStepContinue: !state.isValid && _currentStep == 1
+              onStepContinue: !state.isValid && _currentStep == 3
                   ? null
                   : () async {
                       if (_currentStep < getSteps().length - 1) {
@@ -83,10 +83,6 @@ class _RegisterViewState extends State<RegisterView> {
                           _currentStep++;
                         });
                       } else {
-                        // await restaurantRepository.uploadRestaurantImage(
-                        //     filePath: state.image.toString(), fileName: 'id1');
-                        // String imageUrl =
-                        //     await restaurantRepository.downloadURL('id1');
                         Restaurant restaurant = Restaurant(
                           displayName: state.name.value,
                           address: state.address.value,

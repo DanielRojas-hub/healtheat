@@ -4,4 +4,7 @@ class RouteName {
   static const addFood = 'add_food';
   static const home = 'home';
   static const menu = 'menu';
+  static const food = 'food';
+  static const editFood = 'edit_food';
+  static const editRestaurant = 'edit_restaurant';
 }

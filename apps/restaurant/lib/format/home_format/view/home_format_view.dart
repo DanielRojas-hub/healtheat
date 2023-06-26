@@ -12,8 +12,7 @@ class HomeFormatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: child,
+      body: SafeArea(child: child),
       bottomNavigationBar: BlocBuilder<CustomNavBarCubit, CustomNavBarState>(
         builder: (context, state) => CustomNavBar(
           navList: state.navList,

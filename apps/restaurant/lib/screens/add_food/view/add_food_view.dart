@@ -6,6 +6,7 @@ import 'package:restaurant/router/route_name.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
 import 'package:restaurant/screens/add_food/pages/information/information.dart';
 import 'package:restaurant/screens/add_food/pages/previsualization/previsualization.dart';
+import 'package:restaurant/screens/add_food/pages/category/category.dart';
 
 class AddFoodView extends StatefulWidget {
   const AddFoodView({super.key, this.restaurantId});

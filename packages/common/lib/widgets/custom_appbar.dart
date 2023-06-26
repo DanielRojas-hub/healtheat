@@ -10,13 +10,14 @@ class CustomAppBar extends StatelessWidget {
     this.isFavorite = false,
     this.imageUrl,
     required this.height,
+    this.automaticallyImplyLeading = true,
   });
 
   final VoidCallback? onTapFavorite;
   final bool isFavorite;
   final String? imageUrl;
   final double height;
-
+  final bool automaticallyImplyLeading;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -26,20 +27,24 @@ class CustomAppBar extends StatelessWidget {
           background: imageUrl != null
               ? Image.network(imageUrl!, fit: BoxFit.cover)
               : const ImageContainer()),
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 16),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: CustomIconButton(
-              onTap: () => Navigator.of(context).pop(),
-              elevation: 0,
-              borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-              padding: const EdgeInsets.all(10.0),
-              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-              iconData: Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onSecondaryContainer),
-        ),
-      ),
+      leading: automaticallyImplyLeading
+          ? Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: CustomIconButton(
+                    onTap: () => Navigator.of(context).pop(),
+                    elevation: 0,
+                    borderRadius:
+                        BorderRadius.circular(Constants.radiusInfinite),
+                    padding: const EdgeInsets.all(10.0),
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    iconData: Icons.arrow_back,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer),
+              ),
+            )
+          : null,
       // actions: [
       //   Padding(
       //     padding: const EdgeInsets.only(right: 16),
