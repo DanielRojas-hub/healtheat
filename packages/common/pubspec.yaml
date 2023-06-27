@@ -26,6 +26,10 @@ dependencies:
     path: ../cuisine_repository
   category_repository:
     path: ../category_repository
+  petition_repository:
+    path: ../petition_repository
+  order_repository:
+    path: ../order_repository
 
   collection: ^1.17.1
   google_fonts: any
@@ -41,7 +45,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   assets:
     - ../../assets/images/
