@@ -9,14 +9,14 @@ class Order extends Equatable {
   final String? userId;
   final String? restaurantId;
   final List<Petition>? petitions;
-  final int state;
+  final int status;
   final String id;
 
   const Order({
     required this.userId,
     required this.restaurantId,
     required this.petitions,
-    required this.state,
+    required this.status,
     required this.id,
   });
 
@@ -24,14 +24,14 @@ class Order extends Equatable {
     String? userId,
     String? restaurantId,
     List<Petition>? petitions,
-    int? state,
+    int? status,
     String? id,
   }) {
     return Order(
       userId: userId ?? this.userId,
       restaurantId: restaurantId ?? this.restaurantId,
       petitions: petitions ?? this.petitions,
-      state: state ?? this.state,
+      status: status ?? this.status,
       id: id ?? this.id,
     );
   }
@@ -40,8 +40,8 @@ class Order extends Equatable {
     return <String, dynamic>{
       'userId': userId,
       'restaurantId': restaurantId,
-      'petitions': petitions?.map((x) => x?.toMap()).toList(),
-      'state': state,
+      'petitions': petitions?.map((x) => x.toMap()).toList(),
+      'status': status,
       'id': id,
     };
   }
@@ -58,7 +58,7 @@ class Order extends Equatable {
               ),
             )
           : null,
-      state: map['state'] as int,
+      status: map['status'] as int,
       id: map['id'] as String,
     );
   }
@@ -69,7 +69,7 @@ class Order extends Equatable {
       id: snapshot.id,
       userId: data?['userId'],
       restaurantId: data?['restaurantId'],
-      state: data?['state'],
+      status: data?['status'],
       petitions: data?['petitions'],
     );
   }
@@ -83,12 +83,12 @@ class Order extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
-      userId ?? '',
-      restaurantId ?? '',
-      petitions ?? [],
-      state,
+      userId,
+      restaurantId,
+      petitions,
+      status,
       id,
     ];
   }
