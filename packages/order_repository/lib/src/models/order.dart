@@ -65,7 +65,6 @@ class Order extends Equatable {
 
   factory Order.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>?;
-
     return Order(
       id: snapshot.id,
       userId: data?['userId'],

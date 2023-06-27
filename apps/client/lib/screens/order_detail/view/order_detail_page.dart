@@ -8,11 +8,9 @@ import '../order_detail.dart';
 class OrderDetailPage extends StatelessWidget {
   const OrderDetailPage({
     Key? key,
-    required this.restaurantId,
     required this.orderId,
   }) : super(key: key);
 
-  final String restaurantId;
   final String orderId;
 
   @override
@@ -21,6 +19,5 @@ class OrderDetailPage extends StatelessWidget {
       BlocProvider<OrderBloc>(
           create: (context) => OrderBloc()..add(StreamOrder(orderId))),
     ], child: const OrderDetailView());
-    //return const OrderDetailView();
   }
 }

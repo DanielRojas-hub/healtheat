@@ -29,7 +29,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/order_detail',
+    initialLocation: '/order/Kkz5Y7rQRazjdqi6ZaN6',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -125,11 +125,10 @@ class AppRouter {
             ),
           ]),
       GoRoute(
-        path: '/order_detail',
+        path: '/order/:orderId',
         parentNavigatorKey: rootNavigatorKey,
         name: RouteName.orderDetail,
         builder: (context, state) => OrderDetailPage(
-          restaurantId: state.pathParameters['restaurantId'].toString(),
           orderId: state.pathParameters['orderId'].toString(),
         ),
       ),

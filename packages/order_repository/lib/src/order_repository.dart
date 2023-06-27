@@ -8,14 +8,12 @@ class OrderRepository {
     FirebaseFirestore? firebaseFirestore,
   }) : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
-  Stream<order.Order> streamOrder(String orderId,
-      {List<String>? selectedCategories}) {
-    DocumentReference<Map<String, dynamic>> reference =
-        _firebaseFirestore.collection('orders').doc(orderId);
-
-    return reference.snapshots().map(
-          (snapshot) => order.Order.fromSnapshot(snapshot),
-        );
+  Stream<order.Order> streamOrder(String orderId) {
+    return _firebaseFirestore
+        .collection('orders')
+        .doc(orderId)
+        .snapshots()
+        .map((snapshot) => order.Order.fromSnapshot(snapshot));
   }
 
   Future<order.Order> getOrder(String orderId) async {

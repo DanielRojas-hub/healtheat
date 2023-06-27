@@ -30,14 +30,18 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   void _onStreamOrder(StreamOrder event, Emitter<OrderState> emit) {
+    print('a');
     _orderSubscription?.cancel();
     try {
-      _orderSubscription = _orderRepository
-          .streamOrder(event.orderId)
-          .listen((order) => add(_OrderUpdated(order)));
+      _orderSubscription =
+          _orderRepository.streamOrder(event.orderId).listen((order) {
+        print('c');
+        add(_OrderUpdated(order));
+      });
     } catch (_) {
       //TODO: catch
     }
+    print('b');
   }
 
   Future<void> _onGetOrder(GetOrder event, Emitter<OrderState> emit) async {
