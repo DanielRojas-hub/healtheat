@@ -2,6 +2,7 @@ import 'package:common/services/services.dart';
 import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderDetailView extends StatelessWidget {
@@ -38,7 +39,16 @@ class OrderDetailView extends StatelessWidget {
                               ],
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Clipboard.setData(
+                                      ClipboardData(text: state.order.id));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Copied to clipboard'),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                },
                                 icon:
                                     const Icon(Icons.copy, color: Colors.grey)),
                           ]
@@ -60,35 +70,74 @@ class OrderDetailView extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Column(
                                 children: [
-                                  CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      child: Icon(
-                                        Icons.access_time,
-                                        color: Theme.of(context).disabledColor,
-                                      )),
+                                  state.order.status >= 1
+                                      ? CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primaryContainer,
+                                          child: Icon(
+                                            Icons.access_time,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ))
+                                      : CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .tertiaryContainer,
+                                          child: Icon(
+                                            Icons.access_time,
+                                            color:
+                                                Theme.of(context).disabledColor,
+                                          )),
                                   const SizedBox(height: 30),
-                                  CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      child: Icon(
-                                        Icons.soup_kitchen,
-                                        color: Theme.of(context).disabledColor,
-                                      )),
+                                  state.order.status >= 2
+                                      ? CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primaryContainer,
+                                          child: Icon(
+                                            Icons.soup_kitchen,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ))
+                                      : CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .tertiaryContainer,
+                                          child: Icon(
+                                            Icons.soup_kitchen,
+                                            color:
+                                                Theme.of(context).disabledColor,
+                                          )),
                                   const SizedBox(height: 30),
-                                  CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      child: Icon(
-                                        Icons.delivery_dining,
-                                        color: Theme.of(context).disabledColor,
-                                      )),
+                                  state.order.status >= 3
+                                      ? CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primaryContainer,
+                                          child: Icon(
+                                            Icons.delivery_dining,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ))
+                                      : CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .tertiaryContainer,
+                                          child: Icon(
+                                            Icons.delivery_dining,
+                                            color:
+                                                Theme.of(context).disabledColor,
+                                          )),
                                 ],
                               ),
                             ),
@@ -143,18 +192,28 @@ class OrderDetailView extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15.0),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text('12:30',
+                                  Text(
+                                      state.order.status >= 1
+                                          ? 'Done!'
+                                          : 'Waiting...',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall),
                                   const SizedBox(height: 60),
-                                  Text('1:30',
+                                  Text(
+                                      state.order.status >= 2
+                                          ? 'Done!'
+                                          : 'Waiting...',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall),
                                   const SizedBox(height: 60),
-                                  Text('2:30',
+                                  Text(
+                                      state.order.status >= 3
+                                          ? 'Done!'
+                                          : 'Waiting...',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall),
@@ -214,6 +273,13 @@ class OrderDetailView extends StatelessWidget {
                           ],
                         ),
                       )*/
+                      state.order.status >= 3
+                          ? Center(
+                              child: Text('Your order has arrived!',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium),
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                 );
