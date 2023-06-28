@@ -95,8 +95,11 @@ class _AddFoodViewState extends State<AddFoodView> {
                             foodRepository.createFood(
                                 widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                                 food);
-                            GoRouter.of(context).go('/home');
-                            context.goNamed(RouteName.home);
+                            context.goNamed(RouteName.home, pathParameters: {
+                              'restaurantId':
+                                  widget.restaurantId ?? '28LecpHZyk81KUl6EsND'
+                            });
+                            // ))
                           }
                         },
                   onStepCancel: _currentStep == 0

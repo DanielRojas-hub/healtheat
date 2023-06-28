@@ -20,7 +20,8 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/home/ff99b4b4-80bf-4ec6-bb2b-b87986a1f3e1',
+      // initialLocation: '/home/ff99b4b4-80bf-4ec6-bb2b-b87986a1f3e1',
+      initialLocation: '/register',
       routes: [
         GoRoute(
             path: '/register',
@@ -43,12 +44,12 @@ class AppRouter {
                 },
               )
             ]),
-        GoRoute(
-            path: '/:restaurantId/add_food',
-            name: RouteName.addFood,
-            builder: (context, state) => AddFoodPage(
-                  restaurantId: state.pathParameters['restaurantId'],
-                )),
+        // GoRoute(
+        //     path: '/:restaurantId/add_food',
+        //     name: RouteName.addFood,
+        //     builder: (context, state) => AddFoodPage(
+        //           restaurantId: state.pathParameters['restaurantId'],
+        //         )),
         ShellRoute(
             navigatorKey: shellNavigatorKey,
             builder: (context, state, child) => HomeFormatPage(child: child),
@@ -65,13 +66,13 @@ class AppRouter {
                     );
                   },
                   routes: [
-                    // GoRoute(
-                    //     path: 'add_food',
-                    //     name: RouteName.addFood,
-                    //     builder: (context, state) => AddFoodPage(
-                    //           restaurantId:
-                    //               state.pathParameters['restaurantId'],
-                    //         )),
+                    GoRoute(
+                        path: 'add_food',
+                        name: RouteName.addFood,
+                        builder: (context, state) => AddFoodPage(
+                              restaurantId:
+                                  state.pathParameters['restaurantId'],
+                            )),
                     GoRoute(
                         path: 'food/:foodId',
                         name: RouteName.food,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
@@ -9,6 +10,7 @@ import 'package:restaurant/screens/register/register.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../pages/pages.dart';
 import '../pages/preview/preview.dart';
 
 class RegisterView extends StatefulWidget {
@@ -51,14 +53,14 @@ class _RegisterViewState extends State<RegisterView> {
           content: const CategoryPage(),
           isActive: _currentStep >= 2,
         ),
-        Step(
-          title: Text(
-            'Preview',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          content: const PreviewPage(),
-          isActive: _currentStep >= 3,
-        ),
+        // Step(
+        //   title: Text(
+        //     'Preview',
+        //     style: Theme.of(context).textTheme.labelMedium,
+        //   ),
+        //   content: const HomePage(),
+        //   isActive: _currentStep >= 3,
+        // ),
       ];
 
   int _currentStep = 0;
@@ -75,14 +77,18 @@ class _RegisterViewState extends State<RegisterView> {
               currentStep: _currentStep,
               steps: getSteps(),
               type: StepperType.horizontal,
-              onStepContinue: !state.isValid && _currentStep == 3
+              onStepContinue: !state.isValid && _currentStep == 2
                   ? null
                   : () async {
                       if (_currentStep < getSteps().length - 1) {
                         setState(() {
                           _currentStep++;
                         });
-                      } else {
+                      } else if (state.isValid) {
+                        // Phone phone = Phone(
+                        //   code: state.code.value,
+                        //   number: state.phone.value,
+                        // );
                         Restaurant restaurant = Restaurant(
                           displayName: state.name.value,
                           address: state.address.value,
@@ -94,7 +100,8 @@ class _RegisterViewState extends State<RegisterView> {
                           imageUrl: '',
                           menuIds: state.menuIds,
                           openTime: state.openingTime.value,
-                          phoneNumber: '',
+                          phoneNumber:
+                              "+${state.code.value}-${state.phone.value}",
                           preferenceIds: state.preferenceIds,
                           rating: null,
                         );
@@ -106,7 +113,7 @@ class _RegisterViewState extends State<RegisterView> {
                           print(e);
                         }
                         restaurantRepository.createRestaurant(restaurant);
-                        GoRouter.of(context).go('/add_food');
+                        // GoRouter.of(context).go('/home/$restaurant.id');
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(SnackBar(
@@ -125,11 +132,13 @@ class _RegisterViewState extends State<RegisterView> {
                             ),
                           ));
 
-                        context.goNamed(RouteName.addFood,
-                            pathParameters: {'restaurantId': restaurant.id});
+                        // context.goNamed(RouteName.addFood,
+                        //     pathParameters: {'restaurantId': restaurant.id});
 
                         // Navigator.of(context).push(MaterialPageRoute(
                         //   builder: (context) => ToastContext(),
+                        context.goNamed(RouteName.home,
+                            pathParameters: {'restaurantId': restaurant.id});
                         // ));
                       }
                     },

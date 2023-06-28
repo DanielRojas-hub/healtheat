@@ -163,4 +163,37 @@ class RegisterCubit extends Cubit<RegisterState> {
       state.copyWith(image: image),
     );
   }
+
+  // Future<void> _onSubmitted(
+  //   LoginSubmitted event,
+  //   Emitter<LoginState> emit,
+  // ) async {
+  //   if (state.isValid) {
+  //     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+  //     try {
+  //       await _authenticationRepository.logIn(
+  //         username: state.username.value,
+  //         password: state.password.value,
+  //       );
+  //       emit(state.copyWith(status: FormzSubmissionStatus.success));
+  //     } catch (_) {
+  //       emit(state.copyWith(status: FormzSubmissionStatus.failure));
+  //     }
+  //   }
+  // }
+
+  // void submitted() async {
+  //   if (state.isValid) {
+  //     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+  //     try {
+  //       await _authenticationRepository.logIn(
+  //         username: state.username.value,
+  //         password: state.password.value,
+  //       );
+  //       emit(state.copyWith(status: FormzSubmissionStatus.success));
+  //     } catch (_) {
+  //       emit(state.copyWith(status: FormzSubmissionStatus.failure));
+  //     }
+  //   }
+  // }
 }
