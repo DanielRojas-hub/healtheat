@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/format/home_format/home_format.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
+import 'package:restaurant/screens/food_details/food_detail.dart';
 import 'package:restaurant/screens/home/home.dart';
 import 'package:restaurant/screens/menu/menu.dart';
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
@@ -76,19 +77,20 @@ class AppRouter {
                     GoRoute(
                         path: 'food/:foodId',
                         name: RouteName.food,
-                        builder: (context, state) => AddFoodPage(
-                              restaurantId:
-                                  state.pathParameters['restaurantId'],
-                            ),
-                        routes: [
-                          GoRoute(
-                              path: 'edit',
-                              name: RouteName.editFood,
-                              builder: (context, state) => AddFoodPage(
-                                    restaurantId:
-                                        state.pathParameters['restaurantId'],
-                                  )),
-                        ]),
+                        builder: (context, state) => FoodDetailsPage(
+                          restaurantId: state.pathParameters['restaurantId'].toString(), 
+                          foodId: state.pathParameters['foodId'].toString(),
+                          ),
+                        // routes: [
+                        //   GoRoute(
+                        //       path: 'edit',
+                        //       name: RouteName.editFood,
+                        //       builder: (context, state) => AddFoodPage(
+                        //             restaurantId:
+                        //                 state.pathParameters['restaurantId'],
+                        //           )),
+                        // ]
+                        ),
                     GoRoute(
                         path: 'edit',
                         name: RouteName.editRestaurant,
