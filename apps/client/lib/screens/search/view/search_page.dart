@@ -1,3 +1,4 @@
+import 'package:common/services/search/search_bloc.dart';
 import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,14 +40,11 @@ class SearchPage extends StatelessWidget {
         BlocProvider<MenuBloc>(
           create: (context) => MenuBloc()..add(const StreamMenus()),
         ),
-        BlocProvider<FilterBloc>(
-            create: (context) => FilterBloc(
-                categoryIds: categoryIds,
-                cuisineIds: cuisineIds,
-                menuIds: menuIds)),
+        BlocProvider<SearchBloc>(
+            create: (context) =>
+                SearchBloc(restaurantBloc: context.read<RestaurantBloc>())),
       ],
-      child: SearchView(
-          categoryIds: categoryIds, cuisineIds: cuisineIds, menuIds: menuIds),
+      child: const SearchView(),
     );
   }
 }

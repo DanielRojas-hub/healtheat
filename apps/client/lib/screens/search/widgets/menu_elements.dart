@@ -1,3 +1,4 @@
+import 'package:common/services/search/search_bloc.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:common/services/services.dart';
@@ -8,30 +9,28 @@ class MenuElements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterBloc, FilterState>(builder: ((context, state) {
+    return BlocBuilder<SearchBloc, SearchState>(builder: ((context, state) {
       final selectedMenus = state.menuIds;
 
       return BlocBuilder<MenuBloc, MenuState>(builder: (context, state) {
         if (state is MenusLoaded) {
           final menus = state.menus;
-          return Wrap(
-              spacing: 7.0,
-              runSpacing: 7.0,
+          return Row(
               children: List.generate(
-                menus.length,
-                (index) {
-                  final menu = menus[index];
-                  final isSelected = selectedMenus.contains(menu.id);
-                  final isFirst = index == 0;
+            menus.length,
+            (index) {
+              final menu = menus[index];
+              final isSelected = selectedMenus?.contains(menu.id);
+              final isFirst = index == 0;
 
-                  if (isSelected) {
-                    return Padding(
-                        padding: EdgeInsets.only(left: !isFirst ? 8.0 : 0),
-                        child: CustomChip(label: menu.displayName.toString()));
-                  }
-                  return const SizedBox();
-                },
-              ));
+              if (isSelected ?? false) {
+                return Padding(
+                    padding: EdgeInsets.only(left: !isFirst ? 8.0 : 0),
+                    child: CustomChip(label: menu.displayName.toString()));
+              }
+              return const SizedBox();
+            },
+          ));
         }
         if (state is MenuLoading) {
           return Wrap(

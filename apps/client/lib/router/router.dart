@@ -29,7 +29,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/search',
+    initialLocation: '/home',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -55,29 +55,7 @@ class AppRouter {
           parentNavigatorKey: rootNavigatorKey,
           name: RouteName.login,
           builder: (context, state) => const LoginPage()),
-      GoRoute(
-          path: '/search',
-          parentNavigatorKey: rootNavigatorKey,
-          name: RouteName.search,
-          pageBuilder: (context, state) {
-            final categoryIds =
-                state.queryParameters['categoryIds']?.split(',');
-            final cuisineIds = state.queryParameters['cuisineIds']?.split(',');
-            final menuIds = state.queryParameters['menuIds']?.split(',');
-            final searchInput = state.queryParameters['searchInput'];
 
-            return NoTransitionPage(
-                child: SearchPage(
-                    categoryIds: categoryIds,
-                    cuisineIds: cuisineIds,
-                    menuIds: menuIds,
-                    searchInput: searchInput));
-          },
-          routes: [
-            restaurantGoRoute(RouteName.searchRestaurantDetails,
-                RouteName.searchRestaurantFoodDetails),
-            filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
-          ]),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),
@@ -101,6 +79,33 @@ class AppRouter {
                   );
                 },
                 routes: [
+                  GoRoute(
+                      path: 'search',
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: RouteName.search,
+                      pageBuilder: (context, state) {
+                        final categoryIds =
+                            state.queryParameters['categoryIds']?.split(',');
+                        final cuisineIds =
+                            state.queryParameters['cuisineIds']?.split(',');
+                        final menuIds =
+                            state.queryParameters['menuIds']?.split(',');
+                        final searchInput =
+                            state.queryParameters['searchInput'];
+
+                        return NoTransitionPage(
+                            child: SearchPage(
+                                categoryIds: categoryIds,
+                                cuisineIds: cuisineIds,
+                                menuIds: menuIds,
+                                searchInput: searchInput));
+                      },
+                      routes: [
+                        restaurantGoRoute(RouteName.searchRestaurantDetails,
+                            RouteName.searchRestaurantFoodDetails),
+                        filterRestaurantGoRoute(
+                            RouteName.searchRestaurantFilter)
+                      ]),
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
                       RouteName.homeRestaurantFoodDetails),

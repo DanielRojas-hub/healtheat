@@ -31,6 +31,7 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
                 child: SearchAndFilterSection(
+                  readOnly: true,
                   onTapSearch: () => context.goNamed(RouteName.search),
                   onTapFilter: () async {
                     Map<String, String>? queryParameters = {};
