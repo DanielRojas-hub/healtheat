@@ -27,7 +27,10 @@ class HomePage extends StatelessWidget {
                 categoryIds: categoryIds,
                 cuisineIds: cuisineIds,
                 menuIds: menuIds)),
-        )
+        ),
+        BlocProvider<CategoryBloc>(
+          create: (context) => CategoryBloc()..add(const StreamCategories()),
+        ),
       ],
       child: HomeView(
           categoryIds: categoryIds, cuisineIds: cuisineIds, menuIds: menuIds),
