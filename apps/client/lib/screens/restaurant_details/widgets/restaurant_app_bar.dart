@@ -9,17 +9,29 @@ class RestaurantAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double height = 200;
-    return BlocBuilder<RestaurantBloc, RestaurantState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is RestaurantLoaded) {
-          final restaurant = state.restaurant;
-          return CustomAppBar(
-              imageUrl: restaurant.imageUrl, isFavorite: true, height: height);
-        }
-        if (state is RestaurantLoading) {
-          return const CustomAppBar(height: height);
-        }
-        return const SliverAppBar();
+        final user = state.user;
+        return BlocBuilder<RestaurantBloc, RestaurantState>(
+          builder: (context, state) {
+            if (state is RestaurantLoaded) {
+              final restaurant = state.restaurant;
+              final isFavorite = user.favRestaurants?.contains(restaurant.id);
+              return CustomAppBar(
+                imageUrl: restaurant.imageUrl,
+                isFavorite: isFavorite ?? false,
+                height: height,
+                onTapFavorite: () => context
+                    .read<UserBloc>()
+                    .add(ChangeFavoriteRestaurants(restaurant.id)),
+              );
+            }
+            if (state is RestaurantLoading) {
+              return const CustomAppBar(height: height);
+            }
+            return const SliverAppBar();
+          },
+        );
       },
     );
   }

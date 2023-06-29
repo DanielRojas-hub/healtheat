@@ -26,6 +26,24 @@ class UpdateUser extends UserEvent {
   List<Object> get props => [user, data];
 }
 
+class ChangeFavoriteRestaurants extends UserEvent {
+  final String restaurantId;
+
+  const ChangeFavoriteRestaurants(this.restaurantId);
+
+  @override
+  List<Object> get props => [restaurantId];
+}
+
+class ChangeFavoriteDishes extends UserEvent {
+  final String foodId;
+
+  const ChangeFavoriteDishes(this.foodId);
+
+  @override
+  List<Object> get props => [foodId];
+}
+
 class _AuthenticationUserBloc extends UserEvent {
   final AuthUser authUser;
 

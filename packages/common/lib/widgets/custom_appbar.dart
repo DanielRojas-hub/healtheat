@@ -41,27 +41,27 @@ class CustomAppBar extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSecondaryContainer),
         ),
       ),
-      // actions: [
-      //   Padding(
-      //     padding: const EdgeInsets.only(right: 16),
-      //     child: FittedBox(
-      //       fit: BoxFit.scaleDown,
-      //       child: CustomIconButton(
-      //           onTap: onTapFavorite,
-      //           elevation: 0,
-      //           borderRadius: BorderRadius.circular(Constants.radiusInfinite),
-      //           padding: const EdgeInsets.all(10.0),
-      //           backgroundColor:
-      //               Theme.of(context).colorScheme.secondaryContainer,
-      //           iconData: isFavorite
-      //               ? Icons.favorite
-      //               : Icons.favorite_outline_outlined,
-      //           color: isFavorite
-      //               ? context.theme.redColor
-      //               : Theme.of(context).disabledColor),
-      //     ),
-      //   ),
-      // ],
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: CustomIconButton(
+                onTap: onTapFavorite,
+                elevation: 0,
+                borderRadius: BorderRadius.circular(Constants.radiusInfinite),
+                padding: const EdgeInsets.all(10.0),
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondaryContainer,
+                iconData: isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_outline_outlined,
+                color: isFavorite
+                    ? context.theme.redColor
+                    : Theme.of(context).disabledColor),
+          ),
+        ),
+      ],
     );
   }
 }

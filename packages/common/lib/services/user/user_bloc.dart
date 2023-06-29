@@ -15,6 +15,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       : _userRepository = userRepository ?? UserRepository(),
         super(const UserState.loading()) {
     on<AuthenticationBlocUser>(_onAuthenticationBlocUser);
+    on<ChangeFavoriteRestaurants>(_onChangeFavoriteRestaurants);
+    on<ChangeFavoriteDishes>(_onChangeFavoriteDishes);
     on<UpdateUser>(_onUpdateUser);
     on<_AuthenticationUserBloc>(_onAuthenticationUserBloc);
     on<_UserUpdated>(_onUserUpdated);
@@ -40,6 +42,30 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         (state) => add(_AuthenticationUserBloc(state.authUser)),
       );
     } catch (_) {}
+  }
+
+  Future<void> _onChangeFavoriteRestaurants(
+      ChangeFavoriteRestaurants event, Emitter<UserState> emit) async {
+    print('a');
+    final List<String> favRestaurants =
+        List.from(state.user.favRestaurants ?? []);
+    if (favRestaurants.contains(event.restaurantId)) {
+      favRestaurants.remove(event.restaurantId);
+    } else {
+      favRestaurants.add(event.restaurantId);
+    }
+    add(UpdateUser(state.user, {'favRestaurants': favRestaurants}));
+  }
+
+  Future<void> _onChangeFavoriteDishes(
+      ChangeFavoriteDishes event, Emitter<UserState> emit) async {
+    final List<String> favFoods = List.from(state.user.favFoods ?? []);
+    if (favFoods.contains(event.foodId)) {
+      favFoods.remove(event.foodId);
+    } else {
+      favFoods.add(event.foodId);
+    }
+    add(UpdateUser(state.user, {'favFoods': favFoods}));
   }
 
   Future<void> _onUpdateUser(UpdateUser event, Emitter<UserState> emit) async {

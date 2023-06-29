@@ -15,56 +15,67 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FoodBloc, FoodState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is FoodsLoaded) {
-          final foods = state.foods;
-          return GridView.builder(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Constants.margin, vertical: Constants.marginSmall),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.85,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            itemBuilder: (BuildContext context, int index) {
-              final food = foods[index];
-              return FoodCard(
-                imageUrl: food.imageUrl,
-                title: food.displayName.toString(),
-                categories: const ['Gluten free'],
-                price: food.price ?? 0,
-                isFavorite: false,
-                onTap: () => context.goNamed(foodRouteName, pathParameters: {
-                  'restaurantId': restaurantId,
-                  'foodId': food.id
-                }),
-                onTapFavorite: () {},
-                onTapPrice: () => context.goNamed(foodRouteName,
-                    pathParameters: {
-                      'restaurantId': restaurantId,
-                      'foodId': food.id
-                    }),
+        final user = state.user;
+        return BlocBuilder<FoodBloc, FoodState>(
+          builder: (context, state) {
+            if (state is FoodsLoaded) {
+              final foods = state.foods;
+              return GridView.builder(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.margin,
+                    vertical: Constants.marginSmall),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 0.85,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                itemBuilder: (BuildContext context, int index) {
+                  final food = foods[index];
+                  final isFavorite = user.favFoods?.contains(food.id);
+                  return FoodCard(
+                    imageUrl: food.imageUrl,
+                    title: food.displayName.toString(),
+                    categories: const ['Gluten free'],
+                    price: food.price ?? 0,
+                    isFavorite: isFavorite ?? false,
+                    onTap: () => context.goNamed(foodRouteName,
+                        pathParameters: {
+                          'restaurantId': restaurantId,
+                          'foodId': food.id
+                        }),
+                    onTapFavorite: () => context
+                        .read<UserBloc>()
+                        .add(ChangeFavoriteDishes(food.id)),
+                    onTapPrice: () => context.goNamed(foodRouteName,
+                        pathParameters: {
+                          'restaurantId': restaurantId,
+                          'foodId': food.id
+                        }),
+                  );
+                },
+                itemCount: foods.length,
               );
-            },
-            itemCount: foods.length,
-          );
-        }
-        if (state is FoodLoading) {
-          return GridView.builder(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Constants.margin, vertical: Constants.marginSmall),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.85,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20),
-            itemBuilder: (BuildContext context, int index) =>
-                const SkeletonFoodCard(),
-            itemCount: 5,
-          );
-        }
-        return const SizedBox();
+            }
+            if (state is FoodLoading) {
+              return GridView.builder(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Constants.margin,
+                    vertical: Constants.marginSmall),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 0.85,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                itemBuilder: (BuildContext context, int index) =>
+                    const SkeletonFoodCard(),
+                itemCount: 5,
+              );
+            }
+            return const SizedBox();
+          },
+        );
       },
     );
   }
