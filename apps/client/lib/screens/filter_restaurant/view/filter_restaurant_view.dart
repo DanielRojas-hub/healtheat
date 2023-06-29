@@ -112,7 +112,7 @@ class FilterRestaurantView extends StatelessWidget {
           //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
           //   sliver: SliverToBoxAdapter(child: FilterRadio()),
           // ),
-          const SliverToBoxAdapter(child: SizedBox(height: 70)),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverPadding(
               padding:
                   const EdgeInsets.symmetric(horizontal: Constants.marginSmall),

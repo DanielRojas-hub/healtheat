@@ -23,6 +23,10 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<UserPreferenceBloc>(
+          create: (context) => UserPreferenceBloc()
+            ..add(UserBlocUserPreference(context.read<UserBloc>())),
+        ),
         BlocProvider<RestaurantBloc>(
           create: (context) => RestaurantBloc()
             ..add(UserPreferenceBlocRestaurants(
@@ -40,6 +44,7 @@ class SearchPage extends StatelessWidget {
         BlocProvider<MenuBloc>(
           create: (context) => MenuBloc()..add(const StreamMenus()),
         ),
+        
         BlocProvider<SearchBloc>(
             create: (context) =>
                 SearchBloc(restaurantBloc: context.read<RestaurantBloc>())),

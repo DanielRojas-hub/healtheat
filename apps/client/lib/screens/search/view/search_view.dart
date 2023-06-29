@@ -6,6 +6,7 @@ import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../search.dart';
 
@@ -91,96 +92,107 @@ class SearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RestaurantBloc, RestaurantState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is RestaurantsLoaded) {
-          return BlocBuilder<CategoryBloc, CategoryState>(
-            builder: (context, state) {
-              if (state is CategoriesLoaded) {
-                final categories = state.categories;
-                return BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) {
-                    final restaurants = state.restaurants;
-                    if ((restaurants ?? []).isNotEmpty) {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Constants.margin),
-                        physics: const ScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          final restaurant = restaurants[index];
-                          final restaurantCategories = categories
-                              .where((element) =>
-                                  restaurant.categoryIds!.contains(element.id))
-                              .toList();
-                          final typeFood = List.generate(
-                              restaurantCategories.length,
-                              (index) => restaurantCategories[index]
-                                  .displayName
-                                  .toString());
+        final user = state.user;
 
-                          return RestaurantCard(
-                            name: restaurant.displayName.toString(),
-                            imageUrl: restaurant.imageUrl,
-                            deliveryPriceRange:
-                                restaurant.deliveryPriceRange.toString(),
-                            deliveryTimeRange:
-                                restaurant.deliveryTimeRange.toString(),
-                            rating: 5,
-                            typeFood: typeFood,
-                            onTap: () => context.goNamed(
-                                RouteName.searchRestaurantDetails,
-                                pathParameters: {
-                                  'restaurantId': restaurant.id
-                                }),
-                            isFavorite: true,
+        return BlocBuilder<RestaurantBloc, RestaurantState>(
+          builder: (context, state) {
+            if (state is RestaurantsLoaded) {
+              return BlocBuilder<CategoryBloc, CategoryState>(
+                builder: (context, state) {
+                  if (state is CategoriesLoaded) {
+                    final categories = state.categories;
+                    return BlocBuilder<SearchBloc, SearchState>(
+                      builder: (context, state) {
+                        final restaurants = state.restaurants;
+                        if ((restaurants ?? []).isNotEmpty) {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: Constants.margin),
+                            physics: const ScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              final restaurant = restaurants[index];
+                              final isFavorite = user.favRestaurants?.contains(restaurant.id);
+
+                              final restaurantCategories = categories
+                                  .where((element) =>
+                                      restaurant.categoryIds!.contains(element.id))
+                                  .toList();
+                              final typeFood = List.generate(
+                                  restaurantCategories.length,
+                                  (index) => restaurantCategories[index]
+                                      .displayName
+                                      .toString());
+
+                              return RestaurantCard(
+                                name: restaurant.displayName.toString(),
+                                imageUrl: restaurant.imageUrl,
+                                deliveryPriceRange:
+                                    restaurant.deliveryPriceRange.toString(),
+                                deliveryTimeRange:
+                              '${DateFormat('HH:mm').format(DateTime.parse(restaurant.openTime!))} - ${DateFormat('HH:mm').format(DateTime.parse(restaurant.closeTime!))}',
+                                rating: 5,
+                                typeFood: typeFood,
+                                onTap: () => context.goNamed(
+                                    RouteName.searchRestaurantDetails,
+                                    pathParameters: {
+                                      'restaurantId': restaurant.id
+                                    }),
+                                isFavorite: isFavorite?? false,
+                                onTapFavorite: () => context
+                              .read<UserBloc>()
+                              .add(ChangeFavoriteRestaurants(restaurant.id)),
+                              );
+                            },
+                            itemCount: restaurants!.length,
+                            separatorBuilder: (BuildContext context, int index) =>
+                                const SizedBox(height: 20),
                           );
-                        },
-                        itemCount: restaurants!.length,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(height: 20),
-                      );
-                    }
+                        }
 
-                    return const Center(
-                      child: Text('No hay resultados'),
+                        return const Center(
+                          child: Text('No hay resultados'),
+                        );
+                      },
                     );
-                  },
-                );
-              }
+                  }
 
-              if (state is CategoryLoading) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: Constants.margin),
-                  physics: const ScrollPhysics(),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 15),
-                  itemBuilder: (BuildContext context, int index) =>
-                      const SkeletonRestaurantCard(),
-                  itemCount: 3,
-                );
-              }
-              return const SizedBox();
-            },
-          );
-        }
+                  if (state is CategoryLoading) {
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Constants.margin),
+                      physics: const ScrollPhysics(),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 15),
+                      itemBuilder: (BuildContext context, int index) =>
+                          const SkeletonRestaurantCard(),
+                      itemCount: 3,
+                    );
+                  }
+                  return const SizedBox();
+                },
+              );
+            }
 
-        if (state is RestaurantLoading) {
-          return ListView.separated(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
-            physics: const ScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(height: 15),
-            itemBuilder: (BuildContext context, int index) =>
-                const SkeletonRestaurantCard(),
-            itemCount: 3,
-          );
-        }
-        return const SizedBox();
-      },
+            if (state is RestaurantLoading) {
+              return ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
+                physics: const ScrollPhysics(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 15),
+                itemBuilder: (BuildContext context, int index) =>
+                    const SkeletonRestaurantCard(),
+                itemCount: 3,
+              );
+            }
+            return const SizedBox();
+          },
+        );
+      }
     );
   }
 }
