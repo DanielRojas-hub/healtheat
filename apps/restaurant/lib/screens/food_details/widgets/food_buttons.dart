@@ -18,18 +18,18 @@ class FoodButtons extends StatelessWidget {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.goNamed(RouteName.editFood, pathParameters: {
-                      'restaurantId': food.restaurantId,
-                      'foodId': food.id
-                    });
-                  },
-                  child: const Text("Edit food"),
-                ),
-              ),
-              const SizedBox(width: 10),
+              // Expanded(
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       context.goNamed(RouteName.editFood, pathParameters: {
+              //         'restaurantId': food.restaurantId,
+              //         'foodId': food.id
+              //       });
+              //     },
+              //     child: const Text("Edit food"),
+              //   ),
+              // ),
+              // const SizedBox(width: 10),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {

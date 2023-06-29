@@ -10,9 +10,11 @@ import 'package:restaurant/screens/edit_food/edit_food.dart';
 import 'package:restaurant/screens/food_details/food_detail.dart';
 import 'package:restaurant/screens/edit/edit.dart';
 import 'package:restaurant/screens/home/home.dart';
+import 'package:restaurant/screens/login/login.dart';
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
 import 'package:restaurant/screens/register/view/register_page.dart';
 import 'package:restaurant/screens/order_detail/order_detail.dart';
+import 'package:restaurant/screens/sign_up/sign_up.dart';
 
 import '../screens/orders/view/view.dart';
 import '../screens/edit/pages/info/pages/pages.dart';
@@ -27,14 +29,26 @@ class AppRouter {
   late final GoRouterRefreshStream userService;
   GoRouter get router => _goRouter;
 
+  AppRouter(this.userService);
+
   late final GoRouter _goRouter = GoRouter(
       debugLogDiagnostics: true,
       navigatorKey: rootNavigatorKey,
       refreshListenable: userService,
-      initialLocation: '/',
+      initialLocation: '/login',
       routes: [
         GoRoute(
-            path: '/register',
+          path: '/login',
+          name: RouteName.login,
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: '/sign_up',
+          name: RouteName.signUp,
+          builder: (context, state) => const SignUpPage(),
+        ),
+        GoRoute(
+            path: '/register_restaurant',
             name: RouteName.registerRestaurant,
             builder: (context, state) => const RegisterPage(),
             routes: [
@@ -140,14 +154,48 @@ class AppRouter {
       redirect: (context, state) {
         final appState = userService.authenticationState;
 
+        final isGoingToLogin = state.matchedLocation == '/login';
+        final isGoingToSignUp = state.matchedLocation == '/sign_up';
+
+        final isGoingToRegisterRestaurant =
+            state.matchedLocation == '/register_restaurant';
+        final isGoingToTimePicker =
+            state.matchedLocation == '/register_restaurant/time_picker';
+
+        final isGoingToUnauthenticated = isGoingToLogin || isGoingToSignUp;
+
+        final isGoingToRegisterRestaurantRoutes =
+            isGoingToRegisterRestaurant || isGoingToTimePicker;
+
         switch (appState.status) {
           case AuthenticationStatus.authenticated:
             final userState = userService.userState;
 
+            switch (userState.status) {
+              case UserStatus.success:
+                final user = userState.user;
+                if ((isGoingToUnauthenticated ||
+                        isGoingToRegisterRestaurantRoutes) &&
+                    user.restaurantId != null) {
+                  return '/home/${user.restaurantId}';
+                }
+                if (!isGoingToRegisterRestaurantRoutes &&
+                    user.restaurantId == null) {
+                  return '/register_restaurant';
+                }
+              case UserStatus.failure:
+                break;
+              case UserStatus.loading:
+                break;
+            }
+
           case AuthenticationStatus.unauthenticated:
+            if (!isGoingToUnauthenticated) {
+              return '/login';
+            }
         }
 
-        return;
+        return null;
       });
 }
 

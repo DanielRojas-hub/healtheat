@@ -47,20 +47,6 @@ class AppRouter {
         name: RouteName.splashScreen,
         builder: (context, state) => const SplashScreenPage(),
       ),
-      GoRoute(
-        path: '/login',
-        parentNavigatorKey: rootNavigatorKey,
-        name: RouteName.login,
-        pageBuilder: (context, state) =>
-            const ModalBottomSheetPage(child: LoginPage()),
-      ),
-      GoRoute(
-        path: '/register',
-        parentNavigatorKey: rootNavigatorKey,
-        name: RouteName.register,
-        pageBuilder: (context, state) =>
-            const ModalBottomSheetPage(child: RegisterPage()),
-      ),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),
@@ -144,8 +130,8 @@ class AppRouter {
                       builder: (context, state) =>
                           const OrderConfirmationPage(),
                       routes: [
-                        // loginGoRoute(RouteName.loginOrderConfirmation),
-                        // registerGoRoute(RouteName.registerOrderConfirmation),
+                        loginGoRoute(RouteName.login),
+                        registerGoRoute(RouteName.register),
                         GoRoute(
                             path: 'payment_method',
                             parentNavigatorKey: rootNavigatorKey,
@@ -211,6 +197,26 @@ class AppRouter {
       return null;
     },
   );
+
+  GoRoute loginGoRoute(String loginName) {
+    return GoRoute(
+      path: 'login',
+      parentNavigatorKey: rootNavigatorKey,
+      name: loginName,
+      pageBuilder: (context, state) =>
+          const ModalBottomSheetPage(child: LoginPage()),
+    );
+  }
+
+  GoRoute registerGoRoute(String registerName) {
+    return GoRoute(
+      path: 'register',
+      parentNavigatorKey: rootNavigatorKey,
+      name: registerName,
+      pageBuilder: (context, state) =>
+          const ModalBottomSheetPage(child: RegisterPage()),
+    );
+  }
 
   GoRoute menuPreferencesGoRoute(String preferencesName) {
     return GoRoute(

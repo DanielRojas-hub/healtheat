@@ -1,3 +1,4 @@
+import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -109,6 +110,10 @@ class _RegisterViewState extends State<RegisterView> {
                           print(e);
                         }
                         restaurantRepository.createRestaurant(restaurant);
+                        context.read<UserBloc>().add(UpdateUser(
+                                context.read<UserBloc>().state.user, {
+                              'restaurantId': restaurant.id,
+                            }));
                         // GoRouter.of(context).go('/home/$restaurant.id');
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
@@ -133,8 +138,8 @@ class _RegisterViewState extends State<RegisterView> {
 
                         // Navigator.of(context).push(MaterialPageRoute(
                         //   builder: (context) => ToastContext(),
-                        context.goNamed(RouteName.home,
-                            pathParameters: {'restaurantId': restaurant.id});
+                        // context.goNamed(RouteName.home,
+                        //     pathParameters: {'restaurantId': restaurant.id});
                         // ));
                       }
                     },
