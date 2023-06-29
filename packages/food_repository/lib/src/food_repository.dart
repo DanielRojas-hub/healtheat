@@ -98,4 +98,13 @@ class FoodRepository {
     final downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;
   }
+
+  Future<void> deleteFood(String restaurantId, String foodId) async {
+    return await _firebaseFirestore
+        .collection('restaurants')
+        .doc(restaurantId)
+        .collection('foods')
+        .doc(foodId)
+        .delete();
+  }
 }

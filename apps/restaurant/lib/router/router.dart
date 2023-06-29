@@ -75,22 +75,23 @@ class AppRouter {
                                   state.pathParameters['restaurantId'],
                             )),
                     GoRoute(
-                        path: 'food/:foodId',
-                        name: RouteName.food,
-                        builder: (context, state) => FoodDetailsPage(
-                          restaurantId: state.pathParameters['restaurantId'].toString(), 
-                          foodId: state.pathParameters['foodId'].toString(),
-                          ),
-                        // routes: [
-                        //   GoRoute(
-                        //       path: 'edit',
-                        //       name: RouteName.editFood,
-                        //       builder: (context, state) => AddFoodPage(
-                        //             restaurantId:
-                        //                 state.pathParameters['restaurantId'],
-                        //           )),
-                        // ]
-                        ),
+                      path: 'food/:foodId',
+                      name: RouteName.food,
+                      builder: (context, state) => FoodDetailsPage(
+                        restaurantId:
+                            state.pathParameters['restaurantId'].toString(),
+                        foodId: state.pathParameters['foodId'].toString(),
+                      ),
+                      // routes: [
+                      //   GoRoute(
+                      //       path: 'edit',
+                      //       name: RouteName.editFood,
+                      //       builder: (context, state) => AddFoodPage(
+                      //             restaurantId:
+                      //                 state.pathParameters['restaurantId'],
+                      //           )),
+                      // ]
+                    ),
                     GoRoute(
                         path: 'edit',
                         name: RouteName.editRestaurant,

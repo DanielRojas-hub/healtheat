@@ -18,11 +18,11 @@ class FoodDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CounterBloc>(
-          create: (context) => CounterBloc()
-            ..add(CartBlocCounter(
-                context.read<CartBloc>(), restaurantId, foodId)),
-        ),
+        // BlocProvider<CounterBloc>(
+        //   create: (context) => CounterBloc()
+        //     ..add(CartBlocCounter(
+        //         context.read<CartBloc>(), restaurantId, foodId)),
+        // ),
         BlocProvider<FoodBloc>(
           create: (context) =>
               FoodBloc()..add(StreamFood(restaurantId, foodId)),

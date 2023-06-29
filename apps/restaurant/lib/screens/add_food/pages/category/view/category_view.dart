@@ -16,7 +16,7 @@ class CategoryView extends StatelessWidget {
         children: [
           Text("Personalization",
               style: Theme.of(context).textTheme.headlineSmall),
-          Text("Personalize your restaurant...",
+          Text("Personalize your food...",
               style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 30),
           Text("All the menus!", style: Theme.of(context).textTheme.titleLarge),

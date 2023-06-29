@@ -34,10 +34,12 @@ class FoodList extends StatelessWidget {
                 categories: const ['Gluten free'],
                 price: food.price ?? 0,
                 isFavorite: false,
-                onTap: () => context.goNamed(RouteName.food, pathParameters: {
-                  'restaurantId': restaurantId,
-                  'foodId': food.id
-                }),
+                onTap: () {
+                  context.goNamed(RouteName.food, pathParameters: {
+                    'restaurantId': restaurantId,
+                    'foodId': food.id
+                  });
+                },
                 onTapFavorite: () {},
                 onTapPrice: () => context.goNamed(RouteName.food,
                     pathParameters: {
