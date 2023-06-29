@@ -14,7 +14,10 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Search Restaurants'),
+        centerTitle: true,
+      ),
       body: ListView(children: const [
         SearchWidget(),
         SingleChildScrollView(

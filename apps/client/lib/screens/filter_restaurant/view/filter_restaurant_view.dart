@@ -64,7 +64,7 @@ class FilterRestaurantView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
             sliver: SliverToBoxAdapter(child: CategoryWrap()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
@@ -77,7 +77,7 @@ class FilterRestaurantView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
             sliver: SliverToBoxAdapter(child: CuisineWrap()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
@@ -90,30 +90,45 @@ class FilterRestaurantView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
             sliver: SliverToBoxAdapter(child: MenuWrap()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          // SliverPadding(
+          //   padding:
+          //       const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(
+          //       child: Text("Show first",
+          //           style: Theme.of(context).textTheme.titleLarge)),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+          //   sliver: SliverToBoxAdapter(child: FilterRadio()),
+          // ),
+          const SliverToBoxAdapter(child: SizedBox(height: 70)),
           SliverPadding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(
-                child: Text("Show first",
-                    style: Theme.of(context).textTheme.titleLarge)),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-            sliver: SliverToBoxAdapter(child: FilterRadio()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 40)),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+              sliver: SliverToBoxAdapter(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).hoverColor)),
+                  onPressed: () =>
+                      context.read<FilterBloc>().add(const ResetFilter()),
+                  child: const Text("Reset Filter"),
+                ),
+              )),
+          const SliverToBoxAdapter(child: SizedBox(height: 10)),
+
           SliverPadding(
               padding:
                   const EdgeInsets.symmetric(horizontal: Constants.marginSmall),

@@ -21,6 +21,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<RemoveMenu>(onRemoveMenu);
     on<AddSortType>(onAddSortType);
     on<RemoveSortType>(onRemoveSortType);
+    on<ResetFilter>(_onResetFilter);
   }
 
   // final PreferenceRepository _preferenceRepository;
@@ -85,5 +86,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     final copyList = List<int>.from(state.sortTypeList);
     copyList.remove(event.sortTypeId);
     emit(state.copyWith(sortTypeList: copyList));
+  }
+
+  void _onResetFilter(ResetFilter event, Emitter<FilterState> emit) async {
+    emit(FilterState());
   }
 }
