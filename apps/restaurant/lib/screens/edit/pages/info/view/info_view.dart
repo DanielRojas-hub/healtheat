@@ -14,6 +14,7 @@ class InfoView extends StatefulWidget {
 
 class _InfoViewState extends State<InfoView> {
   File? _image;
+  final RestaurantRepository restaurantRepository = RestaurantRepository();
 
   Future<void> _selectImage() async {
     final picker = ImagePicker();
