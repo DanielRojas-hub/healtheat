@@ -20,38 +20,45 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.authenticationRepository});
+  const MyApp({
+    required AuthenticationRepository authenticationRepository,
+    super.key,
+  }) : _authenticationRepository = authenticationRepository;
 
-  final AuthenticationRepository authenticationRepository;
+  final AuthenticationRepository _authenticationRepository;
 
   // This widget is the root of your application .
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => AppRouter(),
-      child: Builder(builder: (context) {
-        final routerConfig =
-            Provider.of<AppRouter>(context, listen: false).router;
-
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthenticationBloc>(
-              create: (context) => AuthenticationBloc(
-                  authenticationRepository: authenticationRepository),
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => UserBloc()
-                ..add(
-                    AuthenticationBlocUser(context.read<AuthenticationBloc>())),
-            ),
-          ],
-          child: MaterialApp.router(
-            title: 'Flutter Demo',
-            theme: lightTheme(),
-            routerConfig: routerConfig,
+    return RepositoryProvider.value(
+      value: _authenticationRepository,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) => AuthenticationBloc(
+                authenticationRepository: _authenticationRepository),
           ),
-        );
-      }),
+          BlocProvider<UserBloc>(
+            create: (context) => UserBloc()
+              ..add(AuthenticationBlocUser(context.read<AuthenticationBloc>())),
+          ),
+        ],
+        child: Provider(
+          create: (context) => AppRouter(GoRouterRefreshStream(
+              authenticationBloc: context.read<AuthenticationBloc>(),
+              userBloc: context.read<UserBloc>())),
+          child: Builder(builder: (context) {
+            final routerConfig =
+                Provider.of<AppRouter>(context, listen: false).router;
+
+            return MaterialApp.router(
+              title: 'Flutter Demo',
+              theme: lightTheme(),
+              routerConfig: routerConfig,
+            );
+          }),
+        ),
+      ),
     );
   }
 }
