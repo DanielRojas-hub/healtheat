@@ -13,6 +13,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         super(OrderLoading()) {
     on<StreamOrder>(_onStreamOrder);
     on<GetOrder>(_onGetOrder);
+    on<StreamOrders>(_onStreamOrders);
+    on<GetOrders>(_onGetOrders);
     on<_OrderUpdated>(_onOrderUpdated);
     on<_OrdersUpdated>(_onOrdersUpdated);
   }

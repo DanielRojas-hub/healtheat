@@ -7,6 +7,7 @@ import 'package:client/screens/home/home.dart';
 import 'package:client/screens/login/login.dart';
 import 'package:client/screens/order_confirmation/order_confirmation.dart';
 import 'package:client/screens/order_detail/order_detail.dart';
+import 'package:client/screens/orders/orders.dart';
 import 'package:client/screens/preferences_filter/preferences_filter.dart';
 import 'package:client/screens/profile/profile.dart';
 import 'package:client/screens/register/register.dart';
@@ -29,7 +30,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/order/Kkz5Y7rQRazjdqi6ZaN6',
+    initialLocation: '/orders',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -123,15 +124,22 @@ class AppRouter {
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),
+            GoRoute(
+                path: '/orders',
+                parentNavigatorKey: shellNavigatorKey,
+                name: RouteName.orders,
+                builder: (context, state) => OrdersPage(),
+                routes: [
+                  GoRoute(
+                    path: ':orderId',
+                    parentNavigatorKey: shellNavigatorKey,
+                    name: RouteName.orderDetail,
+                    builder: (context, state) => OrderDetailPage(
+                      orderId: state.pathParameters['orderId'].toString(),
+                    ),
+                  ),
+                ]),
           ]),
-      GoRoute(
-        path: '/order/:orderId',
-        parentNavigatorKey: rootNavigatorKey,
-        name: RouteName.orderDetail,
-        builder: (context, state) => OrderDetailPage(
-          orderId: state.pathParameters['orderId'].toString(),
-        ),
-      ),
     ],
   );
 

@@ -77,7 +77,7 @@ class OrderDetailView extends StatelessWidget {
                                               .colorScheme
                                               .primaryContainer,
                                           child: Icon(
-                                            Icons.access_time,
+                                            Icons.schedule,
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .onPrimary,
@@ -88,7 +88,7 @@ class OrderDetailView extends StatelessWidget {
                                               .colorScheme
                                               .tertiaryContainer,
                                           child: Icon(
-                                            Icons.access_time,
+                                            Icons.schedule,
                                             color:
                                                 Theme.of(context).disabledColor,
                                           )),
