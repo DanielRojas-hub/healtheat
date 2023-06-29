@@ -1,4 +1,4 @@
-import 'package:client/router/route_name.dart';
+import 'package:restaurant/router/route_name.dart';
 import 'package:common/services/services.dart';
 import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ActiveOrdersList extends StatelessWidget {
-  const ActiveOrdersList({Key? key}) : super(key: key);
+class PastOrdersList extends StatelessWidget {
+  const PastOrdersList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ActiveOrdersList extends StatelessWidget {
                       const SizedBox(height: 15),
                   itemBuilder: (BuildContext context, int index) {
                     final order = orders[index];
-                    if (order.status < 3) {
+                    if (order.status >= 4) {
                       return OrderCard(
                           orderId: order.id,
                           restaurantName: restaurants

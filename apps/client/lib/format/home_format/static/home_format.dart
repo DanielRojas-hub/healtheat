@@ -8,7 +8,7 @@ final List<NavBarItem> navList = [
   // NavBarItem(Ionicons.heart, RouteName.favorites,
   //     iconDisable: Ionicons.heart_outline),
   NavBarItem(Ionicons.cart, RouteName.cart, iconDisable: Ionicons.cart_outline),
-  NavBarItem(Icons.history, RouteName.cart,
+  NavBarItem(Icons.history, RouteName.orders,
       iconDisable: Icons.history_outlined),
   // NavBarItem(Ionicons.person, RouteName.profile,
   //     iconDisable: Ionicons.person_outline),

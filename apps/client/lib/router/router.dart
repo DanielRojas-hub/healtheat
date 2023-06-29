@@ -30,7 +30,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/orders',
+    initialLocation: '/home',
     routes: [
       // GoRoute(
       //     path: '/splash_screen',
@@ -128,7 +128,7 @@ class AppRouter {
                 path: '/orders',
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.orders,
-                builder: (context, state) => OrdersPage(),
+                builder: (context, state) => const OrdersPage(),
                 routes: [
                   GoRoute(
                     path: ':orderId',

@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
 import 'package:restaurant/screens/register/view/register_page.dart';
+import 'package:restaurant/screens/order_detail/order_detail.dart';
 
+import '../screens/orders/view/view.dart';
 import 'route_name.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -15,7 +17,7 @@ class AppRouter {
 
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/register',
+    initialLocation: '/orders/Kkz5Y7rQRazjdqi6ZaN6',
     routes: [
       GoRoute(
           path: '/register',
@@ -44,6 +46,19 @@ class AppRouter {
           builder: (context, state) => AddFoodPage(
                 restaurantId: state.pathParameters['restaurantId'],
               )),
+      GoRoute(
+          path: '/orders',
+          name: RouteName.orders,
+          builder: (context, state) => const OrdersPage(),
+          routes: [
+            GoRoute(
+              path: ':orderId',
+              name: RouteName.orderDetail,
+              builder: (context, state) => OrderDetailPage(
+                orderId: state.pathParameters['orderId'].toString(),
+              ),
+            ),
+          ]),
     ],
   );
 }

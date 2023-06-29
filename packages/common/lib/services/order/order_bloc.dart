@@ -15,6 +15,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<GetOrder>(_onGetOrder);
     on<StreamOrders>(_onStreamOrders);
     on<GetOrders>(_onGetOrders);
+    on<UpdateOrder>(_onUpdateOrder);
     on<_OrderUpdated>(_onOrderUpdated);
     on<_OrdersUpdated>(_onOrdersUpdated);
   }
@@ -85,6 +86,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   void _onOrderUpdated(_OrderUpdated event, Emitter<OrderState> emit) {
     return emit(OrderLoaded(event.order));
+  }
+
+  void _onUpdateOrder(UpdateOrder event, Emitter<OrderState> emit) {
+    _orderRepository.updateOrder(orderId: event.orderId, data: event.data);
   }
 
   void _onOrdersUpdated(_OrdersUpdated event, Emitter<OrderState> emit) {

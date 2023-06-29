@@ -11,14 +11,18 @@ import '../skelton.dart';
 class OrderCard extends StatelessWidget {
   const OrderCard({
     super.key,
+    required this.restaurantName,
+    required this.orderId,
     required this.status,
-    required this.foods,
+    //required this.foods,
     this.onTap,
     this.onTapFavorite,
   });
 
+  final String restaurantName;
+  final String orderId;
   final int status;
-  final List<String> foods;
+  //final List<String> foods;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
 
@@ -33,83 +37,84 @@ class OrderCard extends StatelessWidget {
             padding: const EdgeInsets.only(
                 top: 5, bottom: 17.5, left: 10, right: 10),
             child: Column(children: [
+              const SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
                   children: [
-                    Expanded(
-                        child: Text('Restaurant #22342342',
-                            style: Theme.of(context).textTheme.titleLarge)),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text(restaurantName,
+                                style: Theme.of(context).textTheme.titleLarge)),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text("#$orderId",
+                                style:
+                                    Theme.of(context).textTheme.labelMedium)),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 5),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                              children: List.generate(
-                                  2,
-                                  (index) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8),
-                                        child: CustomLabelButton(
-                                            label: const Text('type'),
-                                            backgroundColor: Theme.of(context)
-                                                .colorScheme
-                                                .tertiaryContainer,
-                                            color: context.theme.blackColor),
-                                      ))),
+              /*Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Row(
+                            children: List.generate(
+                                foods.length > 3 ? 4 : foods.length,
+                                (index) => Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: index >= 3
+                                          ? CustomLabelButton(
+                                              label: const Text('+'),
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiaryContainer,
+                                              color: context.theme.blackColor)
+                                          : CustomLabelButton(
+                                              label: Text(foods[index]),
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiaryContainer,
+                                              color: context.theme.blackColor),
+                                    ))),
+                      ),
+                    ]),
+              ),*/
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomLabelButton(
+                        label: Text(
+                          status == 0
+                              ? 'Processing'
+                              : status == 1
+                                  ? 'Cooking'
+                                  : status == 2
+                                      ? 'On its way'
+                                      : 'Delivered',
                         ),
-                      ]),
-                ),
-                CustomLabelButton(
-                  label: Text(
-                    status == 0
-                        ? 'Processing'
-                        : status == 1
-                            ? 'Cooking'
-                            : status == 2
-                                ? 'On its way'
-                                : 'Delivered',
-                  ),
-                  icon: status == 0
-                      ? Icons.schedule
-                      : status == 1
-                          ? Icons.soup_kitchen
-                          : status == 2
-                              ? Icons.delivery_dining
-                              : Icons.check,
-                )
-              ]),
+                        icon: status == 0
+                            ? Icons.schedule
+                            : status == 1
+                                ? Icons.soup_kitchen
+                                : status == 2
+                                    ? Icons.delivery_dining
+                                    : Icons.check,
+                      ),
+                    ]),
+              ),
             ]),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row(
-                        children: List.generate(
-                            foods.length > 3 ? 3 : foods.length,
-                            (index) => Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: CustomLabelButton(
-                                      label: const Text('type'),
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      color: context.theme.blackColor),
-                                ))),
-                  ),
-                ]),
-          )
         ]),
       ]),
     );

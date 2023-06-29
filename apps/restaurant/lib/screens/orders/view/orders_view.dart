@@ -1,4 +1,4 @@
-import 'package:client/router/route_name.dart';
+import 'package:restaurant/router/route_name.dart';
 import 'package:common/controllers/controllers.dart';
 import 'package:common/services/services.dart';
 import 'package:common/utils/utils.dart';
@@ -70,7 +70,7 @@ class OrdersView extends StatelessWidget {
             // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
             // const SliverToBoxAdapter(child: PopularCategoryList()),
             // const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            const SliverToBoxAdapter(child: HomeTab()),
+            const SliverToBoxAdapter(child: OrdersTab()),
           ];
         },
         body: PageView(

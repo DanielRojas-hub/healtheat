@@ -61,6 +61,16 @@ class GetOrders extends OrderEvent {
   List<Object?> get props => [orderIds, userId, restaurantId, state, sortType];
 }
 
+class UpdateOrder extends OrderEvent {
+  final String orderId;
+  final Map<String, dynamic> data;
+
+  const UpdateOrder(this.orderId, this.data);
+
+  @override
+  List<Object> get props => [orderId, data];
+}
+
 class _OrderUpdated extends OrderEvent {
   final Order order;
 
