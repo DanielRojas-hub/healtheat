@@ -1,4 +1,5 @@
 import 'package:common/controllers/controllers.dart';
+import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +13,9 @@ class FavoritesPage extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider<TabCubit>(
         create: (context) => TabCubit(tabList: favoritesTabList),
+      ),
+      BlocProvider<CategoryBloc>(
+        create: (context) => CategoryBloc()..add(const StreamCategories()),
       ),
     ], child: const FavoritesView());
   }
