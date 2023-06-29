@@ -15,6 +15,7 @@ class NameInput extends StatelessWidget {
           icon: const Icon(Icons.storefront, size: 20),
           onChanged: (name) => context.read<RegisterCubit>().nameChanged(name),
           errorText: state.name.displayError != null ? 'invalid name' : null,
+          initialValue: state.name.value,
         );
       },
     );

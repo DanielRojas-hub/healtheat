@@ -164,9 +164,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
   }
 
-  void setClosingTime(String time) {
-    closingTimeController.text = time;
-  }
   // Future<void> _onSubmitted(
   //   LoginSubmitted event,
   //   Emitter<LoginState> emit,
