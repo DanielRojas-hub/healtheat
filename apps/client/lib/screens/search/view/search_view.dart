@@ -15,15 +15,15 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView(children: [
+      body: ListView(children: const [
         SearchWidget(),
-        const SingleChildScrollView(
+        SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [CategoryElements(), CuisineElements(), MenuElements()],
             )),
-        const SizedBox(height: 20.0),
+        SizedBox(height: 20.0),
         SearchList()
       ]),
     );

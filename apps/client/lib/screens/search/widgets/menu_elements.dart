@@ -1,7 +1,7 @@
+import 'package:common/services/menu/menu_bloc.dart';
 import 'package:common/services/search/search_bloc.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:common/services/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MenuElements extends StatelessWidget {
@@ -26,7 +26,11 @@ class MenuElements extends StatelessWidget {
               if (isSelected ?? false) {
                 return Padding(
                     padding: EdgeInsets.only(left: !isFirst ? 8.0 : 0),
-                    child: CustomChip(label: menu.displayName.toString()));
+                    child: CustomChip(
+                        label: menu.displayName.toString(),
+                        onDeleted: () => context
+                            .read<SearchBloc>()
+                            .add(RemoveMenu(menu.id))));
               }
               return const SizedBox();
             },

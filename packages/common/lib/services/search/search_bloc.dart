@@ -15,6 +15,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<FilterChange>(_onFilterChange);
     on<UpdateRestaurant>(_onUpdateRestaurant);
     on<RestaurantChange>(_onRestaurantChange);
+    on<RemoveCategory>(_onRemoveCategory);
+    on<RemoveCuisine>(_onRemoveCuisine);
+    on<RemoveMenu>(_onRemoveMenu);
+
     _restaurantBlocSubscription = restaurantBloc.stream.listen((state) {
       if (state is RestaurantsLoaded) {
         add(RestaurantChange(originalRestaurants: state.restaurants));
@@ -40,6 +44,40 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   void _onFilterChange(FilterChange event, Emitter<SearchState> emit) async {
     add(UpdateRestaurant(state.originalRestaurants, event.categoryIds,
         event.cuisineIds, event.menuIds, state.searchInput));
+  }
+
+  void _onRemoveCategory(
+      RemoveCategory event, Emitter<SearchState> emit) async {
+    final copyList = List<String>.from(state.categoryIds ?? []);
+    copyList.remove(event.categoryId);
+    if (copyList.isEmpty) {
+      return add(UpdateRestaurant(state.originalRestaurants, null,
+          state.cuisineIds, state.menuIds, state.searchInput));
+    }
+    add(UpdateRestaurant(state.originalRestaurants, copyList, state.cuisineIds,
+        state.menuIds, state.searchInput));
+  }
+
+  void _onRemoveCuisine(RemoveCuisine event, Emitter<SearchState> emit) async {
+    final copyList = List<String>.from(state.cuisineIds ?? []);
+    copyList.remove(event.cuisineId);
+    if (copyList.isEmpty) {
+      return add(UpdateRestaurant(state.originalRestaurants, state.categoryIds,
+          null, state.menuIds, state.searchInput));
+    }
+    add(UpdateRestaurant(state.originalRestaurants, state.categoryIds, copyList,
+        state.menuIds, state.searchInput));
+  }
+
+  void _onRemoveMenu(RemoveMenu event, Emitter<SearchState> emit) async {
+    final copyList = List<String>.from(state.menuIds ?? []);
+    copyList.remove(event.menuId);
+    if (copyList.isEmpty) {
+      return add(UpdateRestaurant(state.originalRestaurants, state.categoryIds,
+          state.cuisineIds, null, state.searchInput));
+    }
+    add(UpdateRestaurant(state.originalRestaurants, state.categoryIds,
+        state.cuisineIds, copyList, state.searchInput));
   }
 
   void _onRestaurantChange(

@@ -1,5 +1,6 @@
-import 'package:common/common.dart';
+import 'package:common/services/category/category_bloc.dart';
 import 'package:common/services/search/search_bloc.dart';
+import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,12 @@ class CategoryElements extends StatelessWidget {
               if (isSelected ?? false) {
                 return Padding(
                     padding: EdgeInsets.only(left: !isFirst ? 8.0 : 0),
-                    child: CustomChip(label: category.displayName.toString()));
+                    child: CustomChip(
+                      label: category.displayName.toString(),
+                      onDeleted: () => context
+                          .read<SearchBloc>()
+                          .add(RemoveCategory(category.id)),
+                    ));
               }
               return const SizedBox();
             },

@@ -36,6 +36,33 @@ class RestaurantChange extends SearchEvent {
   List<Object> get props => [originalRestaurants];
 }
 
+class RemoveCategory extends SearchEvent {
+  final String categoryId;
+
+  const RemoveCategory(this.categoryId);
+
+  @override
+  List<Object> get props => [categoryId];
+}
+
+class RemoveCuisine extends SearchEvent {
+  final String cuisineId;
+
+  const RemoveCuisine(this.cuisineId);
+
+  @override
+  List<Object> get props => [cuisineId];
+}
+
+class RemoveMenu extends SearchEvent {
+  final String menuId;
+
+  const RemoveMenu(this.menuId);
+
+  @override
+  List<Object> get props => [menuId];
+}
+
 class UpdateRestaurant extends SearchEvent {
   final List<Restaurant>? originalRestaurants;
   final List<String>? categoryIds;

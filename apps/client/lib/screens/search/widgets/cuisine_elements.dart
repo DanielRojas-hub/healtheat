@@ -1,7 +1,7 @@
+import 'package:common/services/cuisine/cuisine_bloc.dart';
 import 'package:common/services/search/search_bloc.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:common/services/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CuisineElements extends StatelessWidget {
@@ -25,7 +25,11 @@ class CuisineElements extends StatelessWidget {
             if (isSelected ?? false) {
               return Padding(
                   padding: EdgeInsets.only(left: !isFirst ? 8.0 : 0),
-                  child: CustomChip(label: cuisine.displayName.toString()));
+                  child: CustomChip(
+                      label: cuisine.displayName.toString(),
+                      onDeleted: () => context
+                          .read<SearchBloc>()
+                          .add(RemoveCuisine(cuisine.id))));
             }
             return const SizedBox();
           }));
