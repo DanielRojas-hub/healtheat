@@ -13,6 +13,7 @@ class User extends Equatable {
   final List<String>? favFoods;
   final List<String>? favRestaurants;
   final String? userPreferenceId;
+  final String? restaurantId;
 
   const User({
     required this.id,
@@ -22,6 +23,7 @@ class User extends Equatable {
     this.favFoods,
     this.favRestaurants,
     this.userPreferenceId,
+    this.restaurantId,
   });
 
   static const empty = User(id: '');
@@ -37,6 +39,7 @@ class User extends Equatable {
     List<String>? favFoods,
     List<String>? favRestaurants,
     String? userPreferenceId,
+    String? restaurantId,
   }) {
     return User(
       id: id ?? this.id,
@@ -46,6 +49,7 @@ class User extends Equatable {
       favFoods: favFoods ?? this.favFoods,
       favRestaurants: favRestaurants ?? this.favRestaurants,
       userPreferenceId: userPreferenceId ?? this.userPreferenceId,
+      restaurantId: restaurantId ?? this.restaurantId,
     );
   }
 
@@ -58,6 +62,7 @@ class User extends Equatable {
       'favFoods': favFoods,
       'favRestaurants': favRestaurants,
       'userPreferenceId': userPreferenceId,
+      'restaurantId': restaurantId,
     };
   }
 
@@ -77,6 +82,8 @@ class User extends Equatable {
       userPreferenceId: map['userPreferenceId'] != null
           ? map['userPreferenceId'] as String
           : null,
+      restaurantId:
+          map['restaurantId'] != null ? map['restaurantId'] as String : null,
     );
   }
 
@@ -84,18 +91,18 @@ class User extends Equatable {
     final data = snapshot.data() as Map<String, dynamic>?;
 
     return User(
-      id: snapshot.id,
-      displayName: data?['displayName'],
-      email: data?['email'],
-      phone: data?['phone'] != null ? Phone.fromMap(data?['phone']) : null,
-      favFoods: data?['favFoods'] != null
-          ? List<String>.from(data?['favFoods'])
-          : null,
-      favRestaurants: data?['favRestaurants'] != null
-          ? List<String>.from(data?['favRestaurants'])
-          : null,
-      userPreferenceId: data?['userPreferenceId'],
-    );
+        id: snapshot.id,
+        displayName: data?['displayName'],
+        email: data?['email'],
+        phone: data?['phone'] != null ? Phone.fromMap(data?['phone']) : null,
+        favFoods: data?['favFoods'] != null
+            ? List<String>.from(data?['favFoods'])
+            : null,
+        favRestaurants: data?['favRestaurants'] != null
+            ? List<String>.from(data?['favRestaurants'])
+            : null,
+        userPreferenceId: data?['userPreferenceId'],
+        restaurantId: data?['restaurantId']);
   }
 
   String toJson() => json.encode(toMap());
@@ -116,6 +123,7 @@ class User extends Equatable {
       favFoods,
       favRestaurants,
       userPreferenceId,
+      restaurantId,
     ];
   }
 }

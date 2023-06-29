@@ -1,4 +1,6 @@
 class RouteName {
+  static const login = 'login';
+  static const signUp = 'register';
   static const registerRestaurant = 'register_restaurant';
   static const timePicker = 'time_picker';
   static const timeEditPicker = 'time_edit_picker';

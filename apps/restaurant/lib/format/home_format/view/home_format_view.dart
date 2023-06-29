@@ -13,16 +13,16 @@ class HomeFormatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: child),
-      bottomNavigationBar: BlocBuilder<CustomNavBarCubit, CustomNavBarState>(
-        builder: (context, state) => CustomNavBar(
-          navList: state.navList,
-          index: state.index,
-          onTap: (NavBarItem selectedNavBar) {
-            context.read<CustomNavBarCubit>().onTap(selectedNavBar);
-            context.goNamed(selectedNavBar.routeName);
-          },
-        ),
-      ),
+      // bottomNavigationBar: BlocBuilder<CustomNavBarCubit, CustomNavBarState>(
+      //   builder: (context, state) => CustomNavBar(
+      //     navList: state.navList,
+      //     index: state.index,
+      //     onTap: (NavBarItem selectedNavBar) {
+      //       context.read<CustomNavBarCubit>().onTap(selectedNavBar);
+      //       context.goNamed(selectedNavBar.routeName);
+      //     },
+      //   ),
+      // ),
     );
   }
 }
