@@ -11,6 +11,7 @@ final class RegisterState extends Equatable {
     this.phone = const IsNumeric.pure(),
     this.openingTime = const NotEmptyString.pure(),
     this.closingTime = const NotEmptyString.pure(),
+    this.image,
     List<String>? cuisineIds,
     List<String>? categoryIds,
     List<String>? menuIds,
@@ -28,6 +29,7 @@ final class RegisterState extends Equatable {
   final IsNumeric phone;
   final NotEmptyString openingTime;
   final NotEmptyString closingTime;
+  final File? image;
   final List<String> cuisineIds;
   final List<String> categoryIds;
   final List<String> menuIds;
@@ -41,6 +43,7 @@ final class RegisterState extends Equatable {
         phone,
         openingTime,
         closingTime,
+        image,
         cuisineIds,
         categoryIds,
         preferenceIds,
@@ -58,6 +61,7 @@ final class RegisterState extends Equatable {
     NotEmptyString? openingTime,
     NotEmptyString? closingTime,
     FormzSubmissionStatus? status,
+    File? image,
     String? errorMessage,
     bool? isValid,
     List<String>? cuisineIds,
@@ -73,6 +77,7 @@ final class RegisterState extends Equatable {
       openingTime: openingTime ?? this.openingTime,
       closingTime: closingTime ?? this.closingTime,
       status: status ?? this.status,
+      image: image ?? this.image,
       errorMessage: errorMessage ?? this.errorMessage,
       isValid: isValid ?? this.isValid,
       cuisineIds: cuisineIds ?? this.cuisineIds,
@@ -82,5 +87,3 @@ final class RegisterState extends Equatable {
     );
   }
 }
-
-// class RegisterInitial extends RegisterState {}

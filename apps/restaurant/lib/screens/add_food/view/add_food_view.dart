@@ -32,24 +32,24 @@ class _AddFoodViewState extends State<AddFoodView> {
             isActive: _currentStep >= 0),
         Step(
             title: const Text(
-              'Previsualization',
+              'Personalize',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blueGrey,
+              ),
+            ),
+            content: const CategoryPage(),
+            isActive: _currentStep >= 1),
+        Step(
+            title: const Text(
+              'Prev',
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.blueGrey,
               ),
             ),
             content: const PrevisualizationPage(),
-            isActive: _currentStep >= 1),
-        // Step(
-        //     title: const Text(
-        //       'Previsualization',
-        //       style: TextStyle(
-        //         fontSize: 10,
-        //         color: Colors.blueGrey,
-        //       ),
-        //     ),
-        //     content: const CategoryPage(),
-        //     isActive: _currentStep >= 2),
+            isActive: _currentStep >= 2),
       ];
 
   @override
@@ -64,28 +64,38 @@ class _AddFoodViewState extends State<AddFoodView> {
                   currentStep: _currentStep,
                   steps: getSteps(),
                   type: StepperType.horizontal,
-                  onStepContinue: () async {
-                    if (_currentStep < getSteps().length - 1) {
-                      setState(() {
-                        _currentStep++;
-                      });
-                    } else if (_currentStep == getSteps().length - 1) {
-                      await foodRepository.uploadFoodImage(
-                          filePath: state.image.toString(), fileName: 'id1');
-                      String imageUrl = await foodRepository.downloadURL('id1');
-                      Food food = Food(
-                          restaurantId:
-                              widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
-                          displayName: state.displayName.value,
-                          description: state.description.value,
-                          imageUrl: imageUrl,
-                          price: num.parse(state.price.value),
-                          isAvailable: true);
-                      foodRepository.createFood(
-                          widget.restaurantId ?? '28LecpHZyk81KUl6EsND', food);
-                      _currentStep = 0;
-                    }
-                  },
+                  onStepContinue: !state.isValid && _currentStep == 1
+                      ? null
+                      : () async {
+                          if (_currentStep < getSteps().length - 1) {
+                            setState(() {
+                              _currentStep++;
+                            });
+                          } else if (_currentStep == getSteps().length - 1) {
+                            Food food = Food(
+                                restaurantId: widget.restaurantId ??
+                                    '28LecpHZyk81KUl6EsND',
+                                displayName: state.displayName.value,
+                                description: state.description.value,
+                                imageUrl: '',
+                                price: num.parse(state.price.value),
+                                isAvailable: true,
+                                categoryIds: state.categoryIds,
+                                menuIds: state.menuIds,
+                                preferenceIds: state.preferenceIds);
+                            try {
+                              String imageUrl = await foodRepository
+                                  .uploadFoodImage(state.image!);
+                              food = food.copyWith(imageUrl: imageUrl);
+                            } catch (e) {
+                              print(e);
+                            }
+                            foodRepository.createFood(
+                                widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
+                                food);
+                            _currentStep = 0;
+                          }
+                        },
                   onStepCancel: _currentStep == 0
                       ? null
                       : () {

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:food_repository/food_repository.dart';
+import 'package:path/path.dart';
 
 class FoodRepository {
   FoodRepository({
@@ -89,20 +90,12 @@ class FoodRepository {
         .update(data);
   }
 
-  Future<void> uploadFoodImage({String? filePath, String? fileName}) async {
-    File file = File(filePath!);
-
-    try {
-      await _firebaseStorage.ref('food_image/$fileName').putFile(file);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<String> downloadURL(String fileName) async {
-    String downloadURL =
-        await _firebaseStorage.ref('food_image/$fileName').getDownloadURL();
-    print(downloadURL);
-    return downloadURL;
+  Future uploadFoodImage(File file) async {
+    final ref = _firebaseStorage.ref().child('food_image');
+    final fileName = basename(file.path);
+    final uploadTask = ref.child(fileName).putFile(file);
+    final snapshot = await uploadTask;
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
   }
 }

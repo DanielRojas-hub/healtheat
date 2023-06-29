@@ -5,3 +5,4 @@ export 'name_input.dart';
 export 'opening_input.dart';
 export 'phone_input.dart';
 export 'schedule_input.dart';
+export 'restaurant_image.dart';

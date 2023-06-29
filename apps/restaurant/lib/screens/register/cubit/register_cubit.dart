@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -153,5 +155,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     final List<String> preferenceIds = List.from(state.preferenceIds);
     preferenceIds.remove(preferenceId);
     emit(state.copyWith(preferenceIds: preferenceIds));
+  }
+
+  void imageChanged(File? image) {
+    emit(
+      state.copyWith(image: image),
+    );
   }
 }

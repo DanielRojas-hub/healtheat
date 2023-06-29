@@ -42,10 +42,10 @@ dependencies:
   formz: ^0.6.0
   form_inputs:
     path: ../../packages/form_inputs
+  firebase_storage: ^11.2.2
   cuisine_repository:
     path: ../../packages/cuisine_repository
   fluttertoast: ^8.2.2
-  firebase_storage: ^11.2.2
 
 dev_dependencies:
   flutter_test:

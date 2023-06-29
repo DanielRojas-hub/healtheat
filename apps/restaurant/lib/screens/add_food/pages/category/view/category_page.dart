@@ -1,4 +1,6 @@
+import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../category.dart';
 
@@ -7,6 +9,14 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CategoryView();
+    return MultiBlocProvider(providers: [
+      BlocProvider<MenuBloc>(
+          create: (context) => MenuBloc()..add(const StreamMenus())),
+      BlocProvider<CategoryBloc>(
+          create: (context) => CategoryBloc()..add(const StreamCategories())),
+      BlocProvider<PreferenceBloc>(
+        create: (context) => PreferenceBloc()..add(const StreamPreferences()),
+      )
+    ], child: const CategoryView());
   }
 }

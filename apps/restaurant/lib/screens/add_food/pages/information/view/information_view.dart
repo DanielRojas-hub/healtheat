@@ -60,8 +60,9 @@ class _InformationViewState extends State<InformationView> {
               ElevatedButton(
                 onPressed: () async {
                   _selectImage();
-                  await foodRepository.uploadFoodImage(
-                      filePath: _image.toString(), fileName: 'id1');
+
+                  // await foodRepository.uploadFoodImage(
+                  //     filePath: _image.toString(), fileName: 'id1');
                 },
                 child: const Text('Upload image'),
               ),

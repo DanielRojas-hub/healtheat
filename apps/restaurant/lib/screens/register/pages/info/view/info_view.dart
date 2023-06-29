@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:restaurant_repository/restaurant_repository.dart';
 import 'dart:io';
 import '../widgets/widgets.dart';
 
@@ -13,6 +14,7 @@ class InfoView extends StatefulWidget {
 
 class _InfoViewState extends State<InfoView> {
   File? _image;
+  final RestaurantRepository restaurantRepository = RestaurantRepository();
 
   Future<void> _selectImage() async {
     final picker = ImagePicker();
@@ -62,14 +64,16 @@ class _InfoViewState extends State<InfoView> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 _selectImage();
+                // await restaurantRepository.uploadRestaurantImage(
+                //     filePath: _image.toString(), fileName: 'id1');
               },
-              child: const Text('Add image'),
+              child: const Text('Upload image'),
             ),
             if (_image != null) ...[
               const SizedBox(height: 10),
-              Image.file(_image!),
+              RestaurantImage(image: _image),
             ],
           ],
         ),
