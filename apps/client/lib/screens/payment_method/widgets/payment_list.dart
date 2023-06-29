@@ -1,9 +1,7 @@
-import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../payment_method.dart';
-import 'payment_card.dart';
 
 class PaymentList extends StatelessWidget {
   const PaymentList({

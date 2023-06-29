@@ -46,6 +46,8 @@ dependencies:
   cuisine_repository:
     path: ../../packages/cuisine_repository
   fluttertoast: ^8.2.2
+  intl: ^0.17.0
+  easy_mask: ^2.0.1
 
 dev_dependencies:
   flutter_test:

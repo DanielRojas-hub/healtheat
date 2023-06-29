@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
 import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
+import 'package:restaurant/screens/register/pages/image/view/image_page.dart';
 import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/register.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../pages/pages.dart';
+import '../pages/preview/preview.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -26,18 +31,35 @@ class _RegisterViewState extends State<RegisterView> {
 
   List<Step> getSteps() => [
         Step(
-            title: const Text('Info'),
+            title: Text(
+              'Info',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
             content: const InfoPage(),
             isActive: _currentStep >= 0),
         Step(
-          title: const Text('Personalization'),
-          content: const CategoryPage(),
+          title: Text(
+            'Image',
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          content: const ImagePage(),
           isActive: _currentStep >= 1,
         ),
+        Step(
+          title: Text(
+            'Customize',
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          content: const CategoryPage(),
+          isActive: _currentStep >= 2,
+        ),
         // Step(
-        //   title: const Text('Preview'),
-        //   content: const PreviewPage(),
-        //   isActive: _currentStep >= 2,
+        //   title: Text(
+        //     'Preview',
+        //     style: Theme.of(context).textTheme.labelMedium,
+        //   ),
+        //   content: const HomePage(),
+        //   isActive: _currentStep >= 3,
         // ),
       ];
 
@@ -55,18 +77,18 @@ class _RegisterViewState extends State<RegisterView> {
               currentStep: _currentStep,
               steps: getSteps(),
               type: StepperType.horizontal,
-              onStepContinue: !state.isValid && _currentStep == 1
+              onStepContinue: !state.isValid && _currentStep == 2
                   ? null
                   : () async {
                       if (_currentStep < getSteps().length - 1) {
                         setState(() {
                           _currentStep++;
                         });
-                      } else {
-                        // await restaurantRepository.uploadRestaurantImage(
-                        //     filePath: state.image.toString(), fileName: 'id1');
-                        // String imageUrl =
-                        //     await restaurantRepository.downloadURL('id1');
+                      } else if (state.isValid) {
+                        // Phone phone = Phone(
+                        //   code: state.code.value,
+                        //   number: state.phone.value,
+                        // );
                         Restaurant restaurant = Restaurant(
                           displayName: state.name.value,
                           address: state.address.value,
@@ -78,7 +100,8 @@ class _RegisterViewState extends State<RegisterView> {
                           imageUrl: '',
                           menuIds: state.menuIds,
                           openTime: state.openingTime.value,
-                          phoneNumber: '',
+                          phoneNumber:
+                              "+${state.code.value}-${state.phone.value}",
                           preferenceIds: state.preferenceIds,
                           rating: null,
                         );
@@ -90,7 +113,7 @@ class _RegisterViewState extends State<RegisterView> {
                           print(e);
                         }
                         restaurantRepository.createRestaurant(restaurant);
-                        GoRouter.of(context).go('/add_food');
+                        // GoRouter.of(context).go('/home/$restaurant.id');
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(SnackBar(
@@ -109,11 +132,13 @@ class _RegisterViewState extends State<RegisterView> {
                             ),
                           ));
 
-                        context.goNamed(RouteName.addFood,
-                            pathParameters: {'restaurantId': restaurant.id});
+                        // context.goNamed(RouteName.addFood,
+                        //     pathParameters: {'restaurantId': restaurant.id});
 
                         // Navigator.of(context).push(MaterialPageRoute(
                         //   builder: (context) => ToastContext(),
+                        context.goNamed(RouteName.home,
+                            pathParameters: {'restaurantId': restaurant.id});
                         // ));
                       }
                     },
