@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterRestaurantPage extends StatelessWidget {
   const FilterRestaurantPage(
-      {super.key, this.categories, this.cuisines, this.menus});
-  final List<String>? categories;
-  final List<String>? cuisines;
-  final List<String>? menus;
+      {super.key, this.categoryIds, this.cuisineIds, this.menuIds});
+  final List<String>? categoryIds;
+  final List<String>? cuisineIds;
+  final List<String>? menuIds;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,9 @@ class FilterRestaurantPage extends StatelessWidget {
       ),
       BlocProvider<FilterBloc>(
           create: (context) => FilterBloc(
-              categoryIds: categories, cuisineIds: cuisines, menuIds: menus)),
+              categoryIds: categoryIds,
+              cuisineIds: cuisineIds,
+              menuIds: menuIds)),
     ], child: const FilterRestaurantView());
   }
 }

@@ -14,7 +14,8 @@ class RestaurantRepository {
       List<String>? categoryIds,
       List<String>? cuisineIds,
       List<String>? menuIds,
-      int? sortType}) {
+      int? sortType,
+      String? name}) {
     Query query = _firebaseFirestore.collection('restaurants');
 
     if (preferenceIds != null && preferenceIds.isNotEmpty) {
@@ -28,6 +29,10 @@ class RestaurantRepository {
     }
     if (menuIds != null && menuIds.isNotEmpty) {
       query = query.where('menuIds', arrayContainsAny: menuIds);
+    }
+
+    if (name != null && name != '') {
+      query = query.where('displayName', isEqualTo: name);
     }
 
     // if (sortType == 0) {

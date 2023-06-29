@@ -117,14 +117,14 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
               preferenceIds: List.generate(
                   state.userPreference.preferenceIds.length,
                   (index) => state.userPreference.preferenceIds[index]),
-              categoryIds: event.categories,
-              cuisineIds: event.cuisines,
-              menuIds: event.menus));
+              categoryIds: event.categoryIds,
+              cuisineIds: event.cuisineIds,
+              menuIds: event.menuIds));
         }
         add(StreamRestaurants(
-            categoryIds: event.categories,
-            cuisineIds: event.cuisines,
-            menuIds: event.menus));
+            categoryIds: event.categoryIds,
+            cuisineIds: event.cuisineIds,
+            menuIds: event.menuIds));
       });
       if (state is UserPreferenceLoaded) {
         final userPreference =
@@ -133,14 +133,14 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
         return add(StreamRestaurants(
             preferenceIds: List.generate(userPreference.preferenceIds.length,
                 (index) => userPreference.preferenceIds[index]),
-            categoryIds: event.categories,
-            cuisineIds: event.cuisines,
-            menuIds: event.menus));
+            categoryIds: event.categoryIds,
+            cuisineIds: event.cuisineIds,
+            menuIds: event.menuIds));
       }
       add(StreamRestaurants(
-          categoryIds: event.categories,
-          cuisineIds: event.cuisines,
-          menuIds: event.menus));
+          categoryIds: event.categoryIds,
+          cuisineIds: event.cuisineIds,
+          menuIds: event.menuIds));
     } catch (_) {
       //TODO: catch
     }

@@ -2,38 +2,37 @@ part of 'filter_bloc.dart';
 
 class FilterState extends Equatable {
   FilterState(
-      // {required this.cuisineList,
-      // required this.menuList,
+      // {required this.cuisineIds,
+      // required this.menuIds,
       // required this.sortTypeList,
-      // required this.categoryList});
-      {List<String>? cuisineList,
-      List<String>? menuList,
+      // required this.categoryIds});
+      {List<String>? cuisineIds,
+      List<String>? menuIds,
       List<int>? sortTypeList,
-      List<String>? categoryList})
-      : categoryList = categoryList ?? List.empty(),
-        menuList = menuList ?? List.empty(),
-        cuisineList = cuisineList ?? List.empty(),
+      List<String>? categoryIds})
+      : categoryIds = categoryIds ?? List.empty(),
+        menuIds = menuIds ?? List.empty(),
+        cuisineIds = cuisineIds ?? List.empty(),
         sortTypeList = sortTypeList ?? List.empty();
 
-  final List<String> categoryList;
-  final List<String> cuisineList;
-  final List<String> menuList;
+  final List<String> categoryIds;
+  final List<String> cuisineIds;
+  final List<String> menuIds;
   final List<int> sortTypeList;
 
   FilterState copyWith(
-      {List<String>? categoryList,
-      List<String>? cuisineList,
-      List<String>? menuList,
+      {List<String>? categoryIds,
+      List<String>? cuisineIds,
+      List<String>? menuIds,
       List<int>? sortTypeList}) {
     return FilterState(
-      categoryList: categoryList ?? this.categoryList,
-      cuisineList: cuisineList ?? this.cuisineList,
-      menuList: menuList ?? this.menuList,
+      categoryIds: categoryIds ?? this.categoryIds,
+      cuisineIds: cuisineIds ?? this.cuisineIds,
+      menuIds: menuIds ?? this.menuIds,
       sortTypeList: sortTypeList ?? this.sortTypeList,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [categoryList, cuisineList, menuList, sortTypeList];
+  List<Object?> get props => [categoryIds, cuisineIds, menuIds, sortTypeList];
 }

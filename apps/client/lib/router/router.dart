@@ -70,36 +70,52 @@ class AppRouter {
                 parentNavigatorKey: shellNavigatorKey,
                 name: RouteName.home,
                 pageBuilder: (context, state) {
-                  final categories =
-                      state.queryParameters['categories']?.split(',');
-                  final cuisines =
-                      state.queryParameters['cuisines']?.split(',');
-                  final menus = state.queryParameters['menus']?.split(',');
+                  final categoryIds =
+                      state.queryParameters['categoryIds']?.split(',');
+                  final cuisineIds =
+                      state.queryParameters['cuisineIds']?.split(',');
+                  final menuIds = state.queryParameters['menuIds']?.split(',');
 
                   return NoTransitionPage(
                     child: HomePage(
-                        categories: categories,
-                        cuisines: cuisines,
-                        menus: menus),
+                        categoryIds: categoryIds,
+                        cuisineIds: cuisineIds,
+                        menuIds: menuIds),
                   );
                 },
                 routes: [
                   menuPreferencesGoRoute(RouteName.menuPreferencesHome),
                   preferencesGoRoute(RouteName.preferencesHome),
+                  GoRoute(
+                      path: 'search',
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: RouteName.search,
+                      pageBuilder: (context, state) {
+                        final categoryIds =
+                            state.queryParameters['categoryIds']?.split(',');
+                        final cuisineIds =
+                            state.queryParameters['cuisineIds']?.split(',');
+                        final menuIds =
+                            state.queryParameters['menuIds']?.split(',');
+                        final searchInput =
+                            state.queryParameters['searchInput'];
+
+                        return NoTransitionPage(
+                            child: SearchPage(
+                                categoryIds: categoryIds,
+                                cuisineIds: cuisineIds,
+                                menuIds: menuIds,
+                                searchInput: searchInput));
+                      },
+                      routes: [
+                        restaurantGoRoute(RouteName.searchRestaurantDetails,
+                            RouteName.searchRestaurantFoodDetails),
+                        filterRestaurantGoRoute(
+                            RouteName.searchRestaurantFilter)
+                      ]),
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
                       RouteName.homeRestaurantFoodDetails),
-                ]),
-            GoRoute(
-                path: '/search',
-                parentNavigatorKey: shellNavigatorKey,
-                name: RouteName.search,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: SearchPage()),
-                routes: [
-                  restaurantGoRoute(RouteName.searchRestaurantDetails,
-                      RouteName.searchRestaurantFoodDetails),
-                  filterRestaurantGoRoute(RouteName.searchRestaurantFilter)
                 ]),
             GoRoute(
                 path: '/favorites',
@@ -227,13 +243,15 @@ class AppRouter {
       parentNavigatorKey: rootNavigatorKey,
       name: filterName,
       pageBuilder: (context, state) {
-        final categories = state.queryParameters['categories']?.split(',');
-        final cuisines = state.queryParameters['cuisines']?.split(',');
-        final menus = state.queryParameters['menus']?.split(',');
+        final categoryIds = state.queryParameters['categoryIds']?.split(',');
+        final cuisineIds = state.queryParameters['cuisineIds']?.split(',');
+        final menuIds = state.queryParameters['menuIds']?.split(',');
 
         return ModalBottomSheetPage(
             child: FilterRestaurantPage(
-                categories: categories, cuisines: cuisines, menus: menus));
+                categoryIds: categoryIds,
+                cuisineIds: cuisineIds,
+                menuIds: menuIds));
       },
     );
   }

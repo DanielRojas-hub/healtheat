@@ -24,7 +24,8 @@ class FavoritesView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
               sliver: SliverToBoxAdapter(
                   child: SearchAndFilterSection(
-                onTap: () =>
+                onTapSearch: () {},
+                onTapFilter: () =>
                     context.goNamed(RouteName.favoriteRestaurantFilter),
               )),
             ),

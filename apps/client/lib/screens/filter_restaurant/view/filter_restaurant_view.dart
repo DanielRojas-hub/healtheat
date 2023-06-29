@@ -64,7 +64,7 @@ class FilterRestaurantView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
             sliver: SliverToBoxAdapter(child: CategoryWrap()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
@@ -77,7 +77,7 @@ class FilterRestaurantView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
             sliver: SliverToBoxAdapter(child: CuisineWrap()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           SliverPadding(
             padding:
                 const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
@@ -113,7 +113,22 @@ class FilterRestaurantView extends StatelessWidget {
           //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
           //   sliver: SliverToBoxAdapter(child: FilterRadio()),
           // ),
-          // const SliverToBoxAdapter(child: SizedBox(height: 40)),
+          const SliverToBoxAdapter(child: SizedBox(height: 70)),
+          SliverPadding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+              sliver: SliverToBoxAdapter(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).hoverColor)),
+                  onPressed: () =>
+                      context.read<FilterBloc>().add(const ResetFilter()),
+                  child: const Text("Reset Filter"),
+                ),
+              )),
+          const SliverToBoxAdapter(child: SizedBox(height: 10)),
+
           SliverPadding(
               padding:
                   const EdgeInsets.symmetric(horizontal: Constants.marginSmall),
@@ -124,16 +139,17 @@ class FilterRestaurantView extends StatelessWidget {
 
                     Map<String, String>? queryParameters = {};
 
-                    if (filterState.categoryList.isNotEmpty) {
-                      queryParameters['categories'] =
-                          filterState.categoryList.join(',');
+                    if (filterState.categoryIds.isNotEmpty) {
+                      queryParameters['categoryIds'] =
+                          filterState.categoryIds.join(',');
                     }
-                    if (filterState.cuisineList.isNotEmpty) {
-                      queryParameters['cuisines'] =
-                          filterState.cuisineList.join(',');
+                    if (filterState.cuisineIds.isNotEmpty) {
+                      queryParameters['cuisineIds'] =
+                          filterState.cuisineIds.join(',');
                     }
-                    if (filterState.menuList.isNotEmpty) {
-                      queryParameters['menus'] = filterState.menuList.join(',');
+                    if (filterState.menuIds.isNotEmpty) {
+                      queryParameters['menuIds'] =
+                          filterState.menuIds.join(',');
                     }
 
                     context.pop(queryParameters);

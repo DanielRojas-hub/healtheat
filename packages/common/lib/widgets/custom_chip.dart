@@ -3,9 +3,10 @@ import 'package:common/utils/constants.dart';
 import 'package:common/widgets/custom_label_button.dart';
 
 class CustomChip extends StatelessWidget {
-  const CustomChip({super.key, required this.label});
+  const CustomChip({super.key, required this.label, this.onDeleted});
 
   final String label;
+  final VoidCallback? onDeleted;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class CustomChip extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
         color: Theme.of(context).colorScheme.onTertiaryContainer,
         deleteIconColor: Theme.of(context).disabledColor,
-        onDeleted: () {},
+        onDeleted: onDeleted,
         padding: const EdgeInsets.only(top: 6, bottom: 6, left: 10, right: 6),
       ),
     );
