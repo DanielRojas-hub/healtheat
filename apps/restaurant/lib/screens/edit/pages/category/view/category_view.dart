@@ -233,22 +233,22 @@ class AllPreference extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final selectedPreferenceIds = state.preferenceIds;
-        return BlocBuilder<PreferenceBloc, PreferenceState>(
+        return BlocBuilder<FoodPreferenceBloc, FoodPreferenceState>(
           builder: (context, state) {
-            if (state is PreferencesLoaded) {
-              final preferences = state.preferences;
+            if (state is FoodPreferencesLoaded) {
+              final foodPreferences = state.foodPreferences;
               return Wrap(
                   spacing: 7.0,
                   runSpacing: 7.0,
                   children: List.generate(
-                    preferences.length,
+                    foodPreferences.length,
                     (index) {
-                      final preference = preferences[index];
+                      final foodPreference = foodPreferences[index];
                       final isSelected =
-                          selectedPreferenceIds.contains(preference.id);
+                          selectedPreferenceIds.contains(foodPreference.id);
 
                       return CustomLabelButton(
-                        label: Text(preference.displayName.toString()),
+                        label: Text(foodPreference.displayName.toString()),
                         backgroundColor: isSelected
                             ? Theme.of(context).colorScheme.primaryContainer
                             : Theme.of(context).colorScheme.secondaryContainer,
@@ -260,15 +260,15 @@ class AllPreference extends StatelessWidget {
                         onTap: () => isSelected
                             ? context
                                 .read<RegisterCubit>()
-                                .removePreference(preference.id)
+                                .removePreference(foodPreference.id)
                             : context
                                 .read<RegisterCubit>()
-                                .addPreference(preference.id),
+                                .addPreference(foodPreference.id),
                       );
                     },
                   ));
             }
-            if (state is PreferenceLoading) {
+            if (state is FoodPreferenceLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             return const SizedBox();

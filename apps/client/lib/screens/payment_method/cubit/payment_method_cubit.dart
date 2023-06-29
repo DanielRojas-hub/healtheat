@@ -1,10 +1,12 @@
-
 import 'package:cart_repository/cart_repository.dart';
 import 'package:common/services/cart/cart_bloc.dart';
+import 'package:common/services/petition/petition_bloc.dart';
+import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:food_repository/food_repository.dart';
+import 'package:order_repository/order_repository.dart';
 
 enum PaymentMethod { applePay, paypal, creditCard }
 
@@ -101,6 +103,12 @@ class PaymentMethodCubit extends Cubit<PaymentMethod> {
                 note: "Contact us for any questions on your order.",
                 onSuccess: (Map params) async {
                   print("onSuccess: $params");
+                  final order = Order(
+                      restaurantId: cart.restaurantId,
+                      status: 0,
+                      userId: context.read<UserBloc>().state.user.id);
+                  context.read<OrderBloc>().add(AddOrder(order));
+                  // context.read<PetitionBloc>().add(AddPetitions(order.id, cart.petitions));
                   Navigator.of(context).pop();
                   context.read<CartBloc>().add(ClearCart());
                 },

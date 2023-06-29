@@ -92,7 +92,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      final authUser = await _authenticationRepository.signUp(
+      final authUser =
+          await _authenticationRepository.linkAccountsEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
@@ -101,7 +102,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         displayName: state.displayName.value,
         email: state.email.value,
       );
-      _userRepository.createUser(user);
+      _userRepository.updateUser(user,
+          {'displayName': state.displayName.value, 'email': state.email.value});
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(

@@ -11,6 +11,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc({OrderRepository? orderRepository})
       : _orderRepository = orderRepository ?? OrderRepository(),
         super(OrderLoading()) {
+    on<AddOrder>(_onAddOrder);
     on<StreamOrder>(_onStreamOrder);
     on<GetOrder>(_onGetOrder);
     on<StreamOrders>(_onStreamOrders);
@@ -30,6 +31,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     _blocSubscription?.cancel();
     _orderSubscription?.cancel();
     return super.close();
+  }
+
+  Future<void> _onAddOrder(AddOrder event, Emitter<OrderState> emit) async {
+    await _orderRepository.createOrder(event.order);
   }
 
   void _onStreamOrder(StreamOrder event, Emitter<OrderState> emit) {

@@ -1,11 +1,9 @@
+import 'package:common/extension/custom_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:common/utils/constants.dart';
 import 'package:common/utils/string_fix.dart';
 
-import '../base_card.dart';
-import '../custom_label_button.dart';
-import '../image_container.dart';
-import '../skelton.dart';
+import '../widgets.dart';
 
 class FoodCard extends StatelessWidget {
   const FoodCard(
@@ -43,15 +41,15 @@ class FoodCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1),
-              Column(
-                children: List.generate(
-                  categories.length,
-                  (index) => Text('- ${categories[index]}',
-                      style: Theme.of(context).textTheme.labelMedium,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1),
-                ),
-              ),
+              // Column(
+              //   children: List.generate(
+              //     categories.length,
+              //     (index) => Text('- ${categories[index]}',
+              //         style: Theme.of(context).textTheme.labelMedium,
+              //         overflow: TextOverflow.ellipsis,
+              //         maxLines: 1),
+              //   ),
+              // ),
               const SizedBox(height: 10),
               CustomLabelButton(
                   label: Text(

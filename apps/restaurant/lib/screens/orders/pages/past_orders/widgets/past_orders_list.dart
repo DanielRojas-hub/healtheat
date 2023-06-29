@@ -40,6 +40,7 @@ class PastOrdersList extends StatelessWidget {
                               pathParameters: {'orderId': order.id}),
                           onTapFavorite: () {});
                     }
+                    return null;
                   },
                   itemCount: orders.length,
                 );

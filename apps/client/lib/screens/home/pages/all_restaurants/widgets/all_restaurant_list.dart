@@ -5,6 +5,7 @@ import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class AllRestaurantList extends StatelessWidget {
   const AllRestaurantList({Key? key}) : super(key: key);
@@ -22,7 +23,6 @@ class AllRestaurantList extends StatelessWidget {
                 builder: (context, state) {
                   if (state is CategoriesLoaded) {
                     final categories = state.categories;
-
                     return ListView.separated(
                       padding: const EdgeInsets.symmetric(
                           horizontal: Constants.margin,
@@ -42,7 +42,6 @@ class AllRestaurantList extends StatelessWidget {
                                 .toString());
                         final isFavorite =
                             user.favRestaurants?.contains(restaurant.id);
-
                         return RestaurantCard(
                           name: restaurant.displayName.toString(),
                           imageUrl: restaurant.imageUrl,
@@ -50,7 +49,7 @@ class AllRestaurantList extends StatelessWidget {
                               restaurant.deliveryPriceRange.toString(),
                           rating: restaurant.rating ?? 0,
                           deliveryTimeRange:
-                              restaurant.deliveryTimeRange.toString(),
+                              '${DateFormat('HH:mm').format(DateTime.parse(restaurant.openTime!))} - ${DateFormat('HH:mm').format(DateTime.parse(restaurant.closeTime!))}',
                           typeFood: typeFood,
                           isFavorite: isFavorite ?? false,
                           onTap: () => context.goNamed(

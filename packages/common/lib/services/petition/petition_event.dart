@@ -8,6 +8,16 @@ abstract class PetitionEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class AddPetitions extends PetitionEvent {
+  final String orderId;
+  final List<Petition> petitions;
+
+  const AddPetitions(this.orderId, this.petitions);
+
+  @override
+  List<Object> get props => [orderId, petitions];
+}
+
 class StreamPetition extends PetitionEvent {
   final String orderId;
   final String petitionId;

@@ -49,6 +49,7 @@ dependencies:
   flutter_paypal: ^0.2.0
   paypal_sdk: ^1.0.7
   formz: ^0.6.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

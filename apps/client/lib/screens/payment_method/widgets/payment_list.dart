@@ -28,13 +28,13 @@ class PaymentList extends StatelessWidget {
           shrinkWrap: true,
           physics: const ScrollPhysics(),
           children: [
-            PaymentCard(
-              label: 'Apple Pay',
-              paymentMethod: PaymentMethod.applePay,
-              selected: state,
-              onTap: (value) =>
-                  context.read<PaymentMethodCubit>().select(value),
-            ),
+            // PaymentCard(
+            //   label: 'Apple Pay',
+            //   paymentMethod: PaymentMethod.applePay,
+            //   selected: state,
+            //   onTap: (value) =>
+            //       context.read<PaymentMethodCubit>().select(value),
+            // ),
             PaymentCard(
               label: 'Paypal',
               paymentMethod: PaymentMethod.paypal,
@@ -42,13 +42,13 @@ class PaymentList extends StatelessWidget {
               onTap: (value) =>
                   context.read<PaymentMethodCubit>().select(value),
             ),
-            PaymentCard(
-              label: 'Credit Card',
-              paymentMethod: PaymentMethod.creditCard,
-              selected: state,
-              onTap: (value) =>
-                  context.read<PaymentMethodCubit>().select(value),
-            ),
+            // PaymentCard(
+            //   label: 'Credit Card',
+            //   paymentMethod: PaymentMethod.creditCard,
+            //   selected: state,
+            //   onTap: (value) =>
+            //       context.read<PaymentMethodCubit>().select(value),
+            // ),
           ],
         );
       },

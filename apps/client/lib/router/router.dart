@@ -169,7 +169,7 @@ class AppRouter {
                 routes: [
                   GoRoute(
                     path: ':orderId',
-                    parentNavigatorKey: shellNavigatorKey,
+                    parentNavigatorKey: rootNavigatorKey,
                     name: RouteName.orderDetail,
                     builder: (context, state) => OrderDetailPage(
                       orderId: state.pathParameters['orderId'].toString(),

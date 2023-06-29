@@ -22,8 +22,10 @@ dependencies:
     path: ../../packages/restaurant_repository
   cart_repository:
     path: ../../packages/cart_repository
-  preference_repository:
-    path: ../../packages/preference_repository
+  user_preference_repository:
+    path: ../../packages/user_preference_repository
+  food_preference_repository:
+    path: ../../packages/food_preference_repository
   authentication_repository:
     path: ../../packages/authentication_repository
   user_repository:

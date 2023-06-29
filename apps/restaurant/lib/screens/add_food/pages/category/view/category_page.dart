@@ -14,8 +14,9 @@ class CategoryPage extends StatelessWidget {
           create: (context) => MenuBloc()..add(const StreamMenus())),
       BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc()..add(const StreamCategories())),
-      BlocProvider<PreferenceBloc>(
-        create: (context) => PreferenceBloc()..add(const StreamPreferences()),
+      BlocProvider<FoodPreferenceBloc>(
+        create: (context) =>
+            FoodPreferenceBloc()..add(const StreamFoodPreferences()),
       )
     ], child: const CategoryView());
   }

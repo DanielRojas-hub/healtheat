@@ -8,6 +8,15 @@ abstract class OrderEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class AddOrder extends OrderEvent {
+  final Order order;
+
+  const AddOrder(this.order);
+
+  @override
+  List<Object> get props => [order];
+}
+
 class StreamOrder extends OrderEvent {
   final String orderId;
 

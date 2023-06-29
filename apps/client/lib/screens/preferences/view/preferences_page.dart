@@ -12,7 +12,7 @@ class PreferencesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider<FoodPreferenceBloc>(
-        create: (context) => FoodPreferenceBloc()..add(StreamFoodPreferences()),
+        create: (context) => FoodPreferenceBloc()..add(const StreamFoodPreferences()),
       ),
       BlocProvider<PreferencesCubit>(
         create: (context) =>

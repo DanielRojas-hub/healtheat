@@ -25,12 +25,12 @@ class RestaurantDetailsView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),
             sliver: SliverToBoxAdapter(child: RestaurantDisplayName()),
           ),
+          // const SliverToBoxAdapter(child: SizedBox(height: 10)),
+          // const SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: Constants.margin),
+          //   sliver: SliverToBoxAdapter(child: RestaurantSpecifications()),
+          // ),
           const SliverToBoxAdapter(child: SizedBox(height: 10)),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: Constants.margin),
-            sliver: SliverToBoxAdapter(child: RestaurantSpecifications()),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 30)),
           const SliverToBoxAdapter(child: RestaurantDetailsTab())
         ];
       },
@@ -40,8 +40,8 @@ class RestaurantDetailsView extends StatelessWidget {
               context.read<TabCubit>().onPageChanged(index),
           children: [
             MenuPage(restaurantId: restaurantId, foodRouteName: foodRouteName),
-            const ReviewPage(),
-            const AboutPage()
+            // const ReviewPage(),
+            AboutPage(restaurantId: restaurantId)
           ]),
     ));
   }

@@ -82,5 +82,6 @@ class RemoveSortType extends FilterEvent {
 class ResetFilter extends FilterEvent {
   const ResetFilter();
 
+  @override
   List<Object> get props => [];
 }

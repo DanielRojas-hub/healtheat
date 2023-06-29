@@ -1,5 +1,6 @@
 import 'package:cart_repository/cart_repository.dart';
 import 'package:common/services/services.dart';
+import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class FoodCartTotal extends StatelessWidget {
         if (state is FoodsLoaded) {
           final foods = state.foods;
           final total = calculateTotal(foods, petitions);
-          return TotalCard(label: Text('\$$total'));
+          return TotalCard(label: Text('\$${stringFix(total)}'));
         }
         if (state is FoodLoading) {
           return const SkeletonTotalCard();

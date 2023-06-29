@@ -2,7 +2,6 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/screens/register/cubit/register_cubit.dart';
-import 'package:restaurant_repository/restaurant_repository.dart';
 
 class NameInput extends StatelessWidget {
   const NameInput({super.key});

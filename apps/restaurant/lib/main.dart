@@ -1,6 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:common/services/services.dart';
-import 'package:common/services/user/user_bloc.dart';
 import 'package:common/themes/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

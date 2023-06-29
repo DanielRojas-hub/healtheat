@@ -1,4 +1,5 @@
 import 'package:client/router/route_name.dart';
+import 'package:collection/collection.dart';
 import 'package:common/services/services.dart';
 import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
@@ -27,19 +28,19 @@ class ActiveOrdersList extends StatelessWidget {
                       const SizedBox(height: 15),
                   itemBuilder: (BuildContext context, int index) {
                     final order = orders[index];
+                    final restaurant = restaurants.firstWhereOrNull(
+                        (element) => element.id == order.restaurantId);
                     if (order.status < 3) {
                       return OrderCard(
                           orderId: order.id,
-                          restaurantName: restaurants
-                              .firstWhere(
-                                  (element) => element.id == order.restaurantId)
-                              .displayName as String,
+                          restaurantName: restaurant?.displayName ?? '',
                           status: order.status,
                           //foods: const ['coco', 'papa', 'pepe', 'pipo'],
                           onTap: () => context.goNamed(RouteName.orderDetail,
                               pathParameters: {'orderId': order.id}),
                           onTapFavorite: () {});
                     }
+                    return null;
                   },
                   itemCount: orders.length,
                 );

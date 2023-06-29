@@ -63,36 +63,36 @@ class RegisterView extends StatelessWidget {
               sliver: SliverToBoxAdapter(child: RegisterButton()),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
-            SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Constants.marginSmall),
-                sliver: SliverToBoxAdapter(
-                  child: Row(children: [
-                    Expanded(
-                      child: Container(
-                          height: 1.0,
-                          color:
-                              Theme.of(context).colorScheme.tertiaryContainer),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text('OR',
-                          style: Theme.of(context).textTheme.labelLarge),
-                    ),
-                    Expanded(
-                      child: Container(
-                          height: 1.0,
-                          color:
-                              Theme.of(context).colorScheme.tertiaryContainer),
-                    ),
-                  ]),
-                )),
-            const SliverToBoxAdapter(child: SizedBox(height: 10)),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
-              sliver: SliverToBoxAdapter(child: GoogleButton()),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            // SliverPadding(
+            //     padding: const EdgeInsets.symmetric(
+            //         horizontal: Constants.marginSmall),
+            //     sliver: SliverToBoxAdapter(
+            //       child: Row(children: [
+            //         Expanded(
+            //           child: Container(
+            //               height: 1.0,
+            //               color:
+            //                   Theme.of(context).colorScheme.tertiaryContainer),
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //           child: Text('OR',
+            //               style: Theme.of(context).textTheme.labelLarge),
+            //         ),
+            //         Expanded(
+            //           child: Container(
+            //               height: 1.0,
+            //               color:
+            //                   Theme.of(context).colorScheme.tertiaryContainer),
+            //         ),
+            //       ]),
+            //     )),
+            // const SliverToBoxAdapter(child: SizedBox(height: 10)),
+            // const SliverPadding(
+            //   padding: EdgeInsets.symmetric(horizontal: Constants.marginSmall),
+            //   sliver: SliverToBoxAdapter(child: GoogleButton()),
+            // ),
+            // const SliverToBoxAdapter(child: SizedBox(height: 20)),
             SliverPadding(
               padding:
                   const EdgeInsets.symmetric(horizontal: Constants.marginSmall),

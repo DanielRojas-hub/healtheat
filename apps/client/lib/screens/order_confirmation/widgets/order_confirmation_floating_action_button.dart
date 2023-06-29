@@ -18,8 +18,13 @@ class OrderConfirmationFloatingActionButton extends StatelessWidget {
             return FloatingActionButton.extended(
               heroTag: 'order_confirmation',
               backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () => context.pushNamed(RouteName
-                  .login) /* context.goNamed(RouteName.paymentMethod) */,
+              onPressed: () {
+                if (context.read<UserBloc>().state.user.email == null) {
+                  context.pushNamed(RouteName.login);
+                  return;
+                }
+                context.pushNamed(RouteName.paymentMethod);
+              },
               label: SizedBox(
                 width: 4 * MediaQuery.of(context).size.width / 5,
                 child: const Center(child: Text('Place Order')),

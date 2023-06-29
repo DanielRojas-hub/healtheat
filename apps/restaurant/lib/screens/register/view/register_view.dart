@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
-import 'package:restaurant/screens/register/pages/category/view/category_page.dart';
 import 'package:restaurant/screens/register/pages/image/view/image_page.dart';
-import 'package:restaurant/screens/register/pages/info/view/info_page.dart';
 import 'package:restaurant/screens/register/register.dart';
 import 'package:restaurant_repository/restaurant_repository.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../pages/pages.dart';
-import '../pages/preview/preview.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});

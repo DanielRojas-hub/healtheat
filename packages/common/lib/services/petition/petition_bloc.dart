@@ -11,6 +11,7 @@ class PetitionBloc extends Bloc<PetitionEvent, PetitionState> {
   PetitionBloc({PetitionRepository? petitionRepository})
       : _petitionRepository = petitionRepository ?? PetitionRepository(),
         super(PetitionLoading()) {
+    on<AddPetitions>(_onAddPetitions);
     on<StreamPetition>(_onStreamPetition);
     on<GetPetition>(_onGetPetition);
     on<StreamPetitions>(_onStreamPetitions);
@@ -29,6 +30,14 @@ class PetitionBloc extends Bloc<PetitionEvent, PetitionState> {
     _blocSubscription?.cancel();
     _petitionSubscription?.cancel();
     return super.close();
+  }
+
+  Future<void> _onAddPetitions(
+      AddPetitions event, Emitter<PetitionState> emit) async {
+    for (var i = 0; i < event.petitions.length; i++) {
+      final petition = event.petitions[i];
+      await _petitionRepository.createPetition(petition, event.orderId);
+    }
   }
 
   void _onStreamPetition(StreamPetition event, Emitter<PetitionState> emit) {

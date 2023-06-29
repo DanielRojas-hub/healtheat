@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 /* import 'package:google_sign_in/google_sign_in.dart'; */
 import 'package:meta/meta.dart';
@@ -251,6 +252,17 @@ class AuthenticationRepository {
     } catch (_) {
       throw const SignUpWithEmailAndPasswordFailure();
     }
+  }
+
+  Future<firebase_auth.User?> linkAccountsEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      final credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      return (await FirebaseAuth.instance.currentUser
+              ?.linkWithCredential(credential))
+          ?.user;
+    } catch (_) {}
   }
 
   /// Starts the Sign In with Google Flow.

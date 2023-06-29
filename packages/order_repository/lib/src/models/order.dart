@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:petition_repository/petition_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class Order extends Equatable {
   final String? userId;
@@ -12,13 +13,13 @@ class Order extends Equatable {
   final int status;
   final String id;
 
-  const Order({
+  Order({
     required this.userId,
     required this.restaurantId,
-    required this.petitions,
+    this.petitions,
     required this.status,
-    required this.id,
-  });
+    String? id,
+  }) : id = id ?? Uuid().v4();
 
   Order copyWith({
     String? userId,

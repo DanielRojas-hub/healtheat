@@ -1,6 +1,7 @@
 import 'package:cart_repository/cart_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:common/services/services.dart';
+import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class FoodItemList extends StatelessWidget {
                 return CartCard(
                   title: food.displayName.toString(),
                   counter: 'x${petition.quantity}',
-                  suffix: '\$$total',
+                  suffix: '\$${stringFix(total)}',
                   imageUrl: food.imageUrl,
                 );
               }

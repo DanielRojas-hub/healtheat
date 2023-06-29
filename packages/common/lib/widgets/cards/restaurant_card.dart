@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:common/extension/custom_theme_extension.dart';
 import 'package:common/utils/constants.dart';
 
-import '../base_card.dart';
-import '../custom_label_button.dart';
-import '../image_container.dart';
-import '../skelton.dart';
+import '../widgets.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({
@@ -67,14 +64,15 @@ class RestaurantCard extends StatelessWidget {
               ]),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                CustomLabelButton(
-                  icon: Icons.electric_scooter,
-                  color: Theme.of(context).colorScheme.onTertiaryContainer,
-                  backgroundColor:
-                      Theme.of(context).colorScheme.tertiaryContainer,
-                  label: Text(deliveryPriceRange,
-                      style: Theme.of(context).textTheme.labelMedium),
-                ),
+                // CustomLabelButton(
+                //   icon: Icons.electric_scooter,
+                //   color: Theme.of(context).colorScheme.onTertiaryContainer,
+                //   backgroundColor:
+                //       Theme.of(context).colorScheme.tertiaryContainer,
+                //   label: Text(deliveryPriceRange,
+                //       style: Theme.of(context).textTheme.labelMedium),
+                // ),
+                const Spacer(),
                 CustomLabelButton(
                     label: Text(deliveryTimeRange), icon: Icons.schedule)
               ]),
@@ -97,12 +95,12 @@ class RestaurantCard extends StatelessWidget {
                                 color: context.theme.blackColor),
                           ))),
             ),
-            CustomLabelButton(
-                label: Text(rating.toString()),
-                icon: Icons.star_rate_rounded,
-                backgroundColor: context.theme.whiteColor,
-                color: context.theme.blackColor,
-                iconColor: context.theme.rateColor)
+            // CustomLabelButton(
+            //     label: Text(rating.toString()),
+            //     icon: Icons.star_rate_rounded,
+            //     backgroundColor: context.theme.whiteColor,
+            //     color: context.theme.blackColor,
+            //     iconColor: context.theme.rateColor)
           ]),
         )
       ]),

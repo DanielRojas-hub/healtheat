@@ -35,13 +35,13 @@ class _InfoViewState extends State<ImageView> {
       builder: (context, state) {
         if (state is RestaurantLoaded) {
           final restaurant = state.restaurant;
-          String? image_before = restaurant.imageUrl;
+          String? imageBefore = restaurant.imageUrl;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (image_before != "") ...[
+              if (imageBefore != "") ...[
                 const SizedBox(height: 10),
-                RestaurantImage(image: File(image_before!)),
+                RestaurantImage(image: File(imageBefore!)),
               ],
               ElevatedButton(
                 onPressed: () async {
