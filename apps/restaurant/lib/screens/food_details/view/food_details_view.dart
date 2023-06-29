@@ -14,27 +14,27 @@ class FoodDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        child: FoodButtons(),
+      ),
+      body: const CustomScrollView(
         slivers: [
-          const FoodAppBar(),
-          const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
-          const SliverPadding(
+          FoodAppBar(),
+          SliverToBoxAdapter(child: SizedBox(height: 15.0)),
+          SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),
             sliver: SliverToBoxAdapter(child: FoodDisplayName()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 5.0)),
-          const SliverPadding(
+          SliverToBoxAdapter(child: SizedBox(height: 5.0)),
+          SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),
             sliver: SliverToBoxAdapter(child: FoodPrice()),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 15.0)),
-          const SliverPadding(
+          SliverToBoxAdapter(child: SizedBox(height: 15.0)),
+          SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: Constants.margin),
             sliver: SliverToBoxAdapter(child: FoodDescription()),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-            sliver: SliverToBoxAdapter(child: FoodButtons()),
           ),
         ],
       ),

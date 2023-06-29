@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/format/home_format/home_format.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
+import 'package:restaurant/screens/edit_food/edit_food.dart';
 import 'package:restaurant/screens/food_details/food_detail.dart';
 import 'package:restaurant/screens/edit/edit.dart';
 import 'package:restaurant/screens/edit/pages/info/pages/time_picker/view/time_edit_view.dart';
@@ -52,68 +53,70 @@ class AppRouter {
             builder: (context, state, child) => HomeFormatPage(child: child),
             routes: [
               GoRoute(
-                  path: '/home/:restaurantId',
-                  parentNavigatorKey: shellNavigatorKey,
-                  name: RouteName.home,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
-                      child: HomePage(
-                          restaurantId:
-                              state.pathParameters['restaurantId'].toString()),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                        path: 'add_food',
-                        name: RouteName.addFood,
-                        builder: (context, state) => AddFoodPage(
-                              restaurantId:
-                                  state.pathParameters['restaurantId'],
-                            )),
-                    GoRoute(
-                      path: 'food/:foodId',
-                      name: RouteName.food,
-                      builder: (context, state) => FoodDetailsPage(
+                path: '/home/:restaurantId',
+                parentNavigatorKey: shellNavigatorKey,
+                name: RouteName.home,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    child: HomePage(
                         restaurantId:
-                            state.pathParameters['restaurantId'].toString(),
-                        foodId: state.pathParameters['foodId'].toString(),
-                      ),
-                      // routes: [
-                      //   GoRoute(
-                      //       path: 'edit',
-                      //       name: RouteName.editFood,
-                      //       builder: (context, state) => AddFoodPage(
-                      //             restaurantId:
-                      //                 state.pathParameters['restaurantId'],
-                      //           )),
-                      // ]
+                            state.pathParameters['restaurantId'].toString()),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: 'add_food',
+                    name: RouteName.addFood,
+                    builder: (context, state) => AddFoodPage(
+                      restaurantId: state.pathParameters['restaurantId'],
                     ),
-                    GoRoute(
-                        path: 'edit_restaurant',
-                        name: RouteName.editRestaurant,
-                        builder: (context, state) => EditPage(
-                            restaurantId: state.pathParameters['restaurantId']
-                                .toString()),
-                        routes: [
-                          GoRoute(
-                            path: 'time_edit_picker',
-                            name: RouteName.timeEditPicker,
-                            pageBuilder: (context, state) {
-                              final initTime =
-                                  state.queryParameters['initTime'];
-                              final timePickerEditType =
-                                  state.queryParameters['type'] == 'open'
-                                      ? TimePickerEditType.open
-                                      : TimePickerEditType.close;
-                              return DialogPage(
-                                  child: TimeEditPage(
-                                timePickerEditType: timePickerEditType,
-                                initTime: initTime,
-                              ));
-                            },
-                          )
-                        ]),
-                  ]),
+                  ),
+                  GoRoute(
+                    path: 'food/:foodId',
+                    name: RouteName.food,
+                    builder: (context, state) => FoodDetailsPage(
+                      restaurantId:
+                          state.pathParameters['restaurantId'].toString(),
+                      foodId: state.pathParameters['foodId'].toString(),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'edit/:foodId',
+                    name: RouteName.editFood,
+                    builder: (context, state) => EditFoodPage(
+                      restaurantId:
+                          state.pathParameters['restaurantId'].toString(),
+                      foodId: state.pathParameters['foodId'].toString(),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'edit_restaurant',
+                    name: RouteName.editRestaurant,
+                    builder: (context, state) => EditPage(
+                        restaurantId:
+                            state.pathParameters['restaurantId'].toString()),
+                    routes: [
+                      GoRoute(
+                        path: 'time_edit_picker',
+                        name: RouteName.timeEditPicker,
+                        pageBuilder: (context, state) {
+                          final initTime = state.queryParameters['initTime'];
+                          final timePickerEditType =
+                              state.queryParameters['type'] == 'open'
+                                  ? TimePickerEditType.open
+                                  : TimePickerEditType.close;
+                          return DialogPage(
+                              child: TimeEditPage(
+                            timePickerEditType: timePickerEditType,
+                            initTime: initTime,
+                          ));
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+
               // GoRoute(
               //     path: '/:restaurantId/menu',
               //     name: RouteName.menu,
@@ -124,15 +127,4 @@ class AppRouter {
               //         )),
             ])
       ]);
-
-  // GoRoute foodGoRoute(String foodRouteName, {bool? isSingle}) {
-  //   return GoRoute(
-  //       path: 'food/:foodId',
-  //       parentNavigatorKey: rootNavigatorKey,
-  //       name: foodRouteName,
-  //       builder: (context, state) => FoodDetailsPage(
-  //             restaurantId: state.pathParameters['restaurantId'].toString(),
-  //             foodId: state.pathParameters['foodId'].toString(),
-  //           ));
-  // }
 }

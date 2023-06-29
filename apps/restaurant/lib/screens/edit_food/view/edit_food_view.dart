@@ -3,21 +3,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_repository/food_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant/router/route_name.dart';
-import 'package:restaurant/screens/add_food/add_food.dart';
-import 'package:restaurant/screens/add_food/pages/information/information.dart';
-import 'package:restaurant/screens/add_food/pages/previsualization/previsualization.dart';
-import 'package:restaurant/screens/add_food/pages/category/category.dart';
+import 'package:restaurant/screens/edit_food/edit_food.dart';
+import 'package:restaurant/screens/edit_food/pages/information/information.dart';
+import 'package:restaurant/screens/edit_food/pages/previsualization/previsualization.dart';
+import 'package:restaurant/screens/edit_food/pages/category/category.dart';
 
-class AddFoodView extends StatefulWidget {
-  const AddFoodView({super.key, this.restaurantId});
+class EditFoodView extends StatefulWidget {
+  const EditFoodView({
+    super.key,
+    required this.restaurantId,
+    required this.foodId,
+  });
 
   final String? restaurantId;
+  final String? foodId;
 
   @override
-  State<AddFoodView> createState() => _AddFoodViewState();
+  State<EditFoodView> createState() => _EditFoodViewState();
 }
 
-class _AddFoodViewState extends State<AddFoodView> {
+class _EditFoodViewState extends State<EditFoodView> {
   int _currentStep = 0;
   FoodRepository foodRepository = FoodRepository();
 
@@ -56,7 +61,7 @@ class _AddFoodViewState extends State<AddFoodView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddFoodCubit, AddFoodState>(
+    return BlocBuilder<EditFoodCubit, EditFoodState>(
       builder: (context, state) => state.isRestarting
           ? const SizedBox()
           : SafeArea(
@@ -95,10 +100,13 @@ class _AddFoodViewState extends State<AddFoodView> {
                             foodRepository.createFood(
                                 widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                                 food);
-                            context.goNamed(RouteName.home, pathParameters: {
-                              'restaurantId':
-                                  widget.restaurantId ?? '28LecpHZyk81KUl6EsND'
-                            });
+                            context.goNamed(
+                              RouteName.home,
+                              pathParameters: {
+                                'restaurantId': widget.restaurantId ??
+                                    '28LecpHZyk81KUl6EsND'
+                              },
+                            );
                             // ))
                           }
                         },

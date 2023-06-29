@@ -32,7 +32,7 @@ class PhoneInput extends StatelessWidget {
                 errorText: state.phone.displayError != null
                     ? 'Invalid phone number'
                     : null,
-                initialValue: "789",
+                initialValue: restaurant.phoneNumber,
               );
             },
           );

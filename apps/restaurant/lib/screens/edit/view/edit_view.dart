@@ -133,6 +133,8 @@ class _EditViewState extends State<EditView> {
                   setState(() {
                     _currentStep--;
                   });
+                } else {
+                  Navigator.pop(context);
                 }
               },
               onStepTapped: (value) => setState(() {
