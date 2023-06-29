@@ -13,8 +13,9 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({UserRepository? userRepository})
       : _userRepository = userRepository ?? UserRepository(),
-        super(UserLoading()) {
+        super(const UserState.loading()) {
     on<AuthenticationBlocUser>(_onAuthenticationBlocUser);
+    on<UpdateUser>(_onUpdateUser);
     on<_AuthenticationUserBloc>(_onAuthenticationUserBloc);
     on<_UserUpdated>(_onUserUpdated);
   }
@@ -41,11 +42,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } catch (_) {}
   }
 
+  Future<void> _onUpdateUser(UpdateUser event, Emitter<UserState> emit) async {
+    await _userRepository.updateUser(event.user, event.data);
+  }
+
   void _onAuthenticationUserBloc(
       _AuthenticationUserBloc event, Emitter<UserState> emit) {
     _userSubscription?.cancel();
 
-    if (event.authUser.isEmpty) return emit(UserLoading());
+    if (event.authUser.isEmpty) return emit(const UserState.loading());
 
     try {
       _userSubscription = _userRepository
@@ -57,6 +62,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   void _onUserUpdated(_UserUpdated event, Emitter<UserState> emit) async {
-    return emit(UserLoaded(event.user));
+    return emit(UserState.success(event.user));
   }
 }

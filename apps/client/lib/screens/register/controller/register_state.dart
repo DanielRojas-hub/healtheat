@@ -4,6 +4,7 @@ enum ConfirmPasswordValidationError { invalid }
 
 final class RegisterState extends Equatable {
   const RegisterState({
+    this.displayName = const NotEmptyString.pure(),
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.confirmedPassword = const ConfirmedPassword.pure(),
@@ -13,6 +14,7 @@ final class RegisterState extends Equatable {
     this.errorMessage,
   });
 
+  final NotEmptyString displayName;
   final Email email;
   final Password password;
   final ConfirmedPassword confirmedPassword;
@@ -33,6 +35,7 @@ final class RegisterState extends Equatable {
       ];
 
   RegisterState copyWith({
+    NotEmptyString? displayName,
     Email? email,
     Password? password,
     ConfirmedPassword? confirmedPassword,
@@ -42,6 +45,7 @@ final class RegisterState extends Equatable {
     String? errorMessage,
   }) {
     return RegisterState(
+      displayName: displayName ?? this.displayName,
       email: email ?? this.email,
       password: password ?? this.password,
       confirmedPassword: confirmedPassword ?? this.confirmedPassword,

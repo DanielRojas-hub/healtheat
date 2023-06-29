@@ -1,6 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cart_repository/cart_repository.dart';
-import 'package:common/services/authentication/authentication_bloc.dart';
 import 'package:common/services/services.dart';
 import 'package:common/services/user/user_bloc.dart';
 import 'package:common/themes/themes.dart';
@@ -35,39 +34,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: _authenticationRepository,
-      child: Provider(
-        create: (context) => AppRouter(),
-        child: Builder(builder: (context) {
-          final routerConfig =
-              Provider.of<AppRouter>(context, listen: false).router;
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) => AuthenticationBloc(
+                authenticationRepository: _authenticationRepository),
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => UserBloc()
+              ..add(AuthenticationBlocUser(context.read<AuthenticationBloc>())),
+          ),
+          BlocProvider<CartBloc>(
+            create: (context) =>
+                CartBloc(cartRepository: CartRepository())..add(GetCart()),
+          ),
+        ],
+        child: Provider(
+          create: (context) => AppRouter(GoRouterRefreshStream(
+              authenticationBloc: context.read<AuthenticationBloc>(),
+              userBloc: context.read<UserBloc>())),
+          child: Builder(builder: (context) {
+            final routerConfig =
+                Provider.of<AppRouter>(context, listen: false).router;
 
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<AuthenticationBloc>(
-                create: (context) => AuthenticationBloc(
-                    authenticationRepository: _authenticationRepository),
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => UserBloc()
-                  ..add(AuthenticationBlocUser(
-                      context.read<AuthenticationBloc>())),
-              ),
-              BlocProvider<UserPreferenceBloc>(
-                create: (context) =>
-                    UserPreferenceBloc()..add(GetUserPreference()),
-              ),
-              BlocProvider<CartBloc>(
-                create: (context) =>
-                    CartBloc(cartRepository: CartRepository())..add(GetCart()),
-              ),
-            ],
-            child: MaterialApp.router(
+            return MaterialApp.router(
               title: 'Flutter Demo',
               theme: lightTheme(),
               routerConfig: routerConfig,
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       ),
     );
   }

@@ -8,36 +8,67 @@ abstract class UserPreferenceEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetUserPreference extends UserPreferenceEvent {}
+class GetUserPreference extends UserPreferenceEvent {
+  final String userId;
+  final String userPreferenceId;
 
-class UpdateUserPreference extends UserPreferenceEvent {
-  final List<Preference> userPreferences;
+  const GetUserPreference(this.userId, this.userPreferenceId);
 
-  const UpdateUserPreference(this.userPreferences);
+  @override
+  List<Object> get props => [userId, userPreferenceId];
+}
+
+class GetUserPreferences extends UserPreferenceEvent {
+  final String userId;
+
+  const GetUserPreferences(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class StreamUserPreference extends UserPreferenceEvent {
+  final String userId;
+  final String? userPreferenceId;
+
+  const StreamUserPreference(this.userId, this.userPreferenceId);
+
+  @override
+  List<Object?> get props => [userId, userPreferenceId];
+}
+
+class StreamUserPreferences extends UserPreferenceEvent {
+  final String userId;
+
+  const StreamUserPreferences(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class UserBlocUserPreference extends UserPreferenceEvent {
+  final UserBloc userBloc;
+
+  const UserBlocUserPreference(this.userBloc);
+
+  @override
+  List<Object> get props => [userBloc];
+}
+
+class _UserPreferenceUpdated extends UserPreferenceEvent {
+  final UserPreference userPreference;
+
+  const _UserPreferenceUpdated(this.userPreference);
+
+  @override
+  List<Object> get props => [userPreference];
+}
+
+class _UserPreferencesUpdated extends UserPreferenceEvent {
+  final List<UserPreference> userPreferences;
+
+  const _UserPreferencesUpdated(this.userPreferences);
 
   @override
   List<Object> get props => [userPreferences];
 }
-
-/* class ClearUserPreference extends UserPreferenceEvent {}
-
- class AddPetition extends UserPreferenceEvent {
-  final String restaurantId;
-  final String foodId;
-  final int quantity;
-
-  const AddPetition(this.restaurantId, this.foodId, this.quantity);
-
-  @override
-  List<Object> get props => [restaurantId, foodId, quantity];
-}
-
-class RemovePetition extends UserPreferenceEvent {
-  final String foodId;
-
-  const RemovePetition(this.foodId);
-
-  @override
-  List<Object> get props => [foodId];
-}
- */

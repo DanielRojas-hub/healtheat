@@ -18,7 +18,7 @@ class RegisterButton extends StatelessWidget {
                     ? () =>
                         context.read<RegisterCubit>().registerFormSubmitted()
                     : null,
-                child: const Text('Register'),
+                child: const Text('REGISTER'),
               );
       },
     );

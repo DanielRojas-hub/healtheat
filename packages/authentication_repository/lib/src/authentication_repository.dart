@@ -304,9 +304,9 @@ class AuthenticationRepository {
   /// Signs in with the provided Anonymous.
   ///
   /// Throws a [LogInWithAnonymousFailure] if an exception occurs.
-  Future<void> logInWithAnonymous() async {
+  Future<firebase_auth.User?> logInWithAnonymous() async {
     try {
-      await _firebaseAuth.signInAnonymously();
+      return (await _firebaseAuth.signInAnonymously()).user;
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw LogInWithAnonymousFailure.fromCode(e.code);
     } catch (_) {

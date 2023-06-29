@@ -1,11 +1,12 @@
 export './cart/cart_bloc.dart';
 export './counter/counter_bloc.dart';
 export './food/food_bloc.dart';
-export './preference/preference_bloc.dart';
-export './restaurant/restaurant_bloc.dart';
 export './user_preference/user_preference_bloc.dart';
+export './restaurant/restaurant_bloc.dart';
+export './food_preference/food_preference_bloc.dart';
 export './authentication/authentication_bloc.dart';
 export './filter/filter_bloc.dart';
 export './category/category_bloc.dart';
 export './cuisine/cuisine_bloc.dart';
 export './menu/menu_bloc.dart';
+export './user/user_bloc.dart';

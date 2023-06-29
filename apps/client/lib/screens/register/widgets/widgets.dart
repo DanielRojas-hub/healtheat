@@ -3,3 +3,4 @@ export './google_button.dart';
 export './password_input.dart';
 export './register_button.dart';
 export './confirm_password_input.dart';
+export './display_name.dart';

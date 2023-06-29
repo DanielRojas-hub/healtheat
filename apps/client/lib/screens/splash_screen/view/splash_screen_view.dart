@@ -60,7 +60,7 @@ class SplashScreenView extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
-                  onPressed: () => context.goNamed(RouteName.home),
+                  onPressed: () => context.goNamed(RouteName.preferencesHome),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).primaryColor)),

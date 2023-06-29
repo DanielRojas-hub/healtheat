@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:client/format/home_format/home_format.dart';
 import 'package:client/screens/cart/cart.dart';
 import 'package:client/screens/favorites/favorites.dart';
@@ -5,14 +7,17 @@ import 'package:client/screens/filter_restaurant/filter_restaurant.dart';
 import 'package:client/screens/food_details/food_detail.dart';
 import 'package:client/screens/home/home.dart';
 import 'package:client/screens/login/login.dart';
+import 'package:client/screens/menu_preferences/menu_preferences.dart';
 import 'package:client/screens/order_confirmation/order_confirmation.dart';
 import 'package:client/screens/order_detail/order_detail.dart';
-import 'package:client/screens/preferences_filter/preferences_filter.dart';
+import 'package:client/screens/preferences/preferences.dart';
 import 'package:client/screens/profile/profile.dart';
 import 'package:client/screens/register/register.dart';
 import 'package:client/screens/restaurant_details/restaurant_details.dart';
 import 'package:client/screens/search/search.dart';
+import 'package:client/screens/splash_screen/splash_screen.dart';
 import 'package:common/page_builders/page_builders.dart';
+import 'package:common/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,29 +30,36 @@ final GlobalKey<NavigatorState> shellNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 class AppRouter {
+  late final GoRouterRefreshStream userService;
   GoRouter get router => _goRouter;
 
-  late final GoRouter _goRouter = GoRouter(
-    navigatorKey: rootNavigatorKey,
-    initialLocation: '/register',
-    routes: [
-      // GoRoute(
-      //     path: '/splash_screen',
-      //     name: RouteName.splashScreen,
-      //     builder: (context, state) => const SplashScreenPage()),
+  AppRouter(this.userService);
 
+  late final GoRouter _goRouter = GoRouter(
+    debugLogDiagnostics: true,
+    navigatorKey: rootNavigatorKey,
+    refreshListenable: userService,
+    initialLocation: '/splash',
+    routes: [
       GoRoute(
-          path: '/preferences_filter',
-          name: RouteName.preferencesFilter,
-          builder: (context, state) => const PreferencesFilterPage()),
+        path: '/splash',
+        name: RouteName.splashScreen,
+        builder: (context, state) => const SplashScreenPage(),
+      ),
       GoRoute(
-          path: '/register',
-          name: RouteName.register,
-          builder: (context, state) => const RegisterPage()),
+        path: '/login',
+        parentNavigatorKey: rootNavigatorKey,
+        name: RouteName.login,
+        pageBuilder: (context, state) =>
+            const ModalBottomSheetPage(child: LoginPage()),
+      ),
       GoRoute(
-          path: '/login',
-          name: RouteName.login,
-          builder: (context, state) => const LoginPage()),
+        path: '/register',
+        parentNavigatorKey: rootNavigatorKey,
+        name: RouteName.register,
+        pageBuilder: (context, state) =>
+            const ModalBottomSheetPage(child: RegisterPage()),
+      ),
       ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => HomeFormatPage(child: child),
@@ -71,6 +83,8 @@ class AppRouter {
                   );
                 },
                 routes: [
+                  menuPreferencesGoRoute(RouteName.menuPreferencesHome),
+                  preferencesGoRoute(RouteName.preferencesHome),
                   filterRestaurantGoRoute(RouteName.homeRestaurantFilter),
                   restaurantGoRoute(RouteName.homeRestaurantDetails,
                       RouteName.homeRestaurantFoodDetails),
@@ -113,6 +127,8 @@ class AppRouter {
                       builder: (context, state) =>
                           const OrderConfirmationPage(),
                       routes: [
+                        // loginGoRoute(RouteName.loginOrderConfirmation),
+                        // registerGoRoute(RouteName.registerOrderConfirmation),
                         GoRoute(
                             path: 'payment_method',
                             parentNavigatorKey: rootNavigatorKey,
@@ -139,7 +155,64 @@ class AppRouter {
         ),
       ),
     ],
+    redirect: (context, GoRouterState state) {
+      final authState = userService.authenticationState;
+
+      // final isGoingToUserPreferences =
+      //     state.matchedLocation == '/home/preferences';
+      final isGoingToSplash = state.matchedLocation == '/splash';
+
+      // final isGoingToUnauthentication =
+      //     isGoingToUserPreferences || isGoingToSplash;
+
+      switch (authState.status) {
+        case AuthenticationStatus.authenticated:
+          if (isGoingToSplash) {
+            return '/home';
+          }
+        // final userState = userService.userState;
+        // switch (userState.status) {
+        //   case UserStatus.success:
+        //     // final user = userState.user;
+        //     if (isGoingToUserPreferences) {
+        //       return '/home';
+        //     }
+        //   case UserStatus.loading:
+        //     break;
+        //   case UserStatus.failure:
+        //     break;
+        // }
+        case AuthenticationStatus.unauthenticated:
+          break;
+      }
+      return null;
+    },
   );
+
+  GoRoute menuPreferencesGoRoute(String preferencesName) {
+    return GoRoute(
+      path: 'menu_preferences',
+      parentNavigatorKey: rootNavigatorKey,
+      name: RouteName.menuPreferencesHome,
+      pageBuilder: (context, state) =>
+          const ModalBottomSheetPage(child: MenuPreferencesPage()),
+    );
+  }
+
+  GoRoute preferencesGoRoute(String preferencesName) {
+    return GoRoute(
+      path: 'preferences',
+      parentNavigatorKey: rootNavigatorKey,
+      name: preferencesName,
+      pageBuilder: (context, state) {
+        final isInit = (state.extra as bool?) ?? true;
+        return ModalBottomSheetPage(
+            enableDrag: isInit ? false : true,
+            isDismissible: isInit ? false : true,
+            child: const PreferencesPage());
+      },
+    );
+  }
 
   GoRoute filterRestaurantGoRoute(String filterName) {
     return GoRoute(
@@ -182,5 +255,42 @@ class AppRouter {
               restaurantId: state.pathParameters['restaurantId'].toString(),
               foodId: state.pathParameters['foodId'].toString(),
             ));
+  }
+}
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  late final StreamSubscription<AuthenticationState>
+      _authenticationSubscription;
+  late final StreamSubscription<UserState> _userSubscription;
+
+  late AuthenticationState authenticationState;
+  late UserState userState;
+
+  GoRouterRefreshStream(
+      {required AuthenticationBloc authenticationBloc,
+      required UserBloc userBloc}) {
+    //App init state
+    authenticationState = authenticationBloc.state;
+    notifyListeners();
+    //User init state
+    userState = userBloc.state;
+    notifyListeners();
+    //App listener
+    _authenticationSubscription = authenticationBloc.stream.listen((state) {
+      authenticationState = state;
+      notifyListeners();
+    });
+    //User listener
+    _userSubscription = userBloc.stream.listen((state) {
+      userState = state;
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    _authenticationSubscription.cancel();
+    _userSubscription.cancel();
+    super.dispose();
   }
 }

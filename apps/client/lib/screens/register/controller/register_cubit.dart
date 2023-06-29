@@ -26,7 +26,23 @@ class RegisterCubit extends Cubit<RegisterState> {
       state.copyWith(
         email: email,
         isValid: Formz.validate([
+          state.displayName,
           email,
+          state.password,
+          state.confirmedPassword,
+        ]),
+      ),
+    );
+  }
+
+  void displayNameChanged(String value) {
+    final displayName = NotEmptyString.dirty(value);
+    emit(
+      state.copyWith(
+        displayName: displayName,
+        isValid: Formz.validate([
+          displayName,
+          state.email,
           state.password,
           state.confirmedPassword,
         ]),
@@ -45,6 +61,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: password,
         confirmedPassword: confirmedPassword,
         isValid: Formz.validate([
+          state.displayName,
           state.email,
           password,
           confirmedPassword,
@@ -62,6 +79,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       state.copyWith(
         confirmedPassword: confirmedPassword,
         isValid: Formz.validate([
+          state.displayName,
           state.email,
           state.password,
           confirmedPassword,
@@ -79,7 +97,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: state.password.value,
       );
       final user = User(
-        id: authUser?.uid,
+        id: authUser!.uid,
+        displayName: state.displayName.value,
         email: state.email.value,
       );
       _userRepository.createUser(user);

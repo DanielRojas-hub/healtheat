@@ -16,6 +16,16 @@ class AuthenticationBlocUser extends UserEvent {
   List<Object> get props => [authenticationBloc];
 }
 
+class UpdateUser extends UserEvent {
+  final User user;
+  final Map<String, dynamic> data;
+
+  const UpdateUser(this.user, this.data);
+
+  @override
+  List<Object> get props => [user, data];
+}
+
 class _AuthenticationUserBloc extends UserEvent {
   final AuthUser authUser;
 

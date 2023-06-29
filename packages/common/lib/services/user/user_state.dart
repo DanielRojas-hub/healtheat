@@ -1,19 +1,30 @@
 part of 'user_bloc.dart';
 
-abstract class UserState extends Equatable {
-  @override
-  List<Object?> get props => [];
+enum UserStatus {
+  success,
+  loading,
+  failure,
 }
 
-class UserLoading extends UserState {}
+class UserState extends Equatable {
+  const UserState._({
+    required this.status,
+    this.user = User.empty,
+  });
 
-class UserFailure extends UserState {}
-
-class UserLoaded extends UserState {
+  final UserStatus status;
   final User user;
 
-  UserLoaded(this.user);
+  const UserState.success(User user)
+      : this._(
+          status: UserStatus.success,
+          user: user,
+        );
+
+  const UserState.loading() : this._(status: UserStatus.loading);
+
+  const UserState.failure() : this._(status: UserStatus.failure);
 
   @override
-  List<Object?> get props => [user];
+  List<Object> get props => [status, user];
 }

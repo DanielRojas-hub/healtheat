@@ -10,17 +10,29 @@ class ConfirmPasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
       buildWhen: (previous, current) =>
-          previous.confirmedPassword != current.confirmedPassword,
+          previous.confirmedPassword != current.confirmedPassword ||
+          previous.isVisible != current.isVisible,
       builder: (context, state) {
         return TextField(
           onChanged: (confirmPassword) => context
               .read<RegisterCubit>()
               .confirmedPasswordChanged(confirmPassword),
+          obscureText: !state.isVisible,
           decoration: InputDecoration(
             labelText: "Confirm password",
             errorText: state.password.displayError != null
                 ? 'invalid confirm password'
                 : null,
+            suffixIcon: IconButton(
+              onPressed: () =>
+                  context.read<RegisterCubit>().visibilityChanged(),
+              icon: Icon(
+                state.isVisible ? Icons.visibility : Icons.visibility_off,
+                color: state.isVisible
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).disabledColor,
+              ),
+            ),
           ),
         );
       },

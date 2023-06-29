@@ -21,12 +21,12 @@ class UserRepository {
         .set(user.toMap());
   }
 
-  /* Future<void> updateUser(User user) async {
+  Future<void> updateUser(User user, Map<String, dynamic> data) async {
     return await _firebaseFirestore
         .collection('users')
         .doc(user.id)
-        .update(user.toMap());
-  } */
+        .update(data);
+  }
 
   Future<void> deleteUser(User user) async {
     return await _firebaseFirestore

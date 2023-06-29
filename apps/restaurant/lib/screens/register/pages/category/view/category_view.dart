@@ -217,17 +217,17 @@ class AllPreference extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final selectedPreferenceIds = state.preferenceIds;
-        return BlocBuilder<PreferenceBloc, PreferenceState>(
+        return BlocBuilder<FoodPreferenceBloc, FoodPreferenceState>(
           builder: (context, state) {
-            if (state is PreferencesLoaded) {
-              final preferences = state.preferences;
+            if (state is FoodPreferencesLoaded) {
+              final foodPreferences = state.foodPreferences;
               return Wrap(
                   spacing: 7.0,
                   runSpacing: 7.0,
                   children: List.generate(
-                    preferences.length,
+                    foodPreferences.length,
                     (index) {
-                      final preference = preferences[index];
+                      final preference = foodPreferences[index];
                       final isSelected =
                           selectedPreferenceIds.contains(preference.id);
 
@@ -252,7 +252,7 @@ class AllPreference extends StatelessWidget {
                     },
                   ));
             }
-            if (state is PreferenceLoading) {
+            if (state is FoodPreferenceLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             return const SizedBox();

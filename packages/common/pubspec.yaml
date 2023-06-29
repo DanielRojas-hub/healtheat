@@ -18,8 +18,10 @@ dependencies:
     path: ../restaurant_repository
   cart_repository:
     path: ../cart_repository
-  preference_repository:
-    path: ../preference_repository
+  food_preference_repository:
+    path: ../food_preference_repository
+  user_preference_repository:
+    path: ../user_preference_repository
   authentication_repository:
     path: ../authentication_repository
   user_repository:

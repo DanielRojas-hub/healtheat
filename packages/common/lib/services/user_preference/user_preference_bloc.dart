@@ -1,71 +1,115 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:common/services/user/user_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:preference_repository/preference_repository.dart';
+import 'package:user_preference_repository/user_preference_repository.dart';
 
 part 'user_preference_event.dart';
 part 'user_preference_state.dart';
 
 class UserPreferenceBloc
     extends Bloc<UserPreferenceEvent, UserPreferenceState> {
-  UserPreferenceBloc({PreferenceRepository? preferenceRepository})
-      : /* _preferenceRepository = preferenceRepository ?? PreferenceRepository(), */
-        super(const UserPreferenceState.loading()) {
-    on<GetUserPreference>(onGetUserPreference);
-    on<UpdateUserPreference>(onUpdateUserPreference);
-    /* on<ClearUserPreference>(onClearCart);
-    on<AddPetition>(onAddPetition);
-    on<RemovePetition>(onRemovePetition); */
+  UserPreferenceBloc({UserPreferenceRepository? userPreferenceRepository})
+      : _userPreferenceRepository =
+            userPreferenceRepository ?? UserPreferenceRepository(),
+        super(UserPreferenceLoading()) {
+    on<GetUserPreference>(_onGetUserPreference);
+    on<GetUserPreferences>(_onGetUserPreferences);
+    on<StreamUserPreference>(_onStreamUserPreference);
+    on<StreamUserPreferences>(_onStreamUserPreferences);
+    on<UserBlocUserPreference>(_onUserBlocUserPreference);
+    on<_UserPreferenceUpdated>(_onUserPreferenceUpdated);
+    on<_UserPreferencesUpdated>(_onUserPreferencesUpdated);
   }
 
-  // final PreferenceRepository _preferenceRepository;
+  final UserPreferenceRepository _userPreferenceRepository;
 
-  Future<void> onGetUserPreference(
-      GetUserPreference event, Emitter<UserPreferenceState> emit) async {
-    // final userPreferences = await _preferenceRepository.getUserPreferences();
-    final userPreferences = [
-      const Preference(
-          id: '69H7mpV3tpAhR8aRaNAS',
-          displayName: 'Vegetarian',
-          description:
-              'A vegetarian diet does not include any meat, poultry, or seafood. It is a meal plan made up of foods that come mostly from plants')
-    ];
+  StreamSubscription? _userPreferenceSubscription;
+  StreamSubscription? _blocSubscription;
 
-    add(UpdateUserPreference(userPreferences));
+  @override
+  Future<void> close() {
+    _userPreferenceSubscription?.cancel();
+    _blocSubscription?.cancel();
+    return super.close();
   }
 
-  Future<void> onUpdateUserPreference(
-      UpdateUserPreference event, Emitter<UserPreferenceState> emit) async {
-    // await _preferenceRepository.setUserPreferences(
-    //     userPreferences: event.userPreferences);
-    emit(event.userPreferences.isNotEmpty
-        ? UserPreferenceState.notEmpty(event.userPreferences)
-        : const UserPreferenceState.empty());
-  }
-
-  /* void onClearCart(ClearCart event, Emitter<CartState> emit) {
-    return add(const UpdateCart(Cart.empty));
-  }
-
-  void onAddPetition(AddPetition event, Emitter<CartState> emit) {
-    if (state.cart.restaurantId != '' &&
-        state.cart.restaurantId != event.restaurantId) return;
-    List<Petition> petitions = List.from(state.cart.petitions);
-    if (petitions
-            .firstWhereOrNull((petition) => petition.foodId == event.foodId) !=
-        null) {
-      return add(IncreaseQuantity(event.foodId, quantity: event.quantity));
+  void _onStreamUserPreference(
+      StreamUserPreference event, Emitter<UserPreferenceState> emit) {
+    _userPreferenceSubscription?.cancel();
+    try {
+      if (event.userPreferenceId == null) return emit(UserPreferenceLoading());
+      _userPreferenceSubscription = _userPreferenceRepository
+          .streamUserPreference(event.userId, event.userPreferenceId!)
+          .listen(
+              (userPreference) => add(_UserPreferenceUpdated(userPreference)));
+    } catch (_) {
+      //TODO: catch
     }
-    petitions.add(Petition(foodId: event.foodId, quantity: event.quantity));
-    final cart = state.cart
-        .copyWith(restaurantId: event.restaurantId, petitions: petitions);
-    return add(UpdateCart(cart));
   }
 
-  void onRemovePetition(RemovePetition event, Emitter<CartState> emit) {
-    List<Petition> petitions = List.from(state.cart.petitions);
-    petitions.removeWhere((petition) => petition.foodId == event.foodId);
-    if (petitions.isEmpty) return add(ClearCart());
-    final cart = state.cart.copyWith(petitions: petitions);
-    return add(UpdateCart(cart));
-  } */
+  Future<void> _onGetUserPreference(
+      GetUserPreference event, Emitter<UserPreferenceState> emit) async {
+    _userPreferenceSubscription?.cancel();
+    try {
+      add(_UserPreferenceUpdated(await _userPreferenceRepository
+          .getUserPreference(event.userId, event.userPreferenceId)));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onStreamUserPreferences(
+      StreamUserPreferences event, Emitter<UserPreferenceState> emit) {
+    _userPreferenceSubscription?.cancel();
+    try {
+      _userPreferenceSubscription = _userPreferenceRepository
+          .streamUserPreferences(event.userId)
+          .listen(
+              (userPreference) => add(_UserPreferencesUpdated(userPreference)));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  Future<void> _onGetUserPreferences(
+      GetUserPreferences event, Emitter<UserPreferenceState> emit) async {
+    _userPreferenceSubscription?.cancel();
+    try {
+      add(_UserPreferencesUpdated(
+          await _userPreferenceRepository.getUserPreferences(event.userId)));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onUserBlocUserPreference(
+      UserBlocUserPreference event, Emitter<UserPreferenceState> emit) {
+    try {
+      final userBloc = event.userBloc;
+      _blocSubscription = userBloc.stream.listen((state) {
+        if (state.user.isNotEmpty) {
+          final user = state.user;
+          add(StreamUserPreference(user.id, user.userPreferenceId));
+        }
+      });
+      if (userBloc.state.user.isNotEmpty) {
+        final user = userBloc.state.user;
+        add(StreamUserPreference(user.id, user.userPreferenceId));
+      }
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onUserPreferenceUpdated(
+      _UserPreferenceUpdated event, Emitter<UserPreferenceState> emit) {
+    return emit(UserPreferenceLoaded(event.userPreference));
+  }
+
+  void _onUserPreferencesUpdated(
+      _UserPreferencesUpdated event, Emitter<UserPreferenceState> emit) {
+    return emit(UserPreferencesLoaded(event.userPreferences));
+  }
 }

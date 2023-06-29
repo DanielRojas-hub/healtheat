@@ -19,6 +19,10 @@ class HomePage extends StatelessWidget {
         BlocProvider<TabCubit>(
           create: (context) => TabCubit(tabList: homeTabList),
         ),
+        BlocProvider<UserPreferenceBloc>(
+          create: (context) => UserPreferenceBloc()
+            ..add(UserBlocUserPreference(context.read<UserBloc>())),
+        ),
         BlocProvider<RestaurantBloc>(
           create: (context) => RestaurantBloc()
             ..add(UserPreferenceBlocRestaurants(

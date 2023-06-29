@@ -14,10 +14,18 @@ class PasswordInput extends StatelessWidget {
         return TextField(
           onChanged: (password) =>
               context.read<LoginCubit>().passwordChanged(password),
-          obscureText: true,
+          obscureText: !state.isVisible,
           decoration: InputDecoration(
             labelText: "Password",
-            suffixIcon: const Icon(Icons.password),
+            suffixIcon: IconButton(
+              onPressed: () => context.read<LoginCubit>().visibilityChanged(),
+              icon: Icon(
+                state.isVisible ? Icons.visibility : Icons.visibility_off,
+                color: state.isVisible
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).disabledColor,
+              ),
+            ),
             errorText:
                 state.password.displayError != null ? 'invalid password' : null,
           ),

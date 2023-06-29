@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../home_format.dart';
+
 class HomeFormatView extends StatelessWidget {
   const HomeFormatView({Key? key, required this.child}) : super(key: key);
 
@@ -12,7 +14,10 @@ class HomeFormatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const UserPreferenceOptions(),
+        centerTitle: true,
+      ),
       body: child,
       bottomNavigationBar: BlocBuilder<CustomNavBarCubit, CustomNavBarState>(
         builder: (context, state) => CustomNavBar(

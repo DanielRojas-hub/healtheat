@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:common/services/cart/cart_bloc.dart';
@@ -113,22 +112,35 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     _blocSubscription?.cancel();
     try {
       _blocSubscription = event.userPreferenceBloc.stream.listen((state) {
+        if (state is UserPreferenceLoaded) {
+          return add(StreamRestaurants(
+              preferenceIds: List.generate(
+                  state.userPreference.preferenceIds.length,
+                  (index) => state.userPreference.preferenceIds[index]),
+              categoryIds: event.categories,
+              cuisineIds: event.cuisines,
+              menuIds: event.menus));
+        }
         add(StreamRestaurants(
-            preferenceIds: List.generate(state.userPreferences.length,
-                (index) => state.userPreferences[index].id),
             categoryIds: event.categories,
             cuisineIds: event.cuisines,
             menuIds: event.menus));
       });
+      if (state is UserPreferenceLoaded) {
+        final userPreference =
+            (event.userPreferenceBloc.state as UserPreferenceLoaded)
+                .userPreference;
+        return add(StreamRestaurants(
+            preferenceIds: List.generate(userPreference.preferenceIds.length,
+                (index) => userPreference.preferenceIds[index]),
+            categoryIds: event.categories,
+            cuisineIds: event.cuisines,
+            menuIds: event.menus));
+      }
       add(StreamRestaurants(
-          preferenceIds: List.generate(
-              event.userPreferenceBloc.state.userPreferences.length,
-              (index) =>
-                  event.userPreferenceBloc.state.userPreferences[index].id),
           categoryIds: event.categories,
           cuisineIds: event.cuisines,
           menuIds: event.menus));
-      // }
     } catch (_) {
       //TODO: catch
     }
