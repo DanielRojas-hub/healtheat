@@ -11,6 +11,7 @@ import 'package:client/screens/menu_preferences/menu_preferences.dart';
 import 'package:client/screens/order_confirmation/order_confirmation.dart';
 import 'package:client/screens/order_detail/order_detail.dart';
 import 'package:client/screens/preferences/preferences.dart';
+import 'package:client/screens/orders/orders.dart';
 import 'package:client/screens/profile/profile.dart';
 import 'package:client/screens/register/register.dart';
 import 'package:client/screens/restaurant_details/restaurant_details.dart';
@@ -144,16 +145,22 @@ class AppRouter {
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
             ),
+            GoRoute(
+                path: '/orders',
+                parentNavigatorKey: shellNavigatorKey,
+                name: RouteName.orders,
+                builder: (context, state) => const OrdersPage(),
+                routes: [
+                  GoRoute(
+                    path: ':orderId',
+                    parentNavigatorKey: shellNavigatorKey,
+                    name: RouteName.orderDetail,
+                    builder: (context, state) => OrderDetailPage(
+                      orderId: state.pathParameters['orderId'].toString(),
+                    ),
+                  ),
+                ]),
           ]),
-      GoRoute(
-        path: '/order_detail',
-        parentNavigatorKey: rootNavigatorKey,
-        name: RouteName.orderDetail,
-        builder: (context, state) => OrderDetailPage(
-          restaurantId: state.pathParameters['restaurantId'].toString(),
-          orderId: state.pathParameters['orderId'].toString(),
-        ),
-      ),
     ],
     redirect: (context, GoRouterState state) {
       final authState = userService.authenticationState;

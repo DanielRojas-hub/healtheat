@@ -28,6 +28,7 @@ class RouteName {
   static const favoriteRestaurantFilter = 'favorite_restaurant_filter';
   static const searchRestaurantFilter = 'search_restaurant_filter';
 
+  static const orders = 'orders';
   static const orderDetail = 'order_detail';
 
   static const addFoodRestaurant = 'add_food';

@@ -8,7 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:restaurant/screens/add_food/add_food.dart';
 import 'package:restaurant/screens/register/pages/info/pages/time_picker/view/time_picker_page.dart';
 import 'package:restaurant/screens/register/view/register_page.dart';
+import 'package:restaurant/screens/order_detail/order_detail.dart';
 
+import '../screens/orders/view/view.dart';
 import 'route_name.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -51,6 +53,19 @@ class AppRouter {
             builder: (context, state) => AddFoodPage(
                   restaurantId: state.pathParameters['restaurantId'],
                 )),
+        GoRoute(
+            path: '/orders',
+            name: RouteName.orders,
+            builder: (context, state) => const OrdersPage(),
+            routes: [
+              GoRoute(
+                path: ':orderId',
+                name: RouteName.orderDetail,
+                builder: (context, state) => OrderDetailPage(
+                  orderId: state.pathParameters['orderId'].toString(),
+                ),
+              ),
+            ]),
       ],
       redirect: (context, state) {
         final appState = userService.authenticationState;
