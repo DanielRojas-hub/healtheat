@@ -19,6 +19,7 @@ class SplashCard extends StatelessWidget {
     return Column(
       children: [
         Expanded(child: SvgPicture.asset(image)),
+        const SizedBox(height: 25),
         Text(title,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: context.theme.blackColor,

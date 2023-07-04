@@ -40,7 +40,7 @@ class AppRouter {
     debugLogDiagnostics: true,
     navigatorKey: rootNavigatorKey,
     refreshListenable: userService,
-    initialLocation: '/home',
+    initialLocation: '/splash',
     routes: [
       GoRoute(
         path: '/splash',

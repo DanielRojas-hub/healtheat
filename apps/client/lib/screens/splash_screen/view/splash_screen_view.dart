@@ -38,25 +38,25 @@ class SplashScreenView extends StatelessWidget {
                 }),
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(splashDataList.length, (index) {
-                final bool selected = index == 0;
-                return Container(
-                  width: selected ? 15 : 6,
-                  height: 6,
-                  margin: const EdgeInsets.only(right: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: selected
-                        ? context.theme.blackColor
-                        : Theme.of(context).colorScheme.tertiary,
-                  ),
-                );
-              }),
-            ),
             const SizedBox(height: 75),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: List.generate(splashDataList.length, (index) {
+            //     final bool selected = index == 0;
+            //     return Container(
+            //       width: selected ? 15 : 6,
+            //       height: 6,
+            //       margin: const EdgeInsets.only(right: 5),
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(50),
+            //         color: selected
+            //             ? context.theme.blackColor
+            //             : Theme.of(context).colorScheme.tertiary,
+            //       ),
+            //     );
+            //   }),
+            // ),
+            // const SizedBox(height: 75),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               child: ElevatedButton(
