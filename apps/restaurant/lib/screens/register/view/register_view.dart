@@ -86,6 +86,22 @@ class _RegisterViewState extends State<RegisterView> {
                         //   code: state.code.value,
                         //   number: state.phone.value,
                         // );
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              content: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Creating restaurant..."),
+                                  SizedBox(width: 16),
+                                  CircularProgressIndicator(),
+                                ],
+                              ),
+                            ),
+                          );
                         Restaurant restaurant = Restaurant(
                           displayName: state.name.value,
                           address: state.address.value,
@@ -114,7 +130,6 @@ class _RegisterViewState extends State<RegisterView> {
                                 context.read<UserBloc>().state.user, {
                               'restaurantId': restaurant.id,
                             }));
-                        // GoRouter.of(context).go('/home/$restaurant.id');
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(SnackBar(
