@@ -21,9 +21,14 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: NestedScrollView(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Aqui va el logout
+        },
+        child: const Icon(Icons.logout),
+      ),
+      body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
             const SliverToBoxAdapter(child: SizedBox(height: 25)),

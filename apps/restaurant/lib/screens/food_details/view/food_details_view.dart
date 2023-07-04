@@ -16,7 +16,7 @@ class FoodDetails extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        child: FoodButtons(),
+        child: DeleteFoodButton(),
       ),
       body: const CustomScrollView(
         slivers: [

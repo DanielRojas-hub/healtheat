@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cart_repository/cart_repository.dart';
 import 'package:client/screens/payment_method/cubit/payment_method_cubit.dart';
 import 'package:common/services/services.dart';
@@ -10,7 +12,8 @@ import 'package:order_repository/order_repository.dart';
 import '../../../router/route_name.dart';
 
 class PaymentMethodFloatingActionButton extends StatelessWidget {
-  const PaymentMethodFloatingActionButton({super.key});
+  PaymentMethodFloatingActionButton({super.key});
+  //bool paymentSuccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class PaymentMethodFloatingActionButton extends StatelessWidget {
                 context,
                 context.read<CartBloc>().state.cart,
               );
+          //if (paymentSuccess) {
           final order = Order(
               restaurantId: context.read<CartBloc>().state.cart.restaurantId,
               status: 0,
@@ -32,6 +36,7 @@ class PaymentMethodFloatingActionButton extends StatelessWidget {
           Navigator.of(context).pop();
           context.read<CartBloc>().add(ClearCart());
           context.goNamed(RouteName.orders);
+          //}
         },
         label: SizedBox(
           width: 4 * MediaQuery.of(context).size.width / 5,

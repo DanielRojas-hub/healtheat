@@ -19,6 +19,7 @@ class AddFoodView extends StatefulWidget {
 
 class _AddFoodViewState extends State<AddFoodView> {
   int _currentStep = 0;
+  bool status = false;
   FoodRepository foodRepository = FoodRepository();
 
   List<Step> getSteps() => [
@@ -74,6 +75,41 @@ class _AddFoodViewState extends State<AddFoodView> {
                               _currentStep++;
                             });
                           } else if (_currentStep == getSteps().length - 1) {
+                            setState(() {
+                              status = true;
+                            });
+                            // showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false,
+                            //   builder: (context) {
+                            //     return AlertDialog(
+                            //       content: Row(
+                            //         children: [
+                            //           CircularProgressIndicator(),
+                            //           SizedBox(width: 16),
+                            //           Text("Creating food..."),
+                            //         ],
+                            //       ),
+                            //     );
+                            //   },
+                            // );
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  content: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Creating food..."),
+                                      SizedBox(width: 16),
+                                      CircularProgressIndicator(),
+                                    ],
+                                  ),
+                                ),
+                              );
                             Food food = Food(
                                 restaurantId: widget.restaurantId ??
                                     '28LecpHZyk81KUl6EsND',
@@ -92,9 +128,31 @@ class _AddFoodViewState extends State<AddFoodView> {
                             } catch (e) {
                               print(e);
                             }
-                            foodRepository.createFood(
+                            await foodRepository.createFood(
                                 widget.restaurantId ?? '28LecpHZyk81KUl6EsND',
                                 food);
+
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(SnackBar(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                content: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(state.errorMessage ?? 'Food creation'),
+                                    Icon(
+                                      Icons.done,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                    ),
+                                  ],
+                                ),
+                              ));
+                            setState(() {
+                              status = false;
+                            });
                             context.goNamed(RouteName.home, pathParameters: {
                               'restaurantId':
                                   widget.restaurantId ?? '28LecpHZyk81KUl6EsND'
