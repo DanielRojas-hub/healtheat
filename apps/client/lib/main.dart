@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                 Provider.of<AppRouter>(context, listen: false).router;
 
             return MaterialApp.router(
-              title: 'Flutter Demo',
+              title: 'HealthEat',
               theme: lightTheme(),
               routerConfig: routerConfig,
             );
