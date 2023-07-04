@@ -13,7 +13,7 @@ import '../../../router/route_name.dart';
 
 class PaymentMethodFloatingActionButton extends StatelessWidget {
   PaymentMethodFloatingActionButton({super.key});
-  bool paymentSuccess = false;
+  //bool paymentSuccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +22,21 @@ class PaymentMethodFloatingActionButton extends StatelessWidget {
       child: FloatingActionButton.extended(
         backgroundColor: context.theme.blackColor,
         onPressed: () {
-          () async {
-            paymentSuccess = await context.read<PaymentMethodCubit>().submit(
-                  context,
-                  context.read<CartBloc>().state.cart,
-                );
-          };
-          print('paymentSuccess: $paymentSuccess');
-          if (paymentSuccess) {
-            final order = Order(
-                restaurantId: context.read<CartBloc>().state.cart.restaurantId,
-                status: 0,
-                userId: context.read<UserBloc>().state.user.id);
-            context.read<OrderBloc>().add(AddOrder(order));
-            // context.read<PetitionBloc>().add(AddPetitions(order.id, cart.petitions));
-            Navigator.of(context).pop();
-            context.read<CartBloc>().add(ClearCart());
-            context.goNamed(RouteName.orders);
-          }
+          context.read<PaymentMethodCubit>().submit(
+                context,
+                context.read<CartBloc>().state.cart,
+              );
+          //if (paymentSuccess) {
+          final order = Order(
+              restaurantId: context.read<CartBloc>().state.cart.restaurantId,
+              status: 0,
+              userId: context.read<UserBloc>().state.user.id);
+          context.read<OrderBloc>().add(AddOrder(order));
+          // context.read<PetitionBloc>().add(AddPetitions(order.id, cart.petitions));
+          Navigator.of(context).pop();
+          context.read<CartBloc>().add(ClearCart());
+          context.goNamed(RouteName.orders);
+          //}
         },
         label: SizedBox(
           width: 4 * MediaQuery.of(context).size.width / 5,
