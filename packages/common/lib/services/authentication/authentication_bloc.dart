@@ -37,6 +37,7 @@ class AuthenticationBloc
 
   void _onLogoutRequested(
       AppLogoutRequested event, Emitter<AuthenticationState> emit) {
+    print('a');
     unawaited(_authenticationRepository.logOut());
   }
 

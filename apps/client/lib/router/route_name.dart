@@ -1,13 +1,22 @@
 class RouteName {
   static const splashScreen = 'splash_screen';
-  static const login = 'login';
-  static const register = 'register';
+
   static const home = 'home';
   static const favorites = 'favorites';
   static const cart = 'cart';
   static const orderConfirmation = 'order_confirmation';
   static const profile = 'profile';
   static const search = 'search';
+
+  static const loginHome = 'login_home';
+  static const loginCart = 'login_cart';
+  static const loginOrders = 'login_orders';
+  static const loginOrderConfirmation = 'login_order_confirmation';
+
+  static const registerHome = 'register_home';
+  static const registerCart = 'register_cart';
+  static const registerOrders = 'register_orders';
+  static const registerOrderConfirmation = 'register_order_confirmation';
 
   static const menuPreferencesHome = 'menu_preferences_home';
 

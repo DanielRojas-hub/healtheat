@@ -15,20 +15,28 @@ class OrderConfirmationFloatingActionButton extends StatelessWidget {
         builder: (context, state) {
           final status = state.status;
           if (status == CartStatus.notEmpty) {
-            return FloatingActionButton.extended(
-              heroTag: 'order_confirmation',
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {
-                if (context.read<UserBloc>().state.user.email == null) {
-                  context.pushNamed(RouteName.login);
-                  return;
-                }
-                context.pushNamed(RouteName.paymentMethod);
+            return BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                final user = state.user;
+                return FloatingActionButton.extended(
+                  heroTag: 'order_confirmation',
+                  backgroundColor: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    if (user.email == null) {
+                      context.pushNamed(RouteName.loginOrderConfirmation,
+                          extra: RouteName.registerOrderConfirmation);
+                      return;
+                    }
+                    context.pushNamed(RouteName.paymentMethod);
+                  },
+                  label: SizedBox(
+                    width: 4 * MediaQuery.of(context).size.width / 5,
+                    child: Center(
+                        child:
+                            Text(user.isNotEmpty ? 'Place Order' : 'Log In')),
+                  ),
+                );
               },
-              label: SizedBox(
-                width: 4 * MediaQuery.of(context).size.width / 5,
-                child: const Center(child: Text('Place Order')),
-              ),
             );
           }
           return const SizedBox();

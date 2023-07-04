@@ -8,7 +8,11 @@ import 'package:go_router/go_router.dart';
 import '../register.dart';
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+  const RegisterView(
+      {super.key, required this.loginName, required this.registerName});
+
+  final String loginName;
+  final String registerName;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +118,7 @@ class RegisterView extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               context.pop();
-                              context.pushNamed(RouteName.login);
+                              context.pushNamed(loginName, extra: registerName);
                             },
                         ),
                       ]),

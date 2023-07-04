@@ -40,7 +40,7 @@ class AppRouter {
     debugLogDiagnostics: true,
     navigatorKey: rootNavigatorKey,
     refreshListenable: userService,
-    initialLocation: '/splash',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         path: '/splash',
@@ -70,6 +70,8 @@ class AppRouter {
                   );
                 },
                 routes: [
+                  loginGoRoute(RouteName.loginHome),
+                  registerGoRoute(RouteName.registerHome),
                   menuPreferencesGoRoute(RouteName.menuPreferencesHome),
                   preferencesGoRoute(RouteName.preferencesHome),
                   GoRoute(
@@ -121,6 +123,8 @@ class AppRouter {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CartPage()),
                 routes: [
+                  loginGoRoute(RouteName.loginCart),
+                  registerGoRoute(RouteName.registerCart),
                   restaurantGoRoute(RouteName.cartRestaurantDetails,
                       RouteName.cartRestaurantFoodDetails),
                   GoRoute(
@@ -130,8 +134,8 @@ class AppRouter {
                       builder: (context, state) =>
                           const OrderConfirmationPage(),
                       routes: [
-                        loginGoRoute(RouteName.login),
-                        registerGoRoute(RouteName.register),
+                        loginGoRoute(RouteName.loginOrderConfirmation),
+                        registerGoRoute(RouteName.registerOrderConfirmation),
                         GoRoute(
                             path: 'payment_method',
                             parentNavigatorKey: rootNavigatorKey,
@@ -153,6 +157,8 @@ class AppRouter {
                 name: RouteName.orders,
                 builder: (context, state) => const OrdersPage(),
                 routes: [
+                  loginGoRoute(RouteName.loginOrders),
+                  registerGoRoute(RouteName.registerOrders),
                   GoRoute(
                     path: ':orderId',
                     parentNavigatorKey: rootNavigatorKey,
@@ -203,8 +209,9 @@ class AppRouter {
       path: 'login',
       parentNavigatorKey: rootNavigatorKey,
       name: loginName,
-      pageBuilder: (context, state) =>
-          const ModalBottomSheetPage(child: LoginPage()),
+      pageBuilder: (context, state) => ModalBottomSheetPage(
+          child: LoginPage(
+              loginName: loginName, registerName: state.extra as String)),
     );
   }
 
@@ -213,8 +220,9 @@ class AppRouter {
       path: 'register',
       parentNavigatorKey: rootNavigatorKey,
       name: registerName,
-      pageBuilder: (context, state) =>
-          const ModalBottomSheetPage(child: RegisterPage()),
+      pageBuilder: (context, state) => ModalBottomSheetPage(
+          child: RegisterPage(
+              loginName: state.extra as String, registerName: registerName)),
     );
   }
 

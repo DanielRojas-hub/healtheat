@@ -22,7 +22,7 @@ class PaymentList extends StatelessWidget {
         color: Colors.grey[100],
       ),
     ); */
-        BlocBuilder<PaymentMethodCubit, PaymentMethod>(
+        BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
       builder: (context, state) {
         return ListView(
           shrinkWrap: true,
@@ -38,7 +38,7 @@ class PaymentList extends StatelessWidget {
             PaymentCard(
               label: 'Paypal',
               paymentMethod: PaymentMethod.paypal,
-              selected: state,
+              selected: state.paymentMethod,
               onTap: (value) =>
                   context.read<PaymentMethodCubit>().select(value),
             ),

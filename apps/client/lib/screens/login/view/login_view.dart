@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:client/router/route_name.dart';
 import 'package:common/utils/utils.dart';
 import 'package:common/widgets/widgets.dart';
@@ -8,7 +9,14 @@ import 'package:go_router/go_router.dart';
 import '../login.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView({
+    Key? key,
+    required this.loginName,
+    required this.registerName,
+  }) : super(key: key);
+
+  final String loginName;
+  final String registerName;
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +124,7 @@ class LoginView extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               context.pop();
-                              context.pushNamed(RouteName.register);
+                              context.pushNamed(registerName, extra: loginName);
                             },
                         ),
                       ]),

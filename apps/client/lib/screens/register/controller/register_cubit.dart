@@ -88,8 +88,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
   }
 
-  Future<void> registerFormSubmitted() async {
-    if (!state.isValid) return;
+  Future<bool> registerFormSubmitted() async {
+    if (!state.isValid) return false;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       final authUser =
@@ -105,6 +105,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       _userRepository.updateUser(user,
           {'displayName': state.displayName.value, 'email': state.email.value});
       emit(state.copyWith(status: FormzSubmissionStatus.success));
+      return true;
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(
         state.copyWith(
@@ -112,8 +113,10 @@ class RegisterCubit extends Cubit<RegisterState> {
           status: FormzSubmissionStatus.failure,
         ),
       );
+      return false;
     } catch (_) {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      return false;
     }
   }
 }

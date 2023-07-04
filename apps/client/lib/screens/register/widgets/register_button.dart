@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 
 import '../register.dart';
 
@@ -15,8 +16,12 @@ class RegisterButton extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator())
             : ElevatedButton(
                 onPressed: state.isValid
-                    ? () =>
-                        context.read<RegisterCubit>().registerFormSubmitted()
+                    ? () async {
+                        final isSuccess = await context
+                            .read<RegisterCubit>()
+                            .registerFormSubmitted();
+                        if (isSuccess) context.pop();
+                      }
                     : null,
                 child: const Text('REGISTER'),
               );

@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../login.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage(
+      {super.key, required this.loginName, required this.registerName});
+
+  final String loginName;
+  final String registerName;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +17,6 @@ class LoginPage extends StatelessWidget {
         create: (context) =>
             LoginCubit(context.read<AuthenticationRepository>()),
       )
-    ], child: const LoginView());
+    ], child: LoginView(loginName: loginName, registerName: registerName));
   }
 }
