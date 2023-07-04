@@ -38,18 +38,15 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   void _onStreamOrder(StreamOrder event, Emitter<OrderState> emit) {
-    print('a');
     _orderSubscription?.cancel();
     try {
       _orderSubscription =
           _orderRepository.streamOrder(event.orderId).listen((order) {
-        print('c');
         add(_OrderUpdated(order));
       });
     } catch (_) {
       //TODO: catch
     }
-    print('b');
   }
 
   Future<void> _onGetOrder(GetOrder event, Emitter<OrderState> emit) async {
@@ -62,6 +59,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   void _onStreamOrders(StreamOrders event, Emitter<OrderState> emit) {
+    print("a");
     _orderSubscription?.cancel();
     try {
       _orderSubscription = _orderRepository
@@ -71,8 +69,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             userId: event.userId,
           )
           .listen((Orders) => add(_OrdersUpdated(Orders)));
+      print("b");
     } catch (_) {
       //TODO: catch
+      print("c");
     }
   }
 

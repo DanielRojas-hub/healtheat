@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cart_repository/cart_repository.dart';
 import 'package:client/screens/payment_method/cubit/payment_method_cubit.dart';
 import 'package:common/services/services.dart';
@@ -10,7 +12,8 @@ import 'package:order_repository/order_repository.dart';
 import '../../../router/route_name.dart';
 
 class PaymentMethodFloatingActionButton extends StatelessWidget {
-  const PaymentMethodFloatingActionButton({super.key});
+  PaymentMethodFloatingActionButton({super.key});
+  bool paymentSuccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +22,24 @@ class PaymentMethodFloatingActionButton extends StatelessWidget {
       child: FloatingActionButton.extended(
         backgroundColor: context.theme.blackColor,
         onPressed: () {
-          context.read<PaymentMethodCubit>().submit(
-                context,
-                context.read<CartBloc>().state.cart,
-              );
-          final order = Order(
-              restaurantId: context.read<CartBloc>().state.cart.restaurantId,
-              status: 0,
-              userId: context.read<UserBloc>().state.user.id);
-          context.read<OrderBloc>().add(AddOrder(order));
-          // context.read<PetitionBloc>().add(AddPetitions(order.id, cart.petitions));
-          Navigator.of(context).pop();
-          context.read<CartBloc>().add(ClearCart());
-          context.goNamed(RouteName.orders);
+          () async {
+            paymentSuccess = await context.read<PaymentMethodCubit>().submit(
+                  context,
+                  context.read<CartBloc>().state.cart,
+                );
+          };
+          print('paymentSuccess: $paymentSuccess');
+          if (paymentSuccess) {
+            final order = Order(
+                restaurantId: context.read<CartBloc>().state.cart.restaurantId,
+                status: 0,
+                userId: context.read<UserBloc>().state.user.id);
+            context.read<OrderBloc>().add(AddOrder(order));
+            // context.read<PetitionBloc>().add(AddPetitions(order.id, cart.petitions));
+            Navigator.of(context).pop();
+            context.read<CartBloc>().add(ClearCart());
+            context.goNamed(RouteName.orders);
+          }
         },
         label: SizedBox(
           width: 4 * MediaQuery.of(context).size.width / 5,

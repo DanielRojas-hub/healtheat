@@ -10,7 +10,7 @@ class PaymentMethodView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Payment Method'), centerTitle: true),
-      floatingActionButton: const PaymentMethodFloatingActionButton(),
+      floatingActionButton: PaymentMethodFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Constants.margin),
