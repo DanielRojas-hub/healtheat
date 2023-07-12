@@ -1,4 +1,5 @@
 import 'package:common/controllers/controllers.dart';
+import 'package:common/services/services.dart';
 import 'package:common/services/user/user_bloc.dart';
 import 'package:common/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Aqui va el logout
-          },
+          onPressed: () => context
+              .read<AuthenticationBloc>()
+              .add(const AppLogoutRequested()),
           child: const Icon(Icons.logout),
         ),
         body: NestedScrollView(

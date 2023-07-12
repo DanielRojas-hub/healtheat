@@ -80,6 +80,15 @@ class UpdateOrder extends OrderEvent {
   List<Object> get props => [orderId, data];
 }
 
+class UserBlocOrders extends OrderEvent {
+  final UserBloc userBloc;
+
+  const UserBlocOrders(this.userBloc);
+
+  @override
+  List<Object> get props => [userBloc];
+}
+
 class _OrderUpdated extends OrderEvent {
   final Order order;
 

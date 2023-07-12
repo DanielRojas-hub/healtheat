@@ -16,9 +16,8 @@ class OrdersPage extends StatelessWidget {
           create: (context) => TabCubit(tabList: homeTabList),
         ),
         BlocProvider<OrderBloc>(
-            create: (context) => OrderBloc()
-              ..add(StreamOrders(
-                  userId: context.read<UserBloc>().state.user.id))),
+            create: (context) =>
+                OrderBloc()..add(UserBlocOrders(context.read<UserBloc>()))),
         BlocProvider<RestaurantBloc>(
           create: (context) => RestaurantBloc()..add(const StreamRestaurants()),
         ),

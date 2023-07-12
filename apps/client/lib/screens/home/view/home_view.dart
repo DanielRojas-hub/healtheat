@@ -76,7 +76,7 @@ class HomeView extends StatelessWidget {
             // const SliverToBoxAdapter(child: SizedBox(height: 7.0)),
             // const SliverToBoxAdapter(child: PopularCategoryList()),
             // const SliverToBoxAdapter(child: SizedBox(height: 25)),
-            const SliverToBoxAdapter(child: HomeTab()),
+            // const SliverToBoxAdapter(child: HomeTab()),
           ];
         },
         body: PageView(
@@ -85,7 +85,7 @@ class HomeView extends StatelessWidget {
             controller: context.read<TabCubit>().controller,
             children: const [
               AllRestaurantsPage(),
-              OpenNowPage(),
+              // OpenNowPage(),
             ]),
       ),
     );

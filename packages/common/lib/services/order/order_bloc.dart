@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:common/services/services.dart';
 import 'package:equatable/equatable.dart';
 import 'package:order_repository/order_repository.dart';
 
@@ -17,6 +18,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<StreamOrders>(_onStreamOrders);
     on<GetOrders>(_onGetOrders);
     on<UpdateOrder>(_onUpdateOrder);
+    on<UserBlocOrders>(_onUserBlocOrders);
     on<_OrderUpdated>(_onOrderUpdated);
     on<_OrdersUpdated>(_onOrdersUpdated);
   }
@@ -84,6 +86,24 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         restaurantId: event.restaurantId,
         userId: event.userId,
       )));
+    } catch (_) {
+      //TODO: catch
+    }
+  }
+
+  void _onUserBlocOrders(UserBlocOrders event, Emitter<OrderState> emit) {
+    _blocSubscription?.cancel();
+    try {
+      _blocSubscription = event.userBloc.stream.listen((state) {
+        if (state.user.isNotEmpty) {
+          return add(StreamOrders(userId: state.user.id));
+        }
+        add(const StreamOrders(userId: 'asdasd'));
+      });
+      if (event.userBloc.state.user.isNotEmpty) {
+        return add(StreamOrders(userId: event.userBloc.state.user.id));
+      }
+      add(const StreamOrders(userId: 'asdasd'));
     } catch (_) {
       //TODO: catch
     }
